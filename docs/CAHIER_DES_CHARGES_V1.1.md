@@ -238,4 +238,4 @@ Le détail des prompts se trouve dans `docs/PROMPTS_CLAUDE_CODE.md`.
 - [ ] Réévaluer la classification AI Act avant la phase 2 et au plus tard avant le 2 décembre 2027.
 - [ ] Relire ce cahier après la proposition de Quality Jobs Act attendue fin 2026.
 - [ ] Revue réglementaire et scientifique tous les six mois.
-- [ ] Remplacer le logo provisoire par le fichier officiel haute définition.
+- [x] Remplacer le logo provisoire par le fichier officiel haute définition (5 octobre 2026).

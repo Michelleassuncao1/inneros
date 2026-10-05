@@ -40,7 +40,7 @@ Le reste de l'interface reste calme : fonds papier, filets fins, pas de dégrad�
 
 ## 4. Logo
 
-- Fichier provisoire : `assets/logo-ima-provisoire.png` (extrait des documents IMA, basse définition). **À remplacer par le fichier officiel du logo (SVG ou PNG haute définition)** avant la mise en ligne.
+- Fichier officiel : `assets/logo-ima.png` (PNG 512 px, fond transparent, recadré sur le cercle). Une version vectorielle (SVG) reste souhaitable pour les rapports PDF imprimés.
 - Toujours sur fond clair ou dans son cercle blanc cerclé d'or ; jamais déformé, jamais recoloré.
 - Taille minimale : 40 px de diamètre à l'écran.
 

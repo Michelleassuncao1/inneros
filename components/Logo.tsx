@@ -1,8 +1,8 @@
 import Image from "next/image";
-import logo from "@/assets/logo-ima-provisoire.png";
+import logo from "@/assets/logo-ima.png";
 
 // Logo circulaire cerclé d'or, jamais déformé ni recoloré (charte, section 4)
-export function Logo({ alt, size = 56 }: { alt: string; size?: number }) {
+export function Logo({ alt, size = 64 }: { alt: string; size?: number }) {
   return (
     <Image
       src={logo}

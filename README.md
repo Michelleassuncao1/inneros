@@ -15,7 +15,7 @@ Ce dossier contient tout ce qu'il faut pour construire InnerOS avec Claude Code,
 | `design/tokens.css` | Les couleurs, polices et réglages de la charte, prêts pour le code |
 | `prompts/redaction-rapport.system.md` | Le prompt système de l'IA qui rédige les brouillons de rapport |
 | `instruments/` | L'emplacement des questionnaires officiels (à fournir par IMA) |
-| `assets/logo-ima-provisoire.png` | Logo provisoire, à remplacer par le fichier officiel |
+| `assets/logo-ima.png` | Logo officiel IMA (cercle doré, fond transparent) |
 | `.env.example` | La liste des clés à renseigner, sans aucune valeur |
 
 ## Pour commencer
