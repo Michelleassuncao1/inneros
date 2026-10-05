@@ -1,0 +1,54 @@
+/* InnerOS — tokens de la charte IMA
+   Couleurs et polices alignées sur le site institutmindsetenaction.com (étape 1 bis, 5 octobre 2026).
+   Seul ajout : --color-ima-gold-text, car l'or du site n'atteint pas le contraste AA pour du texte.
+   Usage : importé dans app/globals.css après `@import "tailwindcss";` */
+
+@theme {
+  /* Couleurs de marque */
+  --color-ima-navy: #08275A;        /* titres, en-têtes, boutons principaux */
+  --color-ima-navy-deep: #051A3F;   /* survol des boutons, pied de page */
+  --color-ima-gold: #C7952C;        /* filets, logo, accents décoratifs (pas de petit texte sur fond clair) */
+  --color-ima-gold-text: #8A651F;   /* texte doré lisible sur fond clair (contraste 5:1) */
+  --color-ima-cream: #F3EBDD;       /* surfaces, encadrés, bandeaux */
+  --color-ima-paper: #FAF8F3;       /* fond de page */
+  --color-ima-ink: #1C1C1A;         /* texte courant (contraste 16:1) */
+  --color-ima-muted: #5A5A5A;       /* texte secondaire (contraste 6,5:1) */
+  --color-ima-line: #E4DACA;        /* bordures et séparateurs */
+
+  /* Repères d'interprétation — toujours accompagnés d'un libellé texte */
+  --color-repere-favorable: #2F6B4F;
+  --color-repere-vigilance: #9A6A00;
+  --color-repere-prioritaire: #B4462E;
+  --color-repere-neutre: #5A5A5A;   /* « sans référence nationale » */
+
+  /* Typographie — identique au site IMA */
+  --font-display: Georgia, "Times New Roman", serif;   /* titres */
+  --font-sans: var(--font-figtree), -apple-system, "Segoe UI", sans-serif;  /* interface et texte */
+
+  /* Échelle typographique (base 16 px, ratio ~1,25) */
+  --text-xs: 0.8rem;
+  --text-sm: 0.9rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.563rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.441rem;
+
+  /* Rayons : sobres, hiérarchisés */
+  --radius-sm: 4px;    /* champs, étiquettes */
+  --radius-md: 8px;    /* boutons, cartes */
+  --radius-full: 9999px; /* logo, pastilles */
+}
+
+:root {
+  color-scheme: light;
+  --focus-ring: 0 0 0 3px #C7952C;  /* anneau de focus or, visible sur fond clair et bleu nuit */
+}
+
+html { background: var(--color-ima-paper); color: var(--color-ima-ink); font-family: var(--font-sans); }
+h1, h2, h3 { font-family: var(--font-display); color: var(--color-ima-navy); font-weight: 700; line-height: 1.2; }
+:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

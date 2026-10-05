@@ -1,0 +1,27 @@
+{
+  "Metadata": {
+    "title": "InnerOS — Institut Mindset en Action®",
+    "description": "Mesure collective et anonyme des risques psychosociaux au travail."
+  },
+  "Header": {
+    "brand": "Institut Mindset en Action®",
+    "logoAlt": "Logo de l'Institut Mindset en Action",
+    "languageLabel": "Langue",
+    "skipLink": "Aller au contenu"
+  },
+  "Home": {
+    "title": "InnerOS",
+    "tagline": "La mesure collective du bien-être au travail, au service de la méthode MINDSET®.",
+    "intro": "InnerOS permet à l'Institut Mindset en Action® d'ouvrir des campagnes de questionnaires anonymes dans une entreprise cliente, de calculer des scores collectifs et de préparer un rapport validé par un praticien IMA.",
+    "principlesTitle": "Nos engagements",
+    "principleAnonymity": "Anonymat complet : aucun compte, aucun nom, aucune adresse pour les répondants.",
+    "principleThreshold": "Aucun résultat n'est affiché pour un groupe de moins de 10 personnes.",
+    "principleHuman": "L'IA prépare un brouillon ; un praticien IMA vérifie et valide chaque rapport.",
+    "principleNoDiagnosis": "Une démarche de prévention collective, jamais un diagnostic individuel.",
+    "status": "Application en cours de construction — phase 1."
+  },
+  "Footer": {
+    "values": "Inspirer · Motiver · Agir",
+    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® est une méthode propriétaire de l'Institut."
+  }
+}

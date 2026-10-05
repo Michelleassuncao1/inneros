@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "../design/tokens.css";
+
+body {
+  background: var(--color-ima-paper);
+  color: var(--color-ima-ink);
+  line-height: 1.5;
+}

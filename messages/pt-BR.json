@@ -1,0 +1,27 @@
+{
+  "Metadata": {
+    "title": "InnerOS — Institut Mindset en Action®",
+    "description": "Avaliação coletiva e anônima dos riscos psicossociais no trabalho."
+  },
+  "Header": {
+    "brand": "Institut Mindset en Action®",
+    "logoAlt": "Logotipo do Institut Mindset en Action",
+    "languageLabel": "Idioma",
+    "skipLink": "Ir para o conteúdo"
+  },
+  "Home": {
+    "title": "InnerOS",
+    "tagline": "A avaliação coletiva do bem-estar no trabalho, a serviço do método MINDSET®.",
+    "intro": "O InnerOS permite ao Institut Mindset en Action® abrir campanhas de questionários anônimos em uma empresa cliente, calcular resultados coletivos e preparar um relatório validado por um profissional do IMA.",
+    "principlesTitle": "Nossos compromissos",
+    "principleAnonymity": "Anonimato total: nenhuma conta, nenhum nome, nenhum endereço para quem responde.",
+    "principleThreshold": "Nenhum resultado é exibido para um grupo com menos de 10 pessoas.",
+    "principleHuman": "A IA prepara um rascunho; um profissional do IMA verifica e valida cada relatório.",
+    "principleNoDiagnosis": "Uma abordagem de prevenção coletiva, nunca um diagnóstico individual.",
+    "status": "Aplicação em construção — fase 1."
+  },
+  "Footer": {
+    "values": "Inspirar · Motivar · Agir",
+    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® é um método proprietário do Instituto."
+  }
+}
