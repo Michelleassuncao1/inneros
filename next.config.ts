@@ -5,6 +5,8 @@ import type { NextConfig } from "next";
 // natif refuse de démarrer sur ce poste (droits Windows sur le dossier de cache).
 // On déclare ici le même alias que le plugin : `next-intl/config` → i18n/request.ts.
 const nextConfig: NextConfig = {
+  // PGlite (base de développement) reste un module Node.js, hors des fichiers compilés
+  serverExternalPackages: ["@electric-sql/pglite"],
   turbopack: {
     resolveAlias: {
       "next-intl/config": "./i18n/request.ts",

@@ -15,6 +15,13 @@
       "when": 1791275902053,
       "tag": "0001_garde-fous",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791313618142,
+      "tag": "0002_connexions",
+      "breakpoints": true
     }
   ]
 }

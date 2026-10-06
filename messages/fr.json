@@ -18,7 +18,59 @@
     "principleThreshold": "Aucun résultat n'est affiché pour un groupe de moins de 10 personnes.",
     "principleHuman": "L'IA prépare un brouillon ; un praticien IMA vérifie et valide chaque rapport.",
     "principleNoDiagnosis": "Une démarche de prévention collective, jamais un diagnostic individuel.",
-    "status": "Application en cours de construction — phase 1."
+    "status": "Application en cours de construction — phase 1.",
+    "adminLink": "Espace IMA",
+    "referentLink": "Espace référent entreprise"
+  },
+  "AdminLogin": {
+    "title": "Connexion administrateur",
+    "intro": "Espace réservé aux praticiens de l'Institut Mindset en Action®.",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "code": "Code de l'application d'authentification",
+    "codeHelp": "Les 6 chiffres affichés dans votre application, renouvelés toutes les 30 secondes.",
+    "submit": "Se connecter",
+    "pending": "Vérification…",
+    "errorInvalid": "Identifiants ou code incorrects.",
+    "errorLocked": "Trop de tentatives. Réessayez dans 15 minutes."
+  },
+  "Admin": {
+    "title": "Espace administrateur",
+    "welcome": "Bonjour {name}",
+    "placeholder": "Vous êtes connectée à l'espace administrateur InnerOS. Les entreprises et les campagnes apparaîtront ici.",
+    "signOut": "Se déconnecter"
+  },
+  "ReferentLogin": {
+    "title": "Connexion référent entreprise",
+    "intro": "Saisissez l'adresse e-mail communiquée à l'Institut Mindset en Action®. Vous recevrez un lien de connexion.",
+    "email": "Adresse e-mail",
+    "submit": "Recevoir mon lien de connexion",
+    "pending": "Envoi…",
+    "sent": "Si cette adresse est enregistrée, un lien de connexion vient de vous être envoyé. Il est valable 15 minutes et ne sert qu'une fois.",
+    "errorEmail": "Veuillez saisir une adresse e-mail valide."
+  },
+  "MagicLink": {
+    "title": "Ouvrir votre espace",
+    "intro": "Cliquez sur le bouton pour ouvrir votre espace référent.",
+    "submit": "Ouvrir mon espace",
+    "pending": "Ouverture…",
+    "errorExpired": "Ce lien a expiré ou a déjà été utilisé.",
+    "newLink": "Demander un nouveau lien"
+  },
+  "Referent": {
+    "title": "Espace référent",
+    "welcome": "Bonjour {name}",
+    "organization": "Entreprise : {name}",
+    "noReport": "Aucun rapport validé pour le moment. Les rapports apparaîtront ici après validation par l'Institut Mindset en Action®.",
+    "signOut": "Se déconnecter"
+  },
+  "Email": {
+    "subject": "Votre lien de connexion InnerOS",
+    "greeting": "Bonjour {name},",
+    "body": "Voici votre lien pour ouvrir votre espace InnerOS. Il est valable 15 minutes et ne peut servir qu'une fois.",
+    "button": "Ouvrir mon espace",
+    "ignore": "Si vous n'avez pas demandé ce lien, ignorez simplement ce message.",
+    "signature": "Institut Mindset en Action®"
   },
   "Footer": {
     "values": "Inspirer · Motiver · Agir",

@@ -18,7 +18,59 @@
     "principleThreshold": "Nenhum resultado é exibido para um grupo com menos de 10 pessoas.",
     "principleHuman": "A IA prepara um rascunho; um profissional do IMA verifica e valida cada relatório.",
     "principleNoDiagnosis": "Uma abordagem de prevenção coletiva, nunca um diagnóstico individual.",
-    "status": "Aplicação em construção — fase 1."
+    "status": "Aplicação em construção — fase 1.",
+    "adminLink": "Área IMA",
+    "referentLink": "Área do responsável da empresa"
+  },
+  "AdminLogin": {
+    "title": "Acesso de administrador",
+    "intro": "Área reservada aos profissionais do Institut Mindset en Action®.",
+    "email": "Endereço de e-mail",
+    "password": "Senha",
+    "code": "Código do aplicativo de autenticação",
+    "codeHelp": "Os 6 dígitos exibidos no seu aplicativo, renovados a cada 30 segundos.",
+    "submit": "Entrar",
+    "pending": "Verificando…",
+    "errorInvalid": "Dados de acesso ou código incorretos.",
+    "errorLocked": "Muitas tentativas. Tente novamente em 15 minutos."
+  },
+  "Admin": {
+    "title": "Área do administrador",
+    "welcome": "Olá, {name}",
+    "placeholder": "Você está conectada à área do administrador do InnerOS. As empresas e as campanhas aparecerão aqui.",
+    "signOut": "Sair"
+  },
+  "ReferentLogin": {
+    "title": "Acesso do responsável da empresa",
+    "intro": "Informe o endereço de e-mail comunicado ao Institut Mindset en Action®. Você receberá um link de acesso.",
+    "email": "Endereço de e-mail",
+    "submit": "Receber meu link de acesso",
+    "pending": "Enviando…",
+    "sent": "Se este endereço estiver cadastrado, um link de acesso acaba de ser enviado. Ele é válido por 15 minutos e só pode ser usado uma vez.",
+    "errorEmail": "Informe um endereço de e-mail válido."
+  },
+  "MagicLink": {
+    "title": "Abrir sua área",
+    "intro": "Clique no botão para abrir sua área de responsável.",
+    "submit": "Abrir minha área",
+    "pending": "Abrindo…",
+    "errorExpired": "Este link expirou ou já foi usado.",
+    "newLink": "Pedir um novo link"
+  },
+  "Referent": {
+    "title": "Área do responsável",
+    "welcome": "Olá, {name}",
+    "organization": "Empresa: {name}",
+    "noReport": "Nenhum relatório validado no momento. Os relatórios aparecerão aqui após a validação pelo Institut Mindset en Action®.",
+    "signOut": "Sair"
+  },
+  "Email": {
+    "subject": "Seu link de acesso ao InnerOS",
+    "greeting": "Olá, {name},",
+    "body": "Aqui está o seu link para abrir sua área no InnerOS. Ele é válido por 15 minutos e só pode ser usado uma vez.",
+    "button": "Abrir minha área",
+    "ignore": "Se você não pediu este link, basta ignorar esta mensagem.",
+    "signature": "Institut Mindset en Action®"
   },
   "Footer": {
     "values": "Inspirar · Motivar · Agir",

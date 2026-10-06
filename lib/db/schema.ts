@@ -83,6 +83,8 @@ export const users = pgTable(
     passwordHash: text("password_hash"),
     totpSecretEncrypted: text("totp_secret_encrypted"),
     totpEnabled: boolean("totp_enabled").notNull().default(false),
+    // Dernier pas de temps TOTP accepté : un même code ne sert jamais deux fois
+    totpLastStep: integer("totp_last_step"),
     // Référents seulement : l'entreprise qu'ils représentent
     organizationId: uuid("organization_id").references(() => organizations.id, {
       onDelete: "restrict",
@@ -100,8 +102,29 @@ export const users = pgTable(
       sql`(${t.role} = 'admin' AND ${t.organizationId} IS NULL)
        OR (${t.role} = 'referent' AND ${t.organizationId} IS NOT NULL AND ${t.passwordHash} IS NULL)`,
     ),
+    // Adresses toujours enregistrées en minuscules, sans espaces
+    check("users_email_normalise", sql`${t.email} = lower(trim(${t.email}))`),
   ],
 );
+
+// Liens de connexion des référents : empreinte seulement, 15 minutes, usage unique (F2).
+export const loginLinks = pgTable("login_links", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  tokenHash: text("token_hash").notNull().unique(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  usedAt: timestamp("used_at", { withTimezone: true }),
+});
+
+// Compteur d'échecs de connexion, par adresse (empreinte de l'adresse, jamais l'adresse elle-même).
+export const loginAttempts = pgTable("login_attempts", {
+  key: text("key").primaryKey(),
+  failures: integer("failures").notNull().default(0),
+  windowStart: timestamp("window_start", { withTimezone: true }).notNull(),
+  lockedUntil: timestamp("locked_until", { withTimezone: true }),
+});
 
 // Questionnaires : une ligne par instrument et par version.
 // `definitions` contient le fichier JSON de chaque langue : { "fr": {...}, "pt-BR": {...} }.

@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { Logo } from "@/components/Logo";
+import { SiteHeader } from "@/components/SiteHeader";
 import { WaveFooter } from "@/components/WaveFooter";
+import { Link } from "@/i18n/navigation";
 
 const principles = [
   "principleAnonymity",
@@ -16,28 +16,10 @@ export default function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = use(params);
   setRequestLocale(locale);
   const t = useTranslations("Home");
-  const tHeader = useTranslations("Header");
 
   return (
     <>
-      <a
-        href="#contenu"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:bg-white focus:px-3 focus:py-2"
-      >
-        {tHeader("skipLink")}
-      </a>
-
-      <header className="border-b border-ima-line">
-        <div className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-4 py-4">
-          <div className="flex items-center gap-3">
-            <Logo alt={tHeader("logoAlt")} />
-            <span className="text-xs font-semibold uppercase tracking-widest text-ima-gold-text sm:text-sm">
-              {tHeader("brand")}
-            </span>
-          </div>
-          <LanguageSwitcher />
-        </div>
-      </header>
+      <SiteHeader />
 
       <main id="contenu" className="mx-auto w-full max-w-4xl flex-1 px-4 py-12 sm:py-16">
         <h1 className="text-3xl sm:text-[3rem]">{t("title")}</h1>
@@ -58,6 +40,21 @@ export default function HomePage({ params }: PageProps<"/[locale]">) {
             ))}
           </ul>
         </section>
+
+        <nav className="mt-10 flex flex-wrap gap-3">
+          <Link
+            href="/admin/connexion"
+            className="rounded-md bg-ima-navy px-5 py-2.5 font-semibold text-white hover:bg-ima-navy-deep"
+          >
+            {t("adminLink")}
+          </Link>
+          <Link
+            href="/espace/connexion"
+            className="rounded-md border border-ima-navy px-5 py-2.5 font-semibold text-ima-navy hover:bg-ima-cream"
+          >
+            {t("referentLink")}
+          </Link>
+        </nav>
 
         <p className="mt-8 text-sm text-ima-muted">{t("status")}</p>
       </main>
