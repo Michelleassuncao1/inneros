@@ -11,6 +11,7 @@ import { langueValide } from "@/i18n/locale";
 import {
   ajouterGroupe,
   choisirQuestionnaires,
+  choisirReferents,
   creerCampagne,
   modifierCampagne,
   supprimerGroupe,
@@ -161,6 +162,21 @@ export async function actionQuestionnaires(
   if (!uuid.safeParse(id).success) return erreur("introuvable");
   const ids = formData.getAll("instruments").map(String);
   const r = await choisirQuestionnaires(db, admin.id, id, ids);
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(`/${langue}/admin/campagnes/${id}`);
+  const t = await getTranslations({ locale: langue, namespace: "Campagnes" });
+  return { succes: t("saved"), envoi: Date.now() };
+}
+
+export async function actionReferentsCampagne(
+  locale: string,
+  id: string,
+  _etat: EtatFormulaire,
+  formData: FormData,
+): Promise<EtatFormulaire> {
+  const { langue, admin, db, erreur } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return erreur("introuvable");
+  const r = await choisirReferents(db, admin.id, id, formData.getAll("referents").map(String));
   if (!r.ok) return erreur(r.erreur);
   revalidatePath(`/${langue}/admin/campagnes/${id}`);
   const t = await getTranslations({ locale: langue, namespace: "Campagnes" });

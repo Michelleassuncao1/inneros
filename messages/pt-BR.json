@@ -112,7 +112,15 @@
       "open": "Aberta",
       "closed": "Encerrada"
     },
-    "test": "teste"
+    "test": "teste",
+    "grouping": {
+      "service": "Setor",
+      "department": "Departamento",
+      "direction": "Diretoria",
+      "site": "Unidade",
+      "function": "Função / cargo",
+      "other": "Outro"
+    }
   },
   "Entreprises": {
     "title": "Empresas",
@@ -209,7 +217,19 @@
     "deleteGroup": "Excluir",
     "deleting": "Excluindo…",
     "status": "Status: {status}",
-    "threshold": "Limite: {seuil} pessoas"
+    "threshold": "Limite: {seuil} pessoas",
+    "groupingCriterion": "Critério de agrupamento",
+    "groupingHelp": "Todos os grupos da campanha seguem um único critério: cada respondente deve se reconhecer em um só grupo. Ele não pode mais ser alterado depois que grupos forem criados.",
+    "perimeterHelp": "Exemplo: « Todos os trabalhadores da unidade de São Paulo, cerca de 120 pessoas. Terceirizados excluídos. »",
+    "groupingInfo": "Critério: {critere}",
+    "labelFor": "Nome do grupo ({critere})",
+    "referentsTitle": "Acesso ao relatório",
+    "referentsHelp": "Somente os responsáveis marcados verão o relatório desta campanha, após a validação pelo IMA.",
+    "referentsLegend": "Responsáveis da empresa",
+    "referentsNone": "Nenhum responsável cadastrado para esta empresa. Adicione-os na ficha da empresa.",
+    "referentsEmpty": "Nenhum responsável escolhido: ninguém na empresa poderá consultar o relatório.",
+    "referentDisabled": "desativado",
+    "saveReferents": "Salvar o acesso"
   },
   "Erreurs": {
     "saisieInvalide": "Alguns campos estão faltando ou incorretos. Verifique o preenchimento.",
@@ -222,7 +242,8 @@
     "campagneVerrouillee": "Esta campanha está aberta ou encerrada: ela não pode mais ser alterada.",
     "groupeSousLeSeuil": "Grupo recusado: o número previsto é inferior ao limite da campanha. Junte-o a outro grupo.",
     "groupeEnDouble": "Já existe um grupo com este nome.",
-    "seuilAuDessusDunGroupe": "Este limite é superior ao número previsto de um grupo existente."
+    "seuilAuDessusDunGroupe": "Este limite é superior ao número previsto de um grupo existente.",
+    "critereVerrouille": "O critério de agrupamento não pode mais ser alterado: já existem grupos. Exclua-os primeiro."
   },
   "QuestionsTypes": {
     "choose": "Escolher uma pergunta-modelo",

@@ -1,12 +1,21 @@
 // Tests de l'étape 4A : entreprises, référents, campagnes, groupes, questionnaires.
 import { eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it } from "vitest";
-import { campaignInstruments, campaigns, instruments, loginLinks, organizations, users } from "../db/schema";
+import {
+  campaignInstruments,
+  campaignReferents,
+  campaigns,
+  instruments,
+  loginLinks,
+  organizations,
+  users,
+} from "../db/schema";
 import { creerBaseDeTest } from "../db/test-db";
 import type { Db } from "../db/types";
 import {
   ajouterGroupe,
   choisirQuestionnaires,
+  choisirReferents,
   creerCampagne,
   modifierCampagne,
   supprimerGroupe,
@@ -40,6 +49,7 @@ const campagne = {
   startDate: "2026-11-01",
   endDate: "2026-11-30",
   locales: ["fr"],
+  groupingCriterion: "service",
 };
 
 beforeEach(async () => {
@@ -222,5 +232,57 @@ describe("Campagnes et groupes (F4)", () => {
     expect(
       await choisirQuestionnaires(db, adminId, id, ["11111111-1111-4111-8111-111111111111"]),
     ).toEqual({ ok: false, erreur: "saisieInvalide" });
+  });
+
+  it("refuse de changer de critère de regroupement une fois des groupes créés", async () => {
+    const id = await nouvelleCampagne();
+    expect((await modifierCampagne(db, adminId, id, { ...campagne, groupingCriterion: "site" })).ok).toBe(true);
+    await ajouterGroupe(db, adminId, id, { label: "Liège", expectedSize: 12 });
+    expect(await modifierCampagne(db, adminId, id, { ...campagne, groupingCriterion: "service" })).toEqual({
+      ok: false,
+      erreur: "critereVerrouille",
+    });
+  });
+
+  it("refuse un critère de regroupement inconnu", async () => {
+    const orgId = await nouvelleEntreprise();
+    expect(await creerCampagne(db, adminId, orgId, { ...campagne, groupingCriterion: "etage" })).toEqual({
+      ok: false,
+      erreur: "saisieInvalide",
+    });
+  });
+});
+
+describe("Référents ayant accès au rapport de la campagne", () => {
+  it("n'accepte que des référents de l'entreprise de la campagne", async () => {
+    const id = await nouvelleCampagne();
+    const [c] = await db.select().from(campaigns).where(eq(campaigns.id, id));
+    await ajouterReferent(db, adminId, c.organizationId, { name: "RH Liège", email: "liege@client.test" });
+    await ajouterReferent(db, adminId, c.organizationId, { name: "RH Bruxelles", email: "bxl@client.test" });
+    const autreOrg = await nouvelleEntreprise();
+    await ajouterReferent(db, adminId, autreOrg, { name: "Autre", email: "autre@ailleurs.test" });
+    const tous = await db.select().from(users);
+    const id_ = (email: string) => tous.find((u) => u.email === email)!.id;
+
+    expect((await choisirReferents(db, adminId, id, [id_("liege@client.test")])).ok).toBe(true);
+    expect(await db.select().from(campaignReferents)).toHaveLength(1);
+
+    const refus = { ok: false, erreur: "saisieInvalide" };
+    expect(await choisirReferents(db, adminId, id, [id_("autre@ailleurs.test")])).toEqual(refus);
+    expect(await choisirReferents(db, adminId, id, [adminId])).toEqual(refus);
+    // La base refuse aussi, même sans passer par l'application
+    await expect(
+      db.insert(campaignReferents).values({ campaignId: id, userId: id_("autre@ailleurs.test") }),
+    ).rejects.toThrow();
+  });
+
+  it("permet de retirer tous les référents", async () => {
+    const id = await nouvelleCampagne();
+    const [c] = await db.select().from(campaigns).where(eq(campaigns.id, id));
+    await ajouterReferent(db, adminId, c.organizationId, { name: "RH", email: "rh@client.test" });
+    const [r] = await db.select().from(users).where(eq(users.email, "rh@client.test"));
+    await choisirReferents(db, adminId, id, [r.id]);
+    expect((await choisirReferents(db, adminId, id, [])).ok).toBe(true);
+    expect(await db.select().from(campaignReferents)).toHaveLength(0);
   });
 });

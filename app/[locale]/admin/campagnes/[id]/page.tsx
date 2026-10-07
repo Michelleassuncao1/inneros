@@ -1,4 +1,4 @@
-import { asc, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { z } from "zod";
@@ -8,11 +8,20 @@ import { FormulaireAction } from "@/components/FormulaireAction";
 import { Link } from "@/i18n/navigation";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
-import { campaignInstruments, campaigns, groups, instruments, organizations } from "@/lib/db/schema";
+import {
+  campaignInstruments,
+  campaignReferents,
+  campaigns,
+  groups,
+  instruments,
+  organizations,
+  users,
+} from "@/lib/db/schema";
 import {
   actionAjouterGroupe,
   actionModifierCampagne,
   actionQuestionnaires,
+  actionReferentsCampagne,
   actionSupprimerGroupe,
 } from "../../actions";
 import { ChampsCampagne } from "../../ChampsFormulaires";
@@ -32,16 +41,23 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
   if (!ligne) notFound();
   const { campagne, entreprise } = ligne;
 
-  const [listeGroupes, tousInstruments, choisis] = await Promise.all([
+  const [listeGroupes, tousInstruments, choisis, referentsEntreprise, acces] = await Promise.all([
     db.select().from(groups).where(eq(groups.campaignId, id)).orderBy(asc(groups.label)),
     db.select().from(instruments).orderBy(asc(instruments.code)),
     db.select().from(campaignInstruments).where(eq(campaignInstruments.campaignId, id)),
+    db
+      .select()
+      .from(users)
+      .where(and(eq(users.organizationId, entreprise.id), eq(users.role, "referent")))
+      .orderBy(asc(users.name)),
+    db.select().from(campaignReferents).where(eq(campaignReferents.campaignId, id)),
   ]);
 
   const t = await getTranslations("Campagnes");
   const l = await getTranslations("Libelles");
   const brouillon = campagne.status === "draft";
   const total = listeGroupes.reduce((s, g) => s + g.expectedSize, 0);
+  const critere = l(`grouping.${campagne.groupingCriterion}`);
 
   return (
     <EspaceAdmin locale={locale} actif="campagnes">
@@ -57,6 +73,7 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
         </li>
         <li>{t("status", { status: l(`status.${campagne.status}`) })}</li>
         <li>{t("threshold", { seuil: campagne.groupMinSize })}</li>
+        <li>{t("groupingInfo", { critere })}</li>
       </ul>
       {!brouillon && (
         <div className="mb-8">
@@ -101,7 +118,7 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
             viderApresSucces
             secondaire
           >
-            <Champ id="label" name="label" label={t("label")} aide={t("labelHelp")} required maxLength={80} />
+            <Champ id="label" name="label" label={t("labelFor", { critere })} aide={t("labelHelp")} required maxLength={80} />
             <Champ
               id="expectedSize"
               name="expectedSize"
@@ -111,6 +128,38 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
               required
             />
           </FormulaireAction>
+        )}
+      </section>
+
+      <section aria-labelledby="acces" className="mt-12">
+        <h2 id="acces" className="text-xl">{t("referentsTitle")}</h2>
+        <p className="mb-4 mt-2 max-w-[70ch] text-sm text-ima-muted">{t("referentsHelp")}</p>
+        {referentsEntreprise.length === 0 ? (
+          <p>{t("referentsNone")}</p>
+        ) : (
+          <>
+            {acces.length === 0 && (
+              <div className="mb-4 max-w-xl">
+                <MessageInfo>{t("referentsEmpty")}</MessageInfo>
+              </div>
+            )}
+            <FormulaireAction
+              action={actionReferentsCampagne.bind(null, locale, id)}
+              libelle={t("saveReferents")}
+              enCours={t("saving")}
+              secondaire
+            >
+              <CasesACocher
+                legende={t("referentsLegend")}
+                name="referents"
+                options={referentsEntreprise.map((r) => ({
+                  valeur: r.id,
+                  libelle: `${r.name} — ${r.email}${r.disabledAt ? ` (${t("referentDisabled")})` : ""}`,
+                }))}
+                cochees={acces.map((a) => a.userId)}
+              />
+            </FormulaireAction>
+          </>
         )}
       </section>
 

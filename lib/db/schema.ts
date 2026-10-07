@@ -37,6 +37,16 @@ export const trancheEffectif = pgEnum("size_band", [
   "1000+",
 ]);
 export const typeMandat = pgEnum("mandate_type", ["flash", "n1", "n2", "n3"]);
+// Critère de regroupement : tous les groupes d'une campagne suivent un seul critère,
+// pour qu'un répondant ne puisse se reconnaître que dans un seul groupe
+export const critereRegroupement = pgEnum("grouping_criterion", [
+  "service",
+  "department",
+  "direction",
+  "site",
+  "function",
+  "other",
+]);
 export const statutCampagne = pgEnum("campaign_status", [
   "draft",
   "open",
@@ -166,6 +176,7 @@ export const campaigns = pgTable(
     status: statutCampagne("status").notNull().default("draft"),
     // Date de validation du mandat (porte P1) : obligatoire pour ouvrir la campagne
     mandateValidatedOn: date("mandate_validated_on"),
+    groupingCriterion: critereRegroupement("grouping_criterion").notNull().default("service"),
     aiDraftingEnabled: boolean("ai_drafting_enabled").notNull().default(true),
     createdBy: uuid("created_by").references(() => users.id, {
       onDelete: "set null",
@@ -185,6 +196,21 @@ export const campaigns = pgTable(
       sql`${t.status} = 'draft' OR ${t.mandateValidatedOn} IS NOT NULL`,
     ),
   ],
+);
+
+// Référents ayant accès au rapport validé de la campagne (un référent d'une autre
+// entreprise est refusé par déclencheur : drizzle/0004_referents-campagne.sql).
+export const campaignReferents = pgTable(
+  "campaign_referents",
+  {
+    campaignId: uuid("campaign_id")
+      .notNull()
+      .references(() => campaigns.id, { onDelete: "cascade" }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+  },
+  (t) => [primaryKey({ columns: [t.campaignId, t.userId] })],
 );
 
 // Questionnaires choisis pour une campagne.

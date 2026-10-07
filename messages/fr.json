@@ -112,7 +112,15 @@
       "open": "Ouverte",
       "closed": "Clôturée"
     },
-    "test": "test"
+    "test": "test",
+    "grouping": {
+      "service": "Service",
+      "department": "Département",
+      "direction": "Direction",
+      "site": "Site",
+      "function": "Fonction / métier",
+      "other": "Autre"
+    }
   },
   "Entreprises": {
     "title": "Entreprises",
@@ -209,7 +217,19 @@
     "deleteGroup": "Supprimer",
     "deleting": "Suppression…",
     "status": "Statut : {status}",
-    "threshold": "Seuil : {seuil} personnes"
+    "threshold": "Seuil : {seuil} personnes",
+    "groupingCriterion": "Critère de regroupement",
+    "groupingHelp": "Tous les groupes de la campagne suivent ce seul critère : chaque répondant doit se reconnaître dans un seul groupe. Il ne peut plus être changé une fois des groupes créés.",
+    "perimeterHelp": "Exemple : « Ensemble du personnel du site de Liège, environ 120 personnes. Intérimaires exclus. »",
+    "groupingInfo": "Critère : {critere}",
+    "labelFor": "Libellé du groupe ({critere})",
+    "referentsTitle": "Accès au rapport",
+    "referentsHelp": "Seuls les référents cochés verront le rapport de cette campagne, après validation par IMA.",
+    "referentsLegend": "Référents de l'entreprise",
+    "referentsNone": "Aucun référent n'est enregistré pour cette entreprise. Ajoutez-en depuis la fiche de l'entreprise.",
+    "referentsEmpty": "Aucun référent n'est encore choisi : personne côté entreprise ne pourra consulter le rapport.",
+    "referentDisabled": "désactivé",
+    "saveReferents": "Enregistrer l'accès"
   },
   "Erreurs": {
     "saisieInvalide": "Certains champs sont manquants ou incorrects. Vérifiez la saisie.",
@@ -222,7 +242,8 @@
     "campagneVerrouillee": "Cette campagne est ouverte ou clôturée : elle ne peut plus être modifiée.",
     "groupeSousLeSeuil": "Groupe refusé : l'effectif prévu est inférieur au seuil de la campagne. Regroupez-le avec un autre groupe.",
     "groupeEnDouble": "Un groupe porte déjà ce libellé.",
-    "seuilAuDessusDunGroupe": "Ce seuil est supérieur à l'effectif prévu d'un groupe existant."
+    "seuilAuDessusDunGroupe": "Ce seuil est supérieur à l'effectif prévu d'un groupe existant.",
+    "critereVerrouille": "Le critère de regroupement ne peut plus être changé : des groupes existent déjà. Supprimez-les d'abord."
   },
   "QuestionsTypes": {
     "choose": "Choisir une question type",

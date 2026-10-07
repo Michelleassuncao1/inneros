@@ -1,7 +1,7 @@
 // Champs des formulaires entreprise et campagne, partagés entre création et modification.
 import { getTranslations } from "next-intl/server";
 import { CasesACocher, Champ, Selection, ZoneTexte } from "@/components/Formulaire";
-import { MANDATS, seuilPlateforme } from "@/lib/admin/campagnes";
+import { CRITERES, MANDATS, seuilPlateforme } from "@/lib/admin/campagnes";
 import { LANGUES, PAYS, TRANCHES } from "@/lib/admin/entreprises";
 import { ChoixQuestionType } from "./ChoixQuestionType";
 
@@ -55,6 +55,7 @@ type Campagne = {
   startDate: string;
   endDate: string;
   locales: string[];
+  groupingCriterion: string;
 };
 
 export async function ChampsCampagne({
@@ -109,9 +110,18 @@ export async function ChampsCampagne({
         id="perimeter"
         name="perimeter"
         label={t("perimeter")}
+        aide={t("perimeterHelp")}
         defaultValue={valeurs?.perimeter ?? ""}
         maxLength={2000}
       />
+      <Selection
+        id="groupingCriterion"
+        name="groupingCriterion"
+        label={t("groupingCriterion")}
+        defaultValue={valeurs?.groupingCriterion ?? "service"}
+        options={CRITERES.map((c) => ({ valeur: c, libelle: l(`grouping.${c}`) }))}
+      />
+      <p className="-mt-3 text-sm text-ima-muted">{t("groupingHelp")}</p>
       <Champ
         id="groupMinSize"
         name="groupMinSize"
