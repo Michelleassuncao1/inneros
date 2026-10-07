@@ -161,6 +161,28 @@ export async function modifierReferent(
   return { ok: true, valeur: undefined };
 }
 
+// Suppression définitive d'un référent (ses liens de connexion partent avec lui).
+// Le journal d'audit garde la trace de la suppression.
+export async function supprimerReferent(
+  db: Db,
+  adminId: string,
+  referentId: string,
+): Promise<Resultat> {
+  const [referent] = await db
+    .delete(users)
+    .where(and(eq(users.id, referentId), eq(users.role, "referent")))
+    .returning({ id: users.id, organizationId: users.organizationId });
+  if (!referent) return { ok: false, erreur: "introuvable" };
+  await journaliser(db, {
+    actorUserId: adminId,
+    action: "referent_deleted",
+    targetType: "user",
+    targetId: referentId,
+    details: { organizationId: referent.organizationId },
+  });
+  return { ok: true, valeur: undefined };
+}
+
 // Désactiver un référent lui retire tout accès, immédiatement (droits relus à chaque page)
 export async function changerEtatReferent(
   db: Db,

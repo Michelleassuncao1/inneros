@@ -14,7 +14,9 @@ import {
   actionEtatReferent,
   actionModifierEntreprise,
   actionModifierReferent,
+  actionSupprimerReferent,
 } from "../../actions";
+import { MenuReferent } from "./MenuReferent";
 import { ChampsEntreprise } from "../../ChampsFormulaires";
 
 export default async function EntreprisePage({ params }: PageProps<"/[locale]/admin/entreprises/[id]">) {
@@ -62,54 +64,39 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
           <p className="mb-6">{t("noReferent")}</p>
         ) : (
           <div className="mb-6">
-            <Tableau entetes={[t("colName"), t("colEmail"), t("colState"), ""]}>
+            <Tableau entetes={[t("colName"), t("colEmail"), t("colState"), t("colActions")]}>
               {referents.map((r) => (
                 <tr key={r.id}>
                   <Cellule>{r.name}</Cellule>
                   <Cellule>{r.email}</Cellule>
                   <Cellule>{r.disabledAt ? t("disabled") : t("active")}</Cellule>
                   <Cellule>
-                    <form action={actionEtatReferent.bind(null, locale, id, r.id, !!r.disabledAt)}>
-                      <button type="submit" className="text-sm font-semibold text-ima-navy underline">
-                        {r.disabledAt ? t("enable") : t("disable")}
-                      </button>
-                    </form>
+                    <MenuReferent
+                      referent={{ id: r.id, name: r.name, email: r.email }}
+                      actionModifier={actionModifierReferent.bind(null, locale, id, r.id)}
+                      actionEtat={actionEtatReferent.bind(null, locale, id, r.id, !!r.disabledAt)}
+                      actionSupprimer={actionSupprimerReferent.bind(null, locale, id, r.id)}
+                      libelles={{
+                        menu: t("actionsFor", { name: r.name }),
+                        edit: t("edit"),
+                        editTitle: t("editReferentTitle"),
+                        editHelp: t("editReferentHelp"),
+                        name: t("referentName"),
+                        email: t("referentEmail"),
+                        save: t("save"),
+                        saving: t("saving"),
+                        toggle: r.disabledAt ? t("enable") : t("disable"),
+                        delete: t("delete"),
+                        deleteTitle: t("deleteTitle"),
+                        deleteText: t("deleteText", { name: r.name, email: r.email }),
+                        deleteConfirm: t("deleteConfirm"),
+                        cancel: t("cancel"),
+                      }}
+                    />
                   </Cellule>
                 </tr>
               ))}
             </Tableau>
-            {referents.map((r) => (
-              <details key={r.id} className="mt-3 rounded-md border border-ima-line bg-white px-4 py-3">
-                <summary className="cursor-pointer font-semibold text-ima-navy">
-                  {t("edit")} — {r.name}
-                </summary>
-                <p className="mb-4 mt-2 text-sm text-ima-muted">{t("editReferentHelp")}</p>
-                <FormulaireAction
-                  action={actionModifierReferent.bind(null, locale, id, r.id)}
-                  libelle={t("save")}
-                  enCours={t("saving")}
-                  secondaire
-                >
-                  <Champ
-                    id={`nom-${r.id}`}
-                    name="name"
-                    label={t("referentName")}
-                    defaultValue={r.name}
-                    required
-                    maxLength={120}
-                  />
-                  <Champ
-                    id={`email-${r.id}`}
-                    name="email"
-                    type="email"
-                    label={t("referentEmail")}
-                    defaultValue={r.email}
-                    required
-                    maxLength={254}
-                  />
-                </FormulaireAction>
-              </details>
-            ))}
           </div>
         )}
         <FormulaireAction

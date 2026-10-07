@@ -154,7 +154,14 @@
     "edit": "Editar",
     "editReferentTitle": "Corrigir este responsável",
     "editReferentHelp": "Se o endereço mudar, os links de acesso já enviados são cancelados.",
-    "referentUpdated": "Responsável atualizado."
+    "referentUpdated": "Responsável atualizado.",
+    "colActions": "Ações",
+    "actionsFor": "Ações para {name}",
+    "delete": "Excluir",
+    "deleteTitle": "Excluir este responsável?",
+    "deleteText": "{name} ({email}) não terá mais nenhum acesso à área do responsável. Esta exclusão é definitiva.",
+    "deleteConfirm": "Excluir definitivamente",
+    "cancel": "Cancelar"
   },
   "Campagnes": {
     "title": "Campanhas",

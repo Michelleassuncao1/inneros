@@ -14,6 +14,7 @@ export function FormulaireAction({
   children,
   viderApresSucces = false,
   secondaire = false,
+  apresSucces,
   className = "flex max-w-xl flex-col gap-5",
 }: {
   action: (etat: EtatFormulaire, formData: FormData) => Promise<EtatFormulaire>;
@@ -22,14 +23,17 @@ export function FormulaireAction({
   children?: React.ReactNode;
   viderApresSucces?: boolean;
   secondaire?: boolean;
+  apresSucces?: () => void;
   className?: string;
 }) {
   const [etat, envoyer, enAttente] = useActionState(action, {});
   const formulaire = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    if (etat.succes && viderApresSucces) formulaire.current?.reset();
-  }, [etat, viderApresSucces]);
+    if (!etat.succes) return;
+    if (viderApresSucces) formulaire.current?.reset();
+    apresSucces?.();
+  }, [etat, viderApresSucces, apresSucces]);
 
   return (
     <form

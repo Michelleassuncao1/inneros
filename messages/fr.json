@@ -154,7 +154,14 @@
     "edit": "Modifier",
     "editReferentTitle": "Corriger ce référent",
     "editReferentHelp": "Si l'adresse change, les liens de connexion déjà envoyés sont annulés.",
-    "referentUpdated": "Référent modifié."
+    "referentUpdated": "Référent modifié.",
+    "colActions": "Actions",
+    "actionsFor": "Actions pour {name}",
+    "delete": "Supprimer",
+    "deleteTitle": "Supprimer ce référent ?",
+    "deleteText": "{name} ({email}) n'aura plus aucun accès à l'espace référent. Cette suppression est définitive.",
+    "deleteConfirm": "Supprimer définitivement",
+    "cancel": "Annuler"
   },
   "Campagnes": {
     "title": "Campagnes",

@@ -21,6 +21,7 @@ import {
   creerEntreprise,
   modifierEntreprise,
   modifierReferent,
+  supprimerReferent,
 } from "@/lib/admin/entreprises";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
@@ -110,6 +111,13 @@ export async function actionEtatReferent(
   const { langue, admin, db } = await contexte(locale);
   if (!uuid.safeParse(referentId).success) return;
   await changerEtatReferent(db, admin.id, referentId, actif);
+  revalidatePath(`/${langue}/admin/entreprises/${organizationId}`);
+}
+
+export async function actionSupprimerReferent(locale: string, organizationId: string, referentId: string) {
+  const { langue, admin, db } = await contexte(locale);
+  if (!uuid.safeParse(referentId).success) return;
+  await supprimerReferent(db, admin.id, referentId);
   revalidatePath(`/${langue}/admin/entreprises/${organizationId}`);
 }
 

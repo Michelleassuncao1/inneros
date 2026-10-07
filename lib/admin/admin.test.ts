@@ -17,6 +17,7 @@ import {
   creerEntreprise,
   modifierEntreprise,
   modifierReferent,
+  supprimerReferent,
 } from "./entreprises";
 
 let db: Db;
@@ -132,6 +133,18 @@ describe("Entreprises et référents (F3)", () => {
       ok: false,
       erreur: "introuvable",
     });
+  });
+
+  it("supprime un référent et ses liens, sans jamais supprimer un administrateur", async () => {
+    const orgId = await nouvelleEntreprise();
+    await ajouterReferent(db, adminId, orgId, { name: "RH", email: "rh@client.test" });
+    const [referent] = await db.select().from(users).where(eq(users.email, "rh@client.test"));
+    await db.insert(loginLinks).values({ tokenHash: "h1", userId: referent.id, expiresAt: new Date(Date.now() + 60_000) });
+
+    expect((await supprimerReferent(db, adminId, referent.id)).ok).toBe(true);
+    expect(await db.select().from(users).where(eq(users.id, referent.id))).toHaveLength(0);
+    expect(await db.select().from(loginLinks)).toHaveLength(0);
+    expect(await supprimerReferent(db, adminId, adminId)).toEqual({ ok: false, erreur: "introuvable" });
   });
 
   it("ne désactive jamais un administrateur par ce biais", async () => {
