@@ -224,6 +224,32 @@
     "groupeEnDouble": "Já existe um grupo com este nome.",
     "seuilAuDessusDunGroupe": "Este limite é superior ao número previsto de um grupo existente."
   },
+  "QuestionsTypes": {
+    "choose": "Escolher uma pergunta-modelo",
+    "placeholder": "— Escolher uma pergunta-modelo —",
+    "help": "Perguntas-modelo validadas pelo IMA para este tipo de mandato. O texto escolhido substitui o conteúdo do campo abaixo e continua editável: complete os trechos entre colchetes.",
+    "confirmReplace": "Substituir o texto atual da pergunta diagnóstica?",
+    "flash": [
+      "Qual é o estado geral dos fatores psicossociais percebidos pelos trabalhadores, e quais pontos merecem atenção prioritária?",
+      "Quais aspectos do trabalho são percebidos como recursos, e quais como pontos de atenção?",
+      "Os resultados coletivos indicam áreas a aprofundar por meio de um diagnóstico mais completo?"
+    ],
+    "n1": [
+      "Como os trabalhadores percebem suas condições de trabalho segundo os seis níveis MINDSET®: trabalho, papéis, interações, gestão, organização, ambiente?",
+      "Quais fatores psicossociais são percebidos como os mais favoráveis e os mais preocupantes, e como eles variam de um grupo para outro?",
+      "Quais prioridades de prevenção coletiva emergem dos resultados?"
+    ],
+    "n2": [
+      "Como as equipes percebem sua carga de trabalho, sua autonomia e o apoio recebido desde [a mudança / a reorganização de …]?",
+      "Que diferenças de percepção aparecem entre [os setores / as unidades / as funções] quanto às exigências do trabalho e aos recursos disponíveis?",
+      "Quais fatores ligados aos papéis e às relações de trabalho (clareza dos papéis, apoio entre colegas, reconhecimento, qualidade da liderança imediata) aparecem como pontos de atenção?"
+    ],
+    "n3": [
+      "Como os fatores psicossociais percebidos evoluíram desde a medição anterior de [mês / ano]?",
+      "Como as percepções evoluíram nas áreas abordadas pelo plano de ação de [ano]?",
+      "Quais prioridades emergem para a continuidade do plano de prevenção?"
+    ]
+  },
   "Footer": {
     "values": "Inspirar · Motivar · Agir",
     "copyright": "© 2026 Institut Mindset en Action®. MINDSET® é um método proprietário do Instituto."

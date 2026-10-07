@@ -224,6 +224,32 @@
     "groupeEnDouble": "Un groupe porte déjà ce libellé.",
     "seuilAuDessusDunGroupe": "Ce seuil est supérieur à l'effectif prévu d'un groupe existant."
   },
+  "QuestionsTypes": {
+    "choose": "Choisir une question type",
+    "placeholder": "— Choisir une question type —",
+    "help": "Questions types validées par IMA pour ce type de mandat. Le texte choisi remplace le contenu du champ ci-dessous et reste modifiable : complétez les passages entre crochets.",
+    "confirmReplace": "Remplacer le texte actuel de la question diagnostique ?",
+    "flash": [
+      "Quel est l'état général des facteurs psychosociaux perçus par le personnel, et quels points méritent une attention prioritaire ?",
+      "Quels aspects du travail sont perçus comme des ressources, et lesquels comme des points de vigilance ?",
+      "Les résultats collectifs indiquent-ils des domaines à approfondir par un diagnostic plus complet ?"
+    ],
+    "n1": [
+      "Comment le personnel perçoit-il ses conditions de travail selon les six niveaux MINDSET® : travail, rôles, interactions, management, organisation, environnement ?",
+      "Quels facteurs psychosociaux sont perçus comme les plus favorables et les plus préoccupants, et comment varient-ils d'un groupe à l'autre ?",
+      "Quelles priorités de prévention collective se dégagent des résultats ?"
+    ],
+    "n2": [
+      "Comment les équipes perçoivent-elles leur charge de travail, leur autonomie et le soutien reçu depuis [le changement / la réorganisation de …] ?",
+      "Quels écarts de perception apparaissent entre [les services / les sites / les fonctions] sur les exigences du travail et les ressources disponibles ?",
+      "Quels facteurs liés aux rôles et aux relations de travail (clarté des rôles, soutien entre collègues, reconnaissance, qualité du management de proximité) ressortent comme points de vigilance ?"
+    ],
+    "n3": [
+      "Comment les facteurs psychosociaux perçus ont-ils évolué depuis la mesure précédente de [mois / année] ?",
+      "Comment les perceptions ont-elles évolué dans les domaines visés par le plan d'action de [année] ?",
+      "Quelles priorités se dégagent pour la suite du plan de prévention ?"
+    ]
+  },
   "Footer": {
     "values": "Inspirer · Motiver · Agir",
     "copyright": "© 2026 Institut Mindset en Action®. MINDSET® est une méthode propriétaire de l'Institut."

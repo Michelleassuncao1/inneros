@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { CasesACocher, Champ, Selection, ZoneTexte } from "@/components/Formulaire";
 import { MANDATS, seuilPlateforme } from "@/lib/admin/campagnes";
 import { LANGUES, PAYS, TRANCHES } from "@/lib/admin/entreprises";
+import { ChoixQuestionType } from "./ChoixQuestionType";
 
 type Entreprise = {
   name: string;
@@ -65,13 +66,15 @@ export async function ChampsCampagne({
 }) {
   const t = await getTranslations("Campagnes");
   const l = await getTranslations("Libelles");
+  const q = await getTranslations("QuestionsTypes");
+  const mandat = valeurs?.mandateType ?? "n1";
   return (
     <>
       <Selection
         id="mandateType"
         name="mandateType"
         label={t("mandateType")}
-        defaultValue={valeurs?.mandateType ?? "n1"}
+        defaultValue={mandat}
         options={MANDATS.map((m) => ({ valeur: m, libelle: l(`mandate.${m}`) }))}
       />
       <Champ
@@ -81,6 +84,18 @@ export async function ChampsCampagne({
         defaultValue={valeurs?.mandateReference}
         required
         maxLength={120}
+      />
+      <ChoixQuestionType
+        idMandat="mandateType"
+        idQuestion="diagnosticQuestion"
+        mandatInitial={mandat}
+        questions={Object.fromEntries(MANDATS.map((m) => [m, q.raw(m) as string[]]))}
+        libelles={{
+          choose: q("choose"),
+          placeholder: q("placeholder"),
+          help: q("help"),
+          confirmReplace: q("confirmReplace"),
+        }}
       />
       <ZoneTexte
         id="diagnosticQuestion"
