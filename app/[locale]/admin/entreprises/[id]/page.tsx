@@ -9,7 +9,12 @@ import { Link } from "@/i18n/navigation";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 import { campaigns, organizations, users } from "@/lib/db/schema";
-import { actionAjouterReferent, actionEtatReferent, actionModifierEntreprise } from "../../actions";
+import {
+  actionAjouterReferent,
+  actionEtatReferent,
+  actionModifierEntreprise,
+  actionModifierReferent,
+} from "../../actions";
 import { ChampsEntreprise } from "../../ChampsFormulaires";
 
 export default async function EntreprisePage({ params }: PageProps<"/[locale]/admin/entreprises/[id]">) {
@@ -73,6 +78,38 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
                 </tr>
               ))}
             </Tableau>
+            {referents.map((r) => (
+              <details key={r.id} className="mt-3 rounded-md border border-ima-line bg-white px-4 py-3">
+                <summary className="cursor-pointer font-semibold text-ima-navy">
+                  {t("edit")} — {r.name}
+                </summary>
+                <p className="mb-4 mt-2 text-sm text-ima-muted">{t("editReferentHelp")}</p>
+                <FormulaireAction
+                  action={actionModifierReferent.bind(null, locale, id, r.id)}
+                  libelle={t("save")}
+                  enCours={t("saving")}
+                  secondaire
+                >
+                  <Champ
+                    id={`nom-${r.id}`}
+                    name="name"
+                    label={t("referentName")}
+                    defaultValue={r.name}
+                    required
+                    maxLength={120}
+                  />
+                  <Champ
+                    id={`email-${r.id}`}
+                    name="email"
+                    type="email"
+                    label={t("referentEmail")}
+                    defaultValue={r.email}
+                    required
+                    maxLength={254}
+                  />
+                </FormulaireAction>
+              </details>
+            ))}
           </div>
         )}
         <FormulaireAction

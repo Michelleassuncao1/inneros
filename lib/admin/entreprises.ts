@@ -1,10 +1,10 @@
 // Fiches entreprises (F3) et référents. Toute entrée est validée par Zod avant d'atteindre la base.
 import { randomInt } from "node:crypto";
-import { and, eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import { z } from "zod";
 import { journaliser } from "../audit";
 import { normaliserEmail } from "../auth/limite";
-import { campaigns, organizations, users } from "../db/schema";
+import { campaigns, loginLinks, organizations, users } from "../db/schema";
 import type { Db } from "../db/types";
 
 export const PAYS = ["BE", "FR", "BR", "PT"] as const;
@@ -115,6 +115,48 @@ export async function ajouterReferent(
     action: "referent_created",
     targetType: "user",
     targetId: referent.id,
+  });
+  return { ok: true, valeur: undefined };
+}
+
+// Correction du nom ou de l'e-mail d'un référent. Si l'adresse change, les liens de connexion
+// non utilisés sont annulés : un lien parti vers une mauvaise adresse ne doit rien ouvrir.
+export async function modifierReferent(
+  db: Db,
+  adminId: string,
+  referentId: string,
+  saisie: unknown,
+): Promise<Resultat> {
+  const donnees = schemaReferent.safeParse(saisie);
+  if (!donnees.success) return { ok: false, erreur: "saisieInvalide" };
+  const email = normaliserEmail(donnees.data.email);
+
+  const [referent] = await db
+    .select()
+    .from(users)
+    .where(and(eq(users.id, referentId), eq(users.role, "referent")));
+  if (!referent) return { ok: false, erreur: "introuvable" };
+
+  const emailChange = email !== referent.email;
+  if (emailChange) {
+    const [existant] = await db.select({ id: users.id }).from(users).where(eq(users.email, email));
+    if (existant) return { ok: false, erreur: "emailDejaUtilise" };
+  }
+
+  await db.transaction(async (tx) => {
+    await tx.update(users).set({ name: donnees.data.name, email }).where(eq(users.id, referentId));
+    if (emailChange) {
+      await tx
+        .delete(loginLinks)
+        .where(and(eq(loginLinks.userId, referentId), isNull(loginLinks.usedAt)));
+    }
+  });
+  await journaliser(db, {
+    actorUserId: adminId,
+    action: "referent_updated",
+    targetType: "user",
+    targetId: referentId,
+    details: { emailChange },
   });
   return { ok: true, valeur: undefined };
 }

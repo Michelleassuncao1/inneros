@@ -1,7 +1,7 @@
 // Tests de l'étape 4A : entreprises, référents, campagnes, groupes, questionnaires.
 import { eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it } from "vitest";
-import { campaignInstruments, campaigns, instruments, organizations, users } from "../db/schema";
+import { campaignInstruments, campaigns, instruments, loginLinks, organizations, users } from "../db/schema";
 import { creerBaseDeTest } from "../db/test-db";
 import type { Db } from "../db/types";
 import {
@@ -11,7 +11,13 @@ import {
   modifierCampagne,
   supprimerGroupe,
 } from "./campagnes";
-import { ajouterReferent, changerEtatReferent, creerEntreprise, modifierEntreprise } from "./entreprises";
+import {
+  ajouterReferent,
+  changerEtatReferent,
+  creerEntreprise,
+  modifierEntreprise,
+  modifierReferent,
+} from "./entreprises";
 
 let db: Db;
 let adminId: string;
@@ -90,6 +96,42 @@ describe("Entreprises et référents (F3)", () => {
     await changerEtatReferent(db, adminId, referent.id, false);
     const [apres] = await db.select().from(users).where(eq(users.id, referent.id));
     expect(apres.disabledAt).not.toBeNull();
+  });
+
+  it("corrige le nom et l'e-mail d'un référent et annule ses liens non utilisés", async () => {
+    const orgId = await nouvelleEntreprise();
+    await ajouterReferent(db, adminId, orgId, { name: "Mauvais nom", email: "erreur@client.test" });
+    const [referent] = await db.select().from(users).where(eq(users.email, "erreur@client.test"));
+    await db.insert(loginLinks).values({ tokenHash: "h1", userId: referent.id, expiresAt: new Date(Date.now() + 60_000) });
+
+    const r = await modifierReferent(db, adminId, referent.id, { name: "Bon Nom", email: " Bon@Client.test " });
+    expect(r.ok).toBe(true);
+    const [apres] = await db.select().from(users).where(eq(users.id, referent.id));
+    expect(apres).toMatchObject({ name: "Bon Nom", email: "bon@client.test" });
+    expect(await db.select().from(loginLinks)).toHaveLength(0);
+  });
+
+  it("garde les liens si seul le nom change", async () => {
+    const orgId = await nouvelleEntreprise();
+    await ajouterReferent(db, adminId, orgId, { name: "Nom", email: "rh@client.test" });
+    const [referent] = await db.select().from(users).where(eq(users.email, "rh@client.test"));
+    await db.insert(loginLinks).values({ tokenHash: "h1", userId: referent.id, expiresAt: new Date(Date.now() + 60_000) });
+    await modifierReferent(db, adminId, referent.id, { name: "Nom corrigé", email: "rh@client.test" });
+    expect(await db.select().from(loginLinks)).toHaveLength(1);
+  });
+
+  it("refuse de corriger vers une adresse déjà utilisée, ou de modifier un administrateur", async () => {
+    const orgId = await nouvelleEntreprise();
+    await ajouterReferent(db, adminId, orgId, { name: "RH", email: "rh@client.test" });
+    const [referent] = await db.select().from(users).where(eq(users.email, "rh@client.test"));
+    expect(await modifierReferent(db, adminId, referent.id, { name: "RH", email: "admin@ima.test" })).toEqual({
+      ok: false,
+      erreur: "emailDejaUtilise",
+    });
+    expect(await modifierReferent(db, adminId, adminId, { name: "Xavier", email: "x@ima.test" })).toEqual({
+      ok: false,
+      erreur: "introuvable",
+    });
   });
 
   it("ne désactive jamais un administrateur par ce biais", async () => {

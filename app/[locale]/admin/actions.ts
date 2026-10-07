@@ -20,6 +20,7 @@ import {
   changerEtatReferent,
   creerEntreprise,
   modifierEntreprise,
+  modifierReferent,
 } from "@/lib/admin/entreprises";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
@@ -82,6 +83,22 @@ export async function actionAjouterReferent(
   revalidatePath(`/${langue}/admin/entreprises/${organizationId}`);
   const t = await getTranslations({ locale: langue, namespace: "Entreprises" });
   return { succes: t("referentAdded"), envoi: Date.now() };
+}
+
+export async function actionModifierReferent(
+  locale: string,
+  organizationId: string,
+  referentId: string,
+  _etat: EtatFormulaire,
+  formData: FormData,
+): Promise<EtatFormulaire> {
+  const { langue, admin, db, erreur } = await contexte(locale);
+  if (!uuid.safeParse(referentId).success) return erreur("introuvable");
+  const r = await modifierReferent(db, admin.id, referentId, champs(formData));
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(`/${langue}/admin/entreprises/${organizationId}`);
+  const t = await getTranslations({ locale: langue, namespace: "Entreprises" });
+  return { succes: t("referentUpdated"), envoi: Date.now() };
 }
 
 export async function actionEtatReferent(

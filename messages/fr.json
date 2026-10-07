@@ -150,7 +150,11 @@
     "adding": "Ajout…",
     "referentAdded": "Référent ajouté.",
     "campaignsTitle": "Campagnes de cette entreprise",
-    "newCampaign": "Nouvelle campagne"
+    "newCampaign": "Nouvelle campagne",
+    "edit": "Modifier",
+    "editReferentTitle": "Corriger ce référent",
+    "editReferentHelp": "Si l'adresse change, les liens de connexion déjà envoyés sont annulés.",
+    "referentUpdated": "Référent modifié."
   },
   "Campagnes": {
     "title": "Campagnes",
