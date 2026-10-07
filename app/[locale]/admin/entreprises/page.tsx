@@ -1,6 +1,7 @@
 import { asc, eq } from "drizzle-orm";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Cellule, EspaceAdmin, FiltrePays, Tableau, TitrePage } from "@/components/EspaceAdmin";
+import { Pays } from "@/components/Drapeau";
 import { Link } from "@/i18n/navigation";
 import { PAYS } from "@/lib/admin/entreprises";
 import { exigerAdmin } from "@/lib/auth/acces";
@@ -53,7 +54,9 @@ export default async function EntreprisesPage({
                   {o.name}
                 </Link>
               </Cellule>
-              <Cellule>{l(`country.${o.country}`)}</Cellule>
+              <Cellule>
+                <Pays code={o.country} nom={l(`country.${o.country}`)} />
+              </Cellule>
               <Cellule>{o.sector}</Cellule>
               <Cellule>
                 <code>{o.internalCode}</code>

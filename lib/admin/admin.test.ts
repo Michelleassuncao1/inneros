@@ -276,6 +276,15 @@ describe("Référents ayant accès au rapport de la campagne", () => {
     ).rejects.toThrow();
   });
 
+  it("refuse de donner l'accès à un référent désactivé", async () => {
+    const id = await nouvelleCampagne();
+    const [c] = await db.select().from(campaigns).where(eq(campaigns.id, id));
+    await ajouterReferent(db, adminId, c.organizationId, { name: "RH", email: "rh@client.test" });
+    const [r] = await db.select().from(users).where(eq(users.email, "rh@client.test"));
+    await changerEtatReferent(db, adminId, r.id, false);
+    expect(await choisirReferents(db, adminId, id, [r.id])).toEqual({ ok: false, erreur: "saisieInvalide" });
+  });
+
   it("permet de retirer tous les référents", async () => {
     const id = await nouvelleCampagne();
     const [c] = await db.select().from(campaigns).where(eq(campaigns.id, id));

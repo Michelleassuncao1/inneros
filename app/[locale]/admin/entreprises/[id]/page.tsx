@@ -5,6 +5,7 @@ import { z } from "zod";
 import { Cellule, EspaceAdmin, Tableau, TitrePage } from "@/components/EspaceAdmin";
 import { Champ } from "@/components/Formulaire";
 import { FormulaireAction } from "@/components/FormulaireAction";
+import { Pays } from "@/components/Drapeau";
 import { Link } from "@/i18n/navigation";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
@@ -44,8 +45,9 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
   return (
     <EspaceAdmin locale={locale} actif="entreprises">
       <TitrePage surtitre={t("editTitle")} titre={org.name} />
-      <p className="font-semibold text-ima-navy">
-        {t("internalCode", { code: org.internalCode })}
+      <p className="flex flex-wrap gap-x-6 font-semibold text-ima-navy">
+        <Pays code={org.country} nom={l(`country.${org.country}`)} />
+        <span>{t("internalCode", { code: org.internalCode })}</span>
       </p>
       <p className="mb-8 text-sm text-ima-muted">{t("internalCodeHelp")}</p>
 

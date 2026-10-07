@@ -1,6 +1,6 @@
 // Campagnes (F4), groupes et questionnaires. Les règles de seuil sont vérifiées ici avec un
 // message clair, puis une seconde fois par la base (contraintes et déclencheurs de l'étape 2).
-import { and, eq, inArray } from "drizzle-orm";
+import { and, eq, inArray, isNull } from "drizzle-orm";
 import { z } from "zod";
 import { journaliser } from "../audit";
 import {
@@ -215,7 +215,7 @@ export async function choisirQuestionnaires(
 }
 
 // Référents ayant accès au rapport de la campagne (modifiable à tout moment).
-// Seuls des référents de l'entreprise de la campagne sont acceptés.
+// Seuls des référents actifs de l'entreprise de la campagne sont acceptés.
 export async function choisirReferents(
   db: Db,
   adminId: string,
@@ -236,6 +236,7 @@ export async function choisirReferents(
             inArray(users.id, ids.data),
             eq(users.role, "referent"),
             eq(users.organizationId, campagne.organizationId),
+            isNull(users.disabledAt),
           ),
         )
     : [];

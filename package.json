@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.8",
+    "country-flag-icons": "^1.6.20",
     "drizzle-orm": "^0.45.3",
     "next": "16.3.8",
     "next-auth": "^5.0.0-beta.32",

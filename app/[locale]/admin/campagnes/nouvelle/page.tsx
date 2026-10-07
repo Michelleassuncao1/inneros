@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { z } from "zod";
 import { EspaceAdmin, TitrePage } from "@/components/EspaceAdmin";
 import { FormulaireAction } from "@/components/FormulaireAction";
+import { Drapeau } from "@/components/Drapeau";
 import { Link } from "@/i18n/navigation";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
@@ -38,7 +39,8 @@ export default async function NouvelleCampagnePage({
         </p>
       ) : (
         <>
-          <p className="mb-8 font-semibold text-ima-navy">
+          <p className="mb-8 flex items-center gap-2 font-semibold text-ima-navy">
+            <Drapeau pays={org.country} />
             {t("organization", { name: org.name, country: l(`country.${org.country}`) })}
           </p>
           <FormulaireAction

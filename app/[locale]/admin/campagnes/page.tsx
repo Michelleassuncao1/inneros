@@ -1,6 +1,7 @@
 import { desc, eq } from "drizzle-orm";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Cellule, EspaceAdmin, FiltrePays, Tableau, TitrePage } from "@/components/EspaceAdmin";
+import { Pays } from "@/components/Drapeau";
 import { Link } from "@/i18n/navigation";
 import { PAYS } from "@/lib/admin/entreprises";
 import { exigerAdmin } from "@/lib/auth/acces";
@@ -43,7 +44,11 @@ export default async function CampagnesPage({
           {liste.map(({ campagne: c, entreprise: o }) => (
             <tr key={c.id}>
               <Cellule>
-                {o.name} ({l(`country.${o.country}`)})
+                {o.name}
+                <br />
+                <span className="text-sm">
+                  <Pays code={o.country} nom={l(`country.${o.country}`)} />
+                </span>
               </Cellule>
               <Cellule>
                 <Link href={`/admin/campagnes/${c.id}`} className="font-semibold text-ima-navy underline">

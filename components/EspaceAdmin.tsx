@@ -2,6 +2,7 @@
 import { getTranslations } from "next-intl/server";
 import { deconnexion } from "@/app/[locale]/deconnexion";
 import { Link } from "@/i18n/navigation";
+import { Drapeau } from "./Drapeau";
 import { SiteHeader } from "./SiteHeader";
 import { WaveFooter } from "./WaveFooter";
 
@@ -112,10 +113,11 @@ export function FiltrePays({
             aria-current={actuel === o.valeur ? "true" : undefined}
             className={
               actuel === o.valeur
-                ? "inline-block rounded-full bg-ima-navy px-3 py-1 text-white"
-                : "inline-block rounded-full border border-ima-navy px-3 py-1 text-ima-navy hover:bg-ima-cream"
+                ? "inline-flex items-center gap-1.5 rounded-full bg-ima-navy px-3 py-1 text-white"
+                : "inline-flex items-center gap-1.5 rounded-full border border-ima-navy px-3 py-1 text-ima-navy hover:bg-ima-cream"
             }
           >
+            {o.valeur && <Drapeau pays={o.valeur} />}
             {o.libelle}
           </Link>
         </li>

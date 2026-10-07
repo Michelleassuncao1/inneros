@@ -1,10 +1,11 @@
-import { and, asc, eq } from "drizzle-orm";
+import { and, asc, eq, isNull } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { z } from "zod";
 import { Cellule, EspaceAdmin, Tableau, TitrePage } from "@/components/EspaceAdmin";
 import { CasesACocher, Champ, MessageInfo } from "@/components/Formulaire";
 import { FormulaireAction } from "@/components/FormulaireAction";
+import { Pays } from "@/components/Drapeau";
 import { Link } from "@/i18n/navigation";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
@@ -48,7 +49,9 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
     db
       .select()
       .from(users)
-      .where(and(eq(users.organizationId, entreprise.id), eq(users.role, "referent")))
+      .where(
+        and(eq(users.organizationId, entreprise.id), eq(users.role, "referent"), isNull(users.disabledAt)),
+      )
       .orderBy(asc(users.name)),
     db.select().from(campaignReferents).where(eq(campaignReferents.campaignId, id)),
   ]);
@@ -68,7 +71,7 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
       <ul className="mb-8 flex flex-wrap gap-x-6 gap-y-1 font-semibold text-ima-navy">
         <li>
           <Link href={`/admin/entreprises/${entreprise.id}`} className="underline">
-            {l(`country.${entreprise.country}`)}
+            <Pays code={entreprise.country} nom={l(`country.${entreprise.country}`)} />
           </Link>
         </li>
         <li>{t("status", { status: l(`status.${campagne.status}`) })}</li>
@@ -154,7 +157,7 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
                 name="referents"
                 options={referentsEntreprise.map((r) => ({
                   valeur: r.id,
-                  libelle: `${r.name} — ${r.email}${r.disabledAt ? ` (${t("referentDisabled")})` : ""}`,
+                  libelle: `${r.name} — ${r.email}`,
                 }))}
                 cochees={acces.map((a) => a.userId)}
               />
