@@ -22,6 +22,13 @@
       "when": 1791313618142,
       "tag": "0002_connexions",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791375728693,
+      "tag": "0003_mandat-valide",
+      "breakpoints": true
     }
   ]
 }

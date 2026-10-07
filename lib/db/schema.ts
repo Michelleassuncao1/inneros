@@ -164,6 +164,8 @@ export const campaigns = pgTable(
     endDate: date("end_date").notNull(),
     locales: langue("locales").array().notNull(),
     status: statutCampagne("status").notNull().default("draft"),
+    // Date de validation du mandat (porte P1) : obligatoire pour ouvrir la campagne
+    mandateValidatedOn: date("mandate_validated_on"),
     aiDraftingEnabled: boolean("ai_drafting_enabled").notNull().default(true),
     createdBy: uuid("created_by").references(() => users.id, {
       onDelete: "set null",
@@ -177,6 +179,11 @@ export const campaigns = pgTable(
     check("campaigns_seuil_minimum", sql`${t.groupMinSize} >= 10`),
     check("campaigns_dates", sql`${t.endDate} >= ${t.startDate}`),
     check("campaigns_langues", sql`cardinality(${t.locales}) >= 1`),
+    // Une campagne ne s'ouvre jamais sans mandat validé (P0 → P1)
+    check(
+      "campaigns_ouverture_mandat",
+      sql`${t.status} = 'draft' OR ${t.mandateValidatedOn} IS NOT NULL`,
+    ),
   ],
 );
 

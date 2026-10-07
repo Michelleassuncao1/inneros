@@ -20,12 +20,13 @@ if (url && /^postgres(ql)?:\/\//.test(url)) {
   console.log("Migrations appliquées sur PostgreSQL.");
 } else {
   mkdirSync(".data", { recursive: true });
-  const client = new PGlite(".data/pglite");
+  const dossier = process.env.PGLITE_DIR || ".data/pglite";
+  const client = new PGlite(dossier);
   await migratePglite(drizzlePglite(client), { migrationsFolder });
   const { rows } = await client.query<{ table_name: string }>(
     "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name",
   );
   await client.close();
-  console.log("Migrations appliquées sur PGlite (.data/pglite).");
+  console.log(`Migrations appliquées sur PGlite (${dossier}).`);
   console.log(`Tables : ${rows.map((r) => r.table_name).join(", ")}`);
 }

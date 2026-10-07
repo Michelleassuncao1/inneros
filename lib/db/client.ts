@@ -6,11 +6,11 @@ import { drizzle as drizzlePglite } from "drizzle-orm/pglite";
 import * as schema from "./schema";
 import type { Db } from "./types";
 
-// DATABASE_URL vide → PGlite (développement, données dans .data/pglite).
+// DATABASE_URL vide → PGlite (développement, données dans .data/pglite, ou PGLITE_DIR pour une base de test).
 // DATABASE_URL postgres://… → PostgreSQL managé OVH (production).
 // Attention : PGlite n'accepte qu'un seul programme à la fois. Arrêter le serveur
 // de développement avant de lancer un script qui ouvre la base (admin:create…).
-export const PGLITE_DIR = ".data/pglite";
+export const PGLITE_DIR = process.env.PGLITE_DIR || ".data/pglite";
 
 function creerClient(): Db {
   const url = process.env.DATABASE_URL;

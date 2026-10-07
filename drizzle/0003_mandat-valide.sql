@@ -1,0 +1,2 @@
+ALTER TABLE "campaigns" ADD COLUMN "mandate_validated_on" date;--> statement-breakpoint
+ALTER TABLE "campaigns" ADD CONSTRAINT "campaigns_ouverture_mandat" CHECK ("campaigns"."status" = 'draft' OR "campaigns"."mandate_validated_on" IS NOT NULL);
