@@ -1,7 +1,7 @@
 // Assemble le contenu du kit d'information (F13) pour une campagne, dans une langue donnée.
 // Le pays de l'entreprise fixe le cadre légal et les numéros d'aide.
 import { getTranslations } from "next-intl/server";
-import { FICHES_PAYS, type CodePays } from "../pays";
+import { aidesPour, FICHES_PAYS, type CodePays } from "../pays";
 import type { ContenuKit } from "./kit";
 
 export async function contenuKit({
@@ -27,7 +27,6 @@ export async function contenuKit({
   const fiche = FICHES_PAYS[pays as CodePays];
   const date = (d: string) =>
     new Intl.DateTimeFormat(langue, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
-  const libellesAides = p.raw(`${pays}.aides`) as string[];
 
   return {
     marque: t("brand"),
@@ -62,7 +61,7 @@ export async function contenuKit({
     aides: {
       titre: t("helpTitle"),
       intro: t("help"),
-      numeros: fiche.aides.map((numero, i) => ({ numero, libelle: libellesAides[i] ?? "" })),
+      numeros: aidesPour(pays, langue).map((a) => ({ numero: a.numero, libelle: p(`${pays}.aides.${a.cle}`) })),
     },
     contact: t("contact"),
   };

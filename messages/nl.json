@@ -1,0 +1,424 @@
+{
+  "Metadata": {
+    "title": "InnerOS — Institut Mindset en Action®",
+    "description": "Collectieve en anonieme meting van psychosociale risico's op het werk."
+  },
+  "Header": {
+    "brand": "Institut Mindset en Action®",
+    "logoAlt": "Logo van het Institut Mindset en Action",
+    "languageLabel": "Taal",
+    "skipLink": "Naar de inhoud"
+  },
+  "Home": {
+    "title": "InnerOS",
+    "tagline": "De collectieve meting van welzijn op het werk, ten dienste van de MINDSET®-methode.",
+    "intro": "Met InnerOS kan het Institut Mindset en Action® anonieme vragenlijstcampagnes opzetten in een klantbedrijf, collectieve scores berekenen en een rapport voorbereiden dat door een IMA-practitioner wordt gevalideerd.",
+    "principlesTitle": "Onze engagementen",
+    "principleAnonymity": "Volledige anonimiteit: geen account, geen naam, geen adres voor de respondenten.",
+    "principleThreshold": "Voor een groep van minder dan 10 personen wordt geen enkel resultaat getoond.",
+    "principleHuman": "AI stelt een ontwerp op; een IMA-practitioner controleert en valideert elk rapport.",
+    "principleNoDiagnosis": "Een aanpak van collectieve preventie, nooit een individuele diagnose.",
+    "status": "Toepassing in opbouw — fase 1.",
+    "adminLink": "IMA-ruimte",
+    "referentLink": "Ruimte contactpersoon bedrijf"
+  },
+  "AdminLogin": {
+    "title": "Aanmelden als beheerder",
+    "intro": "Voorbehouden aan de practitioners van het Institut Mindset en Action®.",
+    "email": "E-mailadres",
+    "password": "Wachtwoord",
+    "code": "Code van de authenticatie-app",
+    "codeHelp": "De 6 cijfers die uw app toont, elke 30 seconden vernieuwd.",
+    "submit": "Aanmelden",
+    "pending": "Controle…",
+    "errorInvalid": "Onjuiste aanmeldgegevens of code.",
+    "errorLocked": "Te veel pogingen. Probeer het over 15 minuten opnieuw."
+  },
+  "Admin": {
+    "title": "Beheerdersruimte",
+    "welcome": "Hallo {name}",
+    "placeholder": "U bent aangemeld in de InnerOS-beheerdersruimte.",
+    "signOut": "Afmelden",
+    "organizationsCount": "{count, plural, =0 {Geen bedrijven} one {# bedrijf} other {# bedrijven}}",
+    "campaignsCount": "{count, plural, =0 {Geen campagnes} one {# campagne} other {# campagnes}}",
+    "manageOrganizations": "Bedrijven beheren",
+    "manageCampaigns": "Campagnes beheren"
+  },
+  "ReferentLogin": {
+    "title": "Aanmelden als contactpersoon van het bedrijf",
+    "intro": "Vul het e-mailadres in dat u aan het Institut Mindset en Action® hebt doorgegeven. U ontvangt een aanmeldlink.",
+    "email": "E-mailadres",
+    "submit": "Mijn aanmeldlink ontvangen",
+    "pending": "Verzenden…",
+    "sent": "Als dit adres geregistreerd is, werd u zonet een aanmeldlink gestuurd. Hij is 15 minuten geldig en kan maar één keer worden gebruikt.",
+    "errorEmail": "Vul een geldig e-mailadres in."
+  },
+  "MagicLink": {
+    "title": "Uw ruimte openen",
+    "intro": "Klik op de knop om uw ruimte als contactpersoon te openen.",
+    "submit": "Mijn ruimte openen",
+    "pending": "Openen…",
+    "errorExpired": "Deze link is verlopen of werd al gebruikt.",
+    "newLink": "Een nieuwe link aanvragen"
+  },
+  "Referent": {
+    "title": "Ruimte contactpersoon",
+    "welcome": "Hallo {name}",
+    "organization": "Bedrijf: {name}",
+    "noReport": "Nog geen gevalideerd rapport. De rapporten verschijnen hier na validatie door het Institut Mindset en Action®.",
+    "signOut": "Afmelden"
+  },
+  "Email": {
+    "subject": "Uw aanmeldlink voor InnerOS",
+    "greeting": "Hallo {name},",
+    "body": "Hier is uw link om uw InnerOS-ruimte te openen. Hij is 15 minuten geldig en kan maar één keer worden gebruikt.",
+    "button": "Mijn ruimte openen",
+    "ignore": "Hebt u deze link niet aangevraagd? Dan mag u dit bericht gewoon negeren.",
+    "signature": "Institut Mindset en Action®"
+  },
+  "AdminNav": {
+    "label": "Menu van de beheerdersruimte",
+    "home": "Start",
+    "organizations": "Bedrijven",
+    "campaigns": "Campagnes",
+    "signOut": "Afmelden"
+  },
+  "Libelles": {
+    "all": "Alle landen",
+    "country": {
+      "BE": "België",
+      "FR": "Frankrijk",
+      "BR": "Brazilië",
+      "PT": "Portugal"
+    },
+    "locale": {
+      "fr": "Frans",
+      "nl": "Nederlands",
+      "en": "Engels",
+      "pt-BR": "Portugees (Brazilië)"
+    },
+    "sizeBand": {
+      "lt50": "Minder dan 50",
+      "50-249": "50 tot 249",
+      "250-999": "250 tot 999",
+      "1000+": "1.000 of meer"
+    },
+    "mandate": {
+      "flash": "Flashdiagnose",
+      "n1": "Diagnose N1",
+      "n2": "Diagnose N2",
+      "n3": "Diagnose N3"
+    },
+    "status": {
+      "draft": "Ontwerp",
+      "open": "Open",
+      "closed": "Afgesloten"
+    },
+    "test": "test",
+    "grouping": {
+      "service": "Dienst",
+      "department": "Departement",
+      "direction": "Directie",
+      "site": "Vestiging",
+      "function": "Functie / beroep",
+      "other": "Andere"
+    }
+  },
+  "Entreprises": {
+    "title": "Bedrijven",
+    "new": "Nieuw bedrijf",
+    "none": "Nog geen bedrijven.",
+    "colName": "Naam",
+    "colCountry": "Land",
+    "colCode": "Interne code",
+    "colSector": "Sector",
+    "name": "Naam van het bedrijf",
+    "country": "Land",
+    "countryHelp": "Het land bepaalt de hulplijnen en het wettelijk kader die aan de werknemers worden getoond. Na de eerste campagne kan het niet meer worden gewijzigd.",
+    "locale": "Hoofdtaal",
+    "sector": "Sector",
+    "sizeBand": "Personeelsomvang",
+    "create": "Het bedrijf aanmaken",
+    "save": "Opslaan",
+    "saving": "Opslaan…",
+    "saved": "Wijzigingen opgeslagen.",
+    "internalCode": "Interne code: {code}",
+    "internalCodeHelp": "Alleen deze code, nooit de naam, wordt aan de AI doorgegeven.",
+    "editTitle": "Bedrijfsfiche",
+    "referentsTitle": "Contactpersonen",
+    "referentsHelp": "Contactpersonen melden zich aan met een link die ze per e-mail ontvangen. Ze zien alleen gevalideerde rapporten.",
+    "noReferent": "Nog geen contactpersonen.",
+    "colEmail": "E-mail",
+    "colState": "Status",
+    "active": "Actief",
+    "disabled": "Gedeactiveerd",
+    "disable": "Deactiveren",
+    "enable": "Opnieuw activeren",
+    "referentName": "Naam van de contactpersoon",
+    "referentEmail": "E-mail van de contactpersoon",
+    "addReferent": "De contactpersoon toevoegen",
+    "adding": "Toevoegen…",
+    "referentAdded": "Contactpersoon toegevoegd.",
+    "campaignsTitle": "Campagnes van dit bedrijf",
+    "newCampaign": "Nieuwe campagne",
+    "edit": "Wijzigen",
+    "editReferentTitle": "Deze contactpersoon corrigeren",
+    "editReferentHelp": "Als het adres verandert, worden de al verzonden aanmeldlinks geannuleerd.",
+    "referentUpdated": "Contactpersoon gewijzigd.",
+    "colActions": "Acties",
+    "actionsFor": "Acties voor {name}",
+    "delete": "Verwijderen",
+    "deleteTitle": "Deze contactpersoon verwijderen?",
+    "deleteText": "{name} ({email}) heeft dan geen toegang meer tot de ruimte voor contactpersonen. Deze verwijdering is definitief.",
+    "deleteConfirm": "Definitief verwijderen",
+    "cancel": "Annuleren"
+  },
+  "Campagnes": {
+    "title": "Campagnes",
+    "new": "Nieuwe campagne",
+    "none": "Nog geen campagnes.",
+    "chooseOrganization": "Open eerst de fiche van het betrokken bedrijf om een campagne aan te maken.",
+    "colOrganization": "Bedrijf",
+    "colMandate": "Mandaat",
+    "colDates": "Data",
+    "colStatus": "Status",
+    "organization": "Bedrijf: {name} ({country})",
+    "mandateType": "Soort mandaat",
+    "mandateReference": "Referentie van het IMA-mandaat",
+    "diagnosticQuestion": "Diagnostische vraag",
+    "diagnosticQuestionHelp": "Wordt als context aan de AI doorgegeven, zonder de naam van het bedrijf. Vermeld er geen namen van personen in.",
+    "perimeter": "Afbakening",
+    "groupMinSize": "Minimumdrempel per groep",
+    "groupMinSizeHelp": "Voor een kleinere groep wordt geen enkel resultaat berekend. Nooit minder dan 10.",
+    "startDate": "Begindatum",
+    "endDate": "Einddatum",
+    "locales": "Talen voor de respondenten",
+    "create": "De campagne aanmaken",
+    "save": "Opslaan",
+    "saving": "Opslaan…",
+    "saved": "Wijzigingen opgeslagen.",
+    "detailsTitle": "Instellingen",
+    "locked": "Campagne geopend of afgesloten: instellingen, groepen en vragenlijsten kunnen niet meer worden gewijzigd.",
+    "instrumentsTitle": "Vragenlijsten",
+    "instrumentsLegend": "Vragenlijsten van de campagne",
+    "instrumentsNone": "Er is nog geen vragenlijst geregistreerd.",
+    "instrumentsTestHelp": "Vragenlijsten met het label “test” bevatten alleen fictieve items.",
+    "saveInstruments": "De vragenlijsten opslaan",
+    "groupsTitle": "Groepen",
+    "groupsHelp": "Elke respondent kiest zijn of haar groep uit deze lijst. Verwachte omvang: minstens {seuil} personen.",
+    "noGroup": "Nog geen groepen.",
+    "colLabel": "Benaming",
+    "colExpected": "Verwachte omvang",
+    "total": "Verwacht totaal: {total} personen",
+    "label": "Benaming van de groep",
+    "labelHelp": "Vermijd een benaming die één persoon aanduidt (bv. “Directie” als er maar één directeur is).",
+    "expectedSize": "Verwachte omvang",
+    "addGroup": "De groep toevoegen",
+    "adding": "Toevoegen…",
+    "groupAdded": "Groep toegevoegd.",
+    "deleteGroup": "Verwijderen",
+    "deleting": "Verwijderen…",
+    "status": "Status: {status}",
+    "threshold": "Drempel: {seuil} personen",
+    "groupingCriterion": "Indelingscriterium",
+    "groupingHelp": "Alle groepen van de campagne volgen dit ene criterium: elke respondent mag zich maar in één groep herkennen. Zodra er groepen zijn aangemaakt, kan het niet meer worden gewijzigd.",
+    "perimeterHelp": "Voorbeeld: “Alle medewerkers van de vestiging in Luik, ongeveer 120 personen. Uitzendkrachten niet inbegrepen.”",
+    "groupingInfo": "Criterium: {critere}",
+    "labelFor": "Benaming van de groep ({critere})",
+    "referentsTitle": "Toegang tot het rapport",
+    "referentsHelp": "Alleen de aangevinkte contactpersonen zien het rapport van deze campagne, na validatie door IMA.",
+    "referentsLegend": "Contactpersonen van het bedrijf",
+    "referentsNone": "Voor dit bedrijf is geen contactpersoon geregistreerd. Voeg ze toe via de bedrijfsfiche.",
+    "referentsEmpty": "Er is nog geen contactpersoon gekozen: niemand bij het bedrijf zal het rapport kunnen raadplegen.",
+    "referentDisabled": "gedeactiveerd",
+    "saveReferents": "De toegang opslaan"
+  },
+  "QuestionsTypes": {
+    "choose": "Een modelvraag kiezen",
+    "placeholder": "— Een modelvraag kiezen —",
+    "help": "Modelvragen die IMA voor dit soort mandaat heeft gevalideerd. De gekozen tekst vervangt de inhoud van het veld hieronder en blijft aanpasbaar: vul de delen tussen vierkante haken aan.",
+    "confirmReplace": "De huidige tekst van de diagnostische vraag vervangen?",
+    "flash": [
+      "Wat is de algemene toestand van de psychosociale factoren zoals de medewerkers die ervaren, en welke punten verdienen prioritaire aandacht?",
+      "Welke aspecten van het werk worden als hulpbronnen ervaren, en welke als aandachtspunten?",
+      "Wijzen de collectieve resultaten op domeinen die met een uitgebreidere diagnose verder moeten worden onderzocht?"
+    ],
+    "n1": [
+      "Hoe ervaren de medewerkers hun arbeidsomstandigheden volgens de zes MINDSET®-niveaus: werk, rollen, interacties, leidinggeven, organisatie, omgeving?",
+      "Welke psychosociale factoren worden als de gunstigste en de meest zorgwekkende ervaren, en hoe verschillen ze van groep tot groep?",
+      "Welke prioriteiten voor collectieve preventie komen uit de resultaten naar voren?"
+    ],
+    "n2": [
+      "Hoe ervaren de teams hun werkdruk, hun autonomie en de steun die ze krijgen sinds [de verandering / de reorganisatie van …]?",
+      "Welke verschillen in beleving komen naar voren tussen [de diensten / de vestigingen / de functies] wat betreft de eisen van het werk en de beschikbare hulpbronnen?",
+      "Welke factoren in verband met rollen en werkrelaties (duidelijkheid van de rollen, steun van collega's, erkenning, kwaliteit van het direct leidinggeven) komen naar voren als aandachtspunten?"
+    ],
+    "n3": [
+      "Hoe zijn de ervaren psychosociale factoren geëvolueerd sinds de vorige meting van [maand / jaar]?",
+      "Hoe is de beleving geëvolueerd in de domeinen waarop het actieplan van [jaar] gericht was?",
+      "Welke prioriteiten komen naar voren voor het vervolg van het preventieplan?"
+    ]
+  },
+  "Jetons": {
+    "title": "Codes voor de respondenten",
+    "help": "Elke respondent krijgt een code voor eenmalig gebruik. De codes worden maar één keer getoond, op het moment dat ze worden aangemaakt: download meteen de tabel en de pdf om af te drukken.",
+    "counts": "{actifs} beschikbaar · {utilises} gebruikt · {revoques} ingetrokken",
+    "number": "Aantal te genereren codes",
+    "numberHelp": "Voorstel: totale verwachte omvang + 10 %.",
+    "generate": "De codes genereren",
+    "generating": "Genereren…",
+    "readyTitle": "{count} codes aangemaakt",
+    "readyText": "Download ze nu: ze kunnen nooit meer worden getoond. Gaat een bestand verloren, trek de codes dan in en genereer nieuwe.",
+    "downloadCsv": "De tabel downloaden (CSV)",
+    "downloadPdf": "De kaarten om af te drukken downloaden (pdf, {langue})",
+    "downloading": "Pdf wordt voorbereid…",
+    "downloaded": "gedownload",
+    "done": "Ik ben klaar",
+    "leaveWarning": "De codes zijn nog niet gedownload. Ze gaan verloren als u de pagina verlaat.",
+    "pdfError": "De pdf kon niet worden voorbereid. Probeer het opnieuw.",
+    "revoke": "Ongebruikte codes intrekken",
+    "revokeTitle": "Ongebruikte codes intrekken?",
+    "revokeText": "De {count} beschikbare codes werken dan niet meer. Al verzonden antwoorden blijven bewaard. Deze actie is definitief.",
+    "revokeConfirm": "Definitief intrekken",
+    "revoked": "{count} codes ingetrokken.",
+    "cancel": "Annuleren",
+    "closedInfo": "Campagne afgesloten: alle codes zijn verwijderd.",
+    "csvHeader": "code;adres"
+  },
+  "Cycle": {
+    "title": "Opening van de campagne",
+    "draftInfo": "De campagne is een ontwerp. Ze opent nooit vanzelf: de bevraging begint wanneer u ze opent.",
+    "checklist": "Vóór het openen: minstens één groep, één vragenlijst en één contactpersoon met toegang tot het rapport.",
+    "mandateDate": "Datum van validatie van het mandaat (poort P1)",
+    "confirm": "Het mandaat is gevalideerd en de werknemersvertegenwoordigers werden geïnformeerd en geraadpleegd.",
+    "open": "De campagne openen",
+    "opening": "Openen…",
+    "openInfo": "Campagne geopend sinds de validatie van het mandaat op {date}. De respondenten kunnen hun codes gebruiken.",
+    "close": "De campagne afsluiten",
+    "closeTitle": "De campagne afsluiten?",
+    "closeText": "De bevraging stopt en alle codes worden definitief verwijderd. De al ontvangen antwoorden blijven bewaard voor de analyse. De campagne kan niet opnieuw worden geopend.",
+    "closeConfirm": "Definitief afsluiten",
+    "closedInfo": "Campagne afgesloten op {date}.",
+    "cancel": "Annuleren",
+    "endsOn": "Einde van de bevraging gepland op {date}.",
+    "extend": "De campagne verlengen",
+    "extendHelp": "Kies een nieuwe einddatum. Ongebruikte codes blijven tot die datum geldig: u hoeft de kaarten niet opnieuw af te drukken. Denk eraan het informatiepakket, waarin de antwoordperiode staat, opnieuw te downloaden en te verspreiden.",
+    "newEndDate": "Nieuwe einddatum",
+    "extendConfirm": "Verlengen",
+    "extending": "Verlengen…",
+    "extended": "Campagne verlengd tot {date}. Download het informatiepakket opnieuw: de antwoordperiode is gewijzigd."
+  },
+  "KitAdmin": {
+    "title": "Informatiepakket (F13)",
+    "help": "Nota voor de werknemers en hun vertegenwoordigers, aangepast aan het land van het bedrijf. Te bezorgen vóór de opening van de campagne.",
+    "download": "Het pakket downloaden ({langue})",
+    "draft": "Werkversie: de tekst moet door IMA worden nagelezen en gevalideerd vóór elke verspreiding."
+  },
+  "Cartes": {
+    "brand": "INSTITUT MINDSET EN ACTION®",
+    "title": "Vragenlijst welzijn op het werk",
+    "yourCode": "Uw persoonlijke code",
+    "scan": "Scan de QR-code of vul de code in op:",
+    "anonymous": "Anoniem: deze code is aan geen enkele naam gekoppeld.",
+    "duration": "Ongeveer 20 minuten · eenmalig gebruik."
+  },
+  "Kit": {
+    "brand": "INSTITUT MINDSET EN ACTION®",
+    "title": "Informatienota voor de werknemers en hun vertegenwoordigers",
+    "subtitle": "Anonieme vragenlijst over welzijn op het werk — {entreprise}",
+    "period": "Antwoordperiode: van {debut} tot {fin}",
+    "workingVersion": "Werkversie — tekst te valideren door het Institut Mindset en Action® vóór verspreiding",
+    "whyTitle": "Waarom deze vragenlijst?",
+    "why": "{entreprise} heeft het Institut Mindset en Action® (IMA) gevraagd om een collectieve meting uit te voeren van de psychosociale factoren op het werk: werkdruk, autonomie, relaties, steun, organisatie en welzijn. Het doel is om samen sporen voor collectieve preventie te vinden. Het gaat in geen geval om een beoordeling van personen.",
+    "howTitle": "Hoe verloopt het?",
+    "how": "Iedereen krijgt een kaart met een code voor eenmalig gebruik en een QR-code. De vragenlijst duurt ongeveer 20 minuten, op smartphone of computer. Eerst kiest u uw groep ({critere}) uit een lijst, daarna beantwoordt u de vragen.",
+    "anonymityTitle": "Uw anonimiteit",
+    "anonymity1": "Er wordt geen account, geen naam, geen e-mailadres en geen IP-adres geregistreerd.",
+    "anonymity2": "De code is aan geen enkele naam gekoppeld: geen enkele lijst verbindt een code met een persoon.",
+    "anonymity3": "Alleen de datum wordt bewaard, nooit het tijdstip.",
+    "anonymity4": "De codes worden aan het einde van de bevraging verwijderd.",
+    "anonymity5": "Voor een groep van minder dan {seuil} personen wordt geen enkel resultaat berekend.",
+    "anonymity6": "Niemand, noch uw werkgever noch IMA, kan de antwoorden van een persoon zien.",
+    "whoTitle": "Wie ziet wat?",
+    "who": "De IMA-practitioners analyseren alleen collectieve resultaten. Uw werkgever ontvangt een collectief rapport, gevalideerd door IMA, dat aan de werknemersvertegenwoordigers kan worden voorgesteld. Geen enkel individueel antwoord wordt aan wie dan ook doorgegeven.",
+    "freeTitle": "Vrijwillige deelname",
+    "free": "U mag weigeren deel te nemen, een vraag overslaan (“ik antwoord liever niet”) of op elk moment stoppen, zonder enig gevolg. Deze vragenlijst is geen medisch onderzoek en leidt niet tot een individuele diagnose.",
+    "aiTitle": "Gebruik van artificiële intelligentie",
+    "ai": "Een eerste ontwerp van het rapport wordt opgesteld met de hulp van artificiële intelligentie (Claude, van het bedrijf Anthropic), uitsluitend op basis van de collectieve resultaten. De AI ziet geen enkel individueel antwoord, berekent de scores niet en neemt geen enkele beslissing: een IMA-practitioner controleert, corrigeert en valideert elk rapport.",
+    "aiEu": "Deze informatie wordt u verstrekt in overeenstemming met de Europese verordening over artificiële intelligentie (artikel 50).",
+    "legalTitle": "Wettelijk kader",
+    "toValidate": "Tekst te laten valideren door een jurist.",
+    "helpTitle": "Hulp nodig?",
+    "help": "Gaat u door een moeilijke periode? U staat er niet alleen voor. Praat erover met iemand die u vertrouwt, met uw arts of met de preventiedienst van uw bedrijf. U kunt ook contact opnemen met:",
+    "contact": "Een vraag over deze bevraging? Institut Mindset en Action® — info@institutmindsetenaction.com"
+  },
+  "Pays": {
+    "BE": {
+      "legal": "In België moet de werkgever de psychosociale risico's op het werk analyseren (Codex over het welzijn op het werk, boek I, titel 3). Deze bevraging ondersteunt die analyse, zonder de rol van de preventieadviseur psychosociale aspecten, de vertrouwenspersoon of de arbeidsarts te vervangen. Vóór de bevraging informeert en raadpleegt de werkgever de werknemersvertegenwoordigers (Comité voor Preventie en Bescherming op het Werk of, bij ontstentenis, de vakbondsafvaardiging of de werknemers).",
+      "aides": {
+        "urgence": "Noodnummer (Europees nummer)",
+        "cps": "Centre de Prévention du Suicide (zelfmoordpreventie, in het Frans)",
+        "teleAccueil": "Télé-Accueil (luisterlijn, in het Frans)",
+        "zelfmoordlijn": "Zelfmoordlijn",
+        "teleOnthaal": "Tele-Onthaal",
+        "ambulance": "Ziekenwagen en brandweer",
+        "police": "Politie"
+      }
+    },
+    "FR": {
+      "legal": "In Frankrijk beoordeelt de werkgever de beroepsrisico's, met inbegrip van de psychosociale risico's, en legt hij ze vast in het enig document voor de beoordeling van beroepsrisico's (DUERP). Het sociaal en economisch comité (CSE) wordt geïnformeerd en geraadpleegd.",
+      "aides": {
+        "urgence": "Noodnummer (Europees nummer)",
+        "suicide": "Nationaal nummer voor zelfmoordpreventie",
+        "ecoute": "Suicide Écoute"
+      }
+    },
+    "BR": {
+      "legal": "In Brazilië verplicht de norm NR-1 bedrijven om psychosociale risico's te identificeren en te beoordelen in het kader van het beheer van beroepsrisico's (GRO / PGR). Deze bevraging levert input voor het GRO / PGR, zonder het te vervangen, noch de rol van de SESMT of de CIPA. NR-1 voorziet in de participatie van de werknemers.",
+      "aides": {
+        "cvv": "CVV — Centro de Valorização da Vida (zelfmoordpreventie)",
+        "samu": "SAMU (acute psychiatrische crisis)"
+      }
+    },
+    "PT": {
+      "legal": "In Portugal beoordeelt de werkgever de beroepsrisico's, met inbegrip van de psychosociale risico's, in het kader van de wettelijke regeling ter bevordering van veiligheid en gezondheid op het werk (wet nr. 102/2009). De werknemersvertegenwoordigers worden geïnformeerd en geraadpleegd.",
+      "aides": {
+        "urgence": "Noodnummer (Europees nummer)",
+        "sns24": "SNS 24 — psychologische ondersteuning",
+        "vozAmiga": "SOS Voz Amiga"
+      }
+    }
+  },
+  "Questionnaire": {
+    "title": "Vragenlijst welzijn op het werk",
+    "soon": "De vragenlijst is binnenkort beschikbaar. Bewaar uw code: er zal naar gevraagd worden."
+  },
+  "Erreurs": {
+    "saisieInvalide": "Sommige velden ontbreken of zijn onjuist. Controleer uw invoer.",
+    "introuvable": "Item niet gevonden.",
+    "inattendue": "Er is een onverwachte fout opgetreden. Probeer het opnieuw.",
+    "paysVerrouille": "Het land kan niet meer worden gewijzigd: voor dit bedrijf bestaat al een campagne.",
+    "emailDejaUtilise": "Dit e-mailadres wordt al door een andere account gebruikt.",
+    "seuilTropBas": "De drempel mag niet lager zijn dan 10 personen.",
+    "datesIncoherentes": "De einddatum moet na de begindatum liggen.",
+    "campagneVerrouillee": "Deze campagne is geopend of afgesloten: ze kan niet meer worden gewijzigd.",
+    "groupeSousLeSeuil": "Groep geweigerd: de verwachte omvang ligt onder de drempel van de campagne. Voeg ze samen met een andere groep.",
+    "groupeEnDouble": "Er bestaat al een groep met deze benaming.",
+    "seuilAuDessusDunGroupe": "Deze drempel ligt hoger dan de verwachte omvang van een bestaande groep.",
+    "critereVerrouille": "Het indelingscriterium kan niet meer worden gewijzigd: er bestaan al groepen. Verwijder ze eerst.",
+    "langueNonDisponible": "Deze taal wordt niet aangeboden voor het land van het bedrijf.",
+    "nombreJetonsInvalide": "Geef een aantal codes tussen 1 en 5.000 in.",
+    "campagneCloturee": "Deze campagne is afgesloten.",
+    "ouvertureIncomplete": "Vul de datum van validatie van het mandaat in en vink de bevestiging aan.",
+    "dateMandatFuture": "De datum van validatie van het mandaat mag niet in de toekomst liggen.",
+    "ouvertureSansGroupe": "Voeg minstens één groep toe voordat u de campagne opent.",
+    "ouvertureSansQuestionnaire": "Kies minstens één vragenlijst voordat u de campagne opent.",
+    "ouvertureSansReferent": "Geef minstens één contactpersoon toegang tot het rapport voordat u de campagne opent.",
+    "campagneNonOuverte": "Deze actie is alleen mogelijk voor een geopende campagne.",
+    "prolongationTropCourte": "De nieuwe einddatum moet na de huidige einddatum liggen."
+  },
+  "Footer": {
+    "values": "Inspireren · Motiveren · Handelen",
+    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® is een eigen methode van het Instituut."
+  }
+}

@@ -3,6 +3,7 @@
 import { eq } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
 import { z } from "zod";
+import { LANGUES } from "@/lib/admin/entreprises";
 import { codesValides, JETONS_MAXIMUM_PAR_LOT } from "@/lib/admin/jetons";
 import { adminConnecte } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
@@ -10,7 +11,7 @@ import { campaigns } from "@/lib/db/schema";
 import { pdfCartesJetons } from "@/lib/pdf/cartes-jetons";
 
 const corps = z.object({
-  langue: z.enum(["fr", "pt-BR"]),
+  langue: z.enum(LANGUES),
   codes: z.array(z.string().max(20)).min(1).max(JETONS_MAXIMUM_PAR_LOT),
 });
 

@@ -93,6 +93,8 @@
     },
     "locale": {
       "fr": "Francês",
+      "nl": "Neerlandês",
+      "en": "Inglês",
       "pt-BR": "Português (Brasil)"
     },
     "sizeBand": {
@@ -353,35 +355,38 @@
   "Pays": {
     "BE": {
       "legal": "Na Bélgica, o empregador é obrigado a analisar os riscos psicossociais no trabalho (Código do bem-estar no trabalho, livro I, título 3). Esta iniciativa apoia essa análise, sem substituir o papel do conselheiro em prevenção dos aspectos psicossociais, da pessoa de confiança ou do médico do trabalho. Antes da campanha, o empregador informa e consulta os representantes dos trabalhadores (comitê para a prevenção e a proteção no trabalho ou, na sua falta, delegação sindical ou trabalhadores).",
-      "aides": [
-        "Emergências (número europeu)",
-        "Centre de Prévention du Suicide (prevenção do suicídio)",
-        "Ambulância e bombeiros",
-        "Polícia"
-      ]
+      "aides": {
+        "urgence": "Emergências (número europeu)",
+        "cps": "Centre de Prévention du Suicide (prevenção do suicídio, em francês)",
+        "teleAccueil": "Télé-Accueil (escuta, em francês)",
+        "zelfmoordlijn": "Zelfmoordlijn (prevenção do suicídio, em neerlandês)",
+        "teleOnthaal": "Tele-Onthaal (escuta, em neerlandês)",
+        "ambulance": "Ambulância e bombeiros",
+        "police": "Polícia"
+      }
     },
     "FR": {
       "legal": "Na França, o empregador avalia os riscos profissionais, inclusive os riscos psicossociais, e os registra no documento único de avaliação dos riscos profissionais (DUERP). O comitê social e econômico (CSE) é informado e consultado.",
-      "aides": [
-        "Emergências (número europeu)",
-        "Número nacional de prevenção do suicídio",
-        "Suicide Écoute"
-      ]
+      "aides": {
+        "urgence": "Emergências (número europeu)",
+        "suicide": "Número nacional de prevenção do suicídio",
+        "ecoute": "Suicide Écoute"
+      }
     },
     "BR": {
       "legal": "No Brasil, a NR-1 exige que a empresa identifique e avalie os riscos psicossociais no Gerenciamento de Riscos Ocupacionais (GRO / PGR). Esta iniciativa alimenta o GRO / PGR sem substituí-lo, nem o papel do SESMT ou da CIPA. A NR-1 prevê a participação dos trabalhadores.",
-      "aides": [
-        "CVV — Centro de Valorização da Vida (prevenção do suicídio)",
-        "SAMU (crise psiquiátrica aguda)"
-      ]
+      "aides": {
+        "cvv": "CVV — Centro de Valorização da Vida (prevenção do suicídio)",
+        "samu": "SAMU (crise psiquiátrica aguda)"
+      }
     },
     "PT": {
       "legal": "Em Portugal, o empregador avalia os riscos profissionais, incluindo os psicossociais, no âmbito do regime jurídico da promoção da segurança e saúde no trabalho (Lei n.º 102/2009). Os representantes dos trabalhadores são informados e consultados.",
-      "aides": [
-        "Emergências (número europeu)",
-        "SNS 24 — apoio psicológico",
-        "SOS Voz Amiga"
-      ]
+      "aides": {
+        "urgence": "Emergências (número europeu)",
+        "sns24": "SNS 24 — apoio psicológico",
+        "vozAmiga": "SOS Voz Amiga"
+      }
     }
   },
   "Questionnaire": {
@@ -409,7 +414,7 @@
     "ouvertureSansGroupe": "Adicione pelo menos um grupo antes de abrir a campanha.",
     "ouvertureSansQuestionnaire": "Escolha pelo menos um questionário antes de abrir a campanha.",
     "ouvertureSansReferent": "Dê acesso ao relatório a pelo menos um responsável antes de abrir a campanha.",
-    "campagneNonOuverte": "Somente uma campanha aberta pode ser encerrada.",
+    "campagneNonOuverte": "Esta ação só é possível para uma campanha aberta.",
     "prolongationTropCourte": "A nova data de término deve ser posterior à data de término atual."
   },
   "Footer": {

@@ -23,7 +23,7 @@ Conformément à l'architecture MINDSET®, une campagne ne s'ouvre jamais d'elle
 | Scores agrégés, tableau de bord, rapport PDF | Voix, wearables, méditation, journaling |
 | Brouillon IA validé par IMA | Paiement en ligne, abonnements InnerOS |
 | Espace de consultation du référent entreprise | Accès autonome d'une entreprise sans mandat IMA |
-| Français et portugais (Brésil) | Néerlandais, espagnol, anglais, portugais (Portugal) |
+| Français, néerlandais, anglais et portugais (Brésil) — néerlandais et anglais ajoutés le 8 octobre 2026 | Espagnol, portugais (Portugal) |
 
 ## 2. Rôles et parcours utilisateurs
 
@@ -61,7 +61,7 @@ Cycle d'une campagne : P0 Recevabilité → P1 Mandat validé → Paramétrage �
 | F10 | Brouillon IA et validation | Brouillon de cartographie et de priorités, éditeur, liste de contrôle de validation, interrupteur IA, export PDF | P1 |
 | F11 | Journal d'audit | Qui a fait quoi et quand, côté administrateurs et référents | P2 |
 | F12 | Suppression automatique | Effacement programmé des réponses brutes après validation du rapport (section 7) | P2 |
-| F13 | Kit d'information | Note pour les travailleurs et leurs représentants (CPPT, délégation syndicale ; consultation prévue par la NR-1) : finalité, anonymat, seuil, destinataires, usage de l'IA, ressources d'aide ; FR et PT-BR | P1 |
+| F13 | Kit d'information | Note pour les travailleurs et leurs représentants (CPPT, délégation syndicale ; consultation prévue par la NR-1) : finalité, anonymat, seuil, destinataires, usage de l'IA, ressources d'aide du pays ; FR, NL, EN et PT-BR | P1 |
 
 **Règles transverses**
 
@@ -78,7 +78,7 @@ Trois instruments validés, utilisés sans modification, avec leur source citée
 | --- | --- | --- | --- | --- |
 | COPSOQ III | Facteurs psychosociaux du travail (pilier M, grille des six niveaux MINDSET®) | Items CORE + MIDDLE de la version nationale ; items d'engagement au travail (WE) exclus | CC BY-NC-ND 4.0 ; usage commercial gratuit selon les lignes directrices ; on facture l'analyse, jamais le questionnaire | Accord de principe du réseau international reçu ; équipes nationales à contacter |
 | CBI | Épuisement : personnel, lié au travail, lié aux bénéficiaires | 19 items ; échelle bénéficiaires optionnelle | Décrit comme libre d'usage ; pas de texte de licence commerciale trouvé | Confirmation écrite demandée au NFA (Copenhague) |
-| Flourishing Scale | Bien-être positif | 8 items, réponses de 1 à 7 | Libre, avec citation de Diener et al. (2010) | Traductions validées FR et PT-BR à identifier |
+| Flourishing Scale | Bien-être positif | 8 items, réponses de 1 à 7 | Libre, avec citation de Diener et al. (2010) | Traductions validées FR, NL, PT-BR à identifier (version originale anglaise) |
 
 **Règles de calcul**
 
@@ -142,7 +142,7 @@ Une application web unique, une seule base de données chez OVH en Europe, Claud
 
 Make et HubSpot restent hors du périmètre des réponses. GitHub héberge uniquement le code source.
 
-**Pile technique** : Next.js (App Router) et TypeScript ; Tailwind CSS ; Drizzle ORM (PGlite en développement, PostgreSQL OVH en production) ; Auth.js avec TOTP ; next-intl (fr, pt-BR) ; Zod ; Vitest ; @react-pdf/renderer ; code portable sans dépendance propre à Vercel.
+**Pile technique** : Next.js (App Router) et TypeScript ; Tailwind CSS ; Drizzle ORM (PGlite en développement, PostgreSQL OVH en production) ; Auth.js avec TOTP ; next-intl (fr, nl, en, pt-BR) ; Zod ; Vitest ; @react-pdf/renderer ; code portable sans dépendance propre à Vercel.
 
 **Coûts mensuels estimés** : Vercel 0 € pendant le développement en local, puis environ 20 $ (sans supplément si le site IMA est déjà en Pro) ; OVH PostgreSQL managé environ 20 à 40 € ; API Claude quelques euros par rapport (plafond 30 €) ; Brevo 0 € ; sous-domaine `app.institutmindsetenaction.com` 0 €.
 
@@ -239,3 +239,6 @@ Le détail des prompts se trouve dans `docs/PROMPTS_CLAUDE_CODE.md`.
 - [ ] Relire ce cahier après la proposition de Quality Jobs Act attendue fin 2026.
 - [ ] Revue réglementaire et scientifique tous les six mois.
 - [x] Remplacer le logo provisoire par le fichier officiel haute définition (5 octobre 2026).
+- [ ] Faire relire les textes néerlandais et anglais (application, kit, cartes) par une personne de langue maternelle.
+- [ ] Choisir entre COPSOQ II version belge (FR, NL ; valeurs de référence belges disponibles) et COPSOQ III (versions belges à obtenir auprès de l'équipe nationale) avant l'étape 5.
+- [ ] Rappels de participation : rappel collectif envoyé aux référents (jamais ciblé sur des personnes), à réaliser à l'étape 7.

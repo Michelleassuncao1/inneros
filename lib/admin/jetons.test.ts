@@ -79,6 +79,10 @@ async function campagnePrete() {
 }
 
 describe("Langues par pays", () => {
+  it("une entreprise belge propose le français, le néerlandais et l'anglais", async () => {
+    expect((await creerCampagne(db, adminId, orgId, { ...campagne, locales: ["fr", "nl", "en"] })).ok).toBe(true);
+  });
+
   it("une entreprise belge ne propose pas le portugais du Brésil", async () => {
     expect(await creerCampagne(db, adminId, orgId, { ...campagne, locales: ["fr", "pt-BR"] })).toEqual({
       ok: false,

@@ -33,7 +33,7 @@ Si une demande contredit l'une de ces règles, arrête-toi et explique le confli
 - Next.js (App Router), TypeScript strict, Tailwind CSS (v4, tokens dans `design/tokens.css`).
 - PostgreSQL : en développement, PGlite (PostgreSQL embarqué, aucun logiciel à installer) ; en production, PostgreSQL managé OVH (région UE). ORM : Drizzle, migrations versionnées, identiques pour les deux.
 - Auth.js : administrateurs avec mot de passe + TOTP obligatoire ; référents par lien magique (Brevo, 15 minutes).
-- next-intl : `fr` et `pt-BR`. Aucun texte d'interface écrit en dur.
+- next-intl : `fr`, `nl`, `en` et `pt-BR` (néerlandais et anglais ajoutés en phase 1 le 8 octobre 2026, décision de Michelle). Aucun texte d'interface écrit en dur. Les langues proposées dépendent du pays de l'entreprise (`lib/pays.ts`).
 - Zod pour toutes les entrées ; Vitest pour les tests ; @react-pdf/renderer pour les PDF ; SDK `@anthropic-ai/sdk`.
 - Code portable : aucune fonctionnalité propre à Vercel (pas de Vercel KV, pas d'Edge Config).
 

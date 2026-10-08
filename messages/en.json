@@ -1,0 +1,424 @@
+{
+  "Metadata": {
+    "title": "InnerOS — Institut Mindset en Action®",
+    "description": "Collective and anonymous assessment of psychosocial risks at work."
+  },
+  "Header": {
+    "brand": "Institut Mindset en Action®",
+    "logoAlt": "Institut Mindset en Action logo",
+    "languageLabel": "Language",
+    "skipLink": "Skip to content"
+  },
+  "Home": {
+    "title": "InnerOS",
+    "tagline": "Collective measurement of well-being at work, in support of the MINDSET® method.",
+    "intro": "InnerOS enables the Institut Mindset en Action® to run anonymous questionnaire campaigns in a client company, calculate collective scores and prepare a report validated by an IMA practitioner.",
+    "principlesTitle": "Our commitments",
+    "principleAnonymity": "Full anonymity: no account, no name, no address for respondents.",
+    "principleThreshold": "No result is shown for a group of fewer than 10 people.",
+    "principleHuman": "AI prepares a draft; an IMA practitioner checks and validates every report.",
+    "principleNoDiagnosis": "A collective prevention approach, never an individual diagnosis.",
+    "status": "Application under construction — phase 1.",
+    "adminLink": "IMA area",
+    "referentLink": "Company contact area"
+  },
+  "AdminLogin": {
+    "title": "Administrator sign-in",
+    "intro": "Reserved for practitioners of the Institut Mindset en Action®.",
+    "email": "Email address",
+    "password": "Password",
+    "code": "Authenticator app code",
+    "codeHelp": "The 6 digits shown in your app, renewed every 30 seconds.",
+    "submit": "Sign in",
+    "pending": "Checking…",
+    "errorInvalid": "Incorrect credentials or code.",
+    "errorLocked": "Too many attempts. Try again in 15 minutes."
+  },
+  "Admin": {
+    "title": "Administrator area",
+    "welcome": "Hello {name}",
+    "placeholder": "You are signed in to the InnerOS administrator area.",
+    "signOut": "Sign out",
+    "organizationsCount": "{count, plural, =0 {No companies} one {# company} other {# companies}}",
+    "campaignsCount": "{count, plural, =0 {No campaigns} one {# campaign} other {# campaigns}}",
+    "manageOrganizations": "Manage companies",
+    "manageCampaigns": "Manage campaigns"
+  },
+  "ReferentLogin": {
+    "title": "Company contact sign-in",
+    "intro": "Enter the email address you gave to the Institut Mindset en Action®. You will receive a sign-in link.",
+    "email": "Email address",
+    "submit": "Send me a sign-in link",
+    "pending": "Sending…",
+    "sent": "If this address is registered, a sign-in link has just been sent to you. It is valid for 15 minutes and can be used only once.",
+    "errorEmail": "Please enter a valid email address."
+  },
+  "MagicLink": {
+    "title": "Open your area",
+    "intro": "Click the button to open your company contact area.",
+    "submit": "Open my area",
+    "pending": "Opening…",
+    "errorExpired": "This link has expired or has already been used.",
+    "newLink": "Request a new link"
+  },
+  "Referent": {
+    "title": "Company contact area",
+    "welcome": "Hello {name}",
+    "organization": "Company: {name}",
+    "noReport": "No validated report yet. Reports will appear here once validated by the Institut Mindset en Action®.",
+    "signOut": "Sign out"
+  },
+  "Email": {
+    "subject": "Your InnerOS sign-in link",
+    "greeting": "Hello {name},",
+    "body": "Here is your link to open your InnerOS area. It is valid for 15 minutes and can be used only once.",
+    "button": "Open my area",
+    "ignore": "If you did not request this link, simply ignore this message.",
+    "signature": "Institut Mindset en Action®"
+  },
+  "AdminNav": {
+    "label": "Administrator area menu",
+    "home": "Home",
+    "organizations": "Companies",
+    "campaigns": "Campaigns",
+    "signOut": "Sign out"
+  },
+  "Libelles": {
+    "all": "All countries",
+    "country": {
+      "BE": "Belgium",
+      "FR": "France",
+      "BR": "Brazil",
+      "PT": "Portugal"
+    },
+    "locale": {
+      "fr": "French",
+      "nl": "Dutch",
+      "en": "English",
+      "pt-BR": "Portuguese (Brazil)"
+    },
+    "sizeBand": {
+      "lt50": "Fewer than 50",
+      "50-249": "50 to 249",
+      "250-999": "250 to 999",
+      "1000+": "1,000 or more"
+    },
+    "mandate": {
+      "flash": "Flash Diagnosis",
+      "n1": "N1 Diagnosis",
+      "n2": "N2 Diagnosis",
+      "n3": "N3 Diagnosis"
+    },
+    "status": {
+      "draft": "Draft",
+      "open": "Open",
+      "closed": "Closed"
+    },
+    "test": "test",
+    "grouping": {
+      "service": "Unit",
+      "department": "Department",
+      "direction": "Division",
+      "site": "Site",
+      "function": "Job / role",
+      "other": "Other"
+    }
+  },
+  "Entreprises": {
+    "title": "Companies",
+    "new": "New company",
+    "none": "No companies yet.",
+    "colName": "Name",
+    "colCountry": "Country",
+    "colCode": "Internal code",
+    "colSector": "Sector",
+    "name": "Company name",
+    "country": "Country",
+    "countryHelp": "The country determines the helplines and the legal framework shown to workers. It can no longer be changed after the first campaign.",
+    "locale": "Main language",
+    "sector": "Business sector",
+    "sizeBand": "Headcount band",
+    "create": "Create the company",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Changes saved.",
+    "internalCode": "Internal code: {code}",
+    "internalCodeHelp": "Only this code, never the name, will be sent to the AI.",
+    "editTitle": "Company record",
+    "referentsTitle": "Company contacts",
+    "referentsHelp": "Company contacts sign in with a link received by email. They will only see validated reports.",
+    "noReferent": "No company contacts yet.",
+    "colEmail": "Email",
+    "colState": "Status",
+    "active": "Active",
+    "disabled": "Disabled",
+    "disable": "Disable",
+    "enable": "Re-enable",
+    "referentName": "Contact name",
+    "referentEmail": "Contact email",
+    "addReferent": "Add the contact",
+    "adding": "Adding…",
+    "referentAdded": "Contact added.",
+    "campaignsTitle": "Campaigns for this company",
+    "newCampaign": "New campaign",
+    "edit": "Edit",
+    "editReferentTitle": "Correct this contact",
+    "editReferentHelp": "If the address changes, sign-in links already sent are cancelled.",
+    "referentUpdated": "Contact updated.",
+    "colActions": "Actions",
+    "actionsFor": "Actions for {name}",
+    "delete": "Delete",
+    "deleteTitle": "Delete this contact?",
+    "deleteText": "{name} ({email}) will no longer have any access to the company contact area. This deletion is permanent.",
+    "deleteConfirm": "Delete permanently",
+    "cancel": "Cancel"
+  },
+  "Campagnes": {
+    "title": "Campaigns",
+    "new": "New campaign",
+    "none": "No campaigns yet.",
+    "chooseOrganization": "To create a campaign, first open the record of the company concerned.",
+    "colOrganization": "Company",
+    "colMandate": "Mandate",
+    "colDates": "Dates",
+    "colStatus": "Status",
+    "organization": "Company: {name} ({country})",
+    "mandateType": "Mandate type",
+    "mandateReference": "IMA mandate reference",
+    "diagnosticQuestion": "Diagnostic question",
+    "diagnosticQuestionHelp": "Sent to the AI as context, without the company name. Do not include any person's name.",
+    "perimeter": "Scope",
+    "groupMinSize": "Minimum group size",
+    "groupMinSizeHelp": "No result is calculated for a smaller group. Never fewer than 10.",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "locales": "Languages offered to respondents",
+    "create": "Create the campaign",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Changes saved.",
+    "detailsTitle": "Settings",
+    "locked": "Campaign open or closed: settings, groups and questionnaires can no longer be changed.",
+    "instrumentsTitle": "Questionnaires",
+    "instrumentsLegend": "Campaign questionnaires",
+    "instrumentsNone": "No questionnaire has been registered yet.",
+    "instrumentsTestHelp": "Questionnaires marked “test” contain only fictitious items.",
+    "saveInstruments": "Save the questionnaires",
+    "groupsTitle": "Groups",
+    "groupsHelp": "Each respondent will choose their group from this list. Expected headcount: at least {seuil} people.",
+    "noGroup": "No groups yet.",
+    "colLabel": "Label",
+    "colExpected": "Expected headcount",
+    "total": "Expected total: {total} people",
+    "label": "Group label",
+    "labelHelp": "Avoid a label that identifies one person (e.g. “Management” if there is only one manager).",
+    "expectedSize": "Expected headcount",
+    "addGroup": "Add the group",
+    "adding": "Adding…",
+    "groupAdded": "Group added.",
+    "deleteGroup": "Delete",
+    "deleting": "Deleting…",
+    "status": "Status: {status}",
+    "threshold": "Threshold: {seuil} people",
+    "groupingCriterion": "Grouping criterion",
+    "groupingHelp": "All groups in the campaign follow this single criterion: each respondent must belong to one group only. It can no longer be changed once groups have been created.",
+    "perimeterHelp": "Example: “All staff at the Liège site, about 120 people. Temporary workers excluded.”",
+    "groupingInfo": "Criterion: {critere}",
+    "labelFor": "Group label ({critere})",
+    "referentsTitle": "Access to the report",
+    "referentsHelp": "Only the ticked company contacts will see this campaign's report, after validation by IMA.",
+    "referentsLegend": "Company contacts",
+    "referentsNone": "No company contact is registered for this company. Add them from the company record.",
+    "referentsEmpty": "No company contact has been chosen yet: no one at the company will be able to view the report.",
+    "referentDisabled": "disabled",
+    "saveReferents": "Save access"
+  },
+  "QuestionsTypes": {
+    "choose": "Choose a template question",
+    "placeholder": "— Choose a template question —",
+    "help": "Template questions validated by IMA for this mandate type. The chosen text replaces the content of the field below and remains editable: complete the parts in square brackets.",
+    "confirmReplace": "Replace the current text of the diagnostic question?",
+    "flash": [
+      "What is the overall state of the psychosocial factors perceived by staff, and which points deserve priority attention?",
+      "Which aspects of work are perceived as resources, and which as points of concern?",
+      "Do the collective results point to areas that should be explored through a more comprehensive diagnosis?"
+    ],
+    "n1": [
+      "How do staff perceive their working conditions across the six MINDSET® levels: work, roles, interactions, management, organisation, environment?",
+      "Which psychosocial factors are perceived as the most favourable and the most concerning, and how do they vary from one group to another?",
+      "What collective prevention priorities emerge from the results?"
+    ],
+    "n2": [
+      "How do teams perceive their workload, their autonomy and the support they have received since [the change / the reorganisation of …]?",
+      "What differences in perception appear between [units / sites / roles] regarding job demands and available resources?",
+      "Which factors related to roles and working relationships (role clarity, support from colleagues, recognition, quality of line management) stand out as points of concern?"
+    ],
+    "n3": [
+      "How have the perceived psychosocial factors changed since the previous measurement in [month / year]?",
+      "How have perceptions changed in the areas targeted by the [year] action plan?",
+      "What priorities emerge for the next phase of the prevention plan?"
+    ]
+  },
+  "Jetons": {
+    "title": "Respondent codes",
+    "help": "Each respondent receives a single-use code. Codes are shown only once, when they are created: download the spreadsheet and the printable PDF straight away.",
+    "counts": "{actifs} available · {utilises} used · {revoques} revoked",
+    "number": "Number of codes to generate",
+    "numberHelp": "Suggestion: total expected headcount + 10%.",
+    "generate": "Generate the codes",
+    "generating": "Generating…",
+    "readyTitle": "{count} codes created",
+    "readyText": "Download them now: they can never be shown again. If a file is lost, revoke the codes and generate new ones.",
+    "downloadCsv": "Download the spreadsheet (CSV)",
+    "downloadPdf": "Download the printable cards (PDF, {langue})",
+    "downloading": "Preparing the PDF…",
+    "downloaded": "downloaded",
+    "done": "I'm done",
+    "leaveWarning": "The codes have not been downloaded yet. They will be lost if you leave the page.",
+    "pdfError": "The PDF could not be prepared. Please try again.",
+    "revoke": "Revoke unused codes",
+    "revokeTitle": "Revoke unused codes?",
+    "revokeText": "The {count} available codes will no longer work. Answers already submitted are kept. This action is permanent.",
+    "revokeConfirm": "Revoke permanently",
+    "revoked": "{count} codes revoked.",
+    "cancel": "Cancel",
+    "closedInfo": "Campaign closed: all codes have been deleted.",
+    "csvHeader": "code;address"
+  },
+  "Cycle": {
+    "title": "Opening the campaign",
+    "draftInfo": "The campaign is a draft. It never opens by itself: data collection starts when you open it.",
+    "checklist": "Before opening: at least one group, one questionnaire and one company contact with access to the report.",
+    "mandateDate": "Mandate validation date (gate P1)",
+    "confirm": "The mandate has been validated and the workers' representatives have been informed and consulted.",
+    "open": "Open the campaign",
+    "opening": "Opening…",
+    "openInfo": "Campaign open since the mandate validation on {date}. Respondents can use their codes.",
+    "close": "Close the campaign",
+    "closeTitle": "Close the campaign?",
+    "closeText": "Data collection stops and all codes are permanently deleted. Answers already received are kept for the analysis. The campaign cannot be reopened.",
+    "closeConfirm": "Close permanently",
+    "closedInfo": "Campaign closed on {date}.",
+    "cancel": "Cancel",
+    "endsOn": "Data collection scheduled to end on {date}.",
+    "extend": "Extend the campaign",
+    "extendHelp": "Choose a new end date. Unused codes remain valid until that date: no need to reprint the cards. Remember to download and redistribute the information kit, which states the response period.",
+    "newEndDate": "New end date",
+    "extendConfirm": "Extend",
+    "extending": "Extending…",
+    "extended": "Campaign extended until {date}. Download the information kit again: the response period has changed."
+  },
+  "KitAdmin": {
+    "title": "Information kit (F13)",
+    "help": "Note for workers and their representatives, adapted to the company's country. To be handed out before the campaign opens.",
+    "download": "Download the kit ({langue})",
+    "draft": "Working version: the text must be reviewed and validated by IMA before any distribution."
+  },
+  "Cartes": {
+    "brand": "INSTITUT MINDSET EN ACTION®",
+    "title": "Well-being at work questionnaire",
+    "yourCode": "Your personal code",
+    "scan": "Scan the QR code or enter the code at:",
+    "anonymous": "Anonymous: this code is not linked to any name.",
+    "duration": "About 20 minutes · single use."
+  },
+  "Kit": {
+    "brand": "INSTITUT MINDSET EN ACTION®",
+    "title": "Information note for workers and their representatives",
+    "subtitle": "Anonymous questionnaire on well-being at work — {entreprise}",
+    "period": "Response period: {debut} to {fin}",
+    "workingVersion": "Working version — text to be validated by the Institut Mindset en Action® before distribution",
+    "whyTitle": "Why this questionnaire?",
+    "why": "{entreprise} has asked the Institut Mindset en Action® (IMA) to carry out a collective assessment of psychosocial factors at work: workload, autonomy, relationships, support, organisation and well-being. The aim is to identify, together, ways of improving collective prevention. It is in no way an assessment of individuals.",
+    "howTitle": "How does it work?",
+    "how": "Each person receives a card with a single-use code and a QR code. The questionnaire takes about 20 minutes, on a phone or a computer. First you select your group ({critere}) from a list, then you answer the questions.",
+    "anonymityTitle": "Your anonymity",
+    "anonymity1": "No account, no name, no email address and no IP address is recorded.",
+    "anonymity2": "The code is not linked to any name: no list connects a code to a person.",
+    "anonymity3": "Only the date is kept, never the time.",
+    "anonymity4": "Codes are deleted at the end of data collection.",
+    "anonymity5": "No result is calculated for a group of fewer than {seuil} people.",
+    "anonymity6": "No one, neither your employer nor IMA, can see an individual's answers.",
+    "whoTitle": "Who will see what?",
+    "who": "IMA practitioners analyse collective results only. Your employer receives a collective report, validated by IMA, which may be presented to the workers' representatives. No individual answer is passed on to anyone.",
+    "freeTitle": "Taking part is voluntary",
+    "free": "You may decline to take part, skip a question (“I prefer not to answer”) or stop at any time, without any consequence. This questionnaire is not a medical examination and does not lead to any individual diagnosis.",
+    "aiTitle": "Use of artificial intelligence",
+    "ai": "A first draft of the report is written with the help of an artificial intelligence (Claude, by the company Anthropic), based solely on the collective results. The AI does not see any individual answer, does not calculate the scores and makes no decision: an IMA practitioner checks, corrects and validates every report.",
+    "aiEu": "This information is provided in accordance with the European regulation on artificial intelligence (Article 50).",
+    "legalTitle": "Legal framework",
+    "toValidate": "Text to be validated by a legal expert.",
+    "helpTitle": "Need help?",
+    "help": "If you are going through a difficult time, you are not alone. Talk to someone you trust, to your doctor or to your company's prevention service. You can also contact:",
+    "contact": "A question about this survey? Institut Mindset en Action® — info@institutmindsetenaction.com"
+  },
+  "Pays": {
+    "BE": {
+      "legal": "In Belgium, employers are required to analyse psychosocial risks at work (Code on Well-being at Work, Book I, Title 3). This survey supports that analysis without replacing the role of the prevention adviser for psychosocial aspects, the confidential counsellor or the occupational physician. Before the survey, the employer informs and consults the workers' representatives (Committee for Prevention and Protection at Work or, failing that, the trade union delegation or the workers themselves).",
+      "aides": {
+        "urgence": "Emergencies (European number)",
+        "cps": "Centre de Prévention du Suicide (suicide prevention, in French)",
+        "teleAccueil": "Télé-Accueil (listening line, in French)",
+        "zelfmoordlijn": "Zelfmoordlijn (suicide prevention, in Dutch)",
+        "teleOnthaal": "Tele-Onthaal (listening line, in Dutch)",
+        "ambulance": "Ambulance and fire brigade",
+        "police": "Police"
+      }
+    },
+    "FR": {
+      "legal": "In France, employers assess occupational risks, including psychosocial risks, and record them in the single occupational risk assessment document (DUERP). The social and economic committee (CSE) is informed and consulted.",
+      "aides": {
+        "urgence": "Emergencies (European number)",
+        "suicide": "National suicide prevention line",
+        "ecoute": "Suicide Écoute"
+      }
+    },
+    "BR": {
+      "legal": "In Brazil, the NR-1 standard requires companies to identify and assess psychosocial risks as part of occupational risk management (GRO / PGR). This survey feeds into the GRO / PGR without replacing it, nor the role of the SESMT or the CIPA. NR-1 provides for worker participation.",
+      "aides": {
+        "cvv": "CVV — Centro de Valorização da Vida (suicide prevention)",
+        "samu": "SAMU (acute psychiatric crisis)"
+      }
+    },
+    "PT": {
+      "legal": "In Portugal, employers assess occupational risks, including psychosocial risks, under the legal framework for the promotion of safety and health at work (Law No. 102/2009). Workers' representatives are informed and consulted.",
+      "aides": {
+        "urgence": "Emergencies (European number)",
+        "sns24": "SNS 24 — psychological support",
+        "vozAmiga": "SOS Voz Amiga"
+      }
+    }
+  },
+  "Questionnaire": {
+    "title": "Well-being at work questionnaire",
+    "soon": "The questionnaire will be available soon. Keep your code: you will be asked for it."
+  },
+  "Erreurs": {
+    "saisieInvalide": "Some fields are missing or incorrect. Please check your entry.",
+    "introuvable": "Item not found.",
+    "inattendue": "An unexpected error occurred. Please try again.",
+    "paysVerrouille": "The country can no longer be changed: a campaign already exists for this company.",
+    "emailDejaUtilise": "This email address is already used by another account.",
+    "seuilTropBas": "The threshold cannot be lower than 10 people.",
+    "datesIncoherentes": "The end date must be after the start date.",
+    "campagneVerrouillee": "This campaign is open or closed: it can no longer be changed.",
+    "groupeSousLeSeuil": "Group refused: the expected headcount is below the campaign threshold. Merge it with another group.",
+    "groupeEnDouble": "A group already has this label.",
+    "seuilAuDessusDunGroupe": "This threshold is higher than the expected headcount of an existing group.",
+    "critereVerrouille": "The grouping criterion can no longer be changed: groups already exist. Delete them first.",
+    "langueNonDisponible": "This language is not offered for the company's country.",
+    "nombreJetonsInvalide": "Enter a number of codes between 1 and 5,000.",
+    "campagneCloturee": "This campaign is closed.",
+    "ouvertureIncomplete": "Enter the mandate validation date and tick the confirmation.",
+    "dateMandatFuture": "The mandate validation date cannot be in the future.",
+    "ouvertureSansGroupe": "Add at least one group before opening the campaign.",
+    "ouvertureSansQuestionnaire": "Choose at least one questionnaire before opening the campaign.",
+    "ouvertureSansReferent": "Give at least one company contact access to the report before opening the campaign.",
+    "campagneNonOuverte": "This action is only possible for an open campaign.",
+    "prolongationTropCourte": "The new end date must be after the current end date."
+  },
+  "Footer": {
+    "values": "Inspire · Motivate · Act",
+    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® is a proprietary method of the Institute."
+  }
+}

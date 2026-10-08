@@ -9,7 +9,7 @@ import type { Db } from "../db/types";
 
 import { PAYS } from "../pays";
 export { PAYS };
-export const LANGUES = ["fr", "pt-BR"] as const;
+export const LANGUES = ["fr", "nl", "en", "pt-BR"] as const;
 export const TRANCHES = ["lt50", "50-249", "250-999", "1000+"] as const;
 
 export type Resultat<T = undefined> = { ok: true; valeur: T } | { ok: false; erreur: string };

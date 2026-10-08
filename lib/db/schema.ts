@@ -29,7 +29,7 @@ export const SEUIL_MINIMUM = 10;
 
 export const roleUtilisateur = pgEnum("user_role", ["admin", "referent"]);
 export const pays = pgEnum("country", ["BE", "BR", "FR", "PT"]);
-export const langue = pgEnum("locale", ["fr", "pt-BR"]);
+export const langue = pgEnum("locale", ["fr", "nl", "en", "pt-BR"]);
 export const trancheEffectif = pgEnum("size_band", [
   "lt50",
   "50-249",

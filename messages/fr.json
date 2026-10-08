@@ -93,6 +93,8 @@
     },
     "locale": {
       "fr": "Français",
+      "nl": "Néerlandais",
+      "en": "Anglais",
       "pt-BR": "Portugais (Brésil)"
     },
     "sizeBand": {
@@ -353,35 +355,38 @@
   "Pays": {
     "BE": {
       "legal": "En Belgique, l'employeur est tenu d'analyser les risques psychosociaux au travail (Code du bien-être au travail, livre I, titre 3). Cette démarche soutient cette analyse, sans remplacer le rôle du conseiller en prévention aspects psychosociaux, de la personne de confiance ou du médecin du travail. Avant la campagne, l'employeur informe et consulte les représentants des travailleurs (comité pour la prévention et la protection au travail ou, à défaut, délégation syndicale ou travailleurs).",
-      "aides": [
-        "Urgences (numéro européen)",
-        "Centre de Prévention du Suicide",
-        "Ambulance et pompiers",
-        "Police"
-      ]
+      "aides": {
+        "urgence": "Urgences (numéro européen)",
+        "cps": "Centre de Prévention du Suicide",
+        "teleAccueil": "Télé-Accueil (écoute)",
+        "zelfmoordlijn": "Zelfmoordlijn (prévention du suicide, en néerlandais)",
+        "teleOnthaal": "Tele-Onthaal (écoute, en néerlandais)",
+        "ambulance": "Ambulance et pompiers",
+        "police": "Police"
+      }
     },
     "FR": {
       "legal": "En France, l'employeur évalue les risques professionnels, y compris les risques psychosociaux, et les inscrit dans le document unique d'évaluation des risques professionnels (DUERP). Le comité social et économique (CSE) est informé et consulté.",
-      "aides": [
-        "Urgences (numéro européen)",
-        "Numéro national de prévention du suicide",
-        "Suicide Écoute"
-      ]
+      "aides": {
+        "urgence": "Urgences (numéro européen)",
+        "suicide": "Numéro national de prévention du suicide",
+        "ecoute": "Suicide Écoute"
+      }
     },
     "BR": {
       "legal": "Au Brésil, la norme NR-1 impose à l'entreprise d'identifier et d'évaluer les risques psychosociaux dans la gestion des risques professionnels (GRO / PGR). Cette démarche alimente le GRO / PGR sans le remplacer, ni le rôle du SESMT ou de la CIPA. La NR-1 prévoit la participation des travailleurs.",
-      "aides": [
-        "CVV — Centro de Valorização da Vida (prévention du suicide)",
-        "SAMU (crise psychiatrique aiguë)"
-      ]
+      "aides": {
+        "cvv": "CVV — Centro de Valorização da Vida (prévention du suicide)",
+        "samu": "SAMU (crise psychiatrique aiguë)"
+      }
     },
     "PT": {
       "legal": "Au Portugal, l'employeur évalue les risques professionnels, y compris psychosociaux, dans le cadre du régime juridique de la promotion de la sécurité et de la santé au travail (loi n° 102/2009). Les représentants des travailleurs sont informés et consultés.",
-      "aides": [
-        "Urgences (numéro européen)",
-        "SNS 24 — soutien psychologique",
-        "SOS Voz Amiga"
-      ]
+      "aides": {
+        "urgence": "Urgences (numéro européen)",
+        "sns24": "SNS 24 — soutien psychologique",
+        "vozAmiga": "SOS Voz Amiga"
+      }
     }
   },
   "Questionnaire": {
@@ -409,7 +414,7 @@
     "ouvertureSansGroupe": "Ajoutez au moins un groupe avant d'ouvrir la campagne.",
     "ouvertureSansQuestionnaire": "Choisissez au moins un questionnaire avant d'ouvrir la campagne.",
     "ouvertureSansReferent": "Donnez l'accès au rapport à au moins un référent avant d'ouvrir la campagne.",
-    "campagneNonOuverte": "Seule une campagne ouverte peut être clôturée.",
+    "campagneNonOuverte": "Cette action n'est possible que pour une campagne ouverte.",
     "prolongationTropCourte": "La nouvelle date de fin doit être postérieure à la date de fin actuelle."
   },
   "Footer": {

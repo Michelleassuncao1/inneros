@@ -12,6 +12,8 @@ type Langue = (typeof routing.locales)[number];
 // Nom de chaque langue dans cette langue même. Ajouter une langue = une ligne ici.
 const NOMS: Record<Langue, string> = {
   fr: "Français",
+  nl: "Nederlands",
+  en: "English",
   "pt-BR": "Português (Brasil)",
 };
 
