@@ -231,20 +231,6 @@
     "referentDisabled": "desativado",
     "saveReferents": "Salvar o acesso"
   },
-  "Erreurs": {
-    "saisieInvalide": "Alguns campos estão faltando ou incorretos. Verifique o preenchimento.",
-    "introuvable": "Item não encontrado.",
-    "inattendue": "Ocorreu um erro inesperado. Tente novamente.",
-    "paysVerrouille": "O país não pode mais ser alterado: já existe uma campanha para esta empresa.",
-    "emailDejaUtilise": "Este endereço de e-mail já é usado por outra conta.",
-    "seuilTropBas": "O limite não pode ser inferior a 10 pessoas.",
-    "datesIncoherentes": "A data de término deve ser posterior à data de início.",
-    "campagneVerrouillee": "Esta campanha está aberta ou encerrada: ela não pode mais ser alterada.",
-    "groupeSousLeSeuil": "Grupo recusado: o número previsto é inferior ao limite da campanha. Junte-o a outro grupo.",
-    "groupeEnDouble": "Já existe um grupo com este nome.",
-    "seuilAuDessusDunGroupe": "Este limite é superior ao número previsto de um grupo existente.",
-    "critereVerrouille": "O critério de agrupamento não pode mais ser alterado: já existem grupos. Exclua-os primeiro."
-  },
   "QuestionsTypes": {
     "choose": "Escolher uma pergunta-modelo",
     "placeholder": "— Escolher uma pergunta-modelo —",
@@ -270,6 +256,153 @@
       "Como as percepções evoluíram nas áreas abordadas pelo plano de ação de [ano]?",
       "Quais prioridades emergem para a continuidade do plano de prevenção?"
     ]
+  },
+  "Jetons": {
+    "title": "Códigos dos respondentes",
+    "help": "Cada respondente recebe um código de uso único. Os códigos são exibidos uma única vez, no momento da criação: baixe imediatamente a planilha e o PDF para impressão.",
+    "counts": "{actifs} disponíveis · {utilises} usados · {revoques} revogados",
+    "number": "Número de códigos a gerar",
+    "numberHelp": "Sugestão: número total previsto + 10 %.",
+    "generate": "Gerar os códigos",
+    "generating": "Gerando…",
+    "readyTitle": "{count} códigos criados",
+    "readyText": "Baixe-os agora: eles nunca mais poderão ser exibidos. Se um arquivo for perdido, revogue os códigos e gere novos.",
+    "downloadCsv": "Baixar a planilha (CSV)",
+    "downloadPdf": "Baixar os cartões para impressão (PDF, {langue})",
+    "downloading": "Preparando o PDF…",
+    "downloaded": "baixado",
+    "done": "Concluí",
+    "leaveWarning": "Os códigos ainda não foram baixados. Eles serão perdidos se você sair da página.",
+    "pdfError": "Não foi possível preparar o PDF. Tente novamente.",
+    "revoke": "Revogar os códigos não usados",
+    "revokeTitle": "Revogar os códigos não usados?",
+    "revokeText": "Os {count} códigos disponíveis deixarão de funcionar. As respostas já enviadas são mantidas. Esta ação é definitiva.",
+    "revokeConfirm": "Revogar definitivamente",
+    "revoked": "{count} códigos revogados.",
+    "cancel": "Cancelar",
+    "closedInfo": "Campanha encerrada: todos os códigos foram excluídos.",
+    "csvHeader": "codigo;endereco"
+  },
+  "Cycle": {
+    "title": "Abertura da campanha",
+    "draftInfo": "A campanha está em rascunho. Ela nunca abre sozinha: a coleta começa quando você a abre.",
+    "checklist": "Antes de abrir: pelo menos um grupo, um questionário e um responsável com acesso ao relatório.",
+    "mandateDate": "Data de validação do mandato (porta P1)",
+    "confirm": "O mandato está validado e os representantes dos trabalhadores foram informados e consultados.",
+    "open": "Abrir a campanha",
+    "opening": "Abrindo…",
+    "openInfo": "Campanha aberta após a validação do mandato em {date}. Os respondentes podem usar seus códigos.",
+    "close": "Encerrar a campanha",
+    "closeTitle": "Encerrar a campanha?",
+    "closeText": "A coleta é interrompida e todos os códigos são excluídos definitivamente. As respostas já recebidas são mantidas para a análise. A campanha não poderá ser reaberta.",
+    "closeConfirm": "Encerrar definitivamente",
+    "closedInfo": "Campanha encerrada em {date}.",
+    "cancel": "Cancelar"
+  },
+  "KitAdmin": {
+    "title": "Kit de informação (F13)",
+    "help": "Nota destinada aos trabalhadores e aos seus representantes, adaptada ao país da empresa. A ser entregue antes da abertura da campanha.",
+    "download": "Baixar o kit ({langue})",
+    "draft": "Versão de trabalho: o texto deve ser revisado e validado pelo IMA antes de qualquer divulgação."
+  },
+  "Cartes": {
+    "brand": "INSTITUT MINDSET EN ACTION®",
+    "title": "Questionário de bem-estar no trabalho",
+    "yourCode": "Seu código pessoal",
+    "scan": "Escaneie o QR code ou digite o código em:",
+    "anonymous": "Anônimo: este código não está ligado a nenhum nome.",
+    "duration": "Cerca de 20 minutos · uso único."
+  },
+  "Kit": {
+    "brand": "INSTITUT MINDSET EN ACTION®",
+    "title": "Nota de informação aos trabalhadores e aos seus representantes",
+    "subtitle": "Questionário anônimo sobre o bem-estar no trabalho — {entreprise}",
+    "period": "Período de resposta: de {debut} a {fin}",
+    "workingVersion": "Versão de trabalho — texto a ser validado pelo Institut Mindset en Action® antes da divulgação",
+    "whyTitle": "Por que este questionário?",
+    "why": "{entreprise} confiou ao Institut Mindset en Action® (IMA) uma avaliação coletiva dos fatores psicossociais do trabalho: carga de trabalho, autonomia, relações, apoio, organização e bem-estar. O objetivo é identificar, em conjunto, caminhos de prevenção coletiva. Em nenhum caso se trata de avaliar as pessoas.",
+    "howTitle": "Como funciona?",
+    "how": "Cada pessoa recebe um cartão com um código de uso único e um QR code. O questionário leva cerca de 20 minutos, no celular ou no computador. Primeiro, você indica o seu grupo ({critere}) em uma lista e, depois, responde às perguntas.",
+    "anonymityTitle": "Seu anonimato",
+    "anonymity1": "Nenhuma conta, nenhum nome, nenhum e-mail nem endereço IP é registrado.",
+    "anonymity2": "O código não está ligado a nenhum nome: nenhuma lista relaciona um código a uma pessoa.",
+    "anonymity3": "Somente a data do dia é guardada, nunca o horário.",
+    "anonymity4": "Os códigos são excluídos ao final da coleta.",
+    "anonymity5": "Nenhum resultado é calculado para um grupo com menos de {seuil} pessoas.",
+    "anonymity6": "Ninguém, nem o seu empregador nem o IMA, pode ver as respostas de uma pessoa.",
+    "whoTitle": "Quem verá o quê?",
+    "who": "Os profissionais do IMA analisam apenas resultados coletivos. O seu empregador recebe um relatório coletivo, validado pelo IMA, que pode ser apresentado aos representantes dos trabalhadores. Nenhuma resposta individual é transmitida a ninguém.",
+    "freeTitle": "Uma participação livre",
+    "free": "Você pode recusar-se a participar, pular uma pergunta (« prefiro não responder ») ou parar a qualquer momento, sem nenhuma consequência. Este questionário não é um exame médico e não gera nenhum diagnóstico individual.",
+    "aiTitle": "Uso de inteligência artificial",
+    "ai": "Um primeiro rascunho do relatório é redigido com a ajuda de uma inteligência artificial (Claude, da empresa Anthropic), a partir apenas dos resultados coletivos. A IA não vê nenhuma resposta individual, não calcula os resultados e não toma nenhuma decisão: um profissional do IMA verifica, corrige e valida cada relatório.",
+    "aiEu": "Esta informação é fornecida em conformidade com o regulamento europeu sobre inteligência artificial (artigo 50).",
+    "legalTitle": "Marco legal",
+    "toValidate": "Texto a ser validado por um jurista.",
+    "helpTitle": "Precisa de ajuda?",
+    "help": "Se você está passando por um momento difícil, você não está sozinho(a). Converse com uma pessoa de confiança, com o seu médico ou com o serviço de prevenção da sua empresa. Você também pode entrar em contato com:",
+    "contact": "Dúvidas sobre esta iniciativa? Institut Mindset en Action® — info@institutmindsetenaction.com"
+  },
+  "Pays": {
+    "BE": {
+      "legal": "Na Bélgica, o empregador é obrigado a analisar os riscos psicossociais no trabalho (Código do bem-estar no trabalho, livro I, título 3). Esta iniciativa apoia essa análise, sem substituir o papel do conselheiro em prevenção dos aspectos psicossociais, da pessoa de confiança ou do médico do trabalho. Antes da campanha, o empregador informa e consulta os representantes dos trabalhadores (comitê para a prevenção e a proteção no trabalho ou, na sua falta, delegação sindical ou trabalhadores).",
+      "aides": [
+        "Emergências (número europeu)",
+        "Centre de Prévention du Suicide (prevenção do suicídio)",
+        "Ambulância e bombeiros",
+        "Polícia"
+      ]
+    },
+    "FR": {
+      "legal": "Na França, o empregador avalia os riscos profissionais, inclusive os riscos psicossociais, e os registra no documento único de avaliação dos riscos profissionais (DUERP). O comitê social e econômico (CSE) é informado e consultado.",
+      "aides": [
+        "Emergências (número europeu)",
+        "Número nacional de prevenção do suicídio",
+        "Suicide Écoute"
+      ]
+    },
+    "BR": {
+      "legal": "No Brasil, a NR-1 exige que a empresa identifique e avalie os riscos psicossociais no Gerenciamento de Riscos Ocupacionais (GRO / PGR). Esta iniciativa alimenta o GRO / PGR sem substituí-lo, nem o papel do SESMT ou da CIPA. A NR-1 prevê a participação dos trabalhadores.",
+      "aides": [
+        "CVV — Centro de Valorização da Vida (prevenção do suicídio)",
+        "SAMU (crise psiquiátrica aguda)"
+      ]
+    },
+    "PT": {
+      "legal": "Em Portugal, o empregador avalia os riscos profissionais, incluindo os psicossociais, no âmbito do regime jurídico da promoção da segurança e saúde no trabalho (Lei n.º 102/2009). Os representantes dos trabalhadores são informados e consultados.",
+      "aides": [
+        "Emergências (número europeu)",
+        "SNS 24 — apoio psicológico",
+        "SOS Voz Amiga"
+      ]
+    }
+  },
+  "Questionnaire": {
+    "title": "Questionário de bem-estar no trabalho",
+    "soon": "O questionário estará disponível em breve. Guarde o seu código: ele será solicitado."
+  },
+  "Erreurs": {
+    "saisieInvalide": "Alguns campos estão faltando ou incorretos. Verifique o preenchimento.",
+    "introuvable": "Item não encontrado.",
+    "inattendue": "Ocorreu um erro inesperado. Tente novamente.",
+    "paysVerrouille": "O país não pode mais ser alterado: já existe uma campanha para esta empresa.",
+    "emailDejaUtilise": "Este endereço de e-mail já é usado por outra conta.",
+    "seuilTropBas": "O limite não pode ser inferior a 10 pessoas.",
+    "datesIncoherentes": "A data de término deve ser posterior à data de início.",
+    "campagneVerrouillee": "Esta campanha está aberta ou encerrada: ela não pode mais ser alterada.",
+    "groupeSousLeSeuil": "Grupo recusado: o número previsto é inferior ao limite da campanha. Junte-o a outro grupo.",
+    "groupeEnDouble": "Já existe um grupo com este nome.",
+    "seuilAuDessusDunGroupe": "Este limite é superior ao número previsto de um grupo existente.",
+    "critereVerrouille": "O critério de agrupamento não pode mais ser alterado: já existem grupos. Exclua-os primeiro.",
+    "langueNonDisponible": "Este idioma não é oferecido para o país da empresa.",
+    "nombreJetonsInvalide": "Informe um número de códigos entre 1 e 5.000.",
+    "campagneCloturee": "Esta campanha está encerrada.",
+    "ouvertureIncomplete": "Informe a data de validação do mandato e marque a confirmação.",
+    "dateMandatFuture": "A data de validação do mandato não pode estar no futuro.",
+    "ouvertureSansGroupe": "Adicione pelo menos um grupo antes de abrir a campanha.",
+    "ouvertureSansQuestionnaire": "Escolha pelo menos um questionário antes de abrir a campanha.",
+    "ouvertureSansReferent": "Dê acesso ao relatório a pelo menos um responsável antes de abrir a campanha.",
+    "campagneNonOuverte": "Somente uma campanha aberta pode ser encerrada."
   },
   "Footer": {
     "values": "Inspirar · Motivar · Agir",

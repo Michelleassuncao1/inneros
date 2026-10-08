@@ -7,7 +7,8 @@ import { normaliserEmail } from "../auth/limite";
 import { campaigns, loginLinks, organizations, users } from "../db/schema";
 import type { Db } from "../db/types";
 
-export const PAYS = ["BE", "FR", "BR", "PT"] as const;
+import { PAYS } from "../pays";
+export { PAYS };
 export const LANGUES = ["fr", "pt-BR"] as const;
 export const TRANCHES = ["lt50", "50-249", "250-999", "1000+"] as const;
 

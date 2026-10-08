@@ -14,6 +14,11 @@ async function utilisateurActif(role: "admin" | "referent") {
   return user;
 }
 
+// Pour les routes de téléchargement (PDF) : renvoie l'administrateur ou null, sans redirection
+export async function adminConnecte() {
+  return utilisateurActif("admin");
+}
+
 export async function exigerAdmin(locale: string) {
   const user = await utilisateurActif("admin");
   if (!user) redirect(`/${locale}/admin/connexion`);

@@ -26,6 +26,8 @@ import {
   actionSupprimerGroupe,
 } from "../../actions";
 import { ChampsCampagne } from "../../ChampsFormulaires";
+import { SectionCycle, SectionJetons, SectionKit } from "./Sections";
+import { languesDuPays } from "@/lib/pays";
 
 export default async function CampagnePage({ params }: PageProps<"/[locale]/admin/campagnes/[id]">) {
   const { locale, id } = await params;
@@ -83,6 +85,10 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
           <MessageInfo>{t("locked")}</MessageInfo>
         </div>
       )}
+
+      <SectionCycle locale={locale} campagne={campagne} />
+      <SectionJetons locale={locale} campagne={campagne} effectifTotal={total} />
+      <SectionKit campagne={campagne} />
 
       <section aria-labelledby="groupes">
         <h2 id="groupes" className="text-xl">{t("groupsTitle")}</h2>
@@ -199,7 +205,11 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
             libelle={t("save")}
             enCours={t("saving")}
           >
-            <ChampsCampagne valeurs={campagne} langueParDefaut={entreprise.locale} />
+            <ChampsCampagne
+              valeurs={campagne}
+              langueParDefaut={entreprise.locale}
+              languesPossibles={languesDuPays(entreprise.country)}
+            />
           </FormulaireAction>
         ) : (
           <p>

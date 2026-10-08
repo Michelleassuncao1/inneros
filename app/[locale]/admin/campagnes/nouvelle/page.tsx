@@ -10,6 +10,7 @@ import { getDb } from "@/lib/db/client";
 import { organizations } from "@/lib/db/schema";
 import { actionCreerCampagne } from "../../actions";
 import { ChampsCampagne } from "../../ChampsFormulaires";
+import { languesDuPays } from "@/lib/pays";
 
 export default async function NouvelleCampagnePage({
   params,
@@ -48,7 +49,7 @@ export default async function NouvelleCampagnePage({
             libelle={t("create")}
             enCours={t("saving")}
           >
-            <ChampsCampagne langueParDefaut={org.locale} />
+            <ChampsCampagne langueParDefaut={org.locale} languesPossibles={languesDuPays(org.country)} />
           </FormulaireAction>
         </>
       )}

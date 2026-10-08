@@ -61,9 +61,12 @@ type Campagne = {
 export async function ChampsCampagne({
   valeurs,
   langueParDefaut,
+  languesPossibles,
 }: {
   valeurs?: Campagne;
   langueParDefaut: string;
+  // Langues prévues pour le pays de l'entreprise (lib/pays.ts)
+  languesPossibles: readonly string[];
 }) {
   const t = await getTranslations("Campagnes");
   const l = await getTranslations("Libelles");
@@ -139,8 +142,8 @@ export async function ChampsCampagne({
       <CasesACocher
         legende={t("locales")}
         name="locales"
-        options={LANGUES.map((p) => ({ valeur: p, libelle: l(`locale.${p}`) }))}
-        cochees={valeurs?.locales ?? [langueParDefaut]}
+        options={languesPossibles.map((p) => ({ valeur: p, libelle: l(`locale.${p}`) }))}
+        cochees={valeurs?.locales ?? (languesPossibles.includes(langueParDefaut) ? [langueParDefaut] : [...languesPossibles])}
       />
     </>
   );

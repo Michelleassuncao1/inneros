@@ -6,7 +6,7 @@ import type { NextConfig } from "next";
 // On déclare ici le même alias que le plugin : `next-intl/config` → i18n/request.ts.
 const nextConfig: NextConfig = {
   // PGlite (base de développement) reste un module Node.js, hors des fichiers compilés
-  serverExternalPackages: ["@electric-sql/pglite"],
+  serverExternalPackages: ["@electric-sql/pglite", "@react-pdf/renderer"],
   turbopack: {
     resolveAlias: {
       "next-intl/config": "./i18n/request.ts",

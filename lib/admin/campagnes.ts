@@ -13,6 +13,7 @@ import {
   users,
 } from "../db/schema";
 import type { Db } from "../db/types";
+import { languesDuPays } from "../pays";
 import { LANGUES, type Resultat } from "./entreprises";
 
 export const MANDATS = ["flash", "n1", "n2", "n3"] as const;
@@ -50,6 +51,12 @@ export const schemaGroupe = z.object({
   expectedSize: z.coerce.number().int().min(1).max(100000),
 });
 
+// Une campagne ne propose que les langues prévues pour le pays de l'entreprise
+function languesAutorisees(pays: string, locales: string[]) {
+  const possibles: readonly string[] = languesDuPays(pays);
+  return locales.every((l) => possibles.includes(l));
+}
+
 function erreurCampagne(e: z.ZodError) {
   return e.issues.some((i) => i.message === "dates") ? "datesIncoherentes" : "saisieInvalide";
 }
@@ -65,10 +72,11 @@ export async function creerCampagne(
   if (donnees.data.groupMinSize < seuilPlateforme()) return { ok: false, erreur: "seuilTropBas" };
 
   const [org] = await db
-    .select({ id: organizations.id })
+    .select({ id: organizations.id, country: organizations.country })
     .from(organizations)
     .where(eq(organizations.id, organizationId));
   if (!org) return { ok: false, erreur: "introuvable" };
+  if (!languesAutorisees(org.country, donnees.data.locales)) return { ok: false, erreur: "langueNonDisponible" };
 
   const [campagne] = await db
     .insert(campaigns)
@@ -102,6 +110,12 @@ export async function modifierCampagne(
   const donnees = schemaCampagne.safeParse(saisie);
   if (!donnees.success) return { ok: false, erreur: erreurCampagne(donnees.error) };
   if (donnees.data.groupMinSize < seuilPlateforme()) return { ok: false, erreur: "seuilTropBas" };
+
+  const [org] = await db
+    .select({ country: organizations.country })
+    .from(organizations)
+    .where(eq(organizations.id, verif.campagne.organizationId));
+  if (!languesAutorisees(org.country, donnees.data.locales)) return { ok: false, erreur: "langueNonDisponible" };
 
   const groupesExistants = await db.select().from(groups).where(eq(groups.campaignId, campaignId));
   // Changer de critère avec des groupes existants mélangerait deux découpages

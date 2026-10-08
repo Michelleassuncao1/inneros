@@ -24,6 +24,8 @@ import {
   modifierReferent,
   supprimerReferent,
 } from "@/lib/admin/entreprises";
+import { cloturerCampagne, ouvrirCampagne } from "@/lib/admin/cycle";
+import { genererJetons, revoquerJetonsNonUtilises } from "@/lib/admin/jetons";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 
@@ -202,5 +204,53 @@ export async function actionSupprimerGroupe(locale: string, id: string, groupId:
   const { langue, admin, db } = await contexte(locale);
   if (!uuid.safeParse(id).success || !uuid.safeParse(groupId).success) return;
   await supprimerGroupe(db, admin.id, id, groupId);
+  revalidatePath(`/${langue}/admin/campagnes/${id}`);
+}
+
+// ─── Jetons, ouverture, clôture ──────────────────────────────────────────────
+
+export type EtatJetons = { erreur?: string; codes?: string[]; envoi?: number };
+
+// Les codes reviennent une seule fois vers le navigateur de l'administrateur ; ils ne sont pas stockés
+export async function actionGenererJetons(
+  locale: string,
+  id: string,
+  _etat: EtatJetons,
+  formData: FormData,
+): Promise<EtatJetons> {
+  const { langue, admin, db, erreur } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return erreur("introuvable");
+  const r = await genererJetons(db, admin.id, id, formData.get("nombre"));
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(`/${langue}/admin/campagnes/${id}`);
+  return { codes: r.valeur.codes, envoi: Date.now() };
+}
+
+export async function actionRevoquerJetons(locale: string, id: string) {
+  const { langue, admin, db } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return;
+  await revoquerJetonsNonUtilises(db, admin.id, id);
+  revalidatePath(`/${langue}/admin/campagnes/${id}`);
+}
+
+export async function actionOuvrirCampagne(
+  locale: string,
+  id: string,
+  _etat: EtatFormulaire,
+  formData: FormData,
+): Promise<EtatFormulaire> {
+  const { langue, admin, db, erreur } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return erreur("introuvable");
+  const r = await ouvrirCampagne(db, admin.id, id, champs(formData));
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(`/${langue}/admin/campagnes/${id}`);
+  const t = await getTranslations({ locale: langue, namespace: "Campagnes" });
+  return { succes: t("saved"), envoi: Date.now() };
+}
+
+export async function actionCloturerCampagne(locale: string, id: string) {
+  const { langue, admin, db } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return;
+  await cloturerCampagne(db, admin.id, id);
   revalidatePath(`/${langue}/admin/campagnes/${id}`);
 }
