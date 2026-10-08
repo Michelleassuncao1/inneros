@@ -24,7 +24,7 @@ import {
   modifierReferent,
   supprimerReferent,
 } from "@/lib/admin/entreprises";
-import { cloturerCampagne, ouvrirCampagne } from "@/lib/admin/cycle";
+import { cloturerCampagne, ouvrirCampagne, prolongerCampagne } from "@/lib/admin/cycle";
 import { genererJetons, revoquerJetonsNonUtilises } from "@/lib/admin/jetons";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
@@ -246,6 +246,24 @@ export async function actionOuvrirCampagne(
   revalidatePath(`/${langue}/admin/campagnes/${id}`);
   const t = await getTranslations({ locale: langue, namespace: "Campagnes" });
   return { succes: t("saved"), envoi: Date.now() };
+}
+
+export async function actionProlongerCampagne(
+  locale: string,
+  id: string,
+  _etat: EtatFormulaire,
+  formData: FormData,
+): Promise<EtatFormulaire> {
+  const { langue, admin, db, erreur } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return erreur("introuvable");
+  const r = await prolongerCampagne(db, admin.id, id, champs(formData));
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(`/${langue}/admin/campagnes/${id}`);
+  const t = await getTranslations({ locale: langue, namespace: "Cycle" });
+  const date = new Intl.DateTimeFormat(langue, { dateStyle: "long", timeZone: "UTC" }).format(
+    new Date(`${r.valeur.nouvelleFin}T00:00:00Z`),
+  );
+  return { succes: t("extended", { date }), envoi: Date.now() };
 }
 
 export async function actionCloturerCampagne(locale: string, id: string) {

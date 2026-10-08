@@ -9,6 +9,7 @@ import {
   actionCloturerCampagne,
   actionGenererJetons,
   actionOuvrirCampagne,
+  actionProlongerCampagne,
   actionRevoquerJetons,
 } from "../../actions";
 import { BoutonConfirmation } from "./BoutonConfirmation";
@@ -19,6 +20,7 @@ type Campagne = {
   status: "draft" | "open" | "closed";
   mandateReference: string;
   mandateValidatedOn: string | null;
+  endDate: string;
   closedAt: Date | null;
   locales: string[];
 };
@@ -53,6 +55,19 @@ export async function SectionCycle({ locale, campagne }: { locale: string; campa
       {campagne.status === "open" && (
         <div className="mt-3 flex max-w-xl flex-col items-start gap-4">
           <MessageInfo>{t("openInfo", { date: dateLisible(locale, campagne.mandateValidatedOn!) })}</MessageInfo>
+          <p className="font-semibold text-ima-navy">{t("endsOn", { date: dateLisible(locale, campagne.endDate) })}</p>
+          <details className="w-full rounded-md border border-ima-line bg-white px-4 py-3">
+            <summary className="cursor-pointer font-semibold text-ima-navy">{t("extend")}</summary>
+            <p className="mb-4 mt-2 text-sm text-ima-muted">{t("extendHelp")}</p>
+            <FormulaireAction
+              action={actionProlongerCampagne.bind(null, locale, campagne.id)}
+              libelle={t("extendConfirm")}
+              enCours={t("extending")}
+              secondaire
+            >
+              <Champ id="endDate" name="endDate" type="date" min={campagne.endDate} label={t("newEndDate")} required />
+            </FormulaireAction>
+          </details>
           <BoutonConfirmation
             libelle={t("close")}
             titre={t("closeTitle")}

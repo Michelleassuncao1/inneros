@@ -297,7 +297,14 @@
     "closeText": "La collecte s'arrête et tous les jetons sont supprimés définitivement. Les réponses déjà reçues sont conservées pour l'analyse. La campagne ne pourra pas être rouverte.",
     "closeConfirm": "Clôturer définitivement",
     "closedInfo": "Campagne clôturée le {date}.",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "endsOn": "Fin de la collecte prévue le {date}.",
+    "extend": "Prolonger la campagne",
+    "extendHelp": "Choisissez une nouvelle date de fin. Les jetons non utilisés restent valables jusqu'à cette date : inutile de réimprimer les cartes. Pensez à retélécharger et redistribuer le kit d'information, qui indique la période de réponse.",
+    "newEndDate": "Nouvelle date de fin",
+    "extendConfirm": "Prolonger",
+    "extending": "Prolongation…",
+    "extended": "Campagne prolongée jusqu'au {date}. Retéléchargez le kit d'information : la période de réponse a changé."
   },
   "KitAdmin": {
     "title": "Kit d'information (F13)",
@@ -402,7 +409,8 @@
     "ouvertureSansGroupe": "Ajoutez au moins un groupe avant d'ouvrir la campagne.",
     "ouvertureSansQuestionnaire": "Choisissez au moins un questionnaire avant d'ouvrir la campagne.",
     "ouvertureSansReferent": "Donnez l'accès au rapport à au moins un référent avant d'ouvrir la campagne.",
-    "campagneNonOuverte": "Seule une campagne ouverte peut être clôturée."
+    "campagneNonOuverte": "Seule une campagne ouverte peut être clôturée.",
+    "prolongationTropCourte": "La nouvelle date de fin doit être postérieure à la date de fin actuelle."
   },
   "Footer": {
     "values": "Inspirer · Motiver · Agir",

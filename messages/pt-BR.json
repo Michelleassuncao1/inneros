@@ -297,7 +297,14 @@
     "closeText": "A coleta é interrompida e todos os códigos são excluídos definitivamente. As respostas já recebidas são mantidas para a análise. A campanha não poderá ser reaberta.",
     "closeConfirm": "Encerrar definitivamente",
     "closedInfo": "Campanha encerrada em {date}.",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "endsOn": "Fim da coleta previsto para {date}.",
+    "extend": "Prorrogar a campanha",
+    "extendHelp": "Escolha uma nova data de término. Os códigos não usados continuam válidos até essa data: não é preciso reimprimir os cartões. Lembre-se de baixar novamente e redistribuir o kit de informação, que indica o período de resposta.",
+    "newEndDate": "Nova data de término",
+    "extendConfirm": "Prorrogar",
+    "extending": "Prorrogando…",
+    "extended": "Campanha prorrogada até {date}. Baixe novamente o kit de informação: o período de resposta mudou."
   },
   "KitAdmin": {
     "title": "Kit de informação (F13)",
@@ -402,7 +409,8 @@
     "ouvertureSansGroupe": "Adicione pelo menos um grupo antes de abrir a campanha.",
     "ouvertureSansQuestionnaire": "Escolha pelo menos um questionário antes de abrir a campanha.",
     "ouvertureSansReferent": "Dê acesso ao relatório a pelo menos um responsável antes de abrir a campanha.",
-    "campagneNonOuverte": "Somente uma campanha aberta pode ser encerrada."
+    "campagneNonOuverte": "Somente uma campanha aberta pode ser encerrada.",
+    "prolongationTropCourte": "A nova data de término deve ser posterior à data de término atual."
   },
   "Footer": {
     "values": "Inspirar · Motivar · Agir",

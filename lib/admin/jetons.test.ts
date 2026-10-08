@@ -6,7 +6,7 @@ import { campaigns, instruments, tokens, users } from "../db/schema";
 import { creerBaseDeTest } from "../db/test-db";
 import type { Db } from "../db/types";
 import { ajouterGroupe, choisirQuestionnaires, choisirReferents, creerCampagne } from "./campagnes";
-import { cloturerCampagne, ouvrirCampagne } from "./cycle";
+import { cloturerCampagne, ouvrirCampagne, prolongerCampagne } from "./cycle";
 import { ajouterReferent, creerEntreprise } from "./entreprises";
 import {
   codesValides,
@@ -175,6 +175,30 @@ describe("Ouverture et clôture", () => {
     expect(close.status).toBe("closed");
     // Plus aucun jeton ne peut être généré pour une campagne clôturée
     expect(await genererJetons(db, adminId, id, 5)).toEqual({ ok: false, erreur: "campagneCloturee" });
+  });
+
+  it("prolonge une campagne ouverte et ses jetons non utilisés", async () => {
+    const id = await campagnePrete();
+    const r = await genererJetons(db, adminId, id, 3);
+    if (!r.ok) throw new Error(r.erreur);
+    await db.update(tokens).set({ status: "consumed" }).where(eq(tokens.tokenHash, empreinteJeton(r.valeur.codes[0])));
+    expect(await prolongerCampagne(db, adminId, id, { endDate: "2026-12-15" })).toEqual({
+      ok: false,
+      erreur: "campagneNonOuverte",
+    });
+    await ouvrirCampagne(db, adminId, id, ouverture, MAINTENANT);
+    expect(await prolongerCampagne(db, adminId, id, { endDate: "2026-11-20" })).toEqual({
+      ok: false,
+      erreur: "prolongationTropCourte",
+    });
+    expect(await prolongerCampagne(db, adminId, id, { endDate: "2026-12-15" })).toEqual({
+      ok: true,
+      valeur: { ancienneFin: "2026-11-30", nouvelleFin: "2026-12-15" },
+    });
+    const [c] = await db.select().from(campaigns).where(eq(campaigns.id, id));
+    expect(c.endDate).toBe("2026-12-15");
+    const expirations = (await db.select().from(tokens)).map((t) => `${t.status}:${t.expiresOn}`).sort();
+    expect(expirations).toEqual(["active:2026-12-15", "active:2026-12-15", "consumed:2026-11-30"]);
   });
 
   it("refuse de clôturer une campagne qui n'est pas ouverte", async () => {

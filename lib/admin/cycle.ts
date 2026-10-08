@@ -1,6 +1,6 @@
 // Ouverture et clôture d'une campagne. Une campagne ne s'ouvre jamais d'elle-même :
 // il faut la date de validation du mandat (porte P1) et la confirmation de l'administrateur.
-import { count, eq } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 import { z } from "zod";
 import { journaliser } from "../audit";
 import { campaignInstruments, campaignReferents, campaigns, groups, tokens } from "../db/schema";
@@ -52,6 +52,38 @@ export async function ouvrirCampagne(
     details: { mandateValidatedOn: donnees.data.mandateValidatedOn },
   });
   return { ok: true, valeur: undefined };
+}
+
+// Prolongation d'une campagne ouverte : nouvelle date de fin, jetons non utilisés valables jusqu'à elle
+export async function prolongerCampagne(
+  db: Db,
+  adminId: string,
+  campaignId: string,
+  saisie: unknown,
+): Promise<Resultat<{ ancienneFin: string; nouvelleFin: string }>> {
+  const nouvelleFin = z.object({ endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) }).safeParse(saisie);
+  if (!nouvelleFin.success) return { ok: false, erreur: "saisieInvalide" };
+  const [campagne] = await db.select().from(campaigns).where(eq(campaigns.id, campaignId));
+  if (!campagne) return { ok: false, erreur: "introuvable" };
+  if (campagne.status !== "open") return { ok: false, erreur: "campagneNonOuverte" };
+  const fin = nouvelleFin.data.endDate;
+  if (fin <= campagne.endDate) return { ok: false, erreur: "prolongationTropCourte" };
+
+  await db.transaction(async (tx) => {
+    await tx.update(campaigns).set({ endDate: fin }).where(eq(campaigns.id, campaignId));
+    await tx
+      .update(tokens)
+      .set({ expiresOn: fin })
+      .where(and(eq(tokens.campaignId, campaignId), eq(tokens.status, "active")));
+  });
+  await journaliser(db, {
+    actorUserId: adminId,
+    action: "campaign_extended",
+    targetType: "campaign",
+    targetId: campaignId,
+    details: { ancienneFin: campagne.endDate, nouvelleFin: fin },
+  });
+  return { ok: true, valeur: { ancienneFin: campagne.endDate, nouvelleFin: fin } };
 }
 
 // Clôture : la collecte s'arrête et tous les jetons sont supprimés (cahier des charges, section 7)
