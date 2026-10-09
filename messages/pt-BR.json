@@ -415,7 +415,8 @@
     "ouvertureSansQuestionnaire": "Escolha pelo menos um questionário antes de abrir a campanha.",
     "ouvertureSansReferent": "Dê acesso ao relatório a pelo menos um responsável antes de abrir a campanha.",
     "campagneNonOuverte": "Esta ação só é possível para uma campanha aberta.",
-    "prolongationTropCourte": "A nova data de término deve ser posterior à data de término atual."
+    "prolongationTropCourte": "A nova data de término deve ser posterior à data de término atual.",
+    "questionnaireIncomplet": "Um questionário escolhido não existe em todos os idiomas da campanha. Retire o idioma ou escolha outro questionário."
   },
   "Passation": {
     "enterTitle": "Acessar o questionário",

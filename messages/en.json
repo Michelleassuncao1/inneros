@@ -415,7 +415,8 @@
     "ouvertureSansQuestionnaire": "Choose at least one questionnaire before opening the campaign.",
     "ouvertureSansReferent": "Give at least one company contact access to the report before opening the campaign.",
     "campagneNonOuverte": "This action is only possible for an open campaign.",
-    "prolongationTropCourte": "The new end date must be after the current end date."
+    "prolongationTropCourte": "The new end date must be after the current end date.",
+    "questionnaireIncomplet": "A selected questionnaire is not available in all the campaign languages. Remove the language or choose another questionnaire."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",

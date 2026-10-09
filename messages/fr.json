@@ -415,7 +415,8 @@
     "ouvertureSansQuestionnaire": "Choisissez au moins un questionnaire avant d'ouvrir la campagne.",
     "ouvertureSansReferent": "Donnez l'accès au rapport à au moins un référent avant d'ouvrir la campagne.",
     "campagneNonOuverte": "Cette action n'est possible que pour une campagne ouverte.",
-    "prolongationTropCourte": "La nouvelle date de fin doit être postérieure à la date de fin actuelle."
+    "prolongationTropCourte": "La nouvelle date de fin doit être postérieure à la date de fin actuelle.",
+    "questionnaireIncomplet": "Un questionnaire choisi n'existe pas dans toutes les langues de la campagne. Retirez la langue ou choisissez un autre questionnaire."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",

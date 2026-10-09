@@ -415,7 +415,8 @@
     "ouvertureSansQuestionnaire": "Kies minstens één vragenlijst voordat u de campagne opent.",
     "ouvertureSansReferent": "Geef minstens één contactpersoon toegang tot het rapport voordat u de campagne opent.",
     "campagneNonOuverte": "Deze actie is alleen mogelijk voor een geopende campagne.",
-    "prolongationTropCourte": "De nieuwe einddatum moet na de huidige einddatum liggen."
+    "prolongationTropCourte": "De nieuwe einddatum moet na de huidige einddatum liggen.",
+    "questionnaireIncomplet": "Een gekozen vragenlijst bestaat niet in alle talen van de campagne. Verwijder de taal of kies een andere vragenlijst."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
