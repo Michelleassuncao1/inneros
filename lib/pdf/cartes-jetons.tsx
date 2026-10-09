@@ -57,7 +57,8 @@ export async function pdfCartesJetons({
   const cartes = await Promise.all(
     codes.map(async (code) => ({
       code,
-      qr: await QRCode.toDataURL(`${urlQuestionnaire}/${normaliserCode(code)}`, {
+      // Le code est placé après « # » : le navigateur ne l'envoie jamais au serveur
+      qr: await QRCode.toDataURL(`${urlQuestionnaire}#${normaliserCode(code)}`, {
         margin: 0,
         width: 300,
         color: { dark: COULEURS.navy, light: "#FFFFFF" },

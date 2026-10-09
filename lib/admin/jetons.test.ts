@@ -2,8 +2,8 @@
 import { randomBytes } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { campaigns, instruments, tokens, users } from "../db/schema";
-import { creerBaseDeTest } from "../db/test-db";
+import { campaigns, tokens, users } from "../db/schema";
+import { chargerQuestionnaireDeTest, creerBaseDeTest } from "../db/test-db";
 import type { Db } from "../db/types";
 import { ajouterGroupe, choisirQuestionnaires, choisirReferents, creerCampagne } from "./campagnes";
 import { cloturerCampagne, ouvrirCampagne, prolongerCampagne } from "./cycle";
@@ -67,11 +67,7 @@ async function nouvelleCampagne() {
 async function campagnePrete() {
   const id = await nouvelleCampagne();
   await ajouterGroupe(db, adminId, id, { label: "Production", expectedSize: 12 });
-  const [instrument] = await db
-    .insert(instruments)
-    .values({ code: "exemple", version: "test", source: "s", license: "l", isTest: true, definitions: {} })
-    .returning();
-  await choisirQuestionnaires(db, adminId, id, [instrument.id]);
+  await choisirQuestionnaires(db, adminId, id, [await chargerQuestionnaireDeTest(db)]);
   await ajouterReferent(db, adminId, orgId, { name: "RH", email: "rh@client.test" });
   const [referent] = await db.select().from(users).where(eq(users.email, "rh@client.test"));
   await choisirReferents(db, adminId, id, [referent.id]);
@@ -203,6 +199,15 @@ describe("Ouverture et clôture", () => {
     expect(c.endDate).toBe("2026-12-15");
     const expirations = (await db.select().from(tokens)).map((t) => `${t.status}:${t.expiresOn}`).sort();
     expect(expirations).toEqual(["active:2026-12-15", "active:2026-12-15", "consumed:2026-11-30"]);
+  });
+
+  it("refuse d'ouvrir si un questionnaire manque dans une langue de la campagne", async () => {
+    const id = await campagnePrete();
+    await db.update(campaigns).set({ locales: ["fr", "nl"] }).where(eq(campaigns.id, id));
+    expect(await ouvrirCampagne(db, adminId, id, ouverture, MAINTENANT)).toEqual({
+      ok: false,
+      erreur: "questionnaireIncomplet",
+    });
   });
 
   it("refuse de clôturer une campagne qui n'est pas ouverte", async () => {

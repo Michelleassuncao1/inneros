@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Logo } from "./Logo";
 
-export function SiteHeader() {
+export function SiteHeader({ sansLangues = false }: { sansLangues?: boolean }) {
   const t = useTranslations("Header");
 
   return (
@@ -22,7 +22,7 @@ export function SiteHeader() {
               {t("brand")}
             </span>
           </Link>
-          <LanguageSwitcher />
+          {!sansLangues && <LanguageSwitcher />}
         </div>
       </header>
     </>

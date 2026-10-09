@@ -1,0 +1,142 @@
+{
+  "format": 2,
+  "instrument": "innerostest",
+  "version": "test-0.2",
+  "langue": "fr",
+  "titre": "Questionnaire de test InnerOS (items fictifs)",
+  "source": "Questionnaire fictif créé pour tester InnerOS. Ne pas utiliser pour une vraie campagne.",
+  "licence": "Usage interne de test",
+  "test": true,
+  "echelles_reponse": [
+    {
+      "id": "frequence",
+      "options": [
+        {
+          "code": 4,
+          "libelle": "ITEM DE TEST — toujours"
+        },
+        {
+          "code": 3,
+          "libelle": "ITEM DE TEST — souvent"
+        },
+        {
+          "code": 2,
+          "libelle": "ITEM DE TEST — parfois"
+        },
+        {
+          "code": 1,
+          "libelle": "ITEM DE TEST — rarement"
+        },
+        {
+          "code": 0,
+          "libelle": "ITEM DE TEST — jamais / presque jamais"
+        }
+      ]
+    },
+    {
+      "id": "accord",
+      "options": [
+        {
+          "code": 1,
+          "libelle": "ITEM DE TEST — pas du tout d'accord"
+        },
+        {
+          "code": 2,
+          "libelle": "ITEM DE TEST — pas d'accord"
+        },
+        {
+          "code": 3,
+          "libelle": "ITEM DE TEST — plutôt pas d'accord"
+        },
+        {
+          "code": 4,
+          "libelle": "ITEM DE TEST — ni d'accord ni pas d'accord"
+        },
+        {
+          "code": 5,
+          "libelle": "ITEM DE TEST — plutôt d'accord"
+        },
+        {
+          "code": 6,
+          "libelle": "ITEM DE TEST — d'accord"
+        },
+        {
+          "code": 7,
+          "libelle": "ITEM DE TEST — tout à fait d'accord"
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "da",
+      "nom": "ITEM DE TEST — dimension A",
+      "consigne": "ITEM DE TEST — consigne fictive avant les questions",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "t1",
+          "texte": "ITEM DE TEST — question 1",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "t2",
+          "texte": "ITEM DE TEST — question 2",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "t3",
+          "texte": "ITEM DE TEST — question 3",
+          "reponse": "frequence",
+          "sens": "inverse"
+        }
+      ]
+    },
+    {
+      "id": "db",
+      "nom": "ITEM DE TEST — dimension B",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "t4",
+          "texte": "ITEM DE TEST — question 4",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "t5",
+          "texte": "ITEM DE TEST — question 5",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "dc",
+      "nom": "ITEM DE TEST — dimension C",
+      "niveau_mindset": "sante",
+      "items": [
+        {
+          "id": "t6",
+          "texte": "ITEM DE TEST — question 6",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "t7",
+          "texte": "ITEM DE TEST — question 7",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "t8",
+          "texte": "ITEM DE TEST — question 8",
+          "reponse": "accord",
+          "sens": "direct"
+        }
+      ]
+    }
+  ]
+}

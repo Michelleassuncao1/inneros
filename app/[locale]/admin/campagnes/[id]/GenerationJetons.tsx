@@ -71,7 +71,7 @@ export function GenerationJetons({
   const nomFichier = reference.replace(/[^\w-]/g, "_");
 
   const csv = () => {
-    const lignes = codes.map((c) => `${c};${urlQuestionnaire}/${langues[0]}/q/${c.replace(/-/g, "")}`);
+    const lignes = codes.map((c) => `${c};${urlQuestionnaire}/${langues[0]}/q#${c.replace(/-/g, "")}`);
     // BOM : Excel reconnaît ainsi les accents
     telecharger(new Blob(["﻿" + [textes.csvHeader, ...lignes].join("\r\n")], { type: "text/csv;charset=utf-8" }), `jetons-${nomFichier}.csv`);
     marquer("csv");

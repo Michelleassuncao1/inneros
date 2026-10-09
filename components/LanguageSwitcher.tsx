@@ -10,7 +10,7 @@ import { routing } from "@/i18n/routing";
 type Langue = (typeof routing.locales)[number];
 
 // Nom de chaque langue dans cette langue même. Ajouter une langue = une ligne ici.
-const NOMS: Record<Langue, string> = {
+export const NOMS_LANGUES: Record<Langue, string> = {
   fr: "Français",
   nl: "Nederlands",
   en: "English",
@@ -68,12 +68,12 @@ export function LanguageSwitcher({ langues = routing.locales }: { langues?: read
         type="button"
         aria-haspopup="menu"
         aria-expanded={ouvert}
-        aria-label={`${t("languageLabel")} : ${NOMS[locale]}`}
+        aria-label={`${t("languageLabel")} : ${NOMS_LANGUES[locale]}`}
         onClick={() => setOuvert((o) => !o)}
         className="inline-flex items-center gap-2 rounded-md border border-ima-navy px-3 py-1.5 text-sm font-semibold text-ima-navy hover:bg-ima-cream"
       >
         <Globe />
-        <span className="hidden sm:inline">{NOMS[locale]}</span>
+        <span className="hidden sm:inline">{NOMS_LANGUES[locale]}</span>
         <span className="sm:hidden">{locale.toUpperCase()}</span>
       </button>
       {ouvert && (
@@ -91,7 +91,7 @@ export function LanguageSwitcher({ langues = routing.locales }: { langues?: read
                 onClick={() => changer(l)}
                 className="flex w-full items-center justify-between gap-3 px-4 py-2 text-left hover:bg-ima-cream focus:bg-ima-cream"
               >
-                {NOMS[l]}
+                {NOMS_LANGUES[l]}
                 {l === locale && <span aria-hidden="true" className="text-ima-gold-text">✓</span>}
               </button>
             </li>

@@ -13,7 +13,8 @@
     "test": "vitest run",
     "admin:create": "tsx scripts/creer-admin.ts",
     "dev:referent-test": "tsx scripts/creer-referent-test.ts",
-    "instruments:test": "tsx scripts/charger-instrument-test.ts"
+    "instruments:test": "tsx scripts/charger-instrument.ts instruments/test/innerostest-0.2.fr.json instruments/test/innerostest-0.2.nl.json instruments/test/innerostest-0.2.en.json instruments/test/innerostest-0.2.pt-BR.json --enregistrer",
+    "instruments:charger": "tsx scripts/charger-instrument.ts"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.8",

@@ -1,0 +1,142 @@
+{
+  "format": 2,
+  "instrument": "innerostest",
+  "version": "test-0.2",
+  "langue": "nl",
+  "titre": "Testvragenlijst InnerOS (fictieve items)",
+  "source": "Fictieve vragenlijst om InnerOS te testen. Niet gebruiken voor een echte campagne.",
+  "licence": "Intern testgebruik",
+  "test": true,
+  "echelles_reponse": [
+    {
+      "id": "frequence",
+      "options": [
+        {
+          "code": 4,
+          "libelle": "TESTITEM — altijd"
+        },
+        {
+          "code": 3,
+          "libelle": "TESTITEM — vaak"
+        },
+        {
+          "code": 2,
+          "libelle": "TESTITEM — soms"
+        },
+        {
+          "code": 1,
+          "libelle": "TESTITEM — zelden"
+        },
+        {
+          "code": 0,
+          "libelle": "TESTITEM — nooit / bijna nooit"
+        }
+      ]
+    },
+    {
+      "id": "accord",
+      "options": [
+        {
+          "code": 1,
+          "libelle": "TESTITEM — helemaal niet akkoord"
+        },
+        {
+          "code": 2,
+          "libelle": "TESTITEM — niet akkoord"
+        },
+        {
+          "code": 3,
+          "libelle": "TESTITEM — eerder niet akkoord"
+        },
+        {
+          "code": 4,
+          "libelle": "TESTITEM — noch akkoord, noch niet akkoord"
+        },
+        {
+          "code": 5,
+          "libelle": "TESTITEM — eerder akkoord"
+        },
+        {
+          "code": 6,
+          "libelle": "TESTITEM — akkoord"
+        },
+        {
+          "code": 7,
+          "libelle": "TESTITEM — helemaal akkoord"
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "da",
+      "nom": "TESTITEM — dimensie A",
+      "consigne": "TESTITEM — fictieve instructie vóór de vragen",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "t1",
+          "texte": "TESTITEM — vraag 1",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "t2",
+          "texte": "TESTITEM — vraag 2",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "t3",
+          "texte": "TESTITEM — vraag 3",
+          "reponse": "frequence",
+          "sens": "inverse"
+        }
+      ]
+    },
+    {
+      "id": "db",
+      "nom": "TESTITEM — dimensie B",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "t4",
+          "texte": "TESTITEM — vraag 4",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "t5",
+          "texte": "TESTITEM — vraag 5",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "dc",
+      "nom": "TESTITEM — dimensie C",
+      "niveau_mindset": "sante",
+      "items": [
+        {
+          "id": "t6",
+          "texte": "TESTITEM — vraag 6",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "t7",
+          "texte": "TESTITEM — vraag 7",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "t8",
+          "texte": "TESTITEM — vraag 8",
+          "reponse": "accord",
+          "sens": "direct"
+        }
+      ]
+    }
+  ]
+}

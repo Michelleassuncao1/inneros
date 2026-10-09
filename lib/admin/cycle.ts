@@ -3,7 +3,8 @@
 import { and, count, eq } from "drizzle-orm";
 import { z } from "zod";
 import { journaliser } from "../audit";
-import { campaignInstruments, campaignReferents, campaigns, groups, tokens } from "../db/schema";
+import { campaignInstruments, campaignReferents, campaigns, groups, instruments, tokens } from "../db/schema";
+import { definitionPour } from "../instruments/chargement";
 import type { Db } from "../db/types";
 import type { Resultat } from "./entreprises";
 
@@ -39,6 +40,17 @@ export async function ouvrirCampagne(
   if (!g.n) return { ok: false, erreur: "ouvertureSansGroupe" };
   if (!i.n) return { ok: false, erreur: "ouvertureSansQuestionnaire" };
   if (!r.n) return { ok: false, erreur: "ouvertureSansReferent" };
+
+  // Chaque questionnaire doit exister, au format attendu, dans chaque langue de la campagne
+  const definitions = await db
+    .select({ definitions: instruments.definitions })
+    .from(campaignInstruments)
+    .innerJoin(instruments, eq(campaignInstruments.instrumentId, instruments.id))
+    .where(eq(campaignInstruments.campaignId, campaignId));
+  const langues = campagne.locales as string[];
+  if (definitions.some((d) => langues.some((l) => !definitionPour(d.definitions, l)))) {
+    return { ok: false, erreur: "questionnaireIncomplet" };
+  }
 
   await db
     .update(campaigns)
