@@ -462,7 +462,8 @@
     "incomplete": "Please answer each question in this part (or choose “I prefer not to answer”) to continue.",
     "source": "Source: {source}",
     "thanksTitle": "Thank you for taking part",
-    "thanksText": "Your answers have been submitted anonymously and deleted from this device. You can close this page."
+    "thanksText": "Your answers have been submitted anonymously and deleted from this device. You can close this page.",
+    "languageUnavailable": "This questionnaire is not offered in {demandee} for your organisation: it is shown in {actuelle}."
   },
   "Footer": {
     "values": "Inspire · Motivate · Act",

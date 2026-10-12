@@ -462,7 +462,8 @@
     "incomplete": "Responda a cada pergunta desta parte (ou escolha « Prefiro não responder ») para continuar.",
     "source": "Fonte: {source}",
     "thanksTitle": "Obrigado pela sua participação",
-    "thanksText": "Suas respostas foram enviadas de forma anônima e apagadas deste aparelho. Você pode fechar esta página."
+    "thanksText": "Suas respostas foram enviadas de forma anônima e apagadas deste aparelho. Você pode fechar esta página.",
+    "languageUnavailable": "Este questionário não é oferecido em {demandee} para a sua organização: ele é exibido em {actuelle}."
   },
   "Footer": {
     "values": "Inspirar · Motivar · Agir",

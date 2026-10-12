@@ -34,10 +34,20 @@ type Sauvegarde = { groupe?: string; reponses: Record<string, number | null>; pa
 
 const normaliser = (code: string) => code.toUpperCase().replace(/[^0-9A-Z]/g, "");
 
-// Clé de sauvegarde sur l'appareil : dérivée du code, sans le contenir
-async function cleStockage(code: string) {
-  const empreinte = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`inneros:${normaliser(code)}`));
-  return `inneros-q-${[...new Uint8Array(empreinte)].slice(0, 12).map((b) => b.toString(16).padStart(2, "0")).join("")}`;
+// Clé de sauvegarde sur l'appareil : dérivée du code, sans le contenir. Calcul simple (cyrb53) plutôt
+// que crypto.subtle, qui n'existe pas sur une adresse http non sécurisée (test sur téléphone en réseau local).
+function cleStockage(code: string) {
+  const texte = `inneros:${normaliser(code)}`;
+  let h1 = 0xdeadbeef;
+  let h2 = 0x41c6ce57;
+  for (let i = 0; i < texte.length; i++) {
+    const c = texte.charCodeAt(i);
+    h1 = Math.imul(h1 ^ c, 2654435761);
+    h2 = Math.imul(h2 ^ c, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return `inneros-q-${(h2 >>> 0).toString(16).padStart(8, "0")}${(h1 >>> 0).toString(16).padStart(8, "0")}`;
 }
 function lireStockage(cle: string): Sauvegarde | null {
   try {
@@ -78,6 +88,13 @@ export function Questionnaire() {
   const [reprise, setReprise] = useState(false);
   const [incomplet, setIncomplet] = useState(false);
   const [envoi, setEnvoi] = useState(false);
+  // Langue demandée mais non proposée pour cette campagne (le répondant est prévenu)
+  const [langueIndisponible, setLangueIndisponible] = useState<string | null>(null);
+  // Nom de langue dans une phrase : minuscule en français et en portugais (« en néerlandais »)
+  const nomLangue = (l: string) => {
+    const nom = tl(`locale.${l}`);
+    return locale === "fr" || locale === "pt-BR" ? nom.charAt(0).toLowerCase() + nom.slice(1) : nom;
+  };
 
   const charger = useCallback(
     async (codeSaisi: string) => {
@@ -100,10 +117,12 @@ export function Questionnaire() {
       }
       // La langue demandée n'est pas proposée pour cette campagne : on passe à une langue prévue
       if (d.langue !== locale) {
-        router.replace(`/q#${normaliser(codeSaisi)}`, { locale: d.langue });
+        router.replace(`/q?demande=${locale}#${normaliser(codeSaisi)}`, { locale: d.langue });
         return;
       }
-      const k = await cleStockage(codeSaisi);
+      const k = cleStockage(codeSaisi);
+      const demande = new URLSearchParams(window.location.search).get("demande");
+      setLangueIndisponible(demande && demande !== locale ? demande : null);
       const existant = lireStockage(k);
       setCode(codeSaisi);
       setCle(k);
@@ -306,6 +325,16 @@ export function Questionnaire() {
     return (
       <div className="max-w-2xl">
         {choixLangue}
+        {langueIndisponible && (
+          <div className="mb-6">
+            <MessageInfo>
+              {t("languageUnavailable", {
+                demandee: nomLangue(langueIndisponible),
+                actuelle: nomLangue(locale),
+              })}
+            </MessageInfo>
+          </div>
+        )}
         {titre(t("infoTitle"))}
         <p className="max-w-[70ch]">{t("infoIntro")}</p>
         <ul className="mt-5 max-w-[70ch] list-disc space-y-2 pl-5 marker:text-ima-gold">

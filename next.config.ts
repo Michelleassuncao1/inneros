@@ -6,6 +6,8 @@ import type { NextConfig } from "next";
 // On déclare ici le même alias que le plugin : `next-intl/config` → i18n/request.ts.
 const nextConfig: NextConfig = {
   // PGlite (base de développement) reste un module Node.js, hors des fichiers compilés
+  // Développement : autorise le test sur un téléphone du même réseau Wi-Fi (adresse locale du PC)
+  allowedDevOrigins: ["192.168.*.*", "10.*.*.*"],
   serverExternalPackages: ["@electric-sql/pglite", "@react-pdf/renderer"],
   turbopack: {
     resolveAlias: {

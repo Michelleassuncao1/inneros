@@ -462,7 +462,8 @@
     "incomplete": "Répondez à chaque question de cette partie (ou choisissez « Je préfère ne pas répondre ») pour continuer.",
     "source": "Source : {source}",
     "thanksTitle": "Merci pour votre participation",
-    "thanksText": "Vos réponses ont été envoyées de façon anonyme et effacées de cet appareil. Vous pouvez fermer cette page."
+    "thanksText": "Vos réponses ont été envoyées de façon anonyme et effacées de cet appareil. Vous pouvez fermer cette page.",
+    "languageUnavailable": "Ce questionnaire n'est pas proposé en {demandee} pour votre organisation : il s'affiche en {actuelle}."
   },
   "Footer": {
     "values": "Inspirer · Motiver · Agir",

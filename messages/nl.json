@@ -462,7 +462,8 @@
     "incomplete": "Beantwoord elke vraag van dit deel (of kies “Ik antwoord liever niet”) om verder te gaan.",
     "source": "Bron: {source}",
     "thanksTitle": "Bedankt voor uw deelname",
-    "thanksText": "Uw antwoorden zijn anoniem verzonden en van dit toestel gewist. U mag deze pagina sluiten."
+    "thanksText": "Uw antwoorden zijn anoniem verzonden en van dit toestel gewist. U mag deze pagina sluiten.",
+    "languageUnavailable": "Deze vragenlijst wordt voor uw organisatie niet aangeboden in het {demandee}: hij wordt getoond in het {actuelle}."
   },
   "Footer": {
     "values": "Inspireren · Motiveren · Handelen",
