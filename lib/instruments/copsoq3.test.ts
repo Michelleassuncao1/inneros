@@ -8,6 +8,7 @@ import { instruments, users } from "../db/schema";
 import { creerBaseDeTest } from "../db/test-db";
 import { enregistrerInstrument, lireInstrument, questionnaireAutorise } from "./chargement";
 import { signature, type FichierInstrument } from "./format";
+import { consignesAAfficher, ITEMS_PAR_PAGE, regrouperEnPages } from "./pages";
 
 const LANGUES = ["fr", "nl", "en"] as const;
 const lire = (langue: string): FichierInstrument => {
@@ -42,6 +43,19 @@ describe("COPSOQ III — version belge", () => {
     expect(manquants).toEqual(["mesuresanschef:9", "frequencesanschef:9", "frequencesanscoll:9"]);
     const inverses = f.dimensions.flatMap((d) => d.items.filter((i) => i.sens === "inverse").map((i) => i.id));
     expect(inverses).toEqual(["ct5"]);
+  });
+
+  it("se présente en pages de 6 questions au plus, sans couper une dimension ni répéter une consigne", () => {
+    const f = lire("fr");
+    const pages = regrouperEnPages(f.dimensions);
+    expect(pages.flat().map((d) => d.id)).toEqual(f.dimensions.map((d) => d.id));
+    for (const page of pages) expect(page.reduce((s, d) => s + d.items.length, 0)).toBeLessThanOrEqual(ITEMS_PAR_PAGE);
+    expect(pages.length).toBeLessThan(f.dimensions.length);
+    // La consigne « confiance » (TE, TM, JU) n'apparaît qu'une fois par page
+    for (const page of pages) {
+      const affichees = consignesAAfficher(page).filter(Boolean);
+      expect(new Set(affichees).size).toBe(affichees.length);
+    }
   });
 
   it("n'est proposée qu'aux entreprises belges", async () => {

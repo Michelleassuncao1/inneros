@@ -9,6 +9,7 @@ import { MessageErreur, MessageInfo } from "@/components/Formulaire";
 import { NOMS_LANGUES } from "@/components/LanguageSwitcher";
 import { useRouter } from "@/i18n/navigation";
 import { cleItem, type FichierInstrument } from "@/lib/instruments/format";
+import { consignesAAfficher, regrouperEnPages } from "@/lib/instruments/pages";
 import type { Contact, SoutienIma } from "@/lib/admin/soutien";
 
 type Donnees = {
@@ -149,12 +150,13 @@ export function Questionnaire() {
     if (cle && etape.nom !== "fin") ecrireStockage(cle, sauvegarde);
   }, [cle, sauvegarde, etape.nom]);
 
+  // Pages : dimensions regroupées par questionnaire, sans jamais mélanger deux questionnaires
   const pages = useMemo(
-    () => donnees?.questionnaires.flatMap((q) => q.dimensions.map((d) => ({ q, d }))) ?? [],
+    () => donnees?.questionnaires.flatMap((q) => regrouperEnPages(q.dimensions).map((dims) => ({ q, dims }))) ?? [],
     [donnees],
   );
   const toutesCles = useMemo(
-    () => pages.flatMap(({ q, d }) => d.items.map((i) => cleItem(q.instrument, i.id))),
+    () => pages.flatMap(({ q, dims }) => dims.flatMap((d) => d.items.map((i) => cleItem(q.instrument, i.id)))),
     [pages],
   );
   const faites = toutesCles.filter((k) => sauvegarde.reponses[k] !== undefined).length;
@@ -482,10 +484,11 @@ export function Questionnaire() {
     );
   }
 
-  // Questions : une partie (dimension) par page
-  const { q, d } = pages[etape.page];
+  // Questions : plusieurs dimensions courtes par page, sans afficher leur nom
+  const { q, dims } = pages[etape.page];
   const echelles = new Map(q.echelles_reponse.map((e) => [e.id, e.options]));
-  const clesPage = d.items.map((i) => cleItem(q.instrument, i.id));
+  const consignes = consignesAAfficher(dims);
+  const clesPage = dims.flatMap((d) => d.items.map((i) => cleItem(q.instrument, i.id)));
   const pageComplete = clesPage.every((k) => sauvegarde.reponses[k] !== undefined);
   const derniere = etape.page === pages.length - 1;
 
@@ -508,12 +511,15 @@ export function Questionnaire() {
         </div>
       </div>
 
-      <p className="text-sm font-semibold uppercase tracking-widest text-ima-gold-text">{q.titre}</p>
-      <h1 className="mt-1 text-xl sm:text-2xl">{d.nom}</h1>
-      {d.consigne && <p className="mt-3 max-w-[70ch]">{d.consigne}</p>}
+      {/* Titre discret (le style des h1 est imposé par design/tokens.css, d'où le span) */}
+      <h1 className="leading-tight">
+        <span className="font-sans text-sm font-semibold uppercase tracking-widest text-ima-gold-text">{q.titre}</span>
+      </h1>
 
       <div className="mt-6 flex flex-col gap-6">
-        {d.items.map((item) => {
+        {dims.flatMap((d, j) => [
+          ...(consignes[j] ? [<p key={`consigne-${d.id}`} className="max-w-[70ch] font-semibold">{consignes[j]}</p>] : []),
+          ...d.items.map((item) => {
           const k = cleItem(q.instrument, item.id);
           const valeur = sauvegarde.reponses[k];
           const option = (libelle: string, v: number | null) => (
@@ -541,7 +547,8 @@ export function Questionnaire() {
               </div>
             </fieldset>
           );
-        })}
+          }),
+        ])}
       </div>
 
       {incomplet && !pageComplete && (
