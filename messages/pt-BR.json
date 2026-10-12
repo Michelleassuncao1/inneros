@@ -306,7 +306,12 @@
     "newEndDate": "Nova data de término",
     "extendConfirm": "Prorrogar",
     "extending": "Prorrogando…",
-    "extended": "Campanha prorrogada até {date}. Baixe novamente o kit de informação: o período de resposta mudou."
+    "extended": "Campanha prorrogada até {date}. Baixe novamente o kit de informação: o período de resposta mudou.",
+    "addLanguage": "Adicionar um idioma",
+    "addLanguageHelp": "Um idioma adicionado não pode mais ser retirado. Os questionários da campanha devem existir neste idioma.",
+    "addLanguageButton": "Adicionar o idioma",
+    "adding": "Adicionando…",
+    "languageAdded": "Idioma adicionado. Se necessário, baixe o kit e os cartões neste idioma."
   },
   "KitAdmin": {
     "title": "Kit de informação (F13)",
@@ -416,7 +421,9 @@
     "ouvertureSansReferent": "Dê acesso ao relatório a pelo menos um responsável antes de abrir a campanha.",
     "campagneNonOuverte": "Esta ação só é possível para uma campanha aberta.",
     "prolongationTropCourte": "A nova data de término deve ser posterior à data de término atual.",
-    "questionnaireIncomplet": "Um questionário escolhido não existe em todos os idiomas da campanha. Retire o idioma ou escolha outro questionário."
+    "questionnaireIncomplet": "Um questionário escolhido não existe em todos os idiomas da campanha. Retire o idioma ou escolha outro questionário.",
+    "soutienContactInvalide": "Verifique os contatos: cada linha preenchida deve ter dados de contato, e um título se a função for « Outro ».",
+    "soutienImaInvalide": "Para oferecer o acompanhamento do IMA, informe pelo menos um telefone, um e-mail ou um link de agendamento que comece com https://."
   },
   "Passation": {
     "enterTitle": "Acessar o questionário",
@@ -464,6 +471,44 @@
     "thanksTitle": "Obrigado pela sua participação",
     "thanksText": "Suas respostas foram enviadas de forma anônima e apagadas deste aparelho. Você pode fechar esta página.",
     "languageUnavailable": "Este questionário não é oferecido em {demandee} para a sua organização: ele é exibido em {actuelle}."
+  },
+  "Soutien": {
+    "title": "Apoio aos respondentes",
+    "help": "Estas informações são exibidas aos respondentes (página de informação e tela final) e no kit de informação. Podem ser alteradas até o encerramento.",
+    "contactsTitle": "A. Na organização",
+    "contactsHelp": "Os contatos internos previstos pela lei ou pela organização. Uma linha sem dados de contato é ignorada.",
+    "contactN": "Contato {n}",
+    "role": "Função",
+    "libelle": "Título (se « Outro »)",
+    "coordonnees": "Nome e dados de contato",
+    "contactB": "B. Para dúvidas sobre a iniciativa, o endereço info@institutmindsetenaction.com é sempre indicado aos respondentes.",
+    "imaTitle": "C. Acompanhamento pelo Institut Mindset en Action® (opcional)",
+    "imaActif": "Oferecer acompanhamento do IMA aos respondentes desta campanha",
+    "imaWarning": "A validar no relatório de impacto à proteção de dados antes de qualquer campanha real. Os avisos (não é um serviço de emergência, nenhuma ligação com as respostas, nada é transmitido ao empregador) são sempre exibidos aos respondentes.",
+    "telephone": "Telefone",
+    "email": "E-mail",
+    "lien": "Link para agendamento (https://…)",
+    "horaires": "Horários",
+    "save": "Salvar o apoio",
+    "saving": "Salvando…",
+    "saved": "Apoio salvo.",
+    "orgTitle": "Na sua organização",
+    "imaRespTitle": "Acompanhamento oferecido pelo Institut Mindset en Action®",
+    "imaAvert1": "Não é um serviço de emergência: em caso de emergência, ligue para os números de ajuda abaixo.",
+    "imaAvert2": "Este acompanhamento não tem nenhuma ligação com as suas respostas ao questionário.",
+    "imaAvert3": "Nada do que você compartilhar é transmitido ao seu empregador.",
+    "rendezVous": "Agendar um horário",
+    "roles": {
+      "personneConfiance": "Pessoa de confiança",
+      "conseillerPrevention": "Conselheiro em prevenção (aspectos psicossociais)",
+      "medecinTravail": "Médico do trabalho",
+      "servicePrevention": "Serviço de prevenção",
+      "sesmt": "SESMT",
+      "cipa": "CIPA",
+      "psychologue": "Psicólogo do trabalho",
+      "rh": "Recursos humanos",
+      "autre": "Outro"
+    }
   },
   "Footer": {
     "values": "Inspirar · Motivar · Agir",

@@ -306,7 +306,12 @@
     "newEndDate": "New end date",
     "extendConfirm": "Extend",
     "extending": "Extending…",
-    "extended": "Campaign extended until {date}. Download the information kit again: the response period has changed."
+    "extended": "Campaign extended until {date}. Download the information kit again: the response period has changed.",
+    "addLanguage": "Add a language",
+    "addLanguageHelp": "A language that has been added cannot be removed. The campaign questionnaires must exist in that language.",
+    "addLanguageButton": "Add the language",
+    "adding": "Adding…",
+    "languageAdded": "Language added. Download the kit and the cards in that language if needed."
   },
   "KitAdmin": {
     "title": "Information kit (F13)",
@@ -416,7 +421,9 @@
     "ouvertureSansReferent": "Give at least one company contact access to the report before opening the campaign.",
     "campagneNonOuverte": "This action is only possible for an open campaign.",
     "prolongationTropCourte": "The new end date must be after the current end date.",
-    "questionnaireIncomplet": "A selected questionnaire is not available in all the campaign languages. Remove the language or choose another questionnaire."
+    "questionnaireIncomplet": "A selected questionnaire is not available in all the campaign languages. Remove the language or choose another questionnaire.",
+    "soutienContactInvalide": "Please check the contacts: each completed line needs contact details, and a title if the role is “Other”.",
+    "soutienImaInvalide": "To offer IMA support, enter at least a phone number, an email address or a booking link starting with https://."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",
@@ -464,6 +471,44 @@
     "thanksTitle": "Thank you for taking part",
     "thanksText": "Your answers have been submitted anonymously and deleted from this device. You can close this page.",
     "languageUnavailable": "This questionnaire is not offered in {demandee} for your organisation: it is shown in {actuelle}."
+  },
+  "Soutien": {
+    "title": "Support for respondents",
+    "help": "This information is shown to respondents (information page and final screen) and in the information kit. It can be changed until the campaign is closed.",
+    "contactsTitle": "A. Within the organisation",
+    "contactsHelp": "Internal contacts provided for by law or by the organisation. A line without contact details is ignored.",
+    "contactN": "Contact {n}",
+    "role": "Role",
+    "libelle": "Title (if “Other”)",
+    "coordonnees": "Name and contact details",
+    "contactB": "B. For questions about the survey, the address info@institutmindsetenaction.com is always shown to respondents.",
+    "imaTitle": "C. Support from the Institut Mindset en Action® (optional)",
+    "imaActif": "Offer IMA support to the respondents of this campaign",
+    "imaWarning": "To be validated in the data protection impact assessment (DPIA) before any real campaign. The warnings (not an emergency service, no link with the answers, nothing is passed on to the employer) are always shown to respondents.",
+    "telephone": "Phone",
+    "email": "Email",
+    "lien": "Appointment booking link (https://…)",
+    "horaires": "Availability",
+    "save": "Save support",
+    "saving": "Saving…",
+    "saved": "Support saved.",
+    "orgTitle": "Within your organisation",
+    "imaRespTitle": "Support offered by the Institut Mindset en Action®",
+    "imaAvert1": "This is not an emergency service: in an emergency, call the helplines below.",
+    "imaAvert2": "This support has no link with your answers to the questionnaire.",
+    "imaAvert3": "Nothing you share is passed on to your employer.",
+    "rendezVous": "Book an appointment",
+    "roles": {
+      "personneConfiance": "Confidential counsellor",
+      "conseillerPrevention": "Prevention adviser for psychosocial aspects",
+      "medecinTravail": "Occupational physician",
+      "servicePrevention": "Prevention service",
+      "sesmt": "SESMT",
+      "cipa": "CIPA",
+      "psychologue": "Occupational psychologist",
+      "rh": "Human resources",
+      "autre": "Other"
+    }
   },
   "Footer": {
     "values": "Inspire · Motivate · Act",

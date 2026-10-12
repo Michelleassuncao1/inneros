@@ -306,7 +306,12 @@
     "newEndDate": "Nouvelle date de fin",
     "extendConfirm": "Prolonger",
     "extending": "Prolongation…",
-    "extended": "Campagne prolongée jusqu'au {date}. Retéléchargez le kit d'information : la période de réponse a changé."
+    "extended": "Campagne prolongée jusqu'au {date}. Retéléchargez le kit d'information : la période de réponse a changé.",
+    "addLanguage": "Ajouter une langue",
+    "addLanguageHelp": "Une langue ajoutée ne peut plus être retirée. Les questionnaires de la campagne doivent exister dans cette langue.",
+    "addLanguageButton": "Ajouter la langue",
+    "adding": "Ajout…",
+    "languageAdded": "Langue ajoutée. Téléchargez si besoin le kit et les cartes dans cette langue."
   },
   "KitAdmin": {
     "title": "Kit d'information (F13)",
@@ -416,7 +421,9 @@
     "ouvertureSansReferent": "Donnez l'accès au rapport à au moins un référent avant d'ouvrir la campagne.",
     "campagneNonOuverte": "Cette action n'est possible que pour une campagne ouverte.",
     "prolongationTropCourte": "La nouvelle date de fin doit être postérieure à la date de fin actuelle.",
-    "questionnaireIncomplet": "Un questionnaire choisi n'existe pas dans toutes les langues de la campagne. Retirez la langue ou choisissez un autre questionnaire."
+    "questionnaireIncomplet": "Un questionnaire choisi n'existe pas dans toutes les langues de la campagne. Retirez la langue ou choisissez un autre questionnaire.",
+    "soutienContactInvalide": "Vérifiez les contacts : chaque ligne remplie doit avoir des coordonnées, et un intitulé si le rôle est « Autre ».",
+    "soutienImaInvalide": "Pour proposer l'accompagnement IMA, indiquez au moins un téléphone, un e-mail ou un lien de rendez-vous commençant par https://."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",
@@ -464,6 +471,44 @@
     "thanksTitle": "Merci pour votre participation",
     "thanksText": "Vos réponses ont été envoyées de façon anonyme et effacées de cet appareil. Vous pouvez fermer cette page.",
     "languageUnavailable": "Ce questionnaire n'est pas proposé en {demandee} pour votre organisation : il s'affiche en {actuelle}."
+  },
+  "Soutien": {
+    "title": "Soutien aux répondants",
+    "help": "Ces informations s'affichent aux répondants (page d'information et écran de fin) et dans le kit d'information. Elles restent modifiables jusqu'à la clôture.",
+    "contactsTitle": "A. Dans l'organisation",
+    "contactsHelp": "Les contacts internes prévus par la loi ou par l'organisation. Une ligne sans coordonnées est ignorée.",
+    "contactN": "Contact {n}",
+    "role": "Rôle",
+    "libelle": "Intitulé (si « Autre »)",
+    "coordonnees": "Nom et coordonnées",
+    "contactB": "B. Pour les questions sur la démarche, l'adresse info@institutmindsetenaction.com est toujours indiquée aux répondants.",
+    "imaTitle": "C. Accompagnement par l'Institut Mindset en Action® (facultatif)",
+    "imaActif": "Proposer un accompagnement IMA aux répondants de cette campagne",
+    "imaWarning": "À valider dans l'analyse d'impact (AIPD) avant toute campagne réelle. Les avertissements (pas un service d'urgence, aucun lien avec les réponses, rien n'est transmis à l'employeur) sont toujours affichés aux répondants.",
+    "telephone": "Téléphone",
+    "email": "E-mail",
+    "lien": "Lien de prise de rendez-vous (https://…)",
+    "horaires": "Horaires",
+    "save": "Enregistrer le soutien",
+    "saving": "Enregistrement…",
+    "saved": "Soutien enregistré.",
+    "orgTitle": "Dans votre organisation",
+    "imaRespTitle": "Accompagnement proposé par l'Institut Mindset en Action®",
+    "imaAvert1": "Ce n'est pas un service d'urgence : en cas d'urgence, appelez les numéros d'aide ci-dessous.",
+    "imaAvert2": "Cet accompagnement n'a aucun lien avec vos réponses au questionnaire.",
+    "imaAvert3": "Rien de ce que vous confiez n'est transmis à votre employeur.",
+    "rendezVous": "Prendre rendez-vous",
+    "roles": {
+      "personneConfiance": "Personne de confiance",
+      "conseillerPrevention": "Conseiller en prévention aspects psychosociaux",
+      "medecinTravail": "Médecin du travail",
+      "servicePrevention": "Service de prévention",
+      "sesmt": "SESMT",
+      "cipa": "CIPA",
+      "psychologue": "Psychologue du travail",
+      "rh": "Ressources humaines",
+      "autre": "Autre"
+    }
   },
   "Footer": {
     "values": "Inspirer · Motiver · Agir",

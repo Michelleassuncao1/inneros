@@ -10,7 +10,14 @@ export type ContenuKit = {
   periode: string;
   versionDeTravail?: string;
   sections: { titre: string; paragraphes?: string[]; puces?: string[]; aValider?: string }[];
-  aides: { titre: string; intro: string; numeros: { numero: string; libelle: string }[] };
+  aides: {
+    titre: string;
+    intro: string;
+    numeros: { numero: string; libelle: string }[];
+    // A. contacts de l'organisation et C. accompagnement IMA, s'ils sont renseignés pour la campagne
+    organisation?: { titre: string; lignes: { libelle: string; coordonnees: string }[] };
+    ima?: { titre: string; lignes: string[]; avertissements: string[] };
+  };
   contact: string;
 };
 
@@ -34,6 +41,8 @@ const s = StyleSheet.create({
   aValider: { fontSize: 8.5, color: COULEURS.goldText, fontWeight: 700, marginTop: 2 },
   encadre: { marginTop: 16, padding: 12, backgroundColor: COULEURS.cream, borderLeftWidth: 3, borderLeftColor: COULEURS.gold },
   numero: { flexDirection: "row", marginTop: 3 },
+  sousTitreAide: { fontWeight: 700, color: COULEURS.navy, marginTop: 4, marginBottom: 2 },
+  blocIma: { backgroundColor: "#FFFFFF", padding: 8, marginVertical: 6 },
   chiffres: { width: 92, fontWeight: 700, color: COULEURS.navy },
   contact: { marginTop: 16, fontSize: 9, color: COULEURS.muted },
   pied: { position: "absolute", left: 0, right: 0, bottom: 0 },
@@ -77,6 +86,30 @@ export async function pdfKit(contenu: ContenuKit) {
         <View style={s.encadre} wrap={false}>
           <Text style={s.titreSection}>{contenu.aides.titre}</Text>
           <Text style={s.paragraphe}>{contenu.aides.intro}</Text>
+          {contenu.aides.organisation && (
+            <View style={{ marginBottom: 6 }}>
+              <Text style={s.sousTitreAide}>{contenu.aides.organisation.titre}</Text>
+              {contenu.aides.organisation.lignes.map((l) => (
+                <Text key={l.libelle + l.coordonnees}>
+                  <Text style={{ fontWeight: 700 }}>{l.libelle}</Text> : {l.coordonnees}
+                </Text>
+              ))}
+            </View>
+          )}
+          {contenu.aides.ima && (
+            <View style={s.blocIma}>
+              <Text style={s.sousTitreAide}>{contenu.aides.ima.titre}</Text>
+              {contenu.aides.ima.lignes.map((l) => (
+                <Text key={l}>{l}</Text>
+              ))}
+              {contenu.aides.ima.avertissements.map((a) => (
+                <View key={a} style={s.puce}>
+                  <Text style={s.point}>•</Text>
+                  <Text style={{ flex: 1, fontSize: 9 }}>{a}</Text>
+                </View>
+              ))}
+            </View>
+          )}
           {contenu.aides.numeros.map((n) => (
             <View key={n.numero} style={s.numero}>
               <Text style={s.chiffres}>{n.numero}</Text>

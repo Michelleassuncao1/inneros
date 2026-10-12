@@ -177,6 +177,11 @@ export const campaigns = pgTable(
     // Date de validation du mandat (porte P1) : obligatoire pour ouvrir la campagne
     mandateValidatedOn: date("mandate_validated_on"),
     groupingCriterion: critereRegroupement("grouping_criterion").notNull().default("service"),
+    // Soutien affiché aux répondants (saisi par IMA, jamais par un répondant) :
+    // contacts internes à l'organisation (personne de confiance, médecin du travail…)
+    supportContacts: jsonb("support_contacts").notNull().default([]),
+    // Accompagnement IMA facultatif (téléphone, e-mail, lien de rendez-vous, horaires)
+    imaSupport: jsonb("ima_support"),
     aiDraftingEnabled: boolean("ai_drafting_enabled").notNull().default(true),
     createdBy: uuid("created_by").references(() => users.id, {
       onDelete: "set null",

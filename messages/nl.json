@@ -306,7 +306,12 @@
     "newEndDate": "Nieuwe einddatum",
     "extendConfirm": "Verlengen",
     "extending": "Verlengen…",
-    "extended": "Campagne verlengd tot {date}. Download het informatiepakket opnieuw: de antwoordperiode is gewijzigd."
+    "extended": "Campagne verlengd tot {date}. Download het informatiepakket opnieuw: de antwoordperiode is gewijzigd.",
+    "addLanguage": "Een taal toevoegen",
+    "addLanguageHelp": "Een toegevoegde taal kan niet meer worden verwijderd. De vragenlijsten van de campagne moeten in deze taal bestaan.",
+    "addLanguageButton": "De taal toevoegen",
+    "adding": "Toevoegen…",
+    "languageAdded": "Taal toegevoegd. Download indien nodig het informatiepakket en de kaarten in deze taal."
   },
   "KitAdmin": {
     "title": "Informatiepakket (F13)",
@@ -416,7 +421,9 @@
     "ouvertureSansReferent": "Geef minstens één contactpersoon toegang tot het rapport voordat u de campagne opent.",
     "campagneNonOuverte": "Deze actie is alleen mogelijk voor een geopende campagne.",
     "prolongationTropCourte": "De nieuwe einddatum moet na de huidige einddatum liggen.",
-    "questionnaireIncomplet": "Een gekozen vragenlijst bestaat niet in alle talen van de campagne. Verwijder de taal of kies een andere vragenlijst."
+    "questionnaireIncomplet": "Een gekozen vragenlijst bestaat niet in alle talen van de campagne. Verwijder de taal of kies een andere vragenlijst.",
+    "soutienContactInvalide": "Controleer de contactpersonen: elke ingevulde regel moet contactgegevens hebben, en een benaming als de rol “Andere” is.",
+    "soutienImaInvalide": "Geef voor de begeleiding door IMA minstens een telefoonnummer, een e-mailadres of een afsprakenlink die begint met https:// op."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
@@ -464,6 +471,44 @@
     "thanksTitle": "Bedankt voor uw deelname",
     "thanksText": "Uw antwoorden zijn anoniem verzonden en van dit toestel gewist. U mag deze pagina sluiten.",
     "languageUnavailable": "Deze vragenlijst wordt voor uw organisatie niet aangeboden in het {demandee}: hij wordt getoond in het {actuelle}."
+  },
+  "Soutien": {
+    "title": "Ondersteuning van de respondenten",
+    "help": "Deze informatie wordt aan de respondenten getoond (informatiepagina en eindscherm) en staat in het informatiepakket. Ze kan worden gewijzigd tot de afsluiting.",
+    "contactsTitle": "A. Binnen de organisatie",
+    "contactsHelp": "De interne contactpersonen die de wet of de organisatie voorziet. Een regel zonder contactgegevens wordt genegeerd.",
+    "contactN": "Contact {n}",
+    "role": "Rol",
+    "libelle": "Benaming (bij “Andere”)",
+    "coordonnees": "Naam en contactgegevens",
+    "contactB": "B. Voor vragen over de bevraging wordt het adres info@institutmindsetenaction.com altijd aan de respondenten getoond.",
+    "imaTitle": "C. Begeleiding door het Institut Mindset en Action® (facultatief)",
+    "imaActif": "Begeleiding door IMA aanbieden aan de respondenten van deze campagne",
+    "imaWarning": "Te valideren in de gegevensbeschermingseffectbeoordeling (GEB) vóór elke echte campagne. De waarschuwingen (geen noodhulp, geen verband met de antwoorden, niets wordt aan de werkgever doorgegeven) worden altijd aan de respondenten getoond.",
+    "telephone": "Telefoon",
+    "email": "E-mail",
+    "lien": "Link om een afspraak te maken (https://…)",
+    "horaires": "Bereikbaarheid",
+    "save": "De ondersteuning opslaan",
+    "saving": "Opslaan…",
+    "saved": "Ondersteuning opgeslagen.",
+    "orgTitle": "Binnen uw organisatie",
+    "imaRespTitle": "Begeleiding aangeboden door het Institut Mindset en Action®",
+    "imaAvert1": "Dit is geen noodhulp: bel in een noodgeval de hulpnummers hieronder.",
+    "imaAvert2": "Deze begeleiding heeft geen enkel verband met uw antwoorden op de vragenlijst.",
+    "imaAvert3": "Niets van wat u toevertrouwt, wordt aan uw werkgever doorgegeven.",
+    "rendezVous": "Een afspraak maken",
+    "roles": {
+      "personneConfiance": "Vertrouwenspersoon",
+      "conseillerPrevention": "Preventieadviseur psychosociale aspecten",
+      "medecinTravail": "Arbeidsarts",
+      "servicePrevention": "Preventiedienst",
+      "sesmt": "SESMT",
+      "cipa": "CIPA",
+      "psychologue": "Arbeidspsycholoog",
+      "rh": "Personeelsdienst",
+      "autre": "Andere"
+    }
   },
   "Footer": {
     "values": "Inspireren · Motiveren · Handelen",

@@ -43,6 +43,13 @@
       "when": 1791476654219,
       "tag": "0005_langues-nl-en",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791806379782,
+      "tag": "0006_soutien-repondants",
+      "breakpoints": true
     }
   ]
 }

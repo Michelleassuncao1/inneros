@@ -3,8 +3,9 @@
 import { and, count, eq } from "drizzle-orm";
 import { z } from "zod";
 import { journaliser } from "../audit";
-import { campaignInstruments, campaignReferents, campaigns, groups, instruments, tokens } from "../db/schema";
+import { campaignInstruments, campaignReferents, campaigns, groups, instruments, organizations, tokens } from "../db/schema";
 import { definitionPour } from "../instruments/chargement";
+import { languesDuPays } from "../pays";
 import type { Db } from "../db/types";
 import type { Resultat } from "./entreprises";
 
@@ -96,6 +97,52 @@ export async function prolongerCampagne(
     details: { ancienneFin: campagne.endDate, nouvelleFin: fin },
   });
   return { ok: true, valeur: { ancienneFin: campagne.endDate, nouvelleFin: fin } };
+}
+
+// Ajout d'une langue à une campagne ouverte (jamais de retrait : les réponses déjà reçues restent
+// comparables). La langue doit être prévue pour le pays et exister pour chaque questionnaire.
+export async function ajouterLangueCampagne(
+  db: Db,
+  adminId: string,
+  campaignId: string,
+  langueSaisie: unknown,
+): Promise<Resultat> {
+  const langue = z.string().max(10).safeParse(langueSaisie);
+  if (!langue.success) return { ok: false, erreur: "saisieInvalide" };
+  const [ligne] = await db
+    .select({ campagne: campaigns, pays: organizations.country })
+    .from(campaigns)
+    .innerJoin(organizations, eq(campaigns.organizationId, organizations.id))
+    .where(eq(campaigns.id, campaignId));
+  if (!ligne) return { ok: false, erreur: "introuvable" };
+  const { campagne, pays } = ligne;
+  if (campagne.status !== "open") return { ok: false, erreur: "campagneNonOuverte" };
+  const actuelles = campagne.locales as string[];
+  const possibles: readonly string[] = languesDuPays(pays);
+  if (!possibles.includes(langue.data) || actuelles.includes(langue.data)) {
+    return { ok: false, erreur: "langueNonDisponible" };
+  }
+  const definitions = await db
+    .select({ definitions: instruments.definitions })
+    .from(campaignInstruments)
+    .innerJoin(instruments, eq(campaignInstruments.instrumentId, instruments.id))
+    .where(eq(campaignInstruments.campaignId, campaignId));
+  if (definitions.some((d) => !definitionPour(d.definitions, langue.data))) {
+    return { ok: false, erreur: "questionnaireIncomplet" };
+  }
+
+  await db
+    .update(campaigns)
+    .set({ locales: [...actuelles, langue.data] as typeof campagne.locales })
+    .where(eq(campaigns.id, campaignId));
+  await journaliser(db, {
+    actorUserId: adminId,
+    action: "campaign_language_added",
+    targetType: "campaign",
+    targetId: campaignId,
+    details: { langue: langue.data },
+  });
+  return { ok: true, valeur: undefined };
 }
 
 // Clôture : la collecte s'arrête et tous les jetons sont supprimés (cahier des charges, section 7)

@@ -46,6 +46,12 @@ describe("PDF", () => {
           { numero: "112", libelle: "Urgences" },
           { numero: "0800 32 123", libelle: "Centre de Prévention du Suicide" },
         ],
+        organisation: { titre: "Dans votre organisation", lignes: [{ libelle: "Personne de confiance", coordonnees: "Mme Exemple — 02 000 00 00" }] },
+        ima: {
+          titre: "Accompagnement proposé par l'Institut Mindset en Action®",
+          lignes: ["Téléphone : +32 400 00 00 00"],
+          avertissements: ["Ce n'est pas un service d'urgence."],
+        },
       },
       contact: "Institut Mindset en Action® — info@institutmindsetenaction.com",
     });

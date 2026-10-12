@@ -4,7 +4,8 @@ import { readFileSync } from "node:fs";
 import { eq } from "drizzle-orm";
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { ajouterGroupe, choisirQuestionnaires, choisirReferents, creerCampagne } from "./admin/campagnes";
-import { cloturerCampagne, ouvrirCampagne } from "./admin/cycle";
+import { ajouterLangueCampagne, cloturerCampagne, ouvrirCampagne } from "./admin/cycle";
+import { enregistrerSoutien } from "./admin/soutien";
 import { ajouterReferent, creerEntreprise } from "./admin/entreprises";
 import { genererJetons, revoquerJetonsNonUtilises } from "./admin/jetons";
 import { answers, campaigns, groups, responses, tokens, users } from "./db/schema";
@@ -198,5 +199,53 @@ describe("Envoi des réponses (anonymat)", () => {
       ok: false,
       raison: "invalide",
     });
+  });
+});
+
+describe("Langue ajoutée à une campagne ouverte", () => {
+  it("n'ajoute qu'une langue du pays, absente, dont tous les questionnaires existent", async () => {
+    const [admin] = await db.select().from(users).where(eq(users.role, "admin"));
+    expect(await ajouterLangueCampagne(db, admin.id, campagneId, "en")).toEqual({ ok: false, erreur: "questionnaireIncomplet" });
+    await chargerQuestionnaireDeTest(db, ["en"]);
+    expect(await ajouterLangueCampagne(db, admin.id, campagneId, "en")).toEqual({ ok: true, valeur: undefined });
+    expect(await ajouterLangueCampagne(db, admin.id, campagneId, "nl")).toEqual({ ok: false, erreur: "langueNonDisponible" });
+    expect(await ajouterLangueCampagne(db, admin.id, campagneId, "pt-BR")).toEqual({ ok: false, erreur: "langueNonDisponible" });
+    const [c] = await db.select().from(campaigns).where(eq(campaigns.id, campagneId));
+    expect(c.locales).toEqual(["fr", "nl", "en"]);
+    const r = await ouvrirQuestionnaire(db, codes[0], "en", MAINTENANT);
+    expect(r.etat === "ok" && r.langue).toBe("en");
+  });
+});
+
+describe("Soutien aux répondants", () => {
+  it("enregistre les contacts internes et l'accompagnement IMA, et les transmet au questionnaire", async () => {
+    const [admin] = await db.select().from(users).where(eq(users.role, "admin"));
+    const r = await enregistrerSoutien(db, admin.id, campagneId, {
+      contacts: [
+        { role: "personneConfiance", coordonnees: "Mme Exemple — 02 000 00 00" },
+        { role: "autre", libelle: "Cellule bien-être", coordonnees: "bien-etre@client.test" },
+        { role: "medecinTravail", coordonnees: "" }, // ligne vide : ignorée
+      ],
+      ima: { actif: true, telephone: "+32 400 00 00 00", horaires: "lun.–ven., 9 h–17 h" },
+    });
+    expect(r.ok).toBe(true);
+    const q = await ouvrirQuestionnaire(db, codes[0], "fr", MAINTENANT);
+    if (q.etat !== "ok") throw new Error(q.etat);
+    expect(q.soutien.contacts.map((c) => c.role)).toEqual(["personneConfiance", "autre"]);
+    expect(q.soutien.ima?.telephone).toBe("+32 400 00 00 00");
+  });
+
+  it("refuse un contact « autre » sans libellé, ou un accompagnement IMA sans moyen de contact", async () => {
+    const [admin] = await db.select().from(users).where(eq(users.role, "admin"));
+    expect(
+      await enregistrerSoutien(db, admin.id, campagneId, { contacts: [{ role: "autre", coordonnees: "02 000 00 00" }], ima: { actif: false } }),
+    ).toEqual({ ok: false, erreur: "soutienContactInvalide" });
+    expect(await enregistrerSoutien(db, admin.id, campagneId, { contacts: [], ima: { actif: true, horaires: "9 h–17 h" } })).toEqual({
+      ok: false,
+      erreur: "soutienImaInvalide",
+    });
+    expect(
+      await enregistrerSoutien(db, admin.id, campagneId, { contacts: [], ima: { actif: true, lien: "http://non-securise.test" } }),
+    ).toEqual({ ok: false, erreur: "soutienImaInvalide" });
   });
 });

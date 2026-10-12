@@ -26,7 +26,7 @@ import {
   actionSupprimerGroupe,
 } from "../../actions";
 import { ChampsCampagne } from "../../ChampsFormulaires";
-import { SectionCycle, SectionJetons, SectionKit } from "./Sections";
+import { SectionCycle, SectionJetons, SectionKit, SectionSoutien } from "./Sections";
 import { languesDuPays } from "@/lib/pays";
 
 export default async function CampagnePage({ params }: PageProps<"/[locale]/admin/campagnes/[id]">) {
@@ -86,9 +86,14 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
         </div>
       )}
 
-      <SectionCycle locale={locale} campagne={campagne} />
+      <SectionCycle
+        locale={locale}
+        campagne={campagne}
+        languesAjoutables={languesDuPays(entreprise.country).filter((lg) => !(campagne.locales as string[]).includes(lg))}
+      />
       <SectionJetons locale={locale} campagne={campagne} effectifTotal={total} />
       <SectionKit campagne={campagne} />
+      <SectionSoutien locale={locale} campagne={campagne} />
 
       <section aria-labelledby="groupes">
         <h2 id="groupes" className="text-xl">{t("groupsTitle")}</h2>

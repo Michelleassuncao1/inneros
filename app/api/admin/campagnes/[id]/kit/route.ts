@@ -4,6 +4,7 @@ import { z } from "zod";
 import { adminConnecte } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 import { campaigns, organizations } from "@/lib/db/schema";
+import { lireSoutien } from "@/lib/admin/soutien";
 import { contenuKit } from "@/lib/pdf/contenu-kit";
 import { pdfKit } from "@/lib/pdf/kit";
 
@@ -30,6 +31,7 @@ export async function GET(requete: Request, { params }: RouteContext<"/api/admin
       fin: campagne.endDate,
       seuil: campagne.groupMinSize,
       critere: campagne.groupingCriterion,
+      soutien: lireSoutien(campagne),
     }),
   );
   const telecharger = new URL(requete.url).searchParams.get("telecharger") !== "non";

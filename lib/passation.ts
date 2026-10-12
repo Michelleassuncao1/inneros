@@ -9,6 +9,7 @@ import type { Db } from "./db/types";
 import { definitionPour } from "./instruments/chargement";
 import { cleItem, type FichierInstrument } from "./instruments/format";
 import { aidesPour } from "./pays";
+import { lireSoutien } from "./admin/soutien";
 
 export type EtatCode = "ok" | "invalide" | "utilise" | "expire" | "pasOuverte" | "indisponible";
 
@@ -69,6 +70,7 @@ export async function ouvrirQuestionnaire(db: Db, code: string, langueDemandee: 
     groupes: listeGroupes,
     questionnaires: questionnaires as FichierInstrument[],
     aides: aidesPour(pays, langue).map((a) => ({ numero: a.numero, cle: a.cle })),
+    soutien: lireSoutien(campagne),
   };
 }
 

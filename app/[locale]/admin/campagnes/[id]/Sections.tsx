@@ -1,16 +1,18 @@
 // Sections « Ouverture », « Jetons » et « Kit d'information » de la fiche campagne.
 import { getTranslations } from "next-intl/server";
-import { MessageInfo } from "@/components/Formulaire";
+import { Champ, MessageInfo, Selection } from "@/components/Formulaire";
 import { FormulaireAction } from "@/components/FormulaireAction";
-import { Champ } from "@/components/Formulaire";
+import { CONTACTS_MAXIMUM, lireSoutien, ROLES_CONTACT } from "@/lib/admin/soutien";
 import { compterJetons } from "@/lib/admin/jetons";
 import { getDb } from "@/lib/db/client";
 import {
+  actionAjouterLangue,
   actionCloturerCampagne,
   actionGenererJetons,
   actionOuvrirCampagne,
   actionProlongerCampagne,
   actionRevoquerJetons,
+  actionSoutien,
 } from "../../actions";
 import { BoutonConfirmation } from "./BoutonConfirmation";
 import { GenerationJetons } from "./GenerationJetons";
@@ -23,6 +25,8 @@ type Campagne = {
   endDate: string;
   closedAt: Date | null;
   locales: string[];
+  supportContacts: unknown;
+  imaSupport: unknown;
 };
 
 const dateLisible = (locale: string, d: string | Date) =>
@@ -30,8 +34,17 @@ const dateLisible = (locale: string, d: string | Date) =>
     typeof d === "string" ? new Date(`${d}T00:00:00Z`) : d,
   );
 
-export async function SectionCycle({ locale, campagne }: { locale: string; campagne: Campagne }) {
+export async function SectionCycle({
+  locale,
+  campagne,
+  languesAjoutables,
+}: {
+  locale: string;
+  campagne: Campagne;
+  languesAjoutables: string[];
+}) {
   const t = await getTranslations("Cycle");
+  const l = await getTranslations("Libelles");
   return (
     <section aria-labelledby="ouverture" className="mb-12">
       <h2 id="ouverture" className="text-xl">{t("title")}</h2>
@@ -68,6 +81,25 @@ export async function SectionCycle({ locale, campagne }: { locale: string; campa
               <Champ id="endDate" name="endDate" type="date" min={campagne.endDate} label={t("newEndDate")} required />
             </FormulaireAction>
           </details>
+          {languesAjoutables.length > 0 && (
+            <details className="w-full rounded-md border border-ima-line bg-white px-4 py-3">
+              <summary className="cursor-pointer font-semibold text-ima-navy">{t("addLanguage")}</summary>
+              <p className="mb-4 mt-2 text-sm text-ima-muted">{t("addLanguageHelp")}</p>
+              <FormulaireAction
+                action={actionAjouterLangue.bind(null, locale, campagne.id)}
+                libelle={t("addLanguageButton")}
+                enCours={t("adding")}
+                secondaire
+              >
+                <Selection
+                  id="langue"
+                  name="langue"
+                  label={t("addLanguage")}
+                  options={languesAjoutables.map((lg) => ({ valeur: lg, libelle: l(`locale.${lg}`) }))}
+                />
+              </FormulaireAction>
+            </details>
+          )}
           <BoutonConfirmation
             libelle={t("close")}
             titre={t("closeTitle")}
@@ -176,3 +208,78 @@ export async function SectionKit({ campagne }: { campagne: Campagne }) {
     </section>
   );
 }
+
+// Soutien affiché aux répondants : A. contacts internes, B. contact IMA (fixe), C. accompagnement IMA
+export async function SectionSoutien({ locale, campagne }: { locale: string; campagne: Campagne }) {
+  const t = await getTranslations("Soutien");
+  const { contacts, ima } = lireSoutien(campagne);
+  if (campagne.status === "closed") return null;
+
+  return (
+    <section aria-labelledby="soutien" className="mb-12">
+      <h2 id="soutien" className="text-xl">{t("title")}</h2>
+      <p className="mb-4 mt-2 max-w-[70ch] text-sm text-ima-muted">{t("help")}</p>
+      <FormulaireAction
+        action={actionSoutien.bind(null, locale, campagne.id)}
+        libelle={t("save")}
+        enCours={t("saving")}
+        secondaire
+        className="flex max-w-2xl flex-col gap-5"
+      >
+        <fieldset className="flex flex-col gap-4">
+          <legend className="mb-1 font-semibold text-ima-navy">{t("contactsTitle")}</legend>
+          <p className="text-sm text-ima-muted">{t("contactsHelp")}</p>
+          {Array.from({ length: CONTACTS_MAXIMUM }, (_, i) => (
+            <div key={i} className="grid gap-3 rounded-md border border-ima-line bg-white p-3 sm:grid-cols-3">
+              <Selection
+                id={`contact-${i}-role`}
+                name={`contacts.${i}.role`}
+                label={`${t("contactN", { n: i + 1 })} — ${t("role")}`}
+                defaultValue={contacts[i]?.role ?? "personneConfiance"}
+                options={ROLES_CONTACT.map((r) => ({ valeur: r, libelle: t(`roles.${r}`) }))}
+              />
+              <Champ
+                id={`contact-${i}-libelle`}
+                name={`contacts.${i}.libelle`}
+                label={t("libelle")}
+                defaultValue={contacts[i]?.libelle ?? ""}
+                maxLength={80}
+              />
+              <Champ
+                id={`contact-${i}-coord`}
+                name={`contacts.${i}.coordonnees`}
+                label={t("coordonnees")}
+                defaultValue={contacts[i]?.coordonnees ?? ""}
+                maxLength={200}
+              />
+            </div>
+          ))}
+        </fieldset>
+
+        <p className="text-sm">{t("contactB")}</p>
+
+        <fieldset className="flex flex-col gap-3">
+          <legend className="mb-1 font-semibold text-ima-navy">{t("imaTitle")}</legend>
+          <p className="text-sm font-semibold text-ima-gold-text">{t("imaWarning")}</p>
+          <label className="flex items-start gap-2">
+            <input
+              type="checkbox"
+              name="ima.actif"
+              value="oui"
+              defaultChecked={!!ima}
+              className="mt-1 h-5 w-5 accent-ima-navy"
+            />
+            <span>{t("imaActif")}</span>
+          </label>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Champ id="ima-telephone" name="ima.telephone" type="tel" label={t("telephone")} defaultValue={ima?.telephone ?? ""} maxLength={40} />
+            <Champ id="ima-email" name="ima.email" type="email" label={t("email")} defaultValue={ima?.email ?? ""} maxLength={254} />
+            <Champ id="ima-lien" name="ima.lien" type="url" label={t("lien")} defaultValue={ima?.lien ?? ""} maxLength={300} />
+            <Champ id="ima-horaires" name="ima.horaires" label={t("horaires")} defaultValue={ima?.horaires ?? ""} maxLength={120} />
+          </div>
+        </fieldset>
+      </FormulaireAction>
+    </section>
+  );
+}
+

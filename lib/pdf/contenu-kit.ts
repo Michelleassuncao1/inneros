@@ -2,6 +2,7 @@
 // Le pays de l'entreprise fixe le cadre légal et les numéros d'aide.
 import { getTranslations } from "next-intl/server";
 import { aidesPour, FICHES_PAYS, type CodePays } from "../pays";
+import type { Contact, SoutienIma } from "../admin/soutien";
 import type { ContenuKit } from "./kit";
 
 export async function contenuKit({
@@ -12,6 +13,7 @@ export async function contenuKit({
   fin,
   seuil,
   critere,
+  soutien,
 }: {
   langue: string;
   entreprise: string;
@@ -20,7 +22,9 @@ export async function contenuKit({
   fin: string;
   seuil: number;
   critere: string;
+  soutien: { contacts: Contact[]; ima: SoutienIma | null };
 }): Promise<ContenuKit> {
+  const ts = await getTranslations({ locale: langue, namespace: "Soutien" });
   const t = await getTranslations({ locale: langue, namespace: "Kit" });
   const p = await getTranslations({ locale: langue, namespace: "Pays" });
   const l = await getTranslations({ locale: langue, namespace: "Libelles" });
@@ -62,6 +66,27 @@ export async function contenuKit({
       titre: t("helpTitle"),
       intro: t("help"),
       numeros: aidesPour(pays, langue).map((a) => ({ numero: a.numero, libelle: p(`${pays}.aides.${a.cle}`) })),
+      organisation: soutien.contacts.length
+        ? {
+            titre: ts("orgTitle"),
+            lignes: soutien.contacts.map((c) => ({
+              libelle: c.role === "autre" ? (c.libelle ?? "") : ts(`roles.${c.role}`),
+              coordonnees: c.coordonnees,
+            })),
+          }
+        : undefined,
+      ima: soutien.ima
+        ? {
+            titre: ts("imaRespTitle"),
+            lignes: [
+              soutien.ima.telephone && `${ts("telephone")} : ${soutien.ima.telephone}`,
+              soutien.ima.email && `${ts("email")} : ${soutien.ima.email}`,
+              soutien.ima.lien && `${ts("rendezVous")} : ${soutien.ima.lien}`,
+              soutien.ima.horaires && `${ts("horaires")} : ${soutien.ima.horaires}`,
+            ].filter((l): l is string => !!l),
+            avertissements: [ts("imaAvert1"), ts("imaAvert2"), ts("imaAvert3")],
+          }
+        : undefined,
     },
     contact: t("contact"),
   };

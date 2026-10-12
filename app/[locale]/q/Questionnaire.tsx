@@ -9,6 +9,7 @@ import { MessageErreur, MessageInfo } from "@/components/Formulaire";
 import { NOMS_LANGUES } from "@/components/LanguageSwitcher";
 import { useRouter } from "@/i18n/navigation";
 import { cleItem, type FichierInstrument } from "@/lib/instruments/format";
+import type { Contact, SoutienIma } from "@/lib/admin/soutien";
 
 type Donnees = {
   langue: string;
@@ -20,6 +21,7 @@ type Donnees = {
   groupes: { id: string; label: string }[];
   questionnaires: FichierInstrument[];
   aides: { numero: string; cle: string }[];
+  soutien: { contacts: Contact[]; ima: SoutienIma | null };
 };
 type Raison = "invalide" | "utilise" | "expire" | "pasOuverte" | "indisponible" | "reseau" | "reponses" | "groupe";
 type Etape =
@@ -76,6 +78,7 @@ export function Questionnaire() {
   const tk = useTranslations("Kit");
   const tp = useTranslations("Pays");
   const tl = useTranslations("Libelles");
+  const ts = useTranslations("Soutien");
   const locale = useLocale();
   const router = useRouter();
 
@@ -203,11 +206,69 @@ export function Questionnaire() {
     </>
   );
 
+  // Besoin d'aide : A. contacts de l'organisation, C. accompagnement IMA (facultatif), numéros d'aide du pays,
+  // puis B. contact IMA pour les questions sur la démarche
+  const imaSoutien = donnees?.soutien.ima;
   const aides = donnees && (
     <section aria-labelledby="aide" className="mt-8 rounded-md border-l-[3px] border-ima-gold bg-ima-cream px-5 py-4">
       <h2 id="aide" className="text-lg">{tk("helpTitle")}</h2>
       <p className="mt-2 text-sm">{tk("help")}</p>
-      <ul className="mt-3 space-y-1">
+
+      {donnees.soutien.contacts.length > 0 && (
+        <>
+          <h3 className="mt-4 font-semibold text-ima-navy">{ts("orgTitle")}</h3>
+          <ul className="mt-2 space-y-1">
+            {donnees.soutien.contacts.map((c, i) => (
+              <li key={i}>
+                <span className="font-semibold">{c.role === "autre" ? c.libelle : ts(`roles.${c.role}`)}</span> : {c.coordonnees}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {imaSoutien && (
+        <div className="mt-4 rounded-md bg-white px-4 py-3">
+          <h3 className="font-semibold text-ima-navy">{ts("imaRespTitle")}</h3>
+          <ul className="mt-2 space-y-1">
+            {imaSoutien.telephone && (
+              <li>
+                {ts("telephone")} :{" "}
+                <a href={`tel:${imaSoutien.telephone.replace(/\s/g, "")}`} className="font-semibold text-ima-navy underline">
+                  {imaSoutien.telephone}
+                </a>
+              </li>
+            )}
+            {imaSoutien.email && (
+              <li>
+                {ts("email")} :{" "}
+                <a href={`mailto:${imaSoutien.email}`} className="font-semibold text-ima-navy underline">
+                  {imaSoutien.email}
+                </a>
+              </li>
+            )}
+            {imaSoutien.lien && (
+              <li>
+                <a href={imaSoutien.lien} target="_blank" rel="noopener noreferrer" className="font-semibold text-ima-navy underline">
+                  {ts("rendezVous")}
+                </a>
+              </li>
+            )}
+            {imaSoutien.horaires && (
+              <li>
+                {ts("horaires")} : {imaSoutien.horaires}
+              </li>
+            )}
+          </ul>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+            <li>{ts("imaAvert1")}</li>
+            <li>{ts("imaAvert2")}</li>
+            <li>{ts("imaAvert3")}</li>
+          </ul>
+        </div>
+      )}
+
+      <ul className="mt-4 space-y-1">
         {donnees.aides.map((a) => (
           <li key={a.numero} className="flex gap-3">
             <a href={`tel:${a.numero.replace(/\s/g, "")}`} className="w-28 shrink-0 font-bold text-ima-navy underline">
@@ -217,6 +278,8 @@ export function Questionnaire() {
           </li>
         ))}
       </ul>
+
+      <p className="mt-4 text-sm">{tk("contact")}</p>
     </section>
   );
 

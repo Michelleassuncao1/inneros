@@ -24,7 +24,8 @@ import {
   modifierReferent,
   supprimerReferent,
 } from "@/lib/admin/entreprises";
-import { cloturerCampagne, ouvrirCampagne, prolongerCampagne } from "@/lib/admin/cycle";
+import { ajouterLangueCampagne, cloturerCampagne, ouvrirCampagne, prolongerCampagne } from "@/lib/admin/cycle";
+import { CONTACTS_MAXIMUM, enregistrerSoutien } from "@/lib/admin/soutien";
 import { genererJetons, revoquerJetonsNonUtilises } from "@/lib/admin/jetons";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
@@ -271,4 +272,49 @@ export async function actionCloturerCampagne(locale: string, id: string) {
   if (!uuid.safeParse(id).success) return;
   await cloturerCampagne(db, admin.id, id);
   revalidatePath(`/${langue}/admin/campagnes/${id}`);
+}
+
+export async function actionAjouterLangue(
+  locale: string,
+  id: string,
+  _etat: EtatFormulaire,
+  formData: FormData,
+): Promise<EtatFormulaire> {
+  const { langue, admin, db, erreur } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return erreur("introuvable");
+  const r = await ajouterLangueCampagne(db, admin.id, id, formData.get("langue"));
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(`/${langue}/admin/campagnes/${id}`);
+  const t = await getTranslations({ locale: langue, namespace: "Cycle" });
+  return { succes: t("languageAdded"), envoi: Date.now() };
+}
+
+// ─── Soutien aux répondants ──────────────────────────────────────────────────
+
+export async function actionSoutien(
+  locale: string,
+  id: string,
+  _etat: EtatFormulaire,
+  formData: FormData,
+): Promise<EtatFormulaire> {
+  const { langue, admin, db, erreur } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return erreur("introuvable");
+  const texte = (nom: string) => String(formData.get(nom) ?? "").trim();
+  const contacts = Array.from({ length: CONTACTS_MAXIMUM }, (_, i) => ({
+    role: texte(`contacts.${i}.role`),
+    libelle: texte(`contacts.${i}.libelle`) || undefined,
+    coordonnees: texte(`contacts.${i}.coordonnees`),
+  }));
+  const ima = {
+    actif: formData.get("ima.actif") === "oui",
+    telephone: texte("ima.telephone") || undefined,
+    email: texte("ima.email") || undefined,
+    lien: texte("ima.lien") || undefined,
+    horaires: texte("ima.horaires") || undefined,
+  };
+  const r = await enregistrerSoutien(db, admin.id, id, { contacts, ima });
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(`/${langue}/admin/campagnes/${id}`);
+  const t = await getTranslations({ locale: langue, namespace: "Soutien" });
+  return { succes: t("saved"), envoi: Date.now() };
 }
