@@ -222,24 +222,34 @@ describe("Soutien aux répondants", () => {
     const [admin] = await db.select().from(users).where(eq(users.role, "admin"));
     const r = await enregistrerSoutien(db, admin.id, campagneId, {
       contacts: [
-        { role: "personneConfiance", coordonnees: "Mme Exemple — 02 000 00 00" },
-        { role: "autre", libelle: "Cellule bien-être", coordonnees: "bien-etre@client.test" },
-        { role: "medecinTravail", coordonnees: "" }, // ligne vide : ignorée
+        { role: "personneConfiance", fonction: "", nom: "Mme Exemple", telephone: "02 000 00 00", email: "" },
+        { role: "autre", fonction: "Cellule bien-être", nom: "", telephone: "", email: "bien-etre@client.test" },
+        { role: "cpap", fonction: "", nom: "", telephone: "", email: "" }, // ligne vide : ignorée
       ],
       ima: { actif: true, telephone: "+32 400 00 00 00", horaires: "lun.–ven., 9 h–17 h" },
     });
     expect(r.ok).toBe(true);
     const q = await ouvrirQuestionnaire(db, codes[0], "fr", MAINTENANT);
     if (q.etat !== "ok") throw new Error(q.etat);
-    expect(q.soutien.contacts.map((c) => c.role)).toEqual(["personneConfiance", "autre"]);
+    expect(q.soutien.contacts).toEqual([
+      { role: "personneConfiance", nom: "Mme Exemple", telephone: "02 000 00 00" },
+      { role: "autre", fonction: "Cellule bien-être", email: "bien-etre@client.test" },
+    ]);
     expect(q.soutien.ima?.telephone).toBe("+32 400 00 00 00");
   });
 
-  it("refuse un contact « autre » sans libellé, ou un accompagnement IMA sans moyen de contact", async () => {
+  it("refuse un contact incomplet, un rôle d'un autre pays, ou un accompagnement IMA sans moyen de contact", async () => {
     const [admin] = await db.select().from(users).where(eq(users.role, "admin"));
-    expect(
-      await enregistrerSoutien(db, admin.id, campagneId, { contacts: [{ role: "autre", coordonnees: "02 000 00 00" }], ima: { actif: false } }),
-    ).toEqual({ ok: false, erreur: "soutienContactInvalide" });
+    const sansIma = { actif: false };
+    const refus = { ok: false, erreur: "soutienContactInvalide" };
+    // « Autre » sans fonction
+    expect(await enregistrerSoutien(db, admin.id, campagneId, { contacts: [{ role: "autre", telephone: "02 000 00 00" }], ima: sansIma })).toEqual(refus);
+    // Un nom sans téléphone ni e-mail
+    expect(await enregistrerSoutien(db, admin.id, campagneId, { contacts: [{ role: "rh", nom: "M. Exemple" }], ima: sansIma })).toEqual(refus);
+    // E-mail invalide
+    expect(await enregistrerSoutien(db, admin.id, campagneId, { contacts: [{ role: "rh", email: "pas-un-email" }], ima: sansIma })).toEqual(refus);
+    // Entreprise belge : la CIPA (Brésil) n'est pas proposée
+    expect(await enregistrerSoutien(db, admin.id, campagneId, { contacts: [{ role: "cipa", telephone: "02 000 00 00" }], ima: sansIma })).toEqual(refus);
     expect(await enregistrerSoutien(db, admin.id, campagneId, { contacts: [], ima: { actif: true, horaires: "9 h–17 h" } })).toEqual({
       ok: false,
       erreur: "soutienImaInvalide",

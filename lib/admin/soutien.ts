@@ -6,32 +6,39 @@
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { journaliser } from "../audit";
-import { campaigns } from "../db/schema";
+import { campaigns, organizations } from "../db/schema";
 import type { Db } from "../db/types";
+import type { CodePays } from "../pays";
 import type { Resultat } from "./entreprises";
 
-export const ROLES_CONTACT = [
-  "personneConfiance",
-  "conseillerPrevention",
-  "medecinTravail",
-  "servicePrevention",
-  "sesmt",
-  "cipa",
-  "psychologue",
-  "rh",
-  "autre",
-] as const;
+// Rôles proposés selon le pays de l'entreprise (tableau d'équivalences validé par Michelle le 12 octobre 2026).
+// Les comités sans personne à contacter (CPPT, CSSCT) sont exclus.
+export const ROLES_PAR_PAYS = {
+  BE: ["personneConfiance", "conseillerPrevention", "cpap", "medecinTravail", "sipp", "sepp", "psychologue", "rh", "autre"],
+  BR: ["medecinTravail", "sesmt", "cipa", "psychologue", "canalSignalement", "rh", "autre"],
+  PT: ["servicoSst", "medecinTravail", "psychologue", "representantsTravailleurs", "rh", "autre"],
+  FR: ["referentHarcelement", "medecinTravail", "preventeur", "cse", "psychologue", "rh", "autre"],
+} as const satisfies Record<CodePays, readonly string[]>;
+export type RoleContact = (typeof ROLES_PAR_PAYS)[CodePays][number];
+export const ROLES_CONTACT: readonly RoleContact[] = [...new Set(Object.values(ROLES_PAR_PAYS).flat())];
+export const rolesDuPays = (pays: string): readonly RoleContact[] => ROLES_PAR_PAYS[pays as CodePays] ?? [];
 export const CONTACTS_MAXIMUM = 6;
 
 const texte = (max: number) => z.string().trim().max(max);
+// Un champ laissé vide dans le formulaire vaut « non renseigné »
+const facultatif = <T extends z.ZodTypeAny>(schema: T) =>
+  z.preprocess((v) => (typeof v === "string" && v.trim() === "" ? undefined : v), schema.optional());
 
 export const schemaContact = z
   .object({
-    role: z.enum(ROLES_CONTACT),
-    libelle: texte(80).optional(), // obligatoire pour « autre »
-    coordonnees: texte(200).min(2),
+    role: z.enum(ROLES_CONTACT as [RoleContact, ...RoleContact[]]),
+    fonction: facultatif(texte(80)), // obligatoire pour « autre »
+    nom: facultatif(texte(80)),
+    telephone: facultatif(texte(40).min(4)),
+    email: facultatif(z.string().trim().email().max(254)),
   })
-  .refine((c) => c.role !== "autre" || (c.libelle?.length ?? 0) >= 2, { message: "libelle" });
+  .refine((c) => c.role !== "autre" || (c.fonction?.length ?? 0) >= 2, { message: "fonction" })
+  .refine((c) => !!(c.telephone || c.email), { message: "joignable" });
 
 export const schemaSoutienIma = z
   .object({
@@ -52,23 +59,31 @@ export async function enregistrerSoutien(
   campaignId: string,
   saisie: { contacts: unknown[]; ima: unknown },
 ): Promise<Resultat> {
-  // Les lignes laissées vides dans le formulaire sont ignorées
-  const lignes = saisie.contacts.filter(
-    (c) => c && typeof c === "object" && String((c as { coordonnees?: unknown }).coordonnees ?? "").trim() !== "",
-  );
-  const contacts = z.array(schemaContact).max(CONTACTS_MAXIMUM).safeParse(lignes);
+  // Les lignes laissées vides dans le formulaire (ni fonction, ni nom, ni téléphone, ni e-mail) sont ignorées
+  const remplie = (c: unknown) =>
+    !!c &&
+    typeof c === "object" &&
+    ["fonction", "nom", "telephone", "email"].some((k) => String((c as Record<string, unknown>)[k] ?? "").trim() !== "");
+  const contacts = z.array(schemaContact).max(CONTACTS_MAXIMUM).safeParse(saisie.contacts.filter(remplie));
   if (!contacts.success) return { ok: false, erreur: "soutienContactInvalide" };
   const ima = schemaSoutienIma.safeParse(saisie.ima);
   if (!ima.success) return { ok: false, erreur: "soutienImaInvalide" };
 
-  const [campagne] = await db.select().from(campaigns).where(eq(campaigns.id, campaignId));
-  if (!campagne) return { ok: false, erreur: "introuvable" };
-  if (campagne.status === "closed") return { ok: false, erreur: "campagneCloturee" };
+  const [ligne] = await db
+    .select({ campagne: campaigns, pays: organizations.country })
+    .from(campaigns)
+    .innerJoin(organizations, eq(campaigns.organizationId, organizations.id))
+    .where(eq(campaigns.id, campaignId));
+  if (!ligne) return { ok: false, erreur: "introuvable" };
+  if (ligne.campagne.status === "closed") return { ok: false, erreur: "campagneCloturee" };
+  // Seuls les rôles du pays de l'entreprise sont acceptés
+  if (contacts.data.some((c) => !rolesDuPays(ligne.pays).includes(c.role)))
+    return { ok: false, erreur: "soutienContactInvalide" };
 
   await db
     .update(campaigns)
     .set({
-      supportContacts: contacts.data.map((c) => ({ ...c, libelle: c.role === "autre" ? c.libelle : undefined })),
+      supportContacts: contacts.data.map((c) => ({ ...c, fonction: c.role === "autre" ? c.fonction : undefined })),
       imaSupport: ima.data.actif ? ima.data : null,
     })
     .where(eq(campaigns.id, campaignId));
@@ -91,3 +106,4 @@ export function lireSoutien(campagne: { supportContacts: unknown; imaSupport: un
     ima: ima.success && ima.data.actif ? ima.data : null,
   };
 }
+

@@ -70,8 +70,8 @@ export async function contenuKit({
         ? {
             titre: ts("orgTitle"),
             lignes: soutien.contacts.map((c) => ({
-              libelle: c.role === "autre" ? (c.libelle ?? "") : ts(`roles.${c.role}`),
-              coordonnees: c.coordonnees,
+              libelle: c.role === "autre" ? (c.fonction ?? "") : ts(`roles.${c.role}`),
+              coordonnees: [c.nom, c.telephone, c.email].filter(Boolean).join(" · "),
             })),
           }
         : undefined,

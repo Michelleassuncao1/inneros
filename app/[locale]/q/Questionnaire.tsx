@@ -220,7 +220,23 @@ export function Questionnaire() {
           <ul className="mt-2 space-y-1">
             {donnees.soutien.contacts.map((c, i) => (
               <li key={i}>
-                <span className="font-semibold">{c.role === "autre" ? c.libelle : ts(`roles.${c.role}`)}</span> : {c.coordonnees}
+                <span className="font-semibold">{c.role === "autre" ? c.fonction : ts(`roles.${c.role}`)}</span>
+                {" : "}
+                {[
+                  c.nom && <span key="nom">{c.nom}</span>,
+                  c.telephone && (
+                    <a key="tel" href={`tel:${c.telephone.replace(/\s/g, "")}`} className="font-semibold text-ima-navy underline">
+                      {c.telephone}
+                    </a>
+                  ),
+                  c.email && (
+                    <a key="email" href={`mailto:${c.email}`} className="font-semibold text-ima-navy underline">
+                      {c.email}
+                    </a>
+                  ),
+                ]
+                  .filter(Boolean)
+                  .flatMap((element, j) => (j ? [" · ", element] : [element]))}
               </li>
             ))}
           </ul>

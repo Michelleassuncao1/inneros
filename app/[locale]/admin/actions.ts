@@ -302,8 +302,10 @@ export async function actionSoutien(
   const texte = (nom: string) => String(formData.get(nom) ?? "").trim();
   const contacts = Array.from({ length: CONTACTS_MAXIMUM }, (_, i) => ({
     role: texte(`contacts.${i}.role`),
-    libelle: texte(`contacts.${i}.libelle`) || undefined,
-    coordonnees: texte(`contacts.${i}.coordonnees`),
+    fonction: texte(`contacts.${i}.fonction`),
+    nom: texte(`contacts.${i}.nom`),
+    telephone: texte(`contacts.${i}.telephone`),
+    email: texte(`contacts.${i}.email`),
   }));
   const ima = {
     actif: formData.get("ima.actif") === "oui",

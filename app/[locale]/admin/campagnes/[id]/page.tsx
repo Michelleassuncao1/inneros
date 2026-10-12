@@ -93,7 +93,7 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
       />
       <SectionJetons locale={locale} campagne={campagne} effectifTotal={total} />
       <SectionKit campagne={campagne} />
-      <SectionSoutien locale={locale} campagne={campagne} />
+      <SectionSoutien locale={locale} campagne={campagne} pays={entreprise.country} />
 
       <section aria-labelledby="groupes">
         <h2 id="groupes" className="text-xl">{t("groupsTitle")}</h2>

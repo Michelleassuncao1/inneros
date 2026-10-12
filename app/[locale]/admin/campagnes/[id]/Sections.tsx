@@ -2,7 +2,7 @@
 import { getTranslations } from "next-intl/server";
 import { Champ, MessageInfo, Selection } from "@/components/Formulaire";
 import { FormulaireAction } from "@/components/FormulaireAction";
-import { CONTACTS_MAXIMUM, lireSoutien, ROLES_CONTACT } from "@/lib/admin/soutien";
+import { CONTACTS_MAXIMUM, lireSoutien, rolesDuPays } from "@/lib/admin/soutien";
 import { compterJetons } from "@/lib/admin/jetons";
 import { getDb } from "@/lib/db/client";
 import {
@@ -210,9 +210,10 @@ export async function SectionKit({ campagne }: { campagne: Campagne }) {
 }
 
 // Soutien affiché aux répondants : A. contacts internes, B. contact IMA (fixe), C. accompagnement IMA
-export async function SectionSoutien({ locale, campagne }: { locale: string; campagne: Campagne }) {
+export async function SectionSoutien({ locale, campagne, pays }: { locale: string; campagne: Campagne; pays: string }) {
   const t = await getTranslations("Soutien");
   const { contacts, ima } = lireSoutien(campagne);
+  const roles = rolesDuPays(pays);
   if (campagne.status === "closed") return null;
 
   return (
@@ -235,22 +236,38 @@ export async function SectionSoutien({ locale, campagne }: { locale: string; cam
                 id={`contact-${i}-role`}
                 name={`contacts.${i}.role`}
                 label={`${t("contactN", { n: i + 1 })} — ${t("role")}`}
-                defaultValue={contacts[i]?.role ?? "personneConfiance"}
-                options={ROLES_CONTACT.map((r) => ({ valeur: r, libelle: t(`roles.${r}`) }))}
+                defaultValue={contacts[i]?.role ?? roles[0]}
+                options={roles.map((r) => ({ valeur: r, libelle: t(`roles.${r}`) }))}
               />
               <Champ
-                id={`contact-${i}-libelle`}
-                name={`contacts.${i}.libelle`}
-                label={t("libelle")}
-                defaultValue={contacts[i]?.libelle ?? ""}
+                id={`contact-${i}-fonction`}
+                name={`contacts.${i}.fonction`}
+                label={t("fonction")}
+                defaultValue={contacts[i]?.fonction ?? ""}
                 maxLength={80}
               />
               <Champ
-                id={`contact-${i}-coord`}
-                name={`contacts.${i}.coordonnees`}
-                label={t("coordonnees")}
-                defaultValue={contacts[i]?.coordonnees ?? ""}
-                maxLength={200}
+                id={`contact-${i}-nom`}
+                name={`contacts.${i}.nom`}
+                label={t("nom")}
+                defaultValue={contacts[i]?.nom ?? ""}
+                maxLength={80}
+              />
+              <Champ
+                id={`contact-${i}-telephone`}
+                name={`contacts.${i}.telephone`}
+                type="tel"
+                label={t("telephone")}
+                defaultValue={contacts[i]?.telephone ?? ""}
+                maxLength={40}
+              />
+              <Champ
+                id={`contact-${i}-email`}
+                name={`contacts.${i}.email`}
+                type="email"
+                label={t("email")}
+                defaultValue={contacts[i]?.email ?? ""}
+                maxLength={254}
               />
             </div>
           ))}
