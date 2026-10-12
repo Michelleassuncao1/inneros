@@ -23,6 +23,20 @@ export function definitionPour(definitions: unknown, langue: string): FichierIns
   return lecture.success ? lecture.data : null;
 }
 
+// Pays auxquels un questionnaire est réservé (null : tous les pays). Toutes les langues ont les mêmes pays.
+export function paysDuQuestionnaire(definitions: unknown): string[] | null {
+  for (const brut of Object.values((definitions as Record<string, unknown> | null) ?? {})) {
+    const lecture = schemaFichierInstrument.safeParse(brut);
+    if (lecture.success) return lecture.data.pays ?? null;
+  }
+  return null;
+}
+
+export const questionnaireAutorise = (definitions: unknown, pays: string) => {
+  const liste = paysDuQuestionnaire(definitions);
+  return liste === null || liste.includes(pays);
+};
+
 export async function enregistrerInstrument(db: Db, f: FichierInstrument): Promise<{ ok: true } | { ok: false; erreur: string }> {
   const [existant] = await db
     .select()
@@ -63,9 +77,12 @@ export function apercuInstrument(f: FichierInstrument): string {
     `${f.titre} — ${f.instrument} ${f.version} (${f.langue})${f.test ? " [TEST]" : ""}`,
     `Source : ${f.source}`,
     `Licence : ${f.licence}`,
+    `Pays : ${f.pays?.join(", ") ?? "tous"}`,
     "",
     "Échelles de réponse :",
-    ...f.echelles_reponse.map((e) => `  [${e.id}] ${e.options.map((o) => `${o.code} = ${o.libelle}`).join(" | ")}`),
+    ...f.echelles_reponse.map(
+      (e) => `  [${e.id}] ${e.options.map((o) => `${o.code} = ${o.libelle}${o.manquant ? " (compté comme manquant)" : ""}`).join(" | ")}`,
+    ),
   ];
   let total = 0;
   for (const d of f.dimensions) {

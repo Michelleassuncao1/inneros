@@ -423,7 +423,8 @@
     "prolongationTropCourte": "La nouvelle date de fin doit être postérieure à la date de fin actuelle.",
     "questionnaireIncomplet": "Un questionnaire choisi n'existe pas dans toutes les langues de la campagne. Retirez la langue ou choisissez un autre questionnaire.",
     "soutienContactInvalide": "Vérifiez les contacts : chaque ligne remplie doit avoir un téléphone ou un e-mail valide, et une fonction si le rôle est « Autre ».",
-    "soutienImaInvalide": "Pour proposer l'accompagnement IMA, indiquez au moins un téléphone, un e-mail ou un lien de rendez-vous commençant par https://."
+    "soutienImaInvalide": "Pour proposer l'accompagnement IMA, indiquez au moins un téléphone, un e-mail ou un lien de rendez-vous commençant par https://.",
+    "questionnairePays": "Ce questionnaire est une version nationale réservée aux entreprises d’un autre pays."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",

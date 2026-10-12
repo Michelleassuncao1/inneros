@@ -528,7 +528,8 @@ export function Questionnaire() {
                 onChange={() => repondre(k, v)}
                 className="h-5 w-5 shrink-0 accent-ima-navy"
               />
-              <span>{libelle}</span>
+              {/* Libellés officiels souvent en minuscules : majuscule à l'affichage seulement */}
+              <span className="first-letter:uppercase">{libelle}</span>
             </label>
           );
           return (

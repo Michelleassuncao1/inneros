@@ -3,6 +3,7 @@
 // Les identifiants (questionnaire, dimensions, items, échelles de réponse) sont identiques dans toutes
 // les langues : c'est ce qui permet de comparer et d'additionner les réponses.
 import { z } from "zod";
+import { PAYS } from "../pays";
 
 const identifiant = z.string().regex(/^[a-z0-9]{1,20}$/, "identifiant : minuscules et chiffres uniquement");
 
@@ -15,12 +16,21 @@ export const schemaFichierInstrument = z.object({
   source: z.string().min(1).max(2000), // citation complète, reprise dans le questionnaire et le rapport
   licence: z.string().min(1).max(1000),
   test: z.boolean().default(false), // items fictifs « ITEM DE TEST »
+  // Version nationale : proposée seulement aux entreprises de ces pays (absent = tous les pays)
+  pays: z.array(z.enum(PAYS)).min(1).optional(),
   echelles_reponse: z
     .array(
       z.object({
         id: identifiant,
         options: z
-          .array(z.object({ code: z.number().int().min(0).max(10), libelle: z.string().min(1).max(200) }))
+          .array(
+            z.object({
+              code: z.number().int().min(0).max(10),
+              libelle: z.string().min(1).max(200),
+              // Réponse comptée comme manquante dans les scores (ex. COPSOQ « je n'ai pas de supérieur »)
+              manquant: z.literal(true).optional(),
+            }),
+          )
           .min(2),
       }),
     )
@@ -81,7 +91,8 @@ export function verifierInstrument(f: FichierInstrument): string[] {
 // Une nouvelle langue doit avoir exactement la même structure que les langues déjà chargées
 export function signature(f: FichierInstrument) {
   return JSON.stringify({
-    echelles: f.echelles_reponse.map((e) => [e.id, e.options.map((o) => o.code)]),
+    pays: f.pays ?? null,
+    echelles: f.echelles_reponse.map((e) => [e.id, e.options.map((o) => (o.manquant ? [o.code, "manquant"] : o.code))]),
     dimensions: f.dimensions.map((d) => [d.id, d.items.map((i) => [i.id, i.reponse, i.sens])]),
   });
 }

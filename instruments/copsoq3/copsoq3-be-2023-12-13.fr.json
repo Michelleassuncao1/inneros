@@ -1,0 +1,764 @@
+{
+  "format": 2,
+  "instrument": "copsoq3",
+  "version": "be-2023-12-13",
+  "langue": "fr",
+  "titre": "COPSOQ III — Questionnaire psychosocial de Copenhague (version belge)",
+  "source": "COPSOQ III, Belgian national version (French and Dutch): Belgian national COPSOQ team, Prof. Els Clays, Ghent University (file of 13 December 2023). English: international version, Llorens C., Pérez-Franco J., Oudyk J., Berthelsen H., Dupret E., Nübling M., Burr H., Moncada S. (2019). COPSOQ III. Guidelines and questionnaire. COPSOQ International Network. Burr H. et al. (2019). The Third Version of the Copenhagen Psychosocial Questionnaire. Safety and Health at Work, 10(4), 482–503.",
+  "licence": "CC BY-NC-ND 4.0, COPSOQ International Network. Free use in workplaces in line with the network guidelines; no fee is charged for the questionnaire itself.",
+  "test": false,
+  "pays": [
+    "BE"
+  ],
+  "echelles_reponse": [
+    {
+      "id": "frequence",
+      "options": [
+        {
+          "libelle": "toujours",
+          "code": 4
+        },
+        {
+          "libelle": "souvent",
+          "code": 3
+        },
+        {
+          "libelle": "parfois",
+          "code": 2
+        },
+        {
+          "libelle": "rarement",
+          "code": 1
+        },
+        {
+          "libelle": "jamais/presque jamais",
+          "code": 0
+        }
+      ]
+    },
+    {
+      "id": "mesure",
+      "options": [
+        {
+          "libelle": "dans une très grande mesure",
+          "code": 4
+        },
+        {
+          "libelle": "dans une grande mesure",
+          "code": 3
+        },
+        {
+          "libelle": "partiellement",
+          "code": 2
+        },
+        {
+          "libelle": "dans une faible mesure",
+          "code": 1
+        },
+        {
+          "libelle": "dans une très faible mesure",
+          "code": 0
+        }
+      ]
+    },
+    {
+      "id": "mesuresanschef",
+      "options": [
+        {
+          "libelle": "dans une très grande mesure",
+          "code": 4
+        },
+        {
+          "libelle": "dans une grande mesure",
+          "code": 3
+        },
+        {
+          "libelle": "partiellement",
+          "code": 2
+        },
+        {
+          "libelle": "dans une faible mesure",
+          "code": 1
+        },
+        {
+          "libelle": "dans une très faible mesure",
+          "code": 0
+        },
+        {
+          "code": 9,
+          "libelle": "Je n'ai pas de superviseur",
+          "manquant": true
+        }
+      ]
+    },
+    {
+      "id": "frequencesanschef",
+      "options": [
+        {
+          "libelle": "toujours",
+          "code": 4
+        },
+        {
+          "libelle": "souvent",
+          "code": 3
+        },
+        {
+          "libelle": "parfois",
+          "code": 2
+        },
+        {
+          "libelle": "rarement",
+          "code": 1
+        },
+        {
+          "libelle": "jamais/presque jamais",
+          "code": 0
+        },
+        {
+          "code": 9,
+          "libelle": "Je n'ai pas de superviseur",
+          "manquant": true
+        }
+      ]
+    },
+    {
+      "id": "frequencesanscoll",
+      "options": [
+        {
+          "libelle": "toujours",
+          "code": 4
+        },
+        {
+          "libelle": "souvent",
+          "code": 3
+        },
+        {
+          "libelle": "parfois",
+          "code": 2
+        },
+        {
+          "libelle": "rarement",
+          "code": 1
+        },
+        {
+          "libelle": "jamais/presque jamais",
+          "code": 0
+        },
+        {
+          "code": 9,
+          "libelle": "Je n'ai pas de collègues",
+          "manquant": true
+        }
+      ]
+    },
+    {
+      "id": "satisfaction",
+      "options": [
+        {
+          "libelle": "très satisfait",
+          "code": 4
+        },
+        {
+          "libelle": "satisfait",
+          "code": 3
+        },
+        {
+          "libelle": "ni satisfait - ni insatisfait",
+          "code": 2
+        },
+        {
+          "libelle": "insatisfait",
+          "code": 1
+        },
+        {
+          "libelle": "très insatisfait",
+          "code": 0
+        }
+      ]
+    },
+    {
+      "id": "sante",
+      "options": [
+        {
+          "libelle": "excellente",
+          "code": 4
+        },
+        {
+          "libelle": "très bonne",
+          "code": 3
+        },
+        {
+          "libelle": "bonne",
+          "code": 2
+        },
+        {
+          "libelle": "assez bonne",
+          "code": 1
+        },
+        {
+          "libelle": "mauvaise",
+          "code": 0
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "qd",
+      "nom": "Exigences quantitatives du travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "qd1",
+          "texte": "Votre charge de travail est-elle répartie de façon irrégulière de telle sorte que votre travail s’accumule ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "qd2",
+          "texte": "A quelle fréquence manquez-vous de temps pour réaliser toutes vos tâches ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "qd3",
+          "texte": "Votre travail prend-il du retard ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "wp",
+      "nom": "Rythme de travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "wp1",
+          "texte": "Devez-vous travailler très rapidement ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "wp2",
+          "texte": "Travaillez-vous à un rythme élevé durant toute la journée ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ed",
+      "nom": "Exigences émotionnelles du travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "ed1",
+          "texte": "Votre travail engendre-t-il des situations qui vous perturbent émotionnellement ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "edx2",
+          "texte": "Dans votre travail, devez-vous composer avec les problèmes personnels des autres ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ed3",
+          "texte": "Votre travail est-il émotionnellement exigeant ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "he",
+      "nom": "Dissimulation des émotions",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "he2",
+          "texte": "Votre travail exige-t-il que vous cachiez vos sentiments ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "he3",
+          "texte": "Etes-vous tenu(e) d’être amical(e) et ouvert(e) à l’égard de chacun indépendamment de la façon dont on se comporte avec vous ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "he4",
+          "texte": "Votre travail exige-t-il que vous ne disiez pas votre opinion?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "in",
+      "nom": "Influence sur le travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "inx1",
+          "texte": "Avez-vous une grande influence sur les décisions concernant votre travail?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "in3",
+          "texte": "Pouvez-vous influencer la quantité de travail qui vous est attribué ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "in4",
+          "texte": "Avez-vous une influence sur ce que vous faites au travail ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "in6",
+          "texte": "Avez-vous une certaine influence sur COMMENT vous effectuez votre travail?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "pd",
+      "nom": "Possibilités de développement",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "pd2",
+          "texte": "Avez-vous la possibilité d’apprendre de nouvelles choses par votre travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "pd3",
+          "texte": "Pouvez-vous utiliser vos compétences et votre expertise dans votre travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "pd4",
+          "texte": "Votre travail vous donne-t-il la possibilité de développer vos compétences ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ct",
+      "nom": "Liberté du temps de travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "ct1",
+          "texte": "Pouvez-vous décider vous-même quand vous prenez une pause ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct2",
+          "texte": "Pouvez-vous prendre des vacances quand vous désirez ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct3",
+          "texte": "Pouvez-vous quitter votre travail pour un petit instant afin d’aller bavarder avec un collègue ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct4",
+          "texte": "Pouvez-vous quitter, sans autorisation spéciale, votre travail pour une demi-heure afin de régler une affaire privée ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct5",
+          "texte": "Devez-vous faire des heures supplémentaires?",
+          "reponse": "frequence",
+          "sens": "inverse"
+        }
+      ]
+    },
+    {
+      "id": "mw",
+      "nom": "Sens du travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "mw1",
+          "texte": "Votre travail a-t-il du sens pour vous ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "mw2",
+          "texte": "Estimez-vous que le travail que vous réalisez est important ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "pr",
+      "nom": "Prévisibilité",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "pr1",
+          "texte": "A votre travail, êtes-vous informé(e) suffisamment à l’avance, par exemple, des décisions importantes, des changements, des projets d’avenir ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "pr2",
+          "texte": "Recevez-vous toutes les informations dont vous avez besoin pour bien faire votre travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "re",
+      "nom": "Reconnaissance",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "re1",
+          "texte": "Votre travail est-il reconnu et apprécié par le management ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "cl",
+      "nom": "Clarté de rôle",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "cl1",
+          "texte": "Votre travail a-t-il des objectifs clairs ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "cl2",
+          "texte": "Savez-vous précisément dans quels domaines se situent vos responsabilités ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "cl3",
+          "texte": "Savez-vous exactement ce que l’on attend de vous au travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "co",
+      "nom": "Conflits de rôle",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "co2",
+          "texte": "Etes-vous confronté(e) à des exigences contradictoires durant votre travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "co3",
+          "texte": "Devez-vous parfois exécuter d’une certaine façon des tâches qui auraient dû l’être d’une manière différente ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "it",
+      "nom": "Tâches inutiles",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "it1",
+          "texte": "Devez-vous parfois effectuer des choses qui ne vous semblent pas nécessaires ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ql",
+      "nom": "Qualité de la direction",
+      "consigne": "Dans quelle mesure trouvez-vous que votre supérieur immédiat …",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "qlx1",
+          "texte": "s’assure que les membres du personnel ont de bonnes possibilités de développement ?",
+          "reponse": "mesuresanschef",
+          "sens": "direct"
+        },
+        {
+          "id": "ql3",
+          "texte": "planifie bien le travail ?",
+          "reponse": "mesuresanschef",
+          "sens": "direct"
+        },
+        {
+          "id": "ql4",
+          "texte": "résoud bien les conflits ?",
+          "reponse": "mesuresanschef",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ss",
+      "nom": "Soutien social de la part de la ligne hiérarchique",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "ssx1",
+          "texte": "Si vous en aviez besoin, à quelle fréquence votre supérieur immédiat hiérarchique serait-il disposé à écouter vos problèmes au travail?",
+          "reponse": "frequencesanschef",
+          "sens": "direct"
+        },
+        {
+          "id": "ssx2",
+          "texte": "Si vous en aviez besoin, à quelle fréquence recevez-vous de l'aide et du soutien de votre supérieur immédiat?",
+          "reponse": "frequencesanschef",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sc",
+      "nom": "Soutien social de la part des collègues",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "scx1",
+          "texte": "Si vous en aviez besoin, à quelle fréquence recevez-vous de l'aide et du soutien de vos collègues?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        },
+        {
+          "id": "scx2",
+          "texte": "Si vous en aviez besoin, à quelle fréquence vos collègues seraient-ils disposés à écouter vos problèmes au travail?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        },
+        {
+          "id": "scx3",
+          "texte": "A quelle fréquence vos collègues vous disent-ils le bien qu’ils pensent du travail que vous effectuez ?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sw",
+      "nom": "Sentiment de communauté au travail",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "sw1",
+          "texte": "Y a-t-il une bonne ambiance entre vos collègues et vous ?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        },
+        {
+          "id": "sw3",
+          "texte": "Au travail, avez-vous le sentiment de faire partie intégrante d’un groupe ?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ji",
+      "nom": "Insécurité d’emploi",
+      "niveau_mindset": "environnement",
+      "items": [
+        {
+          "id": "ji1",
+          "texte": "Êtes-vous inquiet de perdre votre emploi ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "ji3",
+          "texte": "Êtes-vous inquiet d’éprouver des difficultés à trouver un autre emploi, si vous perdiez le vôtre ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "iw",
+      "nom": "Incertitude sur l'environnement de travail",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "iw1",
+          "texte": "Êtes-vous inquiet d’être muté(e) à un autre poste de travail contre votre gré ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "iw3",
+          "texte": "Êtes-vous inquiet que les horaires (quarts de travail, jours de la semaine, heure de début et de fin, ...) soient modifiés en dehors indépendant de votre volonté?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "iw4",
+          "texte": "Êtes-vous inquiet d'une baisse de vos salaires (réduction, rémunération variable, ...)",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "qw",
+      "nom": "Qualité du travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "qw2",
+          "texte": "Êtes-vous satisfait de la qualité du travail effectué sur votre lieu de travail?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "js",
+      "nom": "Satisfaction au travail",
+      "consigne": "Au sujet de votre travail en général. Quel degré de satisfaction éprouvez-vous à l’égard...",
+      "items": [
+        {
+          "id": "js1",
+          "texte": "de vos perspectives professionnelles ?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        },
+        {
+          "id": "js4",
+          "texte": "de votre travail dans son ensemble, tout étant pris en considération ?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        },
+        {
+          "id": "js5",
+          "texte": "votre salaire?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "wf",
+      "nom": "Conflit travail-famille",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "wf2",
+          "texte": "Avez-vous le sentiment que votre travail vous prend tellement d’énergie qu’il a un effet négatif sur votre vie privée ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "wf3",
+          "texte": "Avez-vous le sentiment que votre travail vous prend tellement de temps qu’il a un effet négatif sur votre vie privée ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "te",
+      "nom": "Confiance horizontale",
+      "consigne": "Les questions suivantes ne concernent pas votre propre travail, mais l’ensemble de l’entreprise dans laquelle vous travaillez.",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "te3",
+          "texte": "En général, les travailleurs se font-ils confiance ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tm",
+      "nom": "Confiance verticale",
+      "consigne": "Les questions suivantes ne concernent pas votre propre travail, mais l’ensemble de l’entreprise dans laquelle vous travaillez.",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "tm1",
+          "texte": "Le management fait-il confiance aux travailleurs quant à leur capacité à bien faire leur travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "tmx2",
+          "texte": "Les travailleurs peuvent-ils faire confiance aux informations provenant du management ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "tm4",
+          "texte": "Les travailleurs peuvent-ils exprimer leurs opinions et sentiments ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ju",
+      "nom": "Justice organisationnelle",
+      "consigne": "Les questions suivantes ne concernent pas votre propre travail, mais l’ensemble de l’entreprise dans laquelle vous travaillez.",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "ju1",
+          "texte": "Les conflits sont-ils résolus de manière équitable ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "ju4",
+          "texte": "Le travail est-il partagé équitablement ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "gh",
+      "nom": "Santé subjective",
+      "items": [
+        {
+          "id": "gh1",
+          "texte": "En général, diriez-vous que votre santé est …",
+          "reponse": "sante",
+          "sens": "direct"
+        }
+      ]
+    }
+  ]
+}

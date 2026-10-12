@@ -1,0 +1,764 @@
+{
+  "format": 2,
+  "instrument": "copsoq3",
+  "version": "be-2023-12-13",
+  "langue": "en",
+  "titre": "COPSOQ III — Copenhagen Psychosocial Questionnaire (Belgian version)",
+  "source": "COPSOQ III, Belgian national version (French and Dutch): Belgian national COPSOQ team, Prof. Els Clays, Ghent University (file of 13 December 2023). English: international version, Llorens C., Pérez-Franco J., Oudyk J., Berthelsen H., Dupret E., Nübling M., Burr H., Moncada S. (2019). COPSOQ III. Guidelines and questionnaire. COPSOQ International Network. Burr H. et al. (2019). The Third Version of the Copenhagen Psychosocial Questionnaire. Safety and Health at Work, 10(4), 482–503.",
+  "licence": "CC BY-NC-ND 4.0, COPSOQ International Network. Free use in workplaces in line with the network guidelines; no fee is charged for the questionnaire itself.",
+  "test": false,
+  "pays": [
+    "BE"
+  ],
+  "echelles_reponse": [
+    {
+      "id": "frequence",
+      "options": [
+        {
+          "libelle": "Always",
+          "code": 4
+        },
+        {
+          "libelle": "Often",
+          "code": 3
+        },
+        {
+          "libelle": "Sometimes",
+          "code": 2
+        },
+        {
+          "libelle": "Seldom",
+          "code": 1
+        },
+        {
+          "libelle": "Never/hardly ever",
+          "code": 0
+        }
+      ]
+    },
+    {
+      "id": "mesure",
+      "options": [
+        {
+          "libelle": "To a very large extent",
+          "code": 4
+        },
+        {
+          "libelle": "To a large extent",
+          "code": 3
+        },
+        {
+          "libelle": "Somewhat",
+          "code": 2
+        },
+        {
+          "libelle": "To a small extent",
+          "code": 1
+        },
+        {
+          "libelle": "To a very small extent",
+          "code": 0
+        }
+      ]
+    },
+    {
+      "id": "mesuresanschef",
+      "options": [
+        {
+          "libelle": "To a very large extent",
+          "code": 4
+        },
+        {
+          "libelle": "To a large extent",
+          "code": 3
+        },
+        {
+          "libelle": "Somewhat",
+          "code": 2
+        },
+        {
+          "libelle": "To a small extent",
+          "code": 1
+        },
+        {
+          "libelle": "To a very small extent",
+          "code": 0
+        },
+        {
+          "code": 9,
+          "libelle": "I do not have a supervisor",
+          "manquant": true
+        }
+      ]
+    },
+    {
+      "id": "frequencesanschef",
+      "options": [
+        {
+          "libelle": "Always",
+          "code": 4
+        },
+        {
+          "libelle": "Often",
+          "code": 3
+        },
+        {
+          "libelle": "Sometimes",
+          "code": 2
+        },
+        {
+          "libelle": "Seldom",
+          "code": 1
+        },
+        {
+          "libelle": "Never/hardly ever",
+          "code": 0
+        },
+        {
+          "code": 9,
+          "libelle": "I do not have a supervisor",
+          "manquant": true
+        }
+      ]
+    },
+    {
+      "id": "frequencesanscoll",
+      "options": [
+        {
+          "libelle": "Always",
+          "code": 4
+        },
+        {
+          "libelle": "Often",
+          "code": 3
+        },
+        {
+          "libelle": "Sometimes",
+          "code": 2
+        },
+        {
+          "libelle": "Seldom",
+          "code": 1
+        },
+        {
+          "libelle": "Never/hardly ever",
+          "code": 0
+        },
+        {
+          "code": 9,
+          "libelle": "I do not have colleagues",
+          "manquant": true
+        }
+      ]
+    },
+    {
+      "id": "satisfaction",
+      "options": [
+        {
+          "libelle": "Very satisfied",
+          "code": 4
+        },
+        {
+          "libelle": "Satisfied",
+          "code": 3
+        },
+        {
+          "libelle": "Neither/Nor",
+          "code": 2
+        },
+        {
+          "libelle": "Unsatisfied",
+          "code": 1
+        },
+        {
+          "libelle": "Very unsatisfied",
+          "code": 0
+        }
+      ]
+    },
+    {
+      "id": "sante",
+      "options": [
+        {
+          "libelle": "Excellent",
+          "code": 4
+        },
+        {
+          "libelle": "Very good",
+          "code": 3
+        },
+        {
+          "libelle": "Good",
+          "code": 2
+        },
+        {
+          "libelle": "Fair",
+          "code": 1
+        },
+        {
+          "libelle": "Poor",
+          "code": 0
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "qd",
+      "nom": "Quantitative demands",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "qd1",
+          "texte": "Is your workload unevenly distributed so it piles up?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "qd2",
+          "texte": "How often do you not have time to complete all your work tasks?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "qd3",
+          "texte": "Do you get behind with your work?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "wp",
+      "nom": "Work pace",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "wp1",
+          "texte": "Do you have to work very fast?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "wp2",
+          "texte": "Do you work at a high pace throughout the day?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ed",
+      "nom": "Emotional demands",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "ed1",
+          "texte": "Does your work put you in emotionally disturbing situations?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "edx2",
+          "texte": "Do you have to deal with other people’s personal problems as part of your work?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ed3",
+          "texte": "Is your work emotionally demanding?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "he",
+      "nom": "Demands for hiding emotions",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "he2",
+          "texte": "Does your work require that you hide your feelings?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "he3",
+          "texte": "Are you required to be kind and open towards everyone – regardless of how they behave towards you?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "he4",
+          "texte": "Does your work require that you do not state your opinion?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "in",
+      "nom": "Influence at work",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "inx1",
+          "texte": "Do you have a large degree of influence on the decisions concerning your work?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "in3",
+          "texte": "Can you influence the amount of work assigned to you?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "in4",
+          "texte": "Do you have any influence on what you do at work?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "in6",
+          "texte": "Do you have any influence on HOW you do your work?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "pd",
+      "nom": "Possibilities for development (skill discretion)",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "pd2",
+          "texte": "Do you have the possibility of learning new things through your work?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "pd3",
+          "texte": "Can you use your skills or expertise in your work?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "pd4",
+          "texte": "Does your work give you the opportunity to develop your skills?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ct",
+      "nom": "Control over working time",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "ct1",
+          "texte": "Can you decide when to take a break?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct2",
+          "texte": "Can you take holidays more or less when you wish?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct3",
+          "texte": "Can you leave your work to have a chat with a colleague?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct4",
+          "texte": "If you have some private business is it possible for you to leave your place of work for half an hour without special permission?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct5",
+          "texte": "Do you have to do overtime?",
+          "reponse": "frequence",
+          "sens": "inverse"
+        }
+      ]
+    },
+    {
+      "id": "mw",
+      "nom": "Meaning of work",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "mw1",
+          "texte": "Is your work meaningful?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "mw2",
+          "texte": "Do you feel that the work you do is important?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "pr",
+      "nom": "Predictability",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "pr1",
+          "texte": "At your place of work, are you informed well in advance concerning for example important decisions, changes or plans for the future?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "pr2",
+          "texte": "Do you receive all the information you need in order to do your work well?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "re",
+      "nom": "Recognition",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "re1",
+          "texte": "Is your work recognized and appreciated by the management?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "cl",
+      "nom": "Role clarity",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "cl1",
+          "texte": "Does your work have clear objectives?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "cl2",
+          "texte": "Do you know exactly which areas are your responsibility?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "cl3",
+          "texte": "Do you know exactly what is expected of you at work?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "co",
+      "nom": "Role conflicts",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "co2",
+          "texte": "Are contradictory demands placed on you at work?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "co3",
+          "texte": "Do you sometimes have to do things which ought to have been done in a different way?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "it",
+      "nom": "Illegitimate tasks",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "it1",
+          "texte": "Do you sometimes have to do things which seem to be unnecessary?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ql",
+      "nom": "Quality of leadership",
+      "consigne": "To what extent would you say that your immediate superior ...",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "qlx1",
+          "texte": "makes sure that the members of staff have good development opportunities?",
+          "reponse": "mesuresanschef",
+          "sens": "direct"
+        },
+        {
+          "id": "ql3",
+          "texte": "is good at work planning?",
+          "reponse": "mesuresanschef",
+          "sens": "direct"
+        },
+        {
+          "id": "ql4",
+          "texte": "is good at solving conflicts?",
+          "reponse": "mesuresanschef",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ss",
+      "nom": "Social support from supervisor",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "ssx1",
+          "texte": "How often is your immediate superior willing to listen to your problems at work, if needed?",
+          "reponse": "frequencesanschef",
+          "sens": "direct"
+        },
+        {
+          "id": "ssx2",
+          "texte": "How often do you get help and support from your immediate superior, if needed?",
+          "reponse": "frequencesanschef",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sc",
+      "nom": "Social support from colleagues",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "scx1",
+          "texte": "How often do you get help and support from your colleagues, if needed?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        },
+        {
+          "id": "scx2",
+          "texte": "How often are your colleagues willing to listen to your problems at work, if needed?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        },
+        {
+          "id": "scx3",
+          "texte": "How often do your colleagues talk with you about how well you carry out your work?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sw",
+      "nom": "Sense of community at work",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "sw1",
+          "texte": "Is there a good atmosphere between you and your colleagues?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        },
+        {
+          "id": "sw3",
+          "texte": "Do you feel part of a community at your place of work?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ji",
+      "nom": "Insecurity over employment",
+      "niveau_mindset": "environnement",
+      "items": [
+        {
+          "id": "ji1",
+          "texte": "Are you worried about becoming unemployed?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "ji3",
+          "texte": "Are you worried about it being difficult for you to find another job if you became unemployed?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "iw",
+      "nom": "Insecurity over working conditions",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "iw1",
+          "texte": "Are you worried about being transferred to another job against your will?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "iw3",
+          "texte": "Are you worried about the timetable being changed (shift, weekdays, time to enter and leave ...) against your will?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "iw4",
+          "texte": "Are you worried about a decrease in your salary (reduction, variable pay being introduced ...)?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "qw",
+      "nom": "Quality of work",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "qw2",
+          "texte": "Are you satisfied with the quality of the work performed at your workplace?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "js",
+      "nom": "Satisfaction with work – job satisfaction",
+      "consigne": "Regarding your work in general. How pleased are you with",
+      "items": [
+        {
+          "id": "js1",
+          "texte": "your work prospects?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        },
+        {
+          "id": "js4",
+          "texte": "your job as a whole, everything taken into consideration?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        },
+        {
+          "id": "js5",
+          "texte": "your salary?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "wf",
+      "nom": "Work life conflict",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "wf2",
+          "texte": "Do you feel that your work drains so much of your energy that it has a negative effect on your private life?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "wf3",
+          "texte": "Do you feel that your work takes so much of your time that it has a negative effect on your private life?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "te",
+      "nom": "Horizontal trust",
+      "consigne": "The next questions are not about your own job but about the workplace as a whole.",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "te3",
+          "texte": "Do the employees in general trust each other?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tm",
+      "nom": "Vertical trust",
+      "consigne": "The next questions are not about your own job but about the workplace as a whole.",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "tm1",
+          "texte": "Does the management trust the employees to do their work well?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "tmx2",
+          "texte": "Can the employees trust the information that comes from the management?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "tm4",
+          "texte": "Are the employees able to express their views and feelings?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ju",
+      "nom": "Organizational justice",
+      "consigne": "The next questions are not about your own job but about the workplace as a whole.",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "ju1",
+          "texte": "Are conflicts resolved in a fair way?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "ju4",
+          "texte": "Is the work distributed fairly?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "gh",
+      "nom": "Self rated health",
+      "items": [
+        {
+          "id": "gh1",
+          "texte": "In general, would you say your health is:",
+          "reponse": "sante",
+          "sens": "direct"
+        }
+      ]
+    }
+  ]
+}

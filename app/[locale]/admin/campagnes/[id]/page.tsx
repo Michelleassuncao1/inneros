@@ -26,6 +26,7 @@ import {
   actionSupprimerGroupe,
 } from "../../actions";
 import { ChampsCampagne } from "../../ChampsFormulaires";
+import { questionnaireAutorise } from "@/lib/instruments/chargement";
 import { SectionCycle, SectionJetons, SectionKit, SectionSoutien } from "./Sections";
 import { languesDuPays } from "@/lib/pays";
 
@@ -191,7 +192,9 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
             <CasesACocher
               legende={t("instrumentsLegend")}
               name="instruments"
-              options={tousInstruments.map((i) => ({
+              options={tousInstruments
+                .filter((i) => questionnaireAutorise(i.definitions, entreprise.country))
+                .map((i) => ({
                 valeur: i.id,
                 libelle: `${i.code} ${i.version}${i.isTest ? ` (${l("test")})` : ""}`,
               }))}

@@ -13,6 +13,7 @@ import {
   users,
 } from "../db/schema";
 import type { Db } from "../db/types";
+import { questionnaireAutorise } from "../instruments/chargement";
 import { languesDuPays } from "../pays";
 import { LANGUES, type Resultat } from "./entreprises";
 
@@ -204,11 +205,18 @@ export async function choisirQuestionnaires(
 
   const connus = ids.data.length
     ? await db
-        .select({ id: instruments.id })
+        .select({ id: instruments.id, definitions: instruments.definitions })
         .from(instruments)
         .where(inArray(instruments.id, ids.data))
     : [];
   if (connus.length !== new Set(ids.data).size) return { ok: false, erreur: "saisieInvalide" };
+  // Une version nationale (ex. COPSOQ III belge) n'est proposée qu'aux entreprises de son pays
+  const [entreprise] = await db
+    .select({ pays: organizations.country })
+    .from(organizations)
+    .where(eq(organizations.id, verif.campagne.organizationId));
+  if (connus.some((i) => !questionnaireAutorise(i.definitions, entreprise.pays)))
+    return { ok: false, erreur: "questionnairePays" };
 
   await db.transaction(async (tx) => {
     await tx.delete(campaignInstruments).where(eq(campaignInstruments.campaignId, campaignId));

@@ -423,7 +423,8 @@
     "prolongationTropCourte": "A nova data de término deve ser posterior à data de término atual.",
     "questionnaireIncomplet": "Um questionário escolhido não existe em todos os idiomas da campanha. Retire o idioma ou escolha outro questionário.",
     "soutienContactInvalide": "Verifique os contatos: cada linha preenchida deve ter um telefone ou e-mail válido, e um cargo se a função for « Outro ».",
-    "soutienImaInvalide": "Para oferecer o acompanhamento do IMA, informe pelo menos um telefone, um e-mail ou um link de agendamento que comece com https://."
+    "soutienImaInvalide": "Para oferecer o acompanhamento do IMA, informe pelo menos um telefone, um e-mail ou um link de agendamento que comece com https://.",
+    "questionnairePays": "Este questionário é uma versão nacional reservada a empresas de outro país."
   },
   "Passation": {
     "enterTitle": "Acessar o questionário",

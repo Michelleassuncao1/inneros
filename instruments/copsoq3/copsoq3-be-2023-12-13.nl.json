@@ -1,0 +1,764 @@
+{
+  "format": 2,
+  "instrument": "copsoq3",
+  "version": "be-2023-12-13",
+  "langue": "nl",
+  "titre": "COPSOQ III — Kopenhagen Psychosociale Vragenlijst (Belgische versie)",
+  "source": "COPSOQ III, Belgian national version (French and Dutch): Belgian national COPSOQ team, Prof. Els Clays, Ghent University (file of 13 December 2023). English: international version, Llorens C., Pérez-Franco J., Oudyk J., Berthelsen H., Dupret E., Nübling M., Burr H., Moncada S. (2019). COPSOQ III. Guidelines and questionnaire. COPSOQ International Network. Burr H. et al. (2019). The Third Version of the Copenhagen Psychosocial Questionnaire. Safety and Health at Work, 10(4), 482–503.",
+  "licence": "CC BY-NC-ND 4.0, COPSOQ International Network. Free use in workplaces in line with the network guidelines; no fee is charged for the questionnaire itself.",
+  "test": false,
+  "pays": [
+    "BE"
+  ],
+  "echelles_reponse": [
+    {
+      "id": "frequence",
+      "options": [
+        {
+          "libelle": "altijd",
+          "code": 4
+        },
+        {
+          "libelle": "vaak",
+          "code": 3
+        },
+        {
+          "libelle": "soms",
+          "code": 2
+        },
+        {
+          "libelle": "zelden",
+          "code": 1
+        },
+        {
+          "libelle": "nooit/bijna nooit",
+          "code": 0
+        }
+      ]
+    },
+    {
+      "id": "mesure",
+      "options": [
+        {
+          "libelle": "in zeer belangrijke mate",
+          "code": 4
+        },
+        {
+          "libelle": "in belangrijke mate",
+          "code": 3
+        },
+        {
+          "libelle": "enigszins",
+          "code": 2
+        },
+        {
+          "libelle": "in kleine mate",
+          "code": 1
+        },
+        {
+          "libelle": "in zeer kleine mate",
+          "code": 0
+        }
+      ]
+    },
+    {
+      "id": "mesuresanschef",
+      "options": [
+        {
+          "libelle": "in zeer belangrijke mate",
+          "code": 4
+        },
+        {
+          "libelle": "in belangrijke mate",
+          "code": 3
+        },
+        {
+          "libelle": "enigszins",
+          "code": 2
+        },
+        {
+          "libelle": "in kleine mate",
+          "code": 1
+        },
+        {
+          "libelle": "in zeer kleine mate",
+          "code": 0
+        },
+        {
+          "code": 9,
+          "libelle": "ik heb geen leidinggevende",
+          "manquant": true
+        }
+      ]
+    },
+    {
+      "id": "frequencesanschef",
+      "options": [
+        {
+          "libelle": "altijd",
+          "code": 4
+        },
+        {
+          "libelle": "vaak",
+          "code": 3
+        },
+        {
+          "libelle": "soms",
+          "code": 2
+        },
+        {
+          "libelle": "zelden",
+          "code": 1
+        },
+        {
+          "libelle": "nooit/bijna nooit",
+          "code": 0
+        },
+        {
+          "code": 9,
+          "libelle": "ik heb geen leidinggevende",
+          "manquant": true
+        }
+      ]
+    },
+    {
+      "id": "frequencesanscoll",
+      "options": [
+        {
+          "libelle": "altijd",
+          "code": 4
+        },
+        {
+          "libelle": "vaak",
+          "code": 3
+        },
+        {
+          "libelle": "soms",
+          "code": 2
+        },
+        {
+          "libelle": "zelden",
+          "code": 1
+        },
+        {
+          "libelle": "nooit/bijna nooit",
+          "code": 0
+        },
+        {
+          "code": 9,
+          "libelle": "ik heb geen collega's",
+          "manquant": true
+        }
+      ]
+    },
+    {
+      "id": "satisfaction",
+      "options": [
+        {
+          "libelle": "zeer tevreden",
+          "code": 4
+        },
+        {
+          "libelle": "tevreden",
+          "code": 3
+        },
+        {
+          "libelle": "neutraal",
+          "code": 2
+        },
+        {
+          "libelle": "ontevreden",
+          "code": 1
+        },
+        {
+          "libelle": "zeer ontevreden",
+          "code": 0
+        }
+      ]
+    },
+    {
+      "id": "sante",
+      "options": [
+        {
+          "libelle": "uitstekend",
+          "code": 4
+        },
+        {
+          "libelle": "zeer goed",
+          "code": 3
+        },
+        {
+          "libelle": "goed",
+          "code": 2
+        },
+        {
+          "libelle": "behoorlijk",
+          "code": 1
+        },
+        {
+          "libelle": "slecht",
+          "code": 0
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "qd",
+      "nom": "Kwantitatieve werkvereisten",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "qd1",
+          "texte": "Is uw werkbelasting onregelmatig verdeeld, zodat het werk zich opstapelt ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "qd2",
+          "texte": "Hoe vaak heeft u niet genoeg tijd om al uw taken op het werk af te werken ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "qd3",
+          "texte": "Geraakt u achterop met uw werk ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "wp",
+      "nom": "Werktempo",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "wp1",
+          "texte": "Moet u zeer snel werken ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "wp2",
+          "texte": "Werkt u aan een hoog tempo gedurende de ganse dag ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ed",
+      "nom": "Emotionele werkvereisten",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "ed1",
+          "texte": "Wordt u door uw werk in emotioneel moeilijke situaties gedwongen ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "edx2",
+          "texte": "Houdt uw werk in dat u te maken krijgt met de persoonlijke problemen van andere mensen ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ed3",
+          "texte": "Is uw werk emotioneel veeleisend ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "he",
+      "nom": "Verbergen van emoties",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "he2",
+          "texte": "Vereist uw werk dat u uw gevoelens verbergt ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "he3",
+          "texte": "Moet u vriendelijk en open zijn tegen iedereen – onafgezien hoe men zich gedraagt tegenover u ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "he4",
+          "texte": "Vereist uw werk dat u uw mening niet zegt ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "in",
+      "nom": "Invloed op het werk",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "inx1",
+          "texte": "Heeft u een grote mate van invloed op beslissingen betreffende uw werk ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "in3",
+          "texte": "Kunt u de hoeveelheid werk die u wordt toegewezen beïnvloeden ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "in4",
+          "texte": "Heeft u enige invloed op wat u op uw werk doet ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "in6",
+          "texte": "Heeft u enige invloed op HOE u uw werk uitvoert?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "pd",
+      "nom": "Ontwikkelings-mogelijkheden",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "pd2",
+          "texte": "Heeft u de mogelijkheid om via uw werk nieuwe dingen te leren ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "pd3",
+          "texte": "Kunt u uw vaardigheden of deskundigheden in uw werk gebruiken ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "pd4",
+          "texte": "Geeft uw werk u de mogelijkheid om uw vaardigheden te ontwikkelen ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ct",
+      "nom": "Vrijheid over werktijd",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "ct1",
+          "texte": "Kunt u zelf bepalen wanneer u een pauze neemt ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct2",
+          "texte": "Kunt u vakantie nemen ongeveer wanneer u dat wenst ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct3",
+          "texte": "Kunt u uw werk even laten liggen om een praatje te maken met een collega ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct4",
+          "texte": "Kunt u zonder speciale toestemming uw werk voor een half uurtje verlaten voor een privé-aangelegenheid ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "ct5",
+          "texte": "Moet u overwerken ?",
+          "reponse": "frequence",
+          "sens": "inverse"
+        }
+      ]
+    },
+    {
+      "id": "mw",
+      "nom": "Zinvolheid van het werk",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "mw1",
+          "texte": "Is uw werk zinvol ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "mw2",
+          "texte": "Heeft u het gevoel dat het werk dat u doet belangrijk is ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "pr",
+      "nom": "Voorspelbaarheid",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "pr1",
+          "texte": "Wordt u op uw werkplek ruimschoots van te voren geïnformeerd omtrent bijvoorbeeld belangrijke beslissingen, veranderingen of toekomstplannen ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "pr2",
+          "texte": "Ontvangt u alle nodige informatie om uw werk goed te kunnen uitvoeren ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "re",
+      "nom": "Erkenning",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "re1",
+          "texte": "Wordt uw werk erkend en geapprecieerd door de leiding ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "cl",
+      "nom": "Rolduidelijkheid",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "cl1",
+          "texte": "Heeft uw werk duidelijke doelstellingen ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "cl2",
+          "texte": "Weet u precies in welke domeinen uw verantwoordelijkheid ligt ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "cl3",
+          "texte": "Weet u precies wat er van u verwacht wordt op het werk ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "co",
+      "nom": "Rolconflicten",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "co2",
+          "texte": "Worden er u tijdens het werk tegenstrijdige eisen opgelegd ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "co3",
+          "texte": "Moet u soms dingen doen die op een andere manier hadden moeten uitgevoerd worden ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "it",
+      "nom": "Niet noodzakelijke taken",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "it1",
+          "texte": "Moet u soms dingen doen die onnodig schijnen ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ql",
+      "nom": "Kwaliteit van het leiderschap",
+      "consigne": "In welke mate vindt u dat uw onmiddellijke chef …",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "qlx1",
+          "texte": "ervoor zorgt dat de personeelsleden over goede ontplooiingsmogelijkheden beschikken ?",
+          "reponse": "mesuresanschef",
+          "sens": "direct"
+        },
+        {
+          "id": "ql3",
+          "texte": "goed is in werkplanning ?",
+          "reponse": "mesuresanschef",
+          "sens": "direct"
+        },
+        {
+          "id": "ql4",
+          "texte": "goed is in het oplossen van conflicten ?",
+          "reponse": "mesuresanschef",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ss",
+      "nom": "Sociale ondersteuning leidinggevende",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "ssx1",
+          "texte": "Als u het nodig zou hebben, hoe dikwijls zou uw onmiddellijke chef bereid zijn om te luisteren naar uw problemen op het werk ?",
+          "reponse": "frequencesanschef",
+          "sens": "direct"
+        },
+        {
+          "id": "ssx2",
+          "texte": "Als u het nodig zou hebben, hoe dikwijls zou u hulp en ondersteuning krijgen van uw onmiddellijke chef ?",
+          "reponse": "frequencesanschef",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sc",
+      "nom": "Sociale ondersteuning collega’s",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "scx1",
+          "texte": "Als u het nodig zou hebben, hoe dikwijls zou u hulp en ondersteuning krijgen van uw collega’s ?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        },
+        {
+          "id": "scx2",
+          "texte": "Als u het nodig zou hebben, hoe dikwijls zouden uw collega’s bereid zijn om te luisteren naar uw problemen op het werk ?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        },
+        {
+          "id": "scx3",
+          "texte": "Hoe dikwijls hebben uw collega’s het met u over hoe goed u uw werk uitvoert ?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sw",
+      "nom": "Gemeenschapsgevoel op het werk",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "sw1",
+          "texte": "Is er een goede sfeer tussen u en uw collega’s ?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        },
+        {
+          "id": "sw3",
+          "texte": "Voelt u zich een deel van een groep op uw werkplaats ?",
+          "reponse": "frequencesanscoll",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ji",
+      "nom": "Onzekerheid over tewerkstelling",
+      "niveau_mindset": "environnement",
+      "items": [
+        {
+          "id": "ji1",
+          "texte": "Maakt u zich zorgen om werkloos te worden ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "ji3",
+          "texte": "Maakt u zich zorgen dat het voor u moeilijk zal zijn om een andere job te vinden indien u werkloos zou worden ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "iw",
+      "nom": "Onzekerheid over de werkomgeving",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "iw1",
+          "texte": "Maakt u zich zorgen om tegen uw zin overgeplaatst te worden naar een andere job ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "iw3",
+          "texte": "Maakt u zich zorgen dat de dienstregeling (shifts, weekdagen, begintijd en eindtijd,…) buiten uw wil wordt veranderd ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "iw4",
+          "texte": "Maakt u zich zorgen om een daling van uw loon (vermindering, invoer variabele beloning,…) ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "qw",
+      "nom": "Kwaliteit van het werk",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "qw2",
+          "texte": "Bent u tevreden over de kwaliteit van het uitgevoerde werk op uw werkplek ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "js",
+      "nom": "Jobtevredenheid",
+      "consigne": "Over uw werk in het algemeen. Hoe tevreden bent u over …",
+      "items": [
+        {
+          "id": "js1",
+          "texte": "uw werkvooruitzichten ?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        },
+        {
+          "id": "js4",
+          "texte": "uw job in zijn geheel, alles in beschouwing genomen ?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        },
+        {
+          "id": "js5",
+          "texte": "uw loon ?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "wf",
+      "nom": "Werk-privé conflict",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "wf2",
+          "texte": "Heeft u het gevoel dat uw werk zoveel van uw energie vergt, dat dit een negatief effect heeft op uw privéleven ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "wf3",
+          "texte": "Heeft u het gevoel dat uw werk zoveel van uw tijd vergt, dat dit een negatief effect heeft op uw privéleven ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "te",
+      "nom": "Horizontaal vertrouwen",
+      "consigne": "De volgende vragen handelen niet over uw eigen job, maar over het ganse bedrijf waar u werkt.",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "te3",
+          "texte": "In het algemeen, vertrouwen de werknemers elkaar ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tm",
+      "nom": "Verticaal vertrouwen",
+      "consigne": "De volgende vragen handelen niet over uw eigen job, maar over het ganse bedrijf waar u werkt.",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "tm1",
+          "texte": "Vertrouwt de leiding erop dat de werknemers hun werk goed doen ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "tmx2",
+          "texte": "Kunnen de werknemers de informatie afkomstig van de leiding vertrouwen?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "tm4",
+          "texte": "Kunnen de werknemers hun opvattingen en gevoelens duidelijk maken ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "ju",
+      "nom": "Organisatorische rechtvaardigheid",
+      "consigne": "De volgende vragen handelen niet over uw eigen job, maar over het ganse bedrijf waar u werkt.",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "ju1",
+          "texte": "Worden conflicten opgelost op een rechtvaardige manier ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "ju4",
+          "texte": "Is het werk rechtvaardig verdeeld ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "gh",
+      "nom": "Subjectieve gezondheid",
+      "items": [
+        {
+          "id": "gh1",
+          "texte": "In het algemeen, vindt u uw gezondheid …",
+          "reponse": "sante",
+          "sens": "direct"
+        }
+      ]
+    }
+  ]
+}

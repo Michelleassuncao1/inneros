@@ -31,3 +31,12 @@ npm.cmd run instruments:charger -- instruments/copsoq3-xxx.fr.json
 Cette commande affiche seulement l'aperçu, à comparer mot à mot avec le document officiel.
 Après vérification, la même commande avec `--enregistrer` à la fin enregistre le questionnaire
 (serveur de développement arrêté).
+
+## Questionnaires convertis
+
+| Dossier | Questionnaire | Langues | Source | État |
+|---|---|---|---|---|
+| `copsoq3/` | COPSOQ III, version belge `be-2023-12-13` (CORE + MIDDLE, 62 items, sans WE), réservée aux entreprises belges | fr, nl, en | Excel de l'équipe nationale belge (prof. Els Clays, 13/12/2023) ; anglais : version internationale (lignes directrices 2019) | en relecture : voir `docs/relecture/copsoq3-be-relecture.html` |
+
+Les options « je n'ai pas de supérieur / de collègues » (code 9) sont marquées `manquant` : elles comptent comme
+une réponse manquante dans les scores, comme le prévoient les lignes directrices internationales.

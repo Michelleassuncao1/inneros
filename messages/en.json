@@ -423,7 +423,8 @@
     "prolongationTropCourte": "The new end date must be after the current end date.",
     "questionnaireIncomplet": "A selected questionnaire is not available in all the campaign languages. Remove the language or choose another questionnaire.",
     "soutienContactInvalide": "Please check the contacts: each completed line needs a valid phone number or email address, and a function if the role is “Other”.",
-    "soutienImaInvalide": "To offer IMA support, enter at least a phone number, an email address or a booking link starting with https://."
+    "soutienImaInvalide": "To offer IMA support, enter at least a phone number, an email address or a booking link starting with https://.",
+    "questionnairePays": "This questionnaire is a national version reserved for companies in another country."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",

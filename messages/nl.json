@@ -423,7 +423,8 @@
     "prolongationTropCourte": "De nieuwe einddatum moet na de huidige einddatum liggen.",
     "questionnaireIncomplet": "Een gekozen vragenlijst bestaat niet in alle talen van de campagne. Verwijder de taal of kies een andere vragenlijst.",
     "soutienContactInvalide": "Controleer de contactpersonen: elke ingevulde regel moet een geldig telefoonnummer of e-mailadres hebben, en een functie als de rol “Andere” is.",
-    "soutienImaInvalide": "Geef voor de begeleiding door IMA minstens een telefoonnummer, een e-mailadres of een afsprakenlink die begint met https:// op."
+    "soutienImaInvalide": "Geef voor de begeleiding door IMA minstens een telefoonnummer, een e-mailadres of een afsprakenlink die begint met https:// op.",
+    "questionnairePays": "Deze vragenlijst is een nationale versie, voorbehouden aan ondernemingen in een ander land."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
