@@ -36,8 +36,8 @@ Après vérification, la même commande avec `--enregistrer` à la fin enregistr
 
 | Dossier | Questionnaire | Langues | Source | État |
 |---|---|---|---|---|
-| `copsoq3/` | COPSOQ III, version belge `be-2023-12-13` (CORE + MIDDLE, 62 items, sans WE), réservée aux entreprises belges | fr, nl, en | Excel de l'équipe nationale belge (prof. Els Clays, 13/12/2023) ; anglais : version internationale (lignes directrices 2019) | en relecture : voir `docs/relecture/copsoq3-be-relecture.html` |
+| `copsoq3/` | COPSOQ III, version belge `be-2023-12-13` (CORE + MIDDLE, 62 items, sans WE), réservée aux entreprises belges | fr, nl, en | Excel de l'équipe nationale belge (prof. Els Clays, 13/12/2023) ; anglais : version internationale (lignes directrices 2019) | relu et validé par Michelle le 13/10/2026, enregistré |
 
 Les options « je n'ai pas de supérieur / de collègues » (code 9) sont marquées `manquant` : elles comptent comme
 une réponse manquante dans les scores, comme le prévoient les lignes directrices internationales.
-| `flourishing/` | Flourishing Scale `diener-2009` (8 items, réponses 1 à 7), tous pays | fr, nl, en | PDF du laboratoire de Diener (FR : Villieux et al. 2016 ; NL : van Egmond & Hanke) | en relecture : voir `docs/relecture/flourishing-relecture.html` |
+| `flourishing/` | Flourishing Scale `diener-2009` (8 items, réponses 1 à 7), tous pays | fr, nl, en | PDF du laboratoire de Diener (FR : Villieux et al. 2016 ; NL : van Egmond & Hanke) | relu et validé par Michelle le 13/10/2026, enregistré |
