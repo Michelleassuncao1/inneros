@@ -522,5 +522,39 @@
   "Footer": {
     "values": "Inspireren · Motiveren · Handelen",
     "copyright": "© 2026 Institut Mindset en Action®. MINDSET® is een eigen methode van het Instituut."
+  },
+  "Resultats": {
+    "participationTitle": "Deelname",
+    "summary": "{reponses} antwoorden op {codes} uitgedeelde codes ({taux} %)",
+    "summaryNoCodes": "{reponses} antwoorden",
+    "group": "Groep",
+    "expected": "Verwacht aantal",
+    "responses": "Antwoorden",
+    "rate": "Percentage",
+    "masked": "verborgen",
+    "maskedHelp": "« verborgen »: minder dan {seuil} antwoorden, of verborgen zodat een kleine groep niet door aftrekking kan worden achterhaald.",
+    "afterClose": "De resultaten worden berekend bij de afsluiting van de bevraging, nooit eerder.",
+    "see": "Resultaten bekijken",
+    "title": "Resultaten",
+    "noReference": "Geen nationale referentie: de scores worden zonder kleurmarkering getoond.",
+    "computedOn": "Berekend bij de afsluiting, op {date} (rekenregels {version}).",
+    "maskedGroups": "{count, plural, =0 {Geen verborgen groep.} one {# verborgen groep: minder dan {seuil} antwoorden, of bescherming tegen berekening door aftrekking.} other {# verborgen groepen: minder dan {seuil} antwoorden, of bescherming tegen berekening door aftrekking.}}",
+    "howToRead": "COPSOQ III en CBI: scores van 0 tot 100. Flourishing: som van 8 tot 56. Tussen haakjes: aantal personen.",
+    "scale": "Schaal",
+    "all": "Geheel",
+    "none": "—",
+    "noResults": "Geen resultaten: minder dan {seuil} bruikbare antwoorden in totaal.",
+    "notClosed": "De bevraging is nog niet afgesloten: er worden geen resultaten berekend.",
+    "back": "Terug naar de bevraging",
+    "levels": {
+      "travail": "Activiteit / werk",
+      "roles": "Rollen en verantwoordelijkheden",
+      "interactions": "Interacties",
+      "management": "Management",
+      "organisation": "Organisatie",
+      "environnement": "Omgeving",
+      "sante": "Gezondheid",
+      "aucun": "Resultaatindicatoren"
+    }
   }
 }

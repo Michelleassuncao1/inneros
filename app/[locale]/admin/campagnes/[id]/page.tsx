@@ -27,7 +27,7 @@ import {
 } from "../../actions";
 import { ChampsCampagne } from "../../ChampsFormulaires";
 import { questionnaireAutorise } from "@/lib/instruments/chargement";
-import { SectionCycle, SectionJetons, SectionKit, SectionSoutien } from "./Sections";
+import { SectionCycle, SectionJetons, SectionKit, SectionParticipation, SectionSoutien } from "./Sections";
 import { languesDuPays } from "@/lib/pays";
 
 export default async function CampagnePage({ params }: PageProps<"/[locale]/admin/campagnes/[id]">) {
@@ -92,6 +92,7 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
         campagne={campagne}
         languesAjoutables={languesDuPays(entreprise.country).filter((lg) => !(campagne.locales as string[]).includes(lg))}
       />
+      <SectionParticipation locale={locale} campagne={campagne} />
       <SectionJetons locale={locale} campagne={campagne} effectifTotal={total} />
       <SectionKit campagne={campagne} />
       <SectionSoutien locale={locale} campagne={campagne} pays={entreprise.country} />

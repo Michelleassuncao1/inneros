@@ -5,6 +5,7 @@ import { z } from "zod";
 import { journaliser } from "../audit";
 import { campaignInstruments, campaignReferents, campaigns, groups, instruments, organizations, tokens } from "../db/schema";
 import { definitionPour } from "../instruments/chargement";
+import { calculerAgregats } from "../resultats/agregats";
 import { languesDuPays } from "../pays";
 import type { Db } from "../db/types";
 import type { Resultat } from "./entreprises";
@@ -156,17 +157,25 @@ export async function cloturerCampagne(
   if (!campagne) return { ok: false, erreur: "introuvable" };
   if (campagne.status !== "open") return { ok: false, erreur: "campagneNonOuverte" };
 
-  const supprimes = await db.transaction(async (tx) => {
-    const liste = await tx.delete(tokens).where(eq(tokens.campaignId, campaignId)).returning({ id: tokens.id });
-    await tx.update(campaigns).set({ status: "closed", closedAt: maintenant }).where(eq(campaigns.id, campaignId));
-    return liste.length;
+  // Clôture, suppression des jetons et calcul des résultats : tout ou rien
+  const { supprimes, agregats } = await db.transaction(async (tx) => {
+    const liste = await tx
+      .delete(tokens)
+      .where(eq(tokens.campaignId, campaignId))
+      .returning({ status: tokens.status });
+    const distribues = liste.filter((j) => j.status !== "revoked").length;
+    await tx
+      .update(campaigns)
+      .set({ status: "closed", closedAt: maintenant, tokensIssued: distribues })
+      .where(eq(campaigns.id, campaignId));
+    return { supprimes: liste.length, agregats: await calculerAgregats(tx, campaignId) };
   });
   await journaliser(db, {
     actorUserId: adminId,
     action: "campaign_closed",
     targetType: "campaign",
     targetId: campaignId,
-    details: { jetonsSupprimes: supprimes },
+    details: { jetonsSupprimes: supprimes, agregats },
   });
   return { ok: true, valeur: { jetonsSupprimes: supprimes } };
 }

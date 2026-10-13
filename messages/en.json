@@ -522,5 +522,39 @@
   "Footer": {
     "values": "Inspire · Motivate · Act",
     "copyright": "© 2026 Institut Mindset en Action®. MINDSET® is a proprietary method of the Institute."
+  },
+  "Resultats": {
+    "participationTitle": "Participation",
+    "summary": "{reponses} responses out of {codes} codes handed out ({taux} %)",
+    "summaryNoCodes": "{reponses} responses",
+    "group": "Group",
+    "expected": "Expected size",
+    "responses": "Responses",
+    "rate": "Rate",
+    "masked": "hidden",
+    "maskedHelp": "“hidden”: fewer than {seuil} responses, or hidden so that a small group cannot be worked out by subtraction.",
+    "afterClose": "Results will be calculated when the survey is closed, never before.",
+    "see": "View results",
+    "title": "Results",
+    "noReference": "No national reference: scores are shown without colour markers.",
+    "computedOn": "Calculated at closure, on {date} (calculation rules {version}).",
+    "maskedGroups": "{count, plural, =0 {No hidden group.} one {# hidden group: fewer than {seuil} responses, or protection against calculation by subtraction.} other {# hidden groups: fewer than {seuil} responses, or protection against calculation by subtraction.}}",
+    "howToRead": "COPSOQ III and CBI: scores from 0 to 100. Flourishing: sum from 8 to 56. In brackets: number of people.",
+    "scale": "Scale",
+    "all": "Overall",
+    "none": "—",
+    "noResults": "No results: fewer than {seuil} usable responses in total.",
+    "notClosed": "The survey is not closed yet: no results are calculated.",
+    "back": "Back to the survey",
+    "levels": {
+      "travail": "Activity / work",
+      "roles": "Roles and responsibilities",
+      "interactions": "Interactions",
+      "management": "Management",
+      "organisation": "Organisation",
+      "environnement": "Environment",
+      "sante": "Health",
+      "aucun": "Outcome indicators"
+    }
   }
 }

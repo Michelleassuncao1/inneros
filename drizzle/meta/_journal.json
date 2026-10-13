@@ -50,6 +50,13 @@
       "when": 1791806379782,
       "tag": "0006_soutien-repondants",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1791917790760,
+      "tag": "0007_participation-cloture",
+      "breakpoints": true
     }
   ]
 }

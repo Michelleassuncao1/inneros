@@ -1,5 +1,8 @@
 // Sections « Ouverture », « Jetons » et « Kit d'information » de la fiche campagne.
 import { getTranslations } from "next-intl/server";
+import { Cellule, Tableau } from "@/components/EspaceAdmin";
+import { Link } from "@/i18n/navigation";
+import { participation } from "@/lib/resultats/agregats";
 import { Champ, MessageInfo, Selection } from "@/components/Formulaire";
 import { FormulaireAction } from "@/components/FormulaireAction";
 import { CONTACTS_MAXIMUM, lireSoutien, rolesDuPays } from "@/lib/admin/soutien";
@@ -300,3 +303,46 @@ export async function SectionSoutien({ locale, campagne, pays }: { locale: strin
   );
 }
 
+// Participation (F7) : réponses par groupe, masquées sous le seuil ; lien vers les résultats après la clôture
+export async function SectionParticipation({ locale, campagne }: { locale: string; campagne: Campagne }) {
+  if (campagne.status === "draft") return null;
+  const t = await getTranslations("Resultats");
+  const p = await participation(getDb(), campagne.id);
+  if (!p) return null;
+  const pourcent = (a: number, b: number) =>
+    new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(b ? (a / b) * 100 : 0);
+
+  return (
+    <section aria-labelledby="participation" className="mb-12">
+      <h2 id="participation" className="text-xl">{t("participationTitle")}</h2>
+      <p className="mb-4 mt-2 font-semibold text-ima-navy">
+        {p.codes
+          ? t("summary", { reponses: p.reponses, codes: p.codes, taux: pourcent(p.reponses, p.codes) })
+          : t("summaryNoCodes", { reponses: p.reponses })}
+      </p>
+      <Tableau entetes={[t("group"), t("expected"), t("responses"), t("rate")]}>
+        {p.groupes.map((g) => (
+          <tr key={g.id}>
+            <Cellule>{g.libelle}</Cellule>
+            <Cellule>{g.attendus}</Cellule>
+            <Cellule>{g.reponses ?? <span className="italic text-ima-muted">{t("masked")}</span>}</Cellule>
+            <Cellule>{g.reponses === null ? t("none") : `${pourcent(g.reponses, g.attendus)} %`}</Cellule>
+          </tr>
+        ))}
+      </Tableau>
+      <p className="mt-2 max-w-[70ch] text-sm text-ima-muted">{t("maskedHelp", { seuil: p.seuil })}</p>
+      <div className="mt-4">
+        {campagne.status === "closed" ? (
+          <Link
+            href={`/admin/campagnes/${campagne.id}/resultats`}
+            className="inline-block rounded-md bg-ima-navy px-4 py-2 font-semibold text-white hover:opacity-90"
+          >
+            {t("see")}
+          </Link>
+        ) : (
+          <MessageInfo>{t("afterClose")}</MessageInfo>
+        )}
+      </div>
+    </section>
+  );
+}

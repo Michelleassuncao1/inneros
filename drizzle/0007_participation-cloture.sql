@@ -1,0 +1,1 @@
+ALTER TABLE "campaigns" ADD COLUMN "tokens_issued" integer;

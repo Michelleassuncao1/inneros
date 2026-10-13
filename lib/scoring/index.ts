@@ -11,6 +11,9 @@
 // « Je préfère ne pas répondre » (null) et les options marquées « manquant » comptent comme non répondues.
 import { cleItem, type FichierInstrument } from "../instruments/format";
 
+// Version des règles de calcul, enregistrée avec chaque agrégat
+export const VERSION_CALCUL = "calcul-1";
+
 export type Reponses = Record<string, number | null | undefined>;
 type Dimension = FichierInstrument["dimensions"][number];
 

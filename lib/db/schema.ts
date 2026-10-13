@@ -190,6 +190,8 @@ export const campaigns = pgTable(
       .notNull()
       .defaultNow(),
     closedAt: timestamp("closed_at", { withTimezone: true }),
+    // Nombre de codes distribués (actifs + utilisés), noté à la clôture puisque les jetons sont alors supprimés
+    tokensIssued: integer("tokens_issued"),
   },
   (t) => [
     check("campaigns_seuil_minimum", sql`${t.groupMinSize} >= 10`),

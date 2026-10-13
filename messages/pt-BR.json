@@ -522,5 +522,39 @@
   "Footer": {
     "values": "Inspirar · Motivar · Agir",
     "copyright": "© 2026 Institut Mindset en Action®. MINDSET® é um método proprietário do Instituto."
+  },
+  "Resultats": {
+    "participationTitle": "Participação",
+    "summary": "{reponses} respostas de {codes} códigos distribuídos ({taux} %)",
+    "summaryNoCodes": "{reponses} respostas",
+    "group": "Grupo",
+    "expected": "Efetivo previsto",
+    "responses": "Respostas",
+    "rate": "Taxa",
+    "masked": "oculto",
+    "maskedHelp": "« oculto »: menos de {seuil} respostas, ou oculto para que um grupo pequeno não possa ser identificado por subtração.",
+    "afterClose": "Os resultados serão calculados no encerramento da campanha, nunca antes.",
+    "see": "Ver os resultados",
+    "title": "Resultados",
+    "noReference": "Sem referência nacional: os escores são exibidos sem marcação de cor.",
+    "computedOn": "Calculados no encerramento, em {date} (regras de cálculo {version}).",
+    "maskedGroups": "{count, plural, =0 {Nenhum grupo oculto.} one {# grupo oculto: menos de {seuil} respostas, ou proteção contra o cálculo por subtração.} other {# grupos ocultos: menos de {seuil} respostas, ou proteção contra o cálculo por subtração.}}",
+    "howToRead": "COPSOQ III e CBI: escores de 0 a 100. Flourishing: soma de 8 a 56. Entre parênteses: número de pessoas.",
+    "scale": "Escala",
+    "all": "Conjunto",
+    "none": "—",
+    "noResults": "Nenhum resultado: menos de {seuil} respostas utilizáveis no total.",
+    "notClosed": "A campanha ainda não foi encerrada: nenhum resultado é calculado.",
+    "back": "Voltar à campanha",
+    "levels": {
+      "travail": "Atividade / trabalho",
+      "roles": "Papéis e responsabilidades",
+      "interactions": "Interações",
+      "management": "Gestão",
+      "organisation": "Organização",
+      "environnement": "Ambiente",
+      "sante": "Saúde",
+      "aucun": "Indicadores de resultado"
+    }
   }
 }
