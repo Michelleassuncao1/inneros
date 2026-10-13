@@ -1,0 +1,102 @@
+{
+  "format": 2,
+  "instrument": "flourishing",
+  "version": "diener-2009",
+  "langue": "nl",
+  "titre": "Flourishing Scale",
+  "source": "Nederlandse vertaling: Dr. Marieke van Egmond & Dr. Katja Hanke, Jacobs University Bremen (BIGSSS). Originele versie: Diener, E., Wirtz, D., Tov, W., Kim-Prieto, C., Choi, D., Oishi, S., & Biswas-Diener, R. (2010). New well-being measures: Short scales to assess flourishing and positive and negative feelings. Social Indicators Research, 97(2), 143–156.",
+  "licence": "© Ed Diener and Robert Biswas-Diener, January 2009. Free to use without permission or charge by all professionals, with credit to the authors of the scale.",
+  "test": false,
+  "echelles_reponse": [
+    {
+      "id": "accord",
+      "options": [
+        {
+          "code": 1,
+          "libelle": "Helemaal niet mee eens"
+        },
+        {
+          "code": 2,
+          "libelle": "Mee oneens"
+        },
+        {
+          "code": 3,
+          "libelle": "Een beetje mee oneens"
+        },
+        {
+          "code": 4,
+          "libelle": "Noch mee oneens, noch mee eens"
+        },
+        {
+          "code": 5,
+          "libelle": "Een beetje mee eens"
+        },
+        {
+          "code": 6,
+          "libelle": "Mee eens"
+        },
+        {
+          "code": 7,
+          "libelle": "Heel erg mee eens"
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "fs",
+      "nom": "Flourishing",
+      "consigne": "Geef aan in hoeverre je het eens of oneens bent met de volgende stellingen.",
+      "items": [
+        {
+          "id": "fs1",
+          "texte": "Ik leid een doelgericht en zinvol leven",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs2",
+          "texte": "Mijn sociale relaties zijn ondersteunend en belonend.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs3",
+          "texte": "Ik ben geëngageerd met en geïnteresseerd in mijn dagelijkse activiteiten.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs4",
+          "texte": "Ik draag actief bij aan het geluk en welzijn van anderen.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs5",
+          "texte": "Ik ben capabel en in staat om de activiteiten uit te voeren die belangrijk voor mij zijn.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs6",
+          "texte": "Ik ben een goed persoon en leid een goed leven.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs7",
+          "texte": "Ik ben optimistisch over mijn toekomst.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs8",
+          "texte": "Mensen respecteren mij.",
+          "reponse": "accord",
+          "sens": "direct"
+        }
+      ]
+    }
+  ]
+}

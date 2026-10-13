@@ -1,0 +1,102 @@
+{
+  "format": 2,
+  "instrument": "flourishing",
+  "version": "diener-2009",
+  "langue": "fr",
+  "titre": "Échelle d’épanouissement psychologique (Flourishing Scale)",
+  "source": "Version française : Villieux, A., Sovet, L., Jung, S.-C., & Guilbert, L. (2016). Psychological flourishing: Validation of the French version of the Flourishing Scale and exploration of its relationships with personality traits. Personality and Individual Differences, 88, 1–5. Version originale : Diener, E., Wirtz, D., Tov, W., Kim-Prieto, C., Choi, D., Oishi, S., & Biswas-Diener, R. (2010). New well-being measures: Short scales to assess flourishing and positive and negative feelings. Social Indicators Research, 97(2), 143–156.",
+  "licence": "© Ed Diener and Robert Biswas-Diener, January 2009. Free to use without permission or charge by all professionals, with credit to the authors of the scale.",
+  "test": false,
+  "echelles_reponse": [
+    {
+      "id": "accord",
+      "options": [
+        {
+          "code": 1,
+          "libelle": "Pas du tout d’accord"
+        },
+        {
+          "code": 2,
+          "libelle": "Pas d’accord"
+        },
+        {
+          "code": 3,
+          "libelle": "Plutôt pas d’accord"
+        },
+        {
+          "code": 4,
+          "libelle": "Ni d’accord, ni pas d’accord"
+        },
+        {
+          "code": 5,
+          "libelle": "Plutôt d’accord"
+        },
+        {
+          "code": 6,
+          "libelle": "D’accord"
+        },
+        {
+          "code": 7,
+          "libelle": "Tout à fait d’accord"
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "fs",
+      "nom": "Épanouissement psychologique",
+      "consigne": "Vous trouverez ci-dessous huit affirmations avec lesquelles vous pouvez être plus ou moins en accord (ou en désaccord).",
+      "items": [
+        {
+          "id": "fs1",
+          "texte": "Je mène une vie qui a un but et du sens.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs2",
+          "texte": "Mes relations sociales me soutiennent et sont enrichissantes.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs3",
+          "texte": "Je suis impliqué(e) et intéressé(e) par mes activités quotidiennes.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs4",
+          "texte": "Je contribue activement au bonheur et au bien-être des autres.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs5",
+          "texte": "Je suis compétent(e) et appliqué(e) dans les activités qui sont importantes pour moi.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs6",
+          "texte": "Je suis quelqu’un de « bien » qui a une « bonne » vie.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs7",
+          "texte": "Je suis optimiste quant à mon avenir.",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs8",
+          "texte": "Les gens me respectent.",
+          "reponse": "accord",
+          "sens": "direct"
+        }
+      ]
+    }
+  ]
+}

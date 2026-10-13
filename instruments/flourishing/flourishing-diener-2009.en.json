@@ -1,0 +1,102 @@
+{
+  "format": 2,
+  "instrument": "flourishing",
+  "version": "diener-2009",
+  "langue": "en",
+  "titre": "Flourishing Scale",
+  "source": "Diener, E., Wirtz, D., Tov, W., Kim-Prieto, C., Choi, D., Oishi, S., & Biswas-Diener, R. (2010). New well-being measures: Short scales to assess flourishing and positive and negative feelings. Social Indicators Research, 97(2), 143–156.",
+  "licence": "© Ed Diener and Robert Biswas-Diener, January 2009. Free to use without permission or charge by all professionals, with credit to the authors of the scale.",
+  "test": false,
+  "echelles_reponse": [
+    {
+      "id": "accord",
+      "options": [
+        {
+          "code": 1,
+          "libelle": "Strongly disagree"
+        },
+        {
+          "code": 2,
+          "libelle": "Disagree"
+        },
+        {
+          "code": 3,
+          "libelle": "Slightly disagree"
+        },
+        {
+          "code": 4,
+          "libelle": "Neither agree nor disagree"
+        },
+        {
+          "code": 5,
+          "libelle": "Slightly agree"
+        },
+        {
+          "code": 6,
+          "libelle": "Agree"
+        },
+        {
+          "code": 7,
+          "libelle": "Strongly agree"
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "fs",
+      "nom": "Flourishing",
+      "consigne": "Below are 8 statements with which you may agree or disagree.",
+      "items": [
+        {
+          "id": "fs1",
+          "texte": "I lead a purposeful and meaningful life",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs2",
+          "texte": "My social relationships are supportive and rewarding",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs3",
+          "texte": "I am engaged and interested in my daily activities",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs4",
+          "texte": "I actively contribute to the happiness and well-being of others",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs5",
+          "texte": "I am competent and capable in the activities that are important to me",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs6",
+          "texte": "I am a good person and live a good life",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs7",
+          "texte": "I am optimistic about my future",
+          "reponse": "accord",
+          "sens": "direct"
+        },
+        {
+          "id": "fs8",
+          "texte": "People respect me",
+          "reponse": "accord",
+          "sens": "direct"
+        }
+      ]
+    }
+  ]
+}

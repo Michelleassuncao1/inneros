@@ -40,3 +40,4 @@ Après vérification, la même commande avec `--enregistrer` à la fin enregistr
 
 Les options « je n'ai pas de supérieur / de collègues » (code 9) sont marquées `manquant` : elles comptent comme
 une réponse manquante dans les scores, comme le prévoient les lignes directrices internationales.
+| `flourishing/` | Flourishing Scale `diener-2009` (8 items, réponses 1 à 7), tous pays | fr, nl, en | PDF du laboratoire de Diener (FR : Villieux et al. 2016 ; NL : van Egmond & Hanke) | en relecture : voir `docs/relecture/flourishing-relecture.html` |
