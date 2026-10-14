@@ -19,6 +19,7 @@ import {
   text,
   timestamp,
   unique,
+  uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
 
@@ -103,6 +104,9 @@ export const users = pgTable(
       .notNull()
       .defaultNow(),
     disabledAt: timestamp("disabled_at", { withTimezone: true }),
+    // Maîtrise de l'IA (article 4 AI Act) : date de la formation suivie ; requise pour valider un rapport
+    aiLiteracyAt: date("ai_literacy_at"),
+    aiLiteracyNote: text("ai_literacy_note"),
   },
   (t) => [
     // Un administrateur n'est rattaché à aucune entreprise ;
@@ -393,6 +397,8 @@ export const reports = pgTable(
     // Le délai de conservation des réponses brutes démarre à cette date.
     acceptedBy: uuid("accepted_by").references(() => users.id, { onDelete: "set null" }),
     acceptedAt: timestamp("accepted_at", { withTimezone: true }),
+    // Langue du rapport (fr, nl, en, pt-BR)
+    language: text("language"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
@@ -416,6 +422,8 @@ export const reports = pgTable(
       "reports_refus_motive",
       sql`${t.status} <> 'rejected' OR length(trim(coalesce(${t.rejectionReason}, ''))) > 0`,
     ),
+    // Un seul rapport validé par campagne
+    uniqueIndex("reports_un_valide_par_campagne").on(t.campaignId).where(sql`${t.status} = 'validated'`),
   ],
 );
 

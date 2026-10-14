@@ -125,6 +125,10 @@ export async function creerCampagneDemo(
   // (pour tester la suppression programmée des réponses brutes)
   if (options.rapportAccepteIlYaMois !== undefined) {
     const date = moisAvant(maintenant, options.rapportAccepteIlYaMois);
+    const [validateur] = await db.select({ forme: users.aiLiteracyAt }).from(users).where(eq(users.id, options.adminId));
+    if (!validateur?.forme) {
+      throw new Error("Rapport de démonstration impossible : enregistrez d'abord la formation à l'IA de l'administrateur (page d'accueil de l'espace IMA).");
+    }
     await db.update(campaigns).set({ signatoryReferentId: referent.id }).where(eq(campaigns.id, campagne.id));
     await db.insert(reports).values({
       campaignId: campagne.id,

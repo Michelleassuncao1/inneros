@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
   // Développement : autorise le test sur un téléphone du même réseau Wi-Fi (adresse locale du PC)
   allowedDevOrigins: ["192.168.*.*", "10.*.*.*"],
   serverExternalPackages: ["@electric-sql/pglite", "@react-pdf/renderer"],
+  // Le prompt système du rapport est lu sur le disque : il doit accompagner l'application en production
+  outputFileTracingIncludes: { "/**": ["./prompts/**/*"] },
   // En-têtes de sécurité sur toutes les réponses (audit du 14/10/2026)
   async headers() {
     return [

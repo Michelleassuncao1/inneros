@@ -23,7 +23,7 @@ async function base() {
   const { db } = await creerBaseDeTest();
   const [admin] = await db
     .insert(users)
-    .values({ email: "admin@ima.test", name: "Admin", role: "admin", passwordHash: "x" })
+    .values({ email: "admin@ima.test", name: "Admin", role: "admin", passwordHash: "x", aiLiteracyAt: "2026-10-01" })
     .returning();
   const instrumentId = await chargerQuestionnaireDeTest(db, ["fr"]);
   const demo = (options: { cloture?: Date; accepteIlYa?: number; graine: number }) =>

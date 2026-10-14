@@ -307,6 +307,7 @@ export async function SectionSoutien({ locale, campagne, pays }: { locale: strin
 export async function SectionParticipation({ locale, campagne }: { locale: string; campagne: Campagne }) {
   if (campagne.status === "draft") return null;
   const t = await getTranslations("Resultats");
+  const tRapport = await getTranslations("Rapport");
   const p = await participation(getDb(), campagne.id);
   if (!p) return null;
   const pourcent = (a: number, b: number) =>
@@ -333,12 +334,20 @@ export async function SectionParticipation({ locale, campagne }: { locale: strin
       <p className="mt-2 max-w-[70ch] text-sm text-ima-muted">{t("maskedHelp", { seuil: p.seuil })}</p>
       <div className="mt-4">
         {campagne.status === "closed" ? (
-          <Link
-            href={`/admin/campagnes/${campagne.id}/resultats`}
-            className="inline-block rounded-md bg-ima-navy px-4 py-2 font-semibold text-white hover:opacity-90"
-          >
-            {t("see")}
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href={`/admin/campagnes/${campagne.id}/resultats`}
+              className="inline-block rounded-md bg-ima-navy px-4 py-2 font-semibold text-white hover:opacity-90"
+            >
+              {t("see")}
+            </Link>
+            <Link
+              href={`/admin/campagnes/${campagne.id}/rapport`}
+              className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+            >
+              {tRapport("open")}
+            </Link>
+          </div>
         ) : (
           <MessageInfo>{t("afterClose")}</MessageInfo>
         )}

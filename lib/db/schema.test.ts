@@ -259,10 +259,10 @@ describe("Seuil de 10 (règle 3)", () => {
 });
 
 describe("Validation humaine des rapports (règle 6)", () => {
-  async function creerAdmin(email = "admin@ima.test") {
+  async function creerAdmin(email = "admin@ima.test", formation: string | null = "2026-10-01") {
     const [admin] = await db
       .insert(schema.users)
-      .values({ email, name: "Praticienne IMA", role: "admin", passwordHash: "x" })
+      .values({ email, name: "Praticienne IMA", role: "admin", passwordHash: "x", aiLiteracyAt: formation })
       .returning();
     return admin;
   }
@@ -300,6 +300,25 @@ describe("Validation humaine des rapports (règle 6)", () => {
       checkLanguageRule: true,
       checkLimitsMentioned: true,
     });
+  });
+
+  it("un administrateur sans formation à l'IA enregistrée ne peut pas valider (article 4 AI Act)", async () => {
+    const campagne = await creerCampagne();
+    const admin = await creerAdmin("non-forme@ima.test", null);
+    await refuse(
+      db.insert(schema.reports).values({
+        campaignId: campagne.id,
+        status: "validated",
+        finalText: "Texte du rapport",
+        validatedBy: admin.id,
+        validatedAt: new Date(),
+        checkSourcesVerified: true,
+        checkNoSmallGroup: true,
+        checkLanguageRule: true,
+        checkLimitsMentioned: true,
+      }),
+      "formé à l'IA",
+    );
   });
 
   it("un référent ne peut pas valider un rapport", async () => {
