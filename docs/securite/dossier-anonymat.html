@@ -93,8 +93,13 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
       <li><a href="#conservation">Conservation et suppression</a></li>
       <li><a href="#soustraitants">Sous-traitants</a></li>
       <li><a href="#manquants">Informations et décisions manquantes</a></li>
+      <li><a href="#verifies">Points vérifiés le 14 octobre 2026</a></li>
     </ol>
   </nav>
+
+  <div class="reponse" style="margin-top:28px">
+    <p><strong>Priorité :</strong> la maîtrise de l'IA (article 4 de l'AI Act) s'applique déjà depuis le 2 février 2025. Elle est traitée en tête de la section <a href="#verifies">11</a>, avant la mise en ligne et avant toute première campagne réelle.</p>
+  </div>
 
   <h2 id="qualification">1. Anonymes ou pseudonymisées ?</h2>
   <div class="tableau">
@@ -265,7 +270,7 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
   <h3>Accès et organisation chez IMA</h3>
   <ol class="manquants" style="counter-reset: q 11">
     <li>Qui a un accès direct aux données brutes : liste nominative, attribution et retrait des accès, journalisation.</li>
-    <li>Quels praticiens sont habilités à valider les rapports, et leur formation à l'IA (article 4 de l'AI Act).</li>
+    <li><strong>Priorité — obligation déjà en vigueur.</strong> Mesures de maîtrise de l'IA (article 4 de l'AI Act) pour chaque praticien IMA qui utilise InnerOS ou valide un rapport : voir section 11.</li>
     <li>Procédure en cas de violation de données (notification sous 72 heures, information des clients).</li>
     <li>La consigne « distribution des cartes au hasard, sans liste » doit-elle figurer dans le contrat client ?</li>
   </ol>
@@ -287,6 +292,41 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
     <li>Limitation du nombre de requêtes et politique de sécurité du contenu (CSP) chez l'hébergeur.</li>
     <li>Interdiction formelle d'utiliser des données réelles sur un poste de développement.</li>
   </ol>
+
+  <h2 id="verifies">11. Points vérifiés le 14 octobre 2026</h2>
+  <p class="note">Vérifiés sur les pages publiques des fournisseurs à cette date. Les documents contractuels signés font foi ; ce n'est pas un avis juridique.</p>
+
+  <h3>11.1 Maîtrise de l'IA (article 4 de l'AI Act) — priorité</h3>
+  <ul>
+    <li><strong>En vigueur depuis le 2 février 2025</strong>, indépendamment du calendrier des systèmes « à haut risque ». Elle vise les fournisseurs et les déployeurs de systèmes d'IA : IMA est au minimum déployeur (utilisation de Claude) et probablement fournisseur d'InnerOS.</li>
+    <li>D'après les commentaires publiés, le règlement « Digital Omnibus » (UE) 2026/1744, en vigueur depuis le 27 juillet 2026, a reformulé l'article : il s'agit désormais de <strong>prendre des mesures</strong> pour développer la maîtrise de l'IA du personnel, sans garantir un niveau individuel. L'obligation reste due par IMA, et sa supervision par les autorités nationales a commencé en août 2026. <em>Texte à vérifier sur EUR-Lex.</em></li>
+    <li><strong>Mesures proposées, à mettre en place maintenant :</strong> une courte politique écrite de maîtrise de l'IA ; une formation de chaque praticien avant tout accès à la validation (fonctionnement et limites des modèles de langage, erreurs et inventions possibles, biais, supervision humaine, règle de langage IMA, données à ne jamais transmettre, transparence envers les travailleurs) ; une trace datée de chaque formation.</li>
+    <li><strong>Dans InnerOS</strong> : la validation d'un rapport sera réservée aux praticiens dont la formation est enregistrée (règle en base de données, à l'étape 8).</li>
+  </ul>
+
+  <h3>11.2 Vercel (hébergement de l'application)</h3>
+  <ul>
+    <li><strong>DPA</strong> : un DPA est publié par Vercel, avec les clauses contractuelles types de l'UE pour les transferts. À confirmer : son application au plan choisi (Pro) et son acceptation formelle.</li>
+    <li><strong>Journaux d'exécution</strong> : conservés <strong>1 heure</strong> (Hobby), <strong>1 jour</strong> (Pro), <strong>3 jours</strong> (Enterprise), selon la page des limites de Vercel (mise à jour du 16/09/2026). Un usage professionnel implique le plan Pro, donc 1 jour. Ne pas activer de transfert de journaux (« log drain »). La présence de l'adresse IP dans ces journaux n'est pas documentée clairement : à confirmer.</li>
+    <li><strong>Région</strong> : fonctions à exécuter en Europe (par exemple Paris ou Francfort), à configurer à la mise en ligne.</li>
+  </ul>
+
+  <h3>11.3 Anthropic (IA)</h3>
+  <ul>
+    <li><strong>DPA</strong> : intégré automatiquement aux conditions commerciales (en vigueur depuis le 17/06/2025) ; DPA du 24/02/2025.</li>
+    <li><strong>Transferts hors UE</strong> : clauses contractuelles types de l'UE (modules 2 et 3), avec avenants britannique et suisse. Le cadre UE–États-Unis (Data Privacy Framework) n'y est pas mentionné.</li>
+    <li><strong>Pas d'entraînement</strong> sur les contenus des clients : « Anthropic may not train models on Customer Content from Services ».</li>
+    <li><strong>Conservation</strong> : requêtes et réponses supprimées sous 30 jours, sauf accord de conservation nulle, application de la politique d'usage ou obligation légale (page de confidentialité datée du 01/07/2026). Une conservation nulle (« zero data retention ») est possible sur accord.</li>
+    <li><strong>Contenu transmis</strong> : uniquement des moyennes de groupes d'au moins 10 personnes, le contexte du mandat et un code interne, jamais le nom de l'entreprise ni une réponse individuelle. Le transfert reste à documenter au registre et dans l'AIPD.</li>
+  </ul>
+
+  <h3>11.4 OVHcloud (base de données) — à créer</h3>
+  <ul>
+    <li>La base n'existe pas encore : <strong>région, contrat, DPA, accès et sauvegardes sont à mettre en place</strong>, pas seulement à vérifier.</li>
+    <li>D'après la documentation de sécurité d'OVHcloud pour ses bases managées : disques chiffrés (clé propre à chaque instance, détruite avec elle), sauvegardes chiffrées (AES-256) et stockées dans un autre centre de données, connexions chiffrées (TLS), accès limité à une liste d'adresses IP autorisées. Pas de clés gérées par le client.</li>
+    <li><strong>Point d'architecture à trancher</strong> : les serveurs de Vercel n'ont pas d'adresses IP fixes. Pour limiter l'accès à la base à quelques adresses, il faudrait soit l'offre Vercel « Secure Compute » (Enterprise), soit héberger aussi l'application chez OVH, soit accepter une base joignable depuis Internet, protégée par TLS et un mot de passe fort.</li>
+    <li>Durée de conservation des sauvegardes : non précisée sur la page consultée, à fixer au moment de la création.</li>
+  </ul>
 
   <footer>
     Institut Mindset en Action® · info@institutmindsetenaction.com<br>

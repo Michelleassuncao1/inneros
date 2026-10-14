@@ -135,7 +135,7 @@ Les tests suivants s'exécutent à chaque modification (`npm test`, 125 tests au
 
 ### Accès et organisation chez IMA
 12. **Qui a accès aux données brutes** (accès direct à la base) chez IMA ou chez un prestataire : liste nominative, procédure d'attribution et de retrait, journalisation des accès.
-13. **Qui sont les praticiens habilités** à valider les rapports (formation à la maîtrise de l'IA, article 4 de l'AI Act) ?
+13. **PRIORITÉ — obligation déjà en vigueur (article 4 AI Act, depuis le 02/02/2025)** : mesures de maîtrise de l'IA pour chaque praticien qui utilise InnerOS ou valide un rapport (politique écrite, formation, trace datée). Dans InnerOS, validation réservée aux praticiens dont la formation est enregistrée (étape 8).
 14. **Procédure en cas de violation de données** (notification à l'autorité sous 72 heures, information des clients).
 15. **Politique de distribution des cartes** : la consigne « au hasard, sans liste » doit-elle figurer dans le contrat avec le client ?
 
