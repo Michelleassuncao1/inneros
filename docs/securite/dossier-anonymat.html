@@ -1,0 +1,295 @@
+<title>Dossier anonymat InnerOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Mise en page : une colonne de lecture (dossier juridique), table des matières en tête, charte IMA (bleu nuit, or, papier) */
+:root {
+  --bg: #FAF8F3;
+  --surface: #F3EBDD;
+  --fg: #1C1C1A;
+  --muted: #5A5A5A;
+  --navy: #08275A;
+  --gold: #C7952C;
+  --gold-text: #8A651F;
+  --line: #E4DACA;
+  --ok: #2F6B4F;
+  --warn: #9A6A00;
+  --risk: #B4462E;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: "Figtree", -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1626; --surface: #16223A; --fg: #ECE7DC; --muted: #A9A49A; --navy: #C9D6F0;
+    --gold: #D9AB4A; --gold-text: #E2BC6A; --line: #2A3854; --ok: #6FBF96; --warn: #E0B04A; --risk: #E58B74;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1626; --surface: #16223A; --fg: #ECE7DC; --muted: #A9A49A; --navy: #C9D6F0;
+  --gold: #D9AB4A; --gold-text: #E2BC6A; --line: #2A3854; --ok: #6FBF96; --warn: #E0B04A; --risk: #E58B74;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.6; padding: 0 16px; }
+.page { max-width: 860px; margin: 0 auto; padding-block: 40px 72px; }
+h1, h2, h3 { font-family: var(--font-display); color: var(--navy); line-height: 1.25; text-wrap: balance; }
+h1 { font-size: 2.2rem; margin: 6px 0 0; }
+h2 { font-size: 1.5rem; margin: 56px 0 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.15rem; margin: 28px 0 8px; }
+p, li { max-width: 68ch; }
+a { color: var(--navy); }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.eyebrow { font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-text); margin: 0; }
+.rule { width: 64px; height: 2px; background: var(--gold); margin: 16px 0 20px; }
+.meta { color: var(--muted); font-size: .92rem; }
+.statut { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .04em; color: var(--gold-text); border: 1px solid var(--gold); border-radius: 4px; padding: 2px 8px; }
+.toc { background: var(--surface); border-radius: 8px; padding: 16px 20px; margin-top: 28px; }
+.toc ol { margin: 6px 0 0; padding-left: 22px; columns: 2 18rem; column-gap: 32px; }
+.toc li { break-inside: avoid; margin-bottom: 4px; }
+.reponse { border-left: 3px solid var(--gold); background: var(--surface); padding: 18px 22px; border-radius: 0 8px 8px 0; margin-top: 16px; }
+.reponse p:first-child { margin-top: 0; }
+.formule { font-family: var(--font-display); font-size: 1.1rem; color: var(--navy); margin: 12px 0 0; }
+.tableau { overflow-x: auto; margin: 12px 0 8px; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .95rem; }
+th { background: var(--navy); color: var(--bg); text-align: left; font-weight: 600; padding: 9px 12px; }
+td { border-bottom: 1px solid var(--line); padding: 9px 12px; vertical-align: top; }
+td:first-child { font-weight: 600; }
+.etat { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .03em; border-radius: 999px; padding: 1px 9px; white-space: nowrap; }
+.etat-ok { color: var(--ok); border: 1px solid var(--ok); }
+.etat-attenue { color: var(--warn); border: 1px solid var(--warn); }
+.etat-risque { color: var(--risk); border: 1px solid var(--risk); }
+.etapes { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 10px; counter-reset: etape; }
+.etapes li { counter-increment: etape; display: grid; grid-template-columns: 2.2rem 1fr; gap: 12px; max-width: none; }
+.etapes li::before { content: counter(etape); font-family: var(--font-display); font-size: 1.25rem; color: var(--gold-text); text-align: right; }
+.etapes strong { color: var(--navy); }
+.manquants { counter-reset: q; padding-left: 0; list-style: none; }
+.manquants li { counter-increment: q; position: relative; padding-left: 2.4rem; margin-bottom: 8px; }
+.manquants li::before { content: counter(q); position: absolute; left: 0; top: 0; font-variant-numeric: tabular-nums; font-weight: 700; color: var(--gold-text); }
+.note { font-size: .9rem; color: var(--muted); }
+code { font-size: .88em; background: var(--surface); padding: 1px 5px; border-radius: 4px; }
+footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<main class="page">
+  <p class="eyebrow">Institut Mindset en Action® · InnerOS</p>
+  <h1>Dossier anonymat InnerOS</h1>
+  <div class="rule" aria-hidden="true"></div>
+  <p class="meta"><span class="statut">Document de travail — à relire par un DPO ou un juriste</span></p>
+  <p class="meta">Version du 14 octobre 2026. Établi à partir du code réel de l'application à cette date (et non du seul cahier des charges). Base de travail pour l'analyse d'impact relative à la protection des données (AIPD).</p>
+
+  <nav class="toc" aria-label="Sommaire">
+    <strong>Sommaire</strong>
+    <ol>
+      <li><a href="#qualification">Anonymes ou pseudonymisées ?</a></li>
+      <li><a href="#parcours">Parcours d'une réponse</a></li>
+      <li><a href="#acces">Qui voit quoi</a></li>
+      <li><a href="#contenu">Contenu d'une réponse enregistrée</a></li>
+      <li><a href="#seuil">Seuil de 10 et croisements</a></li>
+      <li><a href="#audit">Constats de l'audit et mesures</a></li>
+      <li><a href="#securite">Sécurité technique</a></li>
+      <li><a href="#conservation">Conservation et suppression</a></li>
+      <li><a href="#soustraitants">Sous-traitants</a></li>
+      <li><a href="#manquants">Informations et décisions manquantes</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="qualification">1. Anonymes ou pseudonymisées ?</h2>
+  <div class="tableau">
+    <table>
+      <thead><tr><th>Données</th><th>Qualification proposée</th><th>Raison principale</th></tr></thead>
+      <tbody>
+        <tr><td>Réponses brutes pendant la collecte</td><td><span class="etat etat-risque">Pseudonymisées</span></td><td>Les codes existent encore ; un recoupement technique reste théoriquement possible.</td></tr>
+        <tr><td>Réponses brutes après la clôture</td><td><span class="etat etat-attenue">Pseudonymisées · risque faible</span></td><td>Codes supprimés, ordre effacé ; mais chaque ligne décrit encore une seule personne.</td></tr>
+        <tr><td>Résultats de groupes (au moins 10 personnes)</td><td><span class="etat etat-ok">Anonymes</span></td><td>Aucun résultat sous le seuil, ni directement ni par soustraction.</td></tr>
+        <tr><td>Rapport validé</td><td><span class="etat etat-ok">Anonyme</span></td><td>Construit uniquement à partir des résultats de groupes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Pourquoi ne pas qualifier aussi les réponses brutes d'« anonymes » ?</h3>
+  <div class="reponse">
+    <p>Au sens du RGPD (considérant 26), une donnée n'est anonyme que si <strong>personne</strong> ne peut plus identifier la personne, <strong>par aucun moyen raisonnablement susceptible d'être utilisé</strong>, ni IMA, ni l'employeur, ni un tiers. Les autorités européennes vérifient trois choses : peut-on <strong>isoler</strong> une personne, <strong>relier</strong> deux informations la concernant, ou <strong>déduire</strong> une information sur elle ?</p>
+    <p><strong>Pendant la collecte</strong>, les codes existent encore. Une personne qui aurait à la fois un accès technique direct à la base (ou à ses journaux internes, ou aux journaux de l'hébergeur) et la liste « qui a reçu quel code » pourrait relier une réponse à quelqu'un. Le risque est faible et nous l'avons réduit, mais il n'est pas nul : le critère « relier » n'est pas rempli.</p>
+    <p><strong>Après la clôture</strong>, les codes sont supprimés et l'ordre d'arrivée est effacé. Mais chaque ligne correspond toujours à <strong>une seule personne</strong> : son groupe, la date de sa réponse et ses 62 à 89 réponses. Quelqu'un qui sait par ailleurs qu'une seule personne du groupe a répondu tel jour, ou à qui un collègue a confié ses réponses, pourrait retrouver sa ligne. Le critère « isoler » n'est pas rempli. Les copies de sauvegarde de l'hébergeur contiennent aussi, pendant quelques jours, l'état d'avant la clôture.</p>
+    <p><strong>Ce qu'apporte la qualification « pseudonymisées » :</strong> elle est exacte, donc défendable devant une autorité ; elle maintient toutes les protections du RGPD sur les réponses brutes (sécurité, durée de conservation, AIPD). Déclarer « anonymes » des données qui ne le sont pas ferait sortir ces données du RGPD sur le papier, ce qui exposerait IMA et ses clients en cas de contrôle et fragiliserait la confiance des travailleurs.</p>
+    <p><strong>Ce qui ne change pas :</strong> aucun nom n'est jamais enregistré, personne chez l'employeur ne voit une réponse individuelle, aucun écran ne l'affiche chez IMA, et seuls des résultats anonymes de groupes d'au moins 10 personnes sortent d'InnerOS.</p>
+    <p class="formule">Formulation proposée pour les documents : « Les réponses sont collectées sans identité et sans lien technique avec le code utilisé ; les réponses brutes sont traitées comme des données pseudonymisées jusqu'à leur suppression ; seuls des résultats agrégés sur au moins 10 personnes sont produits et communiqués. »</p>
+  </div>
+  <h3>Comment se rapprocher de l'anonymat (décisions possibles)</h3>
+  <ul>
+    <li><strong>Supprimer la date de réponse à la clôture</strong> : retire l'information la plus utile pour isoler une personne.</li>
+    <li><strong>Raccourcir la conservation des réponses brutes</strong> : par exemple, les supprimer dès l'acceptation du rapport par l'entreprise. Une fois supprimées, il ne reste que des données anonymes (résultats et rapport).</li>
+    <li><strong>Limiter la durée des sauvegardes</strong> chez l'hébergeur, pour que les données supprimées disparaissent aussi des copies.</li>
+  </ul>
+  <p class="note">Même avec ces mesures, des données individuelles (une ligne par personne) atteignent très rarement le niveau d'anonymat exigé par le RGPD. Le produit réellement anonyme d'InnerOS, ce sont les résultats de groupes.</p>
+
+  <h2 id="parcours">2. Parcours d'une réponse</h2>
+  <ol class="etapes">
+    <li><div><strong>Préparation.</strong> IMA crée la campagne (groupes, questionnaires, dates, seuil d'au moins 10) et génère des codes à usage unique : 10 caractères aléatoires, environ 800 000 milliards de combinaisons. Les codes s'affichent une seule fois ; la base n'en garde qu'une empreinte chiffrée.</div></li>
+    <li><div><strong>Distribution.</strong> L'entreprise remet les cartes <strong>au hasard</strong> (pile mélangée), sans jamais noter qui reçoit quel code. C'est une condition de l'anonymat ; la consigne est affichée dans l'application.</div></li>
+    <li><div><strong>Réponse.</strong> Le travailleur scanne le QR code. Le code, placé après « # » dans l'adresse, n'est jamais envoyé au serveur dans l'adresse ; il est retiré de l'adresse après l'envoi. Aucune case de texte libre ; « Je préfère ne pas répondre » partout ; aucun cookie. Les réponses en cours restent sur l'appareil jusqu'à l'envoi, puis en sont effacées.</div></li>
+    <li><div><strong>Enregistrement.</strong> Le serveur vérifie tout sans rien écrire, puis marque le code « utilisé » et, <strong>dans une opération séparée</strong>, enregistre la réponse : campagne, groupe, date du jour (jamais l'heure), versions des questionnaires, réponses en chiffres. Aucun lien avec le code.</div></li>
+    <li><div><strong>Clôture et calcul.</strong> En une seule opération : codes supprimés, réponses réécrites dans un ordre aléatoire avec de nouveaux identifiants, résultats calculés uniquement pour 10 personnes ou plus, avec protection contre la soustraction. Jamais de calcul pendant la collecte.</div></li>
+    <li><div><strong>Brouillon assisté par IA</strong> (si activé). L'IA reçoit uniquement les résultats de groupes, le contexte du mandat et un code interne à la place du nom de l'entreprise. Un contrôle bloque tout envoi non conforme. <span class="note">(En développement.)</span></div></li>
+    <li><div><strong>Validation par IMA.</strong> Un praticien relit, corrige et valide après une liste de contrôle obligatoire ; la base refuse toute validation incomplète.</div></li>
+    <li><div><strong>Acceptation par l'entreprise.</strong> Le seul référent signataire désigné vérifie les faits (périmètre, groupes, période, effectifs) et accepte, ou demande une correction. Il ne modifie pas l'analyse.</div></li>
+    <li><div><strong>Suppression.</strong> Réponses brutes supprimées automatiquement 12 mois après l'acceptation (au plus tard 18 mois après la clôture). Résultats et rapport conservés.</div></li>
+  </ol>
+
+  <h2 id="acces">3. Qui voit quoi</h2>
+  <div class="tableau">
+    <table>
+      <thead><tr><th></th><th>Réponse individuelle</th><th>Résultats de groupes (≥ 10)</th><th>Rapport</th></tr></thead>
+      <tbody>
+        <tr><td>Travailleur</td><td>Les siennes, sur son appareil, pendant qu'il répond</td><td>Non</td><td>Selon la communication de l'entreprise</td></tr>
+        <tr><td>Référent de l'entreprise</td><td><strong>Jamais</strong></td><td>Non (participation seulement, masquée sous 10)</td><td>Oui, après validation IMA</td></tr>
+        <tr><td>Praticien IMA</td><td><strong>Aucun écran ne l'affiche</strong></td><td>Oui</td><td>Oui</td></tr>
+        <tr><td>IA (Anthropic)</td><td><strong>Jamais</strong></td><td>Oui, sans le nom de l'entreprise</td><td>Elle en rédige le brouillon</td></tr>
+        <tr><td>Accès technique à la base</td><td>Techniquement possible, sans nom</td><td>Oui</td><td>Oui</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="contenu">4. Contenu d'une réponse enregistrée</h2>
+  <div class="tableau">
+    <table>
+      <thead><tr><th>Champ</th><th>Exemple</th><th>Nécessaire ?</th></tr></thead>
+      <tbody>
+        <tr><td>Identifiant</td><td>Aléatoire, renouvelé à la clôture</td><td>Technique</td></tr>
+        <tr><td>Campagne</td><td>Identifiant de la campagne</td><td>Oui</td></tr>
+        <tr><td>Groupe</td><td>« Soins »</td><td>Oui (résultats par groupe)</td></tr>
+        <tr><td>Date</td><td>10/11/2026, sans l'heure</td><td>Non pour le calcul — décision ouverte</td></tr>
+        <tr><td>Versions des questionnaires</td><td>« copsoq3 : be-2023-12-13 »</td><td>Oui (traçabilité des textes)</td></tr>
+        <tr><td>Réponses</td><td>62 à 89 chiffres, ou « pas de réponse »</td><td>Oui</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Jamais enregistré :</strong> nom, e-mail, adresse IP, appareil, navigateur, cookie, heure, durée, langue choisie, texte libre, âge, sexe, ancienneté.</p>
+
+  <h2 id="seuil">5. Seuil de 10 et croisements</h2>
+  <ul>
+    <li><strong>Une seule variable de regroupement</strong> par campagne (service, site ou métier). Aucune autre variable n'est collectée : un croisement comme « groupe × ancienneté × service » est impossible.</li>
+    <li><strong>Seuil imposé par la base de données elle-même</strong> : aucun résultat ne peut être enregistré pour moins de 10 personnes, ni sous le seuil fixé pour la campagne. Le seuil est appliqué échelle par échelle.</li>
+    <li><strong>Protection contre la soustraction</strong> : si la part masquée compte entre 1 et 9 personnes, le plus petit groupe visible est masqué aussi. Vérifié avec des groupes de 25, 12 et 9 personnes : le groupe de 9 n'apparaît nulle part.</li>
+    <li><strong>Participation</strong> masquée selon la même règle ; <strong>aucun calcul pendant la collecte</strong>.</li>
+    <li><strong>Toute variable ajoutée à l'avenir</strong> devra appliquer la même règle à chaque case du croisement, après réévaluation dans l'AIPD.</li>
+    <li><strong>Risque résiduel</strong> : la comparaison entre deux campagnes successives d'une même entreprise pourrait refléter l'arrivée ou le départ d'une ou deux personnes.</li>
+  </ul>
+
+  <h2 id="audit">6. Constats de l'audit et mesures</h2>
+  <div class="tableau">
+    <table>
+      <thead><tr><th>Constat</th><th>État</th><th>Mesure</th></tr></thead>
+      <tbody>
+        <tr><td>Le code « utilisé » et la réponse portaient le même numéro technique de transaction dans la base : on pouvait les relier par une simple requête.</td><td><span class="etat etat-ok">Corrigé</span></td><td>Écriture en deux opérations séparées. Vérifié par un test automatique.</td></tr>
+        <tr><td>L'ordre d'enregistrement des codes et des réponses restait rapprochable.</td><td><span class="etat etat-attenue">Atténué</span></td><td>À la clôture : réponses réécrites dans un ordre aléatoire, nouveaux identifiants, nettoyage des anciennes versions. Reste un risque pendant la collecte, pour un opérateur technique.</td></tr>
+        <tr><td>Journaux de l'hébergeur de l'application (adresse IP, heure des requêtes).</td><td><span class="etat etat-risque">Résiduel</span></td><td>Non enregistrés par InnerOS. Durée de conservation chez l'hébergeur à vérifier ; accès restreint.</td></tr>
+        <tr><td>Sauvegardes et journaux internes de la base.</td><td><span class="etat etat-risque">Résiduel</span></td><td>Durée de conservation chez OVH à vérifier ; accès restreint et journalisé.</td></tr>
+        <tr><td>Cookie de langue sur l'appareil du répondant.</td><td><span class="etat etat-ok">Supprimé</span></td><td>Aucun cookie déposé (vérifié sur les pages du questionnaire).</td></tr>
+        <tr><td>Code visible dans l'historique du navigateur.</td><td><span class="etat etat-ok">Réduit</span></td><td>Retiré de l'adresse après l'envoi ; le code est alors déjà utilisé.</td></tr>
+        <tr><td>Réponses en cours lisibles sur un appareil partagé.</td><td><span class="etat etat-attenue">Atténué</span></td><td>Effacées à l'envoi ; bouton d'effacement ; à mentionner dans l'information aux travailleurs.</td></tr>
+        <tr><td>Liste « qui a reçu quel code » chez l'employeur.</td><td><span class="etat etat-attenue">Organisationnel</span></td><td>Consigne de distribution au hasard affichée ; à inscrire dans le contrat.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="securite">7. Sécurité technique</h2>
+  <div class="tableau">
+    <table>
+      <thead><tr><th>Mesure</th><th>État</th></tr></thead>
+      <tbody>
+        <tr><td>Chiffrement en transit</td><td>HTTPS imposé (en-tête HSTS) ; connexion chiffrée obligatoire vers la base en production</td></tr>
+        <tr><td>Chiffrement au repos</td><td>Dépend de l'hébergeur de la base (OVH) — <strong>à vérifier</strong></td></tr>
+        <tr><td>Codes, mots de passe, second facteur</td><td>Codes et mots de passe jamais stockés en clair (empreintes) ; second facteur chiffré</td></tr>
+        <tr><td>Connexion des praticiens IMA</td><td>Mot de passe + code d'une application d'authentification ; session de 8 heures ; blocage après 5 échecs en 15 minutes</td></tr>
+        <tr><td>Connexion des référents</td><td>Lien à usage unique valable 15 minutes</td></tr>
+        <tr><td>Contrôle d'accès</td><td>Aucun écran de réponses brutes ; référents limités à la participation et au rapport validé de leurs campagnes</td></tr>
+        <tr><td>Journal d'accès</td><td>Toutes les actions des praticiens et référents, dont la consultation des résultats et les suppressions ; 24 mois ; aucune donnée de répondant</td></tr>
+        <tr><td>Accès direct à la base</td><td><strong>À organiser</strong> : liste nominative, accès personnels, journalisation chez l'hébergeur</td></tr>
+        <tr><td>Avant la mise en production</td><td>Revue de sécurité externe, limitation du nombre de requêtes, politique de sécurité du contenu</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="conservation">8. Conservation et suppression</h2>
+  <div class="tableau">
+    <table>
+      <thead><tr><th>Donnée</th><th>Durée</th><th>Mise en œuvre</th></tr></thead>
+      <tbody>
+        <tr><td>Codes (empreintes)</td><td>Jusqu'à la clôture</td><td>Automatique</td></tr>
+        <tr><td>Réponses brutes</td><td>12 mois après l'acceptation du rapport ; au plus tard 18 mois après la clôture</td><td>Automatique chaque nuit, journalisée</td></tr>
+        <tr><td>Résultats de groupes et rapport</td><td>Contrat + 1 an (proposition)</td><td>À décider et à automatiser</td></tr>
+        <tr><td>Comptes des référents et praticiens</td><td>Contrat + 1 an (proposition)</td><td>À décider et à automatiser</td></tr>
+        <tr><td>Journal des actions</td><td>24 mois</td><td>Automatique</td></tr>
+        <tr><td>Sauvegardes de la base</td><td>Selon l'hébergeur</td><td>À vérifier</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="soustraitants">9. Sous-traitants</h2>
+  <div class="tableau">
+    <table>
+      <thead><tr><th>Sous-traitant</th><th>Rôle</th><th>Données reçues</th><th>Localisation</th></tr></thead>
+      <tbody>
+        <tr><td>OVHcloud</td><td>Base de données</td><td>Toutes les données InnerOS</td><td>Union européenne (région à choisir)</td></tr>
+        <tr><td>Vercel</td><td>Hébergement de l'application</td><td>Données en transit ; journaux techniques (adresse IP, heure)</td><td>Société américaine, fonctions en Europe</td></tr>
+        <tr><td>Brevo</td><td>E-mails de connexion des référents</td><td>Nom et e-mail des référents</td><td>Union européenne</td></tr>
+        <tr><td>Anthropic</td><td>Brouillon du rapport (IA)</td><td>Résultats de groupes, contexte du mandat, code interne</td><td>Société américaine</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Aucun de ces contrats (DPA) n'est encore signé : la base OVH et l'hébergement Vercel seront créés à la mise en ligne.</p>
+
+  <h2 id="manquants">10. Informations et décisions manquantes</h2>
+  <p>À compléter avant de finaliser l'AIPD.</p>
+  <h3>Rôles et cadre juridique</h3>
+  <ol class="manquants" style="counter-reset: q 0">
+    <li>Responsable de traitement pour chaque client : l'entreprise (IMA sous-traitant), IMA, ou responsabilité conjointe ? Faut-il un contrat de sous-traitance type (article 28 RGPD) ?</li>
+    <li>Base légale par pays : obligation de l'employeur (Belgique, NR-1 au Brésil, France, Portugal), intérêt légitime ou consentement ?</li>
+    <li>Statut juridique d'IMA : personne physique (comptes et facturation au nom de Michelle Assunção) ou société distincte ? Détermine au nom de qui signer les DPA.</li>
+    <li>DPO : faut-il en désigner un, et avec quelles coordonnées pour la page de confidentialité ?</li>
+    <li>Les réponses brutes pseudonymisées, liées au bien-être et à la santé au travail, relèvent-elles de l'article 9 RGPD (données de santé) ?</li>
+    <li>Information des travailleurs et consultation des représentants (CPPT, CSE, CIPA) : qui en est responsable, et à quel moment ?</li>
+  </ol>
+  <h3>Hébergement et sous-traitants</h3>
+  <ol class="manquants" style="counter-reset: q 6">
+    <li>OVHcloud : région exacte, chiffrement au repos, durée de conservation des sauvegardes et des journaux, accès des équipes OVH, DPA, option HDS pour la France.</li>
+    <li>Vercel : région européenne, durée de conservation des journaux de requêtes (adresse IP, heure), DPA et clauses contractuelles types, personnes ayant accès au projet.</li>
+    <li>Brevo : DPA, région, durée de conservation des e-mails envoyés.</li>
+    <li>Anthropic : DPA, durée de conservation des requêtes, absence d'entraînement sur les données, encadrement du transfert vers les États-Unis.</li>
+    <li>GitHub (code source, sans donnée personnelle) : confirmer qu'il est hors périmètre.</li>
+  </ol>
+  <h3>Accès et organisation chez IMA</h3>
+  <ol class="manquants" style="counter-reset: q 11">
+    <li>Qui a un accès direct aux données brutes : liste nominative, attribution et retrait des accès, journalisation.</li>
+    <li>Quels praticiens sont habilités à valider les rapports, et leur formation à l'IA (article 4 de l'AI Act).</li>
+    <li>Procédure en cas de violation de données (notification sous 72 heures, information des clients).</li>
+    <li>La consigne « distribution des cartes au hasard, sans liste » doit-elle figurer dans le contrat client ?</li>
+  </ol>
+  <h3>Durées de conservation</h3>
+  <ol class="manquants" style="counter-reset: q 15">
+    <li>Confirmer : réponses brutes 12 mois après l'acceptation du rapport (au plus tard 18 mois après la clôture) ; journal 24 mois.</li>
+    <li>Fixer les durées pour les résultats, les rapports et les comptes des référents (« contrat + 1 an » proposé) ; pas encore automatisé.</li>
+    <li>Durée des sauvegardes chez OVH (voir point 7).</li>
+  </ol>
+  <h3>Choix de minimisation</h3>
+  <ol class="manquants" style="counter-reset: q 18">
+    <li>Date de réponse : la garder, la supprimer, ou la supprimer à la clôture ?</li>
+    <li>Comparaison entre campagnes successives : l'autoriser, et à quelles conditions ?</li>
+    <li>Confirmer qu'aucune autre variable (ancienneté, âge…) n'est prévue.</li>
+  </ol>
+  <h3>Avant la mise en production</h3>
+  <ol class="manquants" style="counter-reset: q 21">
+    <li>Revue de sécurité par un développeur externe.</li>
+    <li>Limitation du nombre de requêtes et politique de sécurité du contenu (CSP) chez l'hébergeur.</li>
+    <li>Interdiction formelle d'utiliser des données réelles sur un poste de développement.</li>
+  </ol>
+
+  <footer>
+    Institut Mindset en Action® · info@institutmindsetenaction.com<br>
+    Sources dans le dépôt InnerOS : <code>docs/securite/FLUX-DE-DONNEES.md</code> et <code>docs/securite/ANONYMAT-ET-SECURITE.md</code>. Ce document ne constitue pas un avis juridique.
+  </footer>
+</main>
