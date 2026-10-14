@@ -289,7 +289,7 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
   <h3>Avant la mise en production</h3>
   <ol class="manquants" style="counter-reset: q 21">
     <li>Revue de sécurité par un développeur externe.</li>
-    <li>Limitation du nombre de requêtes et politique de sécurité du contenu (CSP) chez l'hébergeur.</li>
+    <li><strong>Bloquant avant toute campagne réelle</strong> : limitation du nombre de requêtes (voir 11.6). Également : politique de sécurité du contenu (CSP).</li>
     <li>Interdiction formelle d'utiliser des données réelles sur un poste de développement.</li>
   </ol>
 
@@ -318,6 +318,9 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
     <li><strong>Pas d'entraînement</strong> sur les contenus des clients : « Anthropic may not train models on Customer Content from Services ».</li>
     <li><strong>Conservation</strong> : requêtes et réponses supprimées sous 30 jours, sauf accord de conservation nulle, application de la politique d'usage ou obligation légale (page de confidentialité datée du 01/07/2026). Une conservation nulle (« zero data retention ») est possible sur accord.</li>
     <li><strong>Contenu transmis</strong> : uniquement des moyennes de groupes d'au moins 10 personnes, le contexte du mandat et un code interne, jamais le nom de l'entreprise ni une réponse individuelle. Le transfert reste à documenter au registre et dans l'AIPD.</li>
+    <li><strong>Modèle appelé</strong> : <code>claude-sonnet-5-5</code> (Claude Sonnet 5.5), fixé dans la configuration du serveur. Le modèle réellement utilisé sera enregistré avec chaque brouillon.</li>
+    <li><strong>Conservation nulle (ZDR)</strong> : disponible sur demande commerciale auprès d'Anthropic. À demander pour l'espace de travail InnerOS, en confirmant que <code>claude-sonnet-5-5</code> y est couvert.</li>
+    <li><strong>Modèle de secours</strong> : en cas de refus exceptionnel du modèle, l'API peut relancer la demande sur un autre modèle Claude choisi par Anthropic. <strong>Proposition, à confirmer par IMA</strong> : désactiver ce secours, pour garantir un seul modèle connu et compatible avec la conservation nulle ; un refus s'afficherait simplement au praticien, qui pourrait rédiger à la main.</li>
   </ul>
 
   <h3>11.4 OVHcloud (base de données) — à créer</h3>
@@ -326,6 +329,22 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
     <li>D'après la documentation de sécurité d'OVHcloud pour ses bases managées : disques chiffrés (clé propre à chaque instance, détruite avec elle), sauvegardes chiffrées (AES-256) et stockées dans un autre centre de données, connexions chiffrées (TLS), accès limité à une liste d'adresses IP autorisées. Pas de clés gérées par le client.</li>
     <li><strong>Point d'architecture à trancher</strong> : les serveurs de Vercel n'ont pas d'adresses IP fixes. Pour limiter l'accès à la base à quelques adresses, il faudrait soit l'offre Vercel « Secure Compute » (Enterprise), soit héberger aussi l'application chez OVH, soit accepter une base joignable depuis Internet, protégée par TLS et un mot de passe fort.</li>
     <li>Durée de conservation des sauvegardes : non précisée sur la page consultée, à fixer au moment de la création.</li>
+    <li><strong>Choix retenu (14/10/2026)</strong> : base joignable depuis Internet, protégée par une connexion chiffrée obligatoire (déjà imposée par le code) et un mot de passe fort, <strong>à condition</strong> que la limitation de débit soit en place avant toute campagne réelle (voir 11.6).</li>
+  </ul>
+
+  <h3>11.5 Brevo (e-mails)</h3>
+  <ul>
+    <li><strong>Ce qui est envoyé</strong> (vérifié dans le code) : nom et adresse e-mail du référent, et un lien de connexion à usage unique valable 15 minutes. À l'étape 8 s'ajouteront des notifications sans contenu du rapport (« un rapport est disponible », « rapport accepté », « correction demandée »). <strong>Aucune donnée de répondant.</strong></li>
+    <li><strong>Hébergement</strong> : société française, données hébergées dans l'Union européenne d'après les sources consultées. À confirmer dans le DPA.</li>
+    <li><strong>DPA</strong> : à télécharger et signer depuis le compte Brevo (rubrique RGPD), avec la liste des sous-traitants de Brevo.</li>
+    <li><strong>Conservation des journaux d'envoi</strong> : non précisée publiquement ; à demander à Brevo.</li>
+    <li><strong>Suivi des ouvertures et des clics</strong> : à désactiver pour les e-mails transactionnels d'InnerOS. Sinon, Brevo enregistre qui ouvre l'e-mail et remplace le lien de connexion par un lien de suivi qui passe par ses serveurs.</li>
+  </ul>
+
+  <h3>11.6 Limitation de débit — condition avant toute campagne réelle</h3>
+  <ul>
+    <li>Objet : empêcher qu'un programme essaie des codes en masse ou surcharge le service (pages <code>/api/q/…</code> et connexions).</li>
+    <li>Mise en œuvre prévue au niveau de l'hébergeur (règle de pare-feu Vercel), pour qu'InnerOS n'ait pas à traiter lui-même les adresses IP des répondants. Ajoutée à la liste de contrôle de mise en ligne comme <strong>point bloquant</strong>.</li>
   </ul>
 
   <footer>
