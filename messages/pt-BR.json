@@ -444,7 +444,12 @@
     "rapportSyntheseVide": "A síntese está vazia.",
     "rapportFormationIARequise": "Registre primeiro sua formação em letramento em IA (artigo 4 do AI Act).",
     "formationInvalide": "Informe uma data e a formação realizada (3 a 500 caracteres).",
-    "formationDateFuture": "A data da formação não pode estar no futuro."
+    "formationDateFuture": "A data da formação não pode estar no futuro.",
+    "signataireSansAcces": "O signatário deve ser um referente ativo com acesso ao relatório desta campanha.",
+    "signataireRequis": "Somente o referente signatário designado pode aceitar o relatório ou solicitar uma correção.",
+    "rapportDejaAccepte": "Este relatório já foi aceito.",
+    "acceptationIncomplete": "Marque as duas verificações antes de aceitar o relatório.",
+    "correctionMotifRequis": "Descreva a correção solicitada (10 a 2.000 caracteres)."
   },
   "Passation": {
     "enterTitle": "Acessar o questionário",
@@ -632,7 +637,11 @@
       "report_rejected": "Rascunho recusado",
       "report_validated": "Relatório validado",
       "campaign_ai_toggled": "Interruptor de IA alterado",
-      "ai_literacy_recorded": "Formação em IA registrada"
+      "ai_literacy_recorded": "Formação em IA registrada",
+      "campaign_signatory_set": "Referente signatário designado",
+      "report_accepted": "Relatório aceito pela empresa",
+      "report_correction_requested": "Correção solicitada pela empresa",
+      "report_downloaded": "Relatório baixado (PDF)"
     }
   },
   "Rapport": {
@@ -732,5 +741,86 @@
     "saved": "Formação registrada.",
     "current": "Formação registrada: {date} — {note}",
     "missing": "Nenhuma formação registrada: você ainda não pode validar relatórios."
+  },
+  "Notifications": {
+    "salutation": "Olá, {name},",
+    "disponibleSujet": "InnerOS: um relatório está disponível",
+    "disponibleTexte": "O relatório da campanha {reference} foi validado pelo Institut Mindset en Action. Você pode consultá-lo no seu espaço InnerOS.",
+    "ouvrirEspace": "Abrir meu espaço",
+    "accepteSujet": "InnerOS: relatório aceito ({reference})",
+    "accepteTexte": "O referente signatário aceitou o relatório da campanha {reference}.",
+    "correctionSujet": "InnerOS: correção solicitada ({reference})",
+    "correctionTexte": "O referente signatário solicita uma correção do relatório da campanha {reference}. O motivo está indicado no InnerOS.",
+    "ouvrirRapport": "Abrir o relatório",
+    "sansContenu": "Por motivos de confidencialidade, este e-mail não contém nenhum elemento do relatório."
+  },
+  "RapportPdf": {
+    "titre": "Relatório de diagnóstico coletivo dos riscos psicossociais",
+    "reference": "Referência do mandato: {reference}",
+    "periode": "Período de coleta: de {debut} a {fin}",
+    "validation": "Validado por {nom} (Institut Mindset en Action®) em {date}.",
+    "nonValide": "Relatório não validado.",
+    "brouillon": "PRÉVIA — RASCUNHO NÃO VALIDADO: não divulgar.",
+    "anonymat": "Este relatório contém apenas resultados agregados de grupos de pelo menos {seuil} pessoas. Nenhuma resposta individual é acessível, nem ao empregador nem à IMA.",
+    "participation": "Participação: {reponses} respondentes utilizáveis para {codes} códigos distribuídos ({taux} %).",
+    "participationSansCodes": "Participação: {reponses} respondentes utilizáveis.",
+    "groupesPresentes": "Grupos apresentados: {groupes}.",
+    "aucunGroupe": "Nenhum grupo é apresentado separadamente: este relatório contém apenas os resultados de conjunto.",
+    "groupesMasques": "{count, plural, one {# grupo não apresentado} other {# grupos não apresentados}}: menos de {seuil} respostas, ou oculto para proteger o anonimato.",
+    "resultatsTitre": "Resultados por escala",
+    "lecture": "COPSOQ III e CBI: escores de 0 a 100. Flourishing Scale: soma de 8 a 56. Entre parênteses: número de pessoas. Sem referência nacional, os escores não são qualificados como favoráveis ou desfavoráveis.",
+    "legende": "Grupos: {legende}.",
+    "limitesParDefaut": "Dados autodeclarados, coletados em um único momento; nenhuma referência nacional disponível.",
+    "sourcesTitre": "Questionários utilizados",
+    "pied": "Institut Mindset en Action® — relatório confidencial, reservado à empresa e a seus representantes"
+  },
+  "Signataire": {
+    "title": "Referente signatário",
+    "help": "Um único referente compromete a empresa: ele aceita o relatório validado pela IMA ou solicita uma correção. Ele deve ter acesso ao relatório desta campanha.",
+    "label": "Referente signatário",
+    "none": "Nenhum signatário designado",
+    "save": "Salvar o signatário",
+    "saving": "Salvando…",
+    "saved": "Signatário salvo."
+  },
+  "RapportSuivi": {
+    "correctionBanner": "Correção solicitada pela empresa em {date}:",
+    "correctionHelp": "Corrija o relatório e valide-o novamente: ele será reenviado à empresa.",
+    "accepted": "Relatório aceito por {nom} em {date}.",
+    "waitingAcceptance": "Aguardando a aceitação do referente signatário.",
+    "noSignatory": "Nenhum referente signatário foi designado para esta campanha: designe-o na ficha da campanha.",
+    "downloadPdf": "Baixar o PDF",
+    "previewPdf": "Prévia em PDF (rascunho)"
+  },
+  "EspaceRapport": {
+    "campaignsTitle": "Suas campanhas",
+    "noCampaign": "Nenhuma campanha foi atribuída a você por enquanto.",
+    "period": "De {debut} a {fin}",
+    "status": "Relatório: {etat}",
+    "etat": {
+      "indisponible": "ainda não disponível",
+      "disponible": "disponível",
+      "enCorrection": "em correção pela IMA"
+    },
+    "open": "Consultar o relatório",
+    "back": "Voltar ao meu espaço",
+    "notAvailable": "O relatório ainda não está disponível. Você será avisado por e-mail assim que for validado pelo Institut Mindset en Action.",
+    "inCorrection": "Uma correção foi solicitada. O Institut Mindset en Action está corrigindo o relatório; você será avisado por e-mail da nova versão.",
+    "acceptTitle": "Aceitar o relatório",
+    "acceptHelp": "Como referente signatário, você verifica se os fatos correspondem ao contrato. A análise continua sendo do Institut Mindset en Action.",
+    "checkPerimetre": "O perímetro, os grupos e o período correspondem ao contrato.",
+    "checkEffectifs": "Os efetivos e a participação indicados estão corretos.",
+    "accept": "Aceitar o relatório",
+    "accepting": "Enviando…",
+    "acceptedDone": "Relatório aceito. Obrigado.",
+    "correctionTitle": "Solicitar uma correção",
+    "correctionHelp": "Descreva com precisão o erro de fato (perímetro, grupo, período, efetivos). O relatório voltará para a IMA.",
+    "correctionLabel": "Correção solicitada",
+    "correction": "Enviar a solicitação",
+    "sending": "Enviando…",
+    "correctionDone": "Solicitação enviada ao Institut Mindset en Action.",
+    "acceptedBy": "Relatório aceito por {nom} em {date}.",
+    "signatoryOnly": "Somente o referente signatário designado pelo Institut Mindset en Action pode aceitar o relatório.",
+    "download": "Baixar o relatório (PDF)"
   }
 }

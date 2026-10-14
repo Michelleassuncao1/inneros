@@ -1,5 +1,6 @@
 // Envoi d'e-mails transactionnels par l'API Brevo (sans module supplémentaire).
-// En développement, sans BREVO_API_KEY, le message est affiché dans le terminal au lieu d'être envoyé.
+// En développement, sans BREVO_API_KEY, ou pour une adresse de test (.invalid, .test…), le message est affiché
+// dans le terminal au lieu d'être envoyé.
 
 export type Email = {
   to: { email: string; name?: string };
@@ -8,12 +9,16 @@ export type Email = {
   text: string;
 };
 
+// Domaines réservés aux tests (RFC 2606 / 6761) : jamais d'envoi réel, même avec une clé Brevo
+const DOMAINE_DE_TEST = /\.(invalid|test|example|localhost)$/i;
+
 export async function envoyerEmail(email: Email) {
   const cle = process.env.BREVO_API_KEY;
   const expediteur = process.env.EMAIL_FROM;
+  const adresseDeTest = DOMAINE_DE_TEST.test(email.to.email.split("@")[1] ?? "");
 
-  if (!cle || !expediteur) {
-    if (process.env.NODE_ENV === "production") {
+  if (!cle || !expediteur || adresseDeTest) {
+    if (!adresseDeTest && process.env.NODE_ENV === "production") {
       throw new Error("BREVO_API_KEY et EMAIL_FROM sont obligatoires en production");
     }
     console.info(

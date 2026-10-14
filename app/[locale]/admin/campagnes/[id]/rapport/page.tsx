@@ -46,6 +46,7 @@ export default async function RapportPage({ params }: PageProps<"/[locale]/admin
   const { campagne, entreprise } = ligne;
 
   const t = await getTranslations("Rapport");
+  const tsu = await getTranslations("RapportSuivi");
   const tr = await getTranslations("Resultats");
   const l = await getTranslations("Libelles");
   const textes: TextesRapport = {
@@ -71,9 +72,15 @@ export default async function RapportPage({ params }: PageProps<"/[locale]/admin
   const date = (d: Date) => new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(d);
   const nombre = (v: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 1, minimumFractionDigits: 1 }).format(v);
   const optionsLangue = LANGUES_RAPPORT.map((lg) => ({ valeur: lg, libelle: l(`locale.${lg}`) }));
-  const validateur = rapport?.validatedBy
-    ? (await db.select({ name: users.name }).from(users).where(eq(users.id, rapport.validatedBy)))[0]?.name
-    : null;
+  const nomDe = async (uid: string | null | undefined) =>
+    uid ? ((await db.select({ name: users.name }).from(users).where(eq(users.id, uid)))[0]?.name ?? null) : null;
+  const validateur = await nomDe(rapport?.validatedBy);
+  const accepteur = await nomDe(rapport?.acceptedBy);
+  const lienPdf = (
+    <a href={`/api/rapport/${id}/pdf`} className="w-fit rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream">
+      {rapport?.status === "validated" ? tsu("downloadPdf") : tsu("previewPdf")}
+    </a>
+  );
 
   // Données sources, avec les identifiants transmis à l'IA (G1, G2… dans l'ordre alphabétique des groupes)
   const sources = resultats && (
@@ -137,6 +144,14 @@ export default async function RapportPage({ params }: PageProps<"/[locale]/admin
           <p className="font-semibold text-ima-navy">
             {rapport.aiModel ? t("mentionAi", { nom: validateur ?? "—" }) : t("mentionManual", { nom: validateur ?? "—" })}
           </p>
+          {rapport.acceptedAt ? (
+            <MessageInfo>{tsu("accepted", { nom: accepteur ?? "—", date: date(rapport.acceptedAt) })}</MessageInfo>
+          ) : campagne.signatoryReferentId ? (
+            <p className="text-sm text-ima-muted">{tsu("waitingAcceptance")}</p>
+          ) : (
+            <p className="text-sm font-semibold text-ima-gold-text">{tsu("noSignatory")}</p>
+          )}
+          {lienPdf}
           <AffichageRapport contenu={lireContenu(rapport.finalText) ?? contenuVide()} textes={textes} />
         </div>
       ) : (
@@ -175,6 +190,13 @@ export default async function RapportPage({ params }: PageProps<"/[locale]/admin
           ) : (
             // Brouillon en cours : relecture à côté des données sources
             <>
+              {rapport.status === "correction_requested" && (
+                <div className="rounded-md border-l-[3px] border-red-700 bg-white px-4 py-3">
+                  <p className="font-semibold text-ima-navy">{tsu("correctionBanner", { date: date(rapport.correctionRequestedAt!) })}</p>
+                  <p className="mt-1 whitespace-pre-line">{rapport.correctionComment}</p>
+                  <p className="mt-2 text-sm text-ima-muted">{tsu("correctionHelp")}</p>
+                </div>
+              )}
               <div className="rounded-md border-l-[3px] border-ima-gold bg-ima-cream px-4 py-3">
                 <p className="font-semibold text-ima-gold-text">{rapport.status === "ai_draft" ? t("bannerAi") : t("bannerManual")}</p>
                 {rapport.aiModel && rapport.aiGeneratedAt && (
@@ -185,6 +207,7 @@ export default async function RapportPage({ params }: PageProps<"/[locale]/admin
                 <p className="mt-1 text-sm text-ima-muted">
                   {t("language")} : {l(`locale.${rapport.language ?? "fr"}`)}
                 </p>
+                <div className="mt-3">{lienPdf}</div>
               </div>
               <div className="grid gap-8 lg:grid-cols-2">
                 <div className="min-w-0">
@@ -201,6 +224,7 @@ export default async function RapportPage({ params }: PageProps<"/[locale]/admin
                   {sources}
                 </aside>
               </div>
+              {rapport.status !== "correction_requested" && (
               <section className="flex max-w-3xl flex-col gap-6 border-t border-ima-line pt-6">
                 <div>
                   <h3 className="mb-2 text-lg">{t("rejectTitle")}</h3>
@@ -217,6 +241,7 @@ export default async function RapportPage({ params }: PageProps<"/[locale]/admin
                   </div>
                 )}
               </section>
+              )}
             </>
           )}
         </div>

@@ -30,6 +30,7 @@ import { genererJetons, revoquerJetonsNonUtilises } from "@/lib/admin/jetons";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 import { enregistrerFormationIA } from "@/lib/rapport/rapports";
+import { designerSignataire } from "@/lib/rapport/entreprise";
 
 const uuid = z.string().uuid();
 
@@ -330,5 +331,18 @@ export async function actionFormationIA(locale: string, _etat: EtatFormulaire, f
   if (!r.ok) return erreur(r.erreur);
   revalidatePath(`/${langue}/admin`);
   const t = await getTranslations({ locale: langue, namespace: "FormationIA" });
+  return { succes: t("saved"), envoi: Date.now() };
+}
+
+// ─── Référent signataire (étape 8B) ──────────────────────────────────────────
+
+export async function actionSignataire(locale: string, campaignId: string, _etat: EtatFormulaire, formData: FormData): Promise<EtatFormulaire> {
+  const { langue, admin, db, erreur } = await contexte(locale);
+  if (!uuid.safeParse(campaignId).success) return erreur("introuvable");
+  const choix = String(formData.get("signataire") ?? "");
+  const r = await designerSignataire(db, admin.id, campaignId, choix || null);
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(`/${langue}/admin/campagnes/${campaignId}`);
+  const t = await getTranslations({ locale: langue, namespace: "Signataire" });
   return { succes: t("saved"), envoi: Date.now() };
 }

@@ -444,7 +444,12 @@
     "rapportSyntheseVide": "La synthèse est vide.",
     "rapportFormationIARequise": "Enregistrez d'abord votre formation à la maîtrise de l'IA (article 4 AI Act).",
     "formationInvalide": "Indiquez une date et la formation suivie (3 à 500 caractères).",
-    "formationDateFuture": "La date de formation ne peut pas être dans le futur."
+    "formationDateFuture": "La date de formation ne peut pas être dans le futur.",
+    "signataireSansAcces": "Le signataire doit être un référent actif ayant accès au rapport de cette campagne.",
+    "signataireRequis": "Seul le référent signataire désigné peut accepter le rapport ou demander une correction.",
+    "rapportDejaAccepte": "Ce rapport est déjà accepté.",
+    "acceptationIncomplete": "Cochez les deux vérifications avant d'accepter le rapport.",
+    "correctionMotifRequis": "Décrivez la correction demandée (10 à 2 000 caractères)."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",
@@ -632,7 +637,11 @@
       "report_rejected": "Brouillon refusé",
       "report_validated": "Rapport validé",
       "campaign_ai_toggled": "Interrupteur IA modifié",
-      "ai_literacy_recorded": "Formation IA enregistrée"
+      "ai_literacy_recorded": "Formation IA enregistrée",
+      "campaign_signatory_set": "Référent signataire désigné",
+      "report_accepted": "Rapport accepté par l'entreprise",
+      "report_correction_requested": "Correction demandée par l'entreprise",
+      "report_downloaded": "Rapport téléchargé (PDF)"
     }
   },
   "Rapport": {
@@ -732,5 +741,86 @@
     "saved": "Formation enregistrée.",
     "current": "Formation enregistrée : {date} — {note}",
     "missing": "Aucune formation enregistrée : vous ne pouvez pas encore valider de rapport."
+  },
+  "Notifications": {
+    "salutation": "Bonjour {name},",
+    "disponibleSujet": "InnerOS : un rapport est disponible",
+    "disponibleTexte": "Le rapport de la campagne {reference} a été validé par l'Institut Mindset en Action. Vous pouvez le consulter dans votre espace InnerOS.",
+    "ouvrirEspace": "Ouvrir mon espace",
+    "accepteSujet": "InnerOS : rapport accepté ({reference})",
+    "accepteTexte": "Le référent signataire a accepté le rapport de la campagne {reference}.",
+    "correctionSujet": "InnerOS : correction demandée ({reference})",
+    "correctionTexte": "Le référent signataire demande une correction du rapport de la campagne {reference}. Le motif est indiqué dans InnerOS.",
+    "ouvrirRapport": "Ouvrir le rapport",
+    "sansContenu": "Pour des raisons de confidentialité, cet e-mail ne contient aucun élément du rapport."
+  },
+  "RapportPdf": {
+    "titre": "Rapport de diagnostic collectif des risques psychosociaux",
+    "reference": "Référence du mandat : {reference}",
+    "periode": "Période de collecte : du {debut} au {fin}",
+    "validation": "Validé par {nom} (Institut Mindset en Action®) le {date}.",
+    "nonValide": "Rapport non validé.",
+    "brouillon": "APERÇU — BROUILLON NON VALIDÉ : ne pas diffuser.",
+    "anonymat": "Ce rapport ne contient que des résultats agrégés sur des groupes d'au moins {seuil} personnes. Aucune réponse individuelle n'est accessible, ni à l'employeur ni à IMA.",
+    "participation": "Participation : {reponses} répondants exploitables pour {codes} codes distribués ({taux} %).",
+    "participationSansCodes": "Participation : {reponses} répondants exploitables.",
+    "groupesPresentes": "Groupes présentés : {groupes}.",
+    "aucunGroupe": "Aucun groupe n'est présenté séparément : seuls les résultats d'ensemble figurent dans ce rapport.",
+    "groupesMasques": "{count, plural, one {# groupe non présenté} other {# groupes non présentés}} : moins de {seuil} réponses, ou masqué pour protéger l'anonymat.",
+    "resultatsTitre": "Résultats par échelle",
+    "lecture": "COPSOQ III et CBI : scores de 0 à 100. Flourishing Scale : somme de 8 à 56. Entre parenthèses : nombre de personnes. Sans référence nationale, les scores ne sont pas qualifiés de favorables ou de défavorables.",
+    "legende": "Groupes : {legende}.",
+    "limitesParDefaut": "Données déclaratives, recueillies à un moment donné ; aucune référence nationale disponible.",
+    "sourcesTitre": "Questionnaires utilisés",
+    "pied": "Institut Mindset en Action® — rapport confidentiel, réservé à l'entreprise et à ses représentants"
+  },
+  "Signataire": {
+    "title": "Référent signataire",
+    "help": "Un seul référent engage l'entreprise : il accepte le rapport validé par IMA ou demande une correction. Il doit avoir accès au rapport de cette campagne.",
+    "label": "Référent signataire",
+    "none": "Aucun signataire désigné",
+    "save": "Enregistrer le signataire",
+    "saving": "Enregistrement…",
+    "saved": "Signataire enregistré."
+  },
+  "RapportSuivi": {
+    "correctionBanner": "Correction demandée par l'entreprise le {date} :",
+    "correctionHelp": "Corrigez le rapport, puis validez-le à nouveau : il sera renvoyé à l'entreprise.",
+    "accepted": "Rapport accepté par {nom} le {date}.",
+    "waitingAcceptance": "En attente d'acceptation par le référent signataire.",
+    "noSignatory": "Aucun référent signataire n'est désigné pour cette campagne : désignez-le sur la fiche de la campagne.",
+    "downloadPdf": "Télécharger le PDF",
+    "previewPdf": "Aperçu PDF (brouillon)"
+  },
+  "EspaceRapport": {
+    "campaignsTitle": "Vos campagnes",
+    "noCampaign": "Aucune campagne ne vous est attribuée pour le moment.",
+    "period": "Du {debut} au {fin}",
+    "status": "Rapport : {etat}",
+    "etat": {
+      "indisponible": "pas encore disponible",
+      "disponible": "disponible",
+      "enCorrection": "en cours de correction par IMA"
+    },
+    "open": "Consulter le rapport",
+    "back": "Retour à mon espace",
+    "notAvailable": "Le rapport n'est pas encore disponible. Vous serez prévenu par e-mail dès sa validation par l'Institut Mindset en Action.",
+    "inCorrection": "Une correction a été demandée. L'Institut Mindset en Action corrige le rapport ; vous serez prévenu par e-mail de sa nouvelle version.",
+    "acceptTitle": "Accepter le rapport",
+    "acceptHelp": "En tant que référent signataire, vous vérifiez que les faits correspondent au contrat. L'analyse reste celle de l'Institut Mindset en Action.",
+    "checkPerimetre": "Le périmètre, les groupes et la période correspondent au contrat.",
+    "checkEffectifs": "Les effectifs et la participation indiqués sont corrects.",
+    "accept": "Accepter le rapport",
+    "accepting": "Envoi…",
+    "acceptedDone": "Rapport accepté. Merci.",
+    "correctionTitle": "Demander une correction",
+    "correctionHelp": "Décrivez précisément l'erreur de fait (périmètre, groupe, période, effectifs). Le rapport retournera chez IMA.",
+    "correctionLabel": "Correction demandée",
+    "correction": "Envoyer la demande",
+    "sending": "Envoi…",
+    "correctionDone": "Demande envoyée à l'Institut Mindset en Action.",
+    "acceptedBy": "Rapport accepté par {nom} le {date}.",
+    "signatoryOnly": "Seul le référent signataire désigné par l'Institut Mindset en Action peut accepter le rapport.",
+    "download": "Télécharger le rapport (PDF)"
   }
 }

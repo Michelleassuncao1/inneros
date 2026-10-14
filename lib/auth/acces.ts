@@ -30,3 +30,8 @@ export async function exigerReferent(locale: string) {
   if (!user) redirect(`/${locale}/espace/connexion`);
   return user;
 }
+
+// Pour les téléchargements côté référent : renvoie le référent ou null, sans redirection
+export async function referentConnecte() {
+  return utilisateurActif("referent");
+}

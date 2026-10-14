@@ -63,6 +63,7 @@ export const statutRapport = pgEnum("report_status", [
   "ai_draft",
   "rejected",
   "validated",
+  "correction_requested", // demandée par le référent signataire après validation IMA (étape 8B)
 ]);
 
 // ─── Côté IMA et entreprises ─────────────────────────────────────────────────
@@ -399,6 +400,10 @@ export const reports = pgTable(
     acceptedAt: timestamp("accepted_at", { withTimezone: true }),
     // Langue du rapport (fr, nl, en, pt-BR)
     language: text("language"),
+    // Demande de correction du référent signataire (faits non conformes au contrat)
+    correctionComment: text("correction_comment"),
+    correctionRequestedAt: timestamp("correction_requested_at", { withTimezone: true }),
+    correctionRequestedBy: uuid("correction_requested_by").references(() => users.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

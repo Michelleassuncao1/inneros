@@ -8,6 +8,7 @@ import type { Db } from "../db/types";
 import { construireChargeUtile, verifierChargeUtile } from "./charge-utile";
 import { LANGUES_RAPPORT, schemaContenuRapport, contenuVide, type ContenuRapport } from "./contenu";
 import { appelClaude, type AppelIA } from "./ia";
+import { notifierRapportDisponible } from "./notifications";
 
 export type Resultat<T = undefined> = { ok: true; valeur: T } | { ok: false; erreur: string; detail?: string };
 
@@ -112,7 +113,9 @@ export async function creerRapportManuel(db: Db, adminId: string, campaignId: st
 async function rapportModifiable(db: Db, reportId: string) {
   const [r] = await db.select().from(reports).where(eq(reports.id, reportId));
   if (!r) return { ok: false as const, erreur: "introuvable" };
-  if (r.status !== "draft" && r.status !== "ai_draft") return { ok: false as const, erreur: "rapportNonModifiable" };
+  // Modifiable : brouillon, ou rapport renvoyé par l'entreprise pour correction (jamais après acceptation)
+  if (r.acceptedAt || !["draft", "ai_draft", "correction_requested"].includes(r.status))
+    return { ok: false as const, erreur: "rapportNonModifiable" };
   return { ok: true as const, rapport: r };
 }
 
@@ -129,6 +132,8 @@ export async function enregistrerContenu(db: Db, adminId: string, reportId: stri
 export async function refuserRapport(db: Db, adminId: string, reportId: string, motif: string): Promise<Resultat> {
   const verif = await rapportModifiable(db, reportId);
   if (!verif.ok) return verif;
+  // Un rapport déjà validé puis renvoyé pour correction se corrige ; il ne se refuse pas
+  if (verif.rapport.status === "correction_requested") return { ok: false, erreur: "rapportNonModifiable" };
   const m = motif.trim();
   if (m.length < 5 || m.length > 1000) return { ok: false, erreur: "rapportMotifRequis" };
   await db.update(reports).set({ status: "rejected", rejectionReason: m, updatedAt: new Date() }).where(eq(reports.id, reportId));
@@ -149,6 +154,7 @@ export async function validerRapport(
   reportId: string,
   saisie: { contenu: unknown; liste: unknown },
   maintenant = new Date(),
+  envoi?: (db: Db, campaignId: string) => Promise<void>,
 ): Promise<Resultat> {
   const verif = await rapportModifiable(db, reportId);
   if (!verif.ok) return verif;
@@ -171,9 +177,21 @@ export async function validerRapport(
       validatedBy: adminId,
       validatedAt: maintenant,
       updatedAt: maintenant,
+      // La demande de correction traitée est effacée (elle reste dans le journal)
+      correctionComment: null,
+      correctionRequestedAt: null,
+      correctionRequestedBy: null,
     })
     .where(eq(reports.id, reportId));
-  await journaliser(db, { actorUserId: adminId, action: "report_validated", targetType: "campaign", targetId: verif.rapport.campaignId });
+  await journaliser(db, {
+    actorUserId: adminId,
+    action: "report_validated",
+    targetType: "campaign",
+    targetId: verif.rapport.campaignId,
+    details: verif.rapport.status === "correction_requested" ? { apresCorrection: true } : undefined,
+  });
+  // Les référents de la campagne sont prévenus (sans contenu du rapport)
+  await (envoi ?? notifierRapportDisponible)(db, verif.rapport.campaignId);
   return { ok: true, valeur: undefined };
 }
 

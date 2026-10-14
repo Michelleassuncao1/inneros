@@ -177,6 +177,7 @@ export async function lireResultats(db: Db, campaignId: string, langue: string) 
         null;
       return {
         titre: definition?.titre ?? "",
+        source: definition ? `${definition.titre} — ${definition.source}` : "",
         dimensions: (definition?.dimensions ?? []).map((d) => ({
           id: d.id,
           nom: d.nom,

@@ -32,6 +32,7 @@ export function AffichageRapport({ contenu, textes }: { contenu: ContenuRapport;
         <p className="max-w-[70ch] whitespace-pre-line">{contenu.synthese}</p>
       </section>
 
+      {contenu.cartographie.some((b) => b.constats.some((k) => k.texte.trim())) && (
       <section className="flex flex-col gap-4">
         <h3 className="text-lg">{textes.l.cartographie}</h3>
         {contenu.cartographie
@@ -55,6 +56,7 @@ export function AffichageRapport({ contenu, textes }: { contenu: ContenuRapport;
             </div>
           ))}
       </section>
+      )}
 
       {contenu.priorites_proposees.length > 0 && (
         <section>

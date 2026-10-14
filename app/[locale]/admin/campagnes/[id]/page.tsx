@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { z } from "zod";
 import { Cellule, EspaceAdmin, Tableau, TitrePage } from "@/components/EspaceAdmin";
-import { CasesACocher, Champ, MessageInfo } from "@/components/Formulaire";
+import { CasesACocher, Champ, MessageInfo, Selection } from "@/components/Formulaire";
 import { FormulaireAction } from "@/components/FormulaireAction";
 import { Pays } from "@/components/Drapeau";
 import { Link } from "@/i18n/navigation";
@@ -23,6 +23,7 @@ import {
   actionModifierCampagne,
   actionQuestionnaires,
   actionReferentsCampagne,
+  actionSignataire,
   actionSupprimerGroupe,
 } from "../../actions";
 import { ChampsCampagne } from "../../ChampsFormulaires";
@@ -60,6 +61,7 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
   ]);
 
   const t = await getTranslations("Campagnes");
+  const ts = await getTranslations("Signataire");
   const l = await getTranslations("Libelles");
   const brouillon = campagne.status === "draft";
   const total = listeGroupes.reduce((s, g) => s + g.expectedSize, 0);
@@ -176,6 +178,28 @@ export default async function CampagnePage({ params }: PageProps<"/[locale]/admi
               />
             </FormulaireAction>
           </>
+        )}
+
+        {/* Référent signataire : un seul, parmi les référents ayant accès (décision B du 14/10/2026) */}
+        {acces.length > 0 && (
+          <div className="mt-8 max-w-xl">
+            <h3 className="text-lg">{ts("title")}</h3>
+            <p className="mb-3 mt-1 text-sm text-ima-muted">{ts("help")}</p>
+            <FormulaireAction action={actionSignataire.bind(null, locale, id)} libelle={ts("save")} enCours={ts("saving")} secondaire>
+              <Selection
+                id="signataire"
+                name="signataire"
+                label={ts("label")}
+                defaultValue={campagne.signatoryReferentId ?? ""}
+                options={[
+                  { valeur: "", libelle: ts("none") },
+                  ...referentsEntreprise
+                    .filter((r) => acces.some((a) => a.userId === r.id))
+                    .map((r) => ({ valeur: r.id, libelle: `${r.name} — ${r.email}` })),
+                ]}
+              />
+            </FormulaireAction>
+          </div>
         )}
       </section>
 

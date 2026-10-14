@@ -444,7 +444,12 @@
     "rapportSyntheseVide": "De samenvatting is leeg.",
     "rapportFormationIARequise": "Registreer eerst uw opleiding AI-geletterdheid (artikel 4 AI-verordening).",
     "formationInvalide": "Vermeld een datum en de gevolgde opleiding (3 tot 500 tekens).",
-    "formationDateFuture": "De opleidingsdatum mag niet in de toekomst liggen."
+    "formationDateFuture": "De opleidingsdatum mag niet in de toekomst liggen.",
+    "signataireSansAcces": "De ondertekenaar moet een actieve referentiepersoon zijn met toegang tot het rapport van deze bevraging.",
+    "signataireRequis": "Alleen de aangewezen ondertekenende referentiepersoon kan het rapport aanvaarden of een correctie vragen.",
+    "rapportDejaAccepte": "Dit rapport is al aanvaard.",
+    "acceptationIncomplete": "Vink de twee controles aan voordat u het rapport aanvaardt.",
+    "correctionMotifRequis": "Beschrijf de gevraagde correctie (10 tot 2 000 tekens)."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
@@ -632,7 +637,11 @@
       "report_rejected": "Ontwerp geweigerd",
       "report_validated": "Rapport gevalideerd",
       "campaign_ai_toggled": "AI-schakelaar gewijzigd",
-      "ai_literacy_recorded": "AI-opleiding geregistreerd"
+      "ai_literacy_recorded": "AI-opleiding geregistreerd",
+      "campaign_signatory_set": "Ondertekenende referentiepersoon aangewezen",
+      "report_accepted": "Rapport aanvaard door de onderneming",
+      "report_correction_requested": "Correctie gevraagd door de onderneming",
+      "report_downloaded": "Rapport gedownload (pdf)"
     }
   },
   "Rapport": {
@@ -732,5 +741,86 @@
     "saved": "Opleiding geregistreerd.",
     "current": "Geregistreerde opleiding: {date} — {note}",
     "missing": "Geen opleiding geregistreerd: u kunt nog geen rapport valideren."
+  },
+  "Notifications": {
+    "salutation": "Beste {name},",
+    "disponibleSujet": "InnerOS: er is een rapport beschikbaar",
+    "disponibleTexte": "Het rapport van de bevraging {reference} is gevalideerd door het Institut Mindset en Action. U kunt het raadplegen in uw InnerOS-ruimte.",
+    "ouvrirEspace": "Mijn ruimte openen",
+    "accepteSujet": "InnerOS: rapport aanvaard ({reference})",
+    "accepteTexte": "De ondertekenende referentiepersoon heeft het rapport van de bevraging {reference} aanvaard.",
+    "correctionSujet": "InnerOS: correctie gevraagd ({reference})",
+    "correctionTexte": "De ondertekenende referentiepersoon vraagt een correctie van het rapport van de bevraging {reference}. De reden staat in InnerOS.",
+    "ouvrirRapport": "Rapport openen",
+    "sansContenu": "Om redenen van vertrouwelijkheid bevat deze e-mail geen enkel element van het rapport."
+  },
+  "RapportPdf": {
+    "titre": "Rapport van de collectieve diagnose van psychosociale risico's",
+    "reference": "Referentie van de opdracht: {reference}",
+    "periode": "Periode van de bevraging: van {debut} tot {fin}",
+    "validation": "Gevalideerd door {nom} (Institut Mindset en Action®) op {date}.",
+    "nonValide": "Rapport niet gevalideerd.",
+    "brouillon": "VOORBEELD — NIET GEVALIDEERD ONTWERP: niet verspreiden.",
+    "anonymat": "Dit rapport bevat alleen geaggregeerde resultaten voor groepen van minstens {seuil} personen. Geen enkel individueel antwoord is toegankelijk, noch voor de werkgever noch voor IMA.",
+    "participation": "Deelname: {reponses} bruikbare respondenten voor {codes} uitgedeelde codes ({taux} %).",
+    "participationSansCodes": "Deelname: {reponses} bruikbare respondenten.",
+    "groupesPresentes": "Getoonde groepen: {groupes}.",
+    "aucunGroupe": "Geen enkele groep wordt afzonderlijk getoond: dit rapport bevat alleen de globale resultaten.",
+    "groupesMasques": "{count, plural, one {# groep niet getoond} other {# groepen niet getoond}}: minder dan {seuil} antwoorden, of verborgen om de anonimiteit te beschermen.",
+    "resultatsTitre": "Resultaten per schaal",
+    "lecture": "COPSOQ III en CBI: scores van 0 tot 100. Flourishing Scale: som van 8 tot 56. Tussen haakjes: aantal personen. Zonder nationale referentie worden de scores niet als gunstig of ongunstig beoordeeld.",
+    "legende": "Groepen: {legende}.",
+    "limitesParDefaut": "Zelfgerapporteerde gegevens, verzameld op één moment; geen nationale referentie beschikbaar.",
+    "sourcesTitre": "Gebruikte vragenlijsten",
+    "pied": "Institut Mindset en Action® — vertrouwelijk rapport, voorbehouden aan de onderneming en haar vertegenwoordigers"
+  },
+  "Signataire": {
+    "title": "Ondertekenende referentiepersoon",
+    "help": "Eén referentiepersoon verbindt de onderneming: die aanvaardt het door IMA gevalideerde rapport of vraagt een correctie. Hij of zij moet toegang hebben tot het rapport van deze bevraging.",
+    "label": "Ondertekenende referentiepersoon",
+    "none": "Geen ondertekenaar aangewezen",
+    "save": "Ondertekenaar opslaan",
+    "saving": "Opslaan…",
+    "saved": "Ondertekenaar opgeslagen."
+  },
+  "RapportSuivi": {
+    "correctionBanner": "Correctie gevraagd door de onderneming op {date}:",
+    "correctionHelp": "Corrigeer het rapport en valideer het opnieuw: het wordt dan opnieuw naar de onderneming gestuurd.",
+    "accepted": "Rapport aanvaard door {nom} op {date}.",
+    "waitingAcceptance": "In afwachting van aanvaarding door de ondertekenende referentiepersoon.",
+    "noSignatory": "Er is geen ondertekenende referentiepersoon aangewezen voor deze bevraging: wijs die aan op de fiche van de bevraging.",
+    "downloadPdf": "Pdf downloaden",
+    "previewPdf": "Voorbeeld pdf (ontwerp)"
+  },
+  "EspaceRapport": {
+    "campaignsTitle": "Uw bevragingen",
+    "noCampaign": "Er is u voorlopig geen bevraging toegewezen.",
+    "period": "Van {debut} tot {fin}",
+    "status": "Rapport: {etat}",
+    "etat": {
+      "indisponible": "nog niet beschikbaar",
+      "disponible": "beschikbaar",
+      "enCorrection": "wordt door IMA gecorrigeerd"
+    },
+    "open": "Rapport raadplegen",
+    "back": "Terug naar mijn ruimte",
+    "notAvailable": "Het rapport is nog niet beschikbaar. U krijgt een e-mail zodra het door het Institut Mindset en Action is gevalideerd.",
+    "inCorrection": "Er is een correctie gevraagd. Het Institut Mindset en Action corrigeert het rapport; u krijgt een e-mail bij de nieuwe versie.",
+    "acceptTitle": "Het rapport aanvaarden",
+    "acceptHelp": "Als ondertekenende referentiepersoon controleert u of de feiten overeenkomen met het contract. De analyse blijft die van het Institut Mindset en Action.",
+    "checkPerimetre": "De reikwijdte, de groepen en de periode komen overeen met het contract.",
+    "checkEffectifs": "De vermelde aantallen en de deelname zijn correct.",
+    "accept": "Het rapport aanvaarden",
+    "accepting": "Verzenden…",
+    "acceptedDone": "Rapport aanvaard. Dank u.",
+    "correctionTitle": "Een correctie vragen",
+    "correctionHelp": "Beschrijf nauwkeurig de feitelijke fout (reikwijdte, groep, periode, aantallen). Het rapport gaat terug naar IMA.",
+    "correctionLabel": "Gevraagde correctie",
+    "correction": "Vraag verzenden",
+    "sending": "Verzenden…",
+    "correctionDone": "Vraag verzonden naar het Institut Mindset en Action.",
+    "acceptedBy": "Rapport aanvaard door {nom} op {date}.",
+    "signatoryOnly": "Alleen de door het Institut Mindset en Action aangewezen ondertekenende referentiepersoon kan het rapport aanvaarden.",
+    "download": "Rapport downloaden (pdf)"
   }
 }
