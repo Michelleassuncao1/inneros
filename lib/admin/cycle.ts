@@ -6,6 +6,7 @@ import { journaliser } from "../audit";
 import { campaignInstruments, campaignReferents, campaigns, groups, instruments, organizations, tokens } from "../db/schema";
 import { definitionPour } from "../instruments/chargement";
 import { calculerAgregats } from "../resultats/agregats";
+import { nettoyerAnciennesVersions, reecrireReponses } from "../confidentialite/anonymat";
 import { languesDuPays } from "../pays";
 import type { Db } from "../db/types";
 import type { Resultat } from "./entreprises";
@@ -164,12 +165,15 @@ export async function cloturerCampagne(
       .where(eq(tokens.campaignId, campaignId))
       .returning({ status: tokens.status });
     const distribues = liste.filter((j) => j.status !== "revoked").length;
+    // Anonymat : réponses réécrites dans un ordre aléatoire (voir lib/confidentialite/anonymat.ts)
+    await reecrireReponses(tx, campaignId);
     await tx
       .update(campaigns)
       .set({ status: "closed", closedAt: maintenant, tokensIssued: distribues })
       .where(eq(campaigns.id, campaignId));
     return { supprimes: liste.length, agregats: await calculerAgregats(tx, campaignId) };
   });
+  await nettoyerAnciennesVersions(db);
   await journaliser(db, {
     actorUserId: adminId,
     action: "campaign_closed",

@@ -262,7 +262,7 @@
   },
   "Jetons": {
     "title": "Respondent codes",
-    "help": "Each respondent receives a single-use code. Codes are shown only once, when they are created: download the spreadsheet and the printable PDF straight away.",
+    "help": "Each respondent receives a single-use code. Codes are shown only once, when they are created: download the spreadsheet and the printable PDF straight away. Hand out the cards at random (for example from a shuffled pile) and never record who receives which code: this is a condition of anonymity.",
     "counts": "{actifs} available · {utilises} used · {revoques} revoked",
     "number": "Number of codes to generate",
     "numberHelp": "Suggestion: total expected headcount + 10%.",

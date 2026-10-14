@@ -15,6 +15,10 @@ export const PGLITE_DIR = process.env.PGLITE_DIR || ".data/pglite";
 function creerClient(): Db {
   const url = process.env.DATABASE_URL;
   if (url && /^postgres(ql)?:\/\//.test(url)) {
+    // Production : connexion chiffrée (TLS) obligatoire vers la base OVH
+    if (process.env.NODE_ENV === "production" && !/[?&]sslmode=(require|verify-ca|verify-full)\b/.test(url)) {
+      throw new Error("DATABASE_URL doit imposer une connexion chiffrée (sslmode=require ou verify-full).");
+    }
     return drizzleNodePg(url, { schema });
   }
   mkdirSync(".data", { recursive: true });

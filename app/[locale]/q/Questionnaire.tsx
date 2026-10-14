@@ -189,6 +189,8 @@ export function Questionnaire() {
       const d = await r.json();
       if (d.ok) {
         if (cle) ecrireStockage(cle, null);
+        // Le code (désormais utilisé) est retiré de l'adresse affichée et de l'historique de cette page
+        window.history.replaceState(null, "", window.location.pathname);
         setEtape({ nom: "fin" });
       } else {
         setEtape({ nom: "erreur", raison: d.raison });

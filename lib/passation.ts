@@ -111,51 +111,58 @@ export async function enregistrerReponses(
   saisie: { code: string; groupe: string; reponses: Record<string, number | null> },
   maintenant = new Date(),
 ): Promise<ResultatEnvoi> {
+  // Anonymat : le jeton et la réponse sont écrits dans deux transactions distinctes. Dans une seule
+  // transaction, PostgreSQL attribue le même numéro de transaction (colonne cachée xmin) au jeton
+  // « utilisé » et à la réponse, ce qui permettrait de les relier en lisant la base.
+  // (Constat de l'audit du 14/10/2026, voir docs/securite/ANONYMAT-ET-SECURITE.md.)
+  const empreinte = empreinteJeton(saisie.code);
   try {
-    await db.transaction(async (tx) => {
-      // 1. Le jeton passe à « utilisé », une seule fois : un second envoi simultané ne trouve plus rien
-      const [jeton] = await tx
-        .update(tokens)
-        .set({ status: "consumed" })
-        .where(
-          and(
-            eq(tokens.tokenHash, empreinteJeton(saisie.code)),
-            eq(tokens.status, "active"),
-            gte(tokens.expiresOn, jour(maintenant)),
-          ),
-        )
-        .returning({ campaignId: tokens.campaignId });
-      if (!jeton) {
-        const existant = await lireJeton(tx, saisie.code);
-        throw new ErreurPassation(!existant || existant.status === "revoked" ? "invalide" : existant.status === "consumed" ? "utilise" : "expire");
-      }
+    // 1. Vérifications, sans rien écrire : un envoi refusé ne consomme pas le code
+    const existant = await lireJeton(db, saisie.code);
+    if (!existant || existant.status === "revoked") throw new ErreurPassation("invalide");
+    if (existant.status === "consumed") throw new ErreurPassation("utilise");
+    if (existant.expiresOn < jour(maintenant)) throw new ErreurPassation("expire");
+    const [campagne] = await db.select().from(campaigns).where(eq(campaigns.id, existant.campaignId));
+    if (!campagne || campagne.status !== "open") throw new ErreurPassation("pasOuverte");
+    // Le groupe doit appartenir à la campagne
+    const [groupe] = await db
+      .select({ id: groups.id })
+      .from(groups)
+      .where(and(eq(groups.id, saisie.groupe), eq(groups.campaignId, campagne.id)));
+    if (!groupe) throw new ErreurPassation("groupe");
+    // Exactement les items de la campagne, avec des codes autorisés (ou vide : « je préfère ne pas répondre »)
+    const { attendus, versions } = await itemsAttendus(db, campagne.id);
+    const recus = Object.entries(saisie.reponses);
+    if (recus.length !== attendus.size) throw new ErreurPassation("reponses");
+    for (const [cle, valeur] of recus) {
+      const codes = attendus.get(cle);
+      if (!codes || (valeur !== null && !codes.has(valeur))) throw new ErreurPassation("reponses");
+    }
 
-      const [campagne] = await tx.select().from(campaigns).where(eq(campaigns.id, jeton.campaignId));
-      if (!campagne || campagne.status !== "open") throw new ErreurPassation("pasOuverte");
+    // 2. Transaction A : le jeton passe à « utilisé », une seule fois (un second envoi simultané ne trouve plus rien)
+    const consommes = await db
+      .update(tokens)
+      .set({ status: "consumed" })
+      .where(and(eq(tokens.tokenHash, empreinte), eq(tokens.status, "active"), gte(tokens.expiresOn, jour(maintenant))))
+      .returning({ id: tokens.id });
+    if (!consommes.length) throw new ErreurPassation("utilise");
 
-      // 2. Le groupe doit appartenir à la campagne
-      const [groupe] = await tx
-        .select({ id: groups.id })
-        .from(groups)
-        .where(and(eq(groups.id, saisie.groupe), eq(groups.campaignId, campagne.id)));
-      if (!groupe) throw new ErreurPassation("groupe");
-
-      // 3. Exactement les items de la campagne, avec des codes autorisés (ou vide : « je préfère ne pas répondre »)
-      const { attendus, versions } = await itemsAttendus(tx, campagne.id);
-      const recus = Object.entries(saisie.reponses);
-      if (recus.length !== attendus.size) throw new ErreurPassation("reponses");
-      for (const [cle, valeur] of recus) {
-        const codes = attendus.get(cle);
-        if (!codes || (valeur !== null && !codes.has(valeur))) throw new ErreurPassation("reponses");
-      }
-
-      // 4. La réponse anonyme : campagne, groupe, date du jour (par défaut en base), versions
-      const [reponse] = await tx
-        .insert(responses)
-        .values({ campaignId: campagne.id, groupId: groupe.id, instrumentVersions: versions })
-        .returning({ id: responses.id });
-      await tx.insert(answers).values(recus.map(([itemId, value]) => ({ responseId: reponse.id, itemId, value })));
-    });
+    // 3. Transaction B : la réponse anonyme (campagne, groupe, date du jour, versions), sans lien avec le jeton
+    try {
+      await db.transaction(async (tx) => {
+        const [ouverte] = await tx.select({ status: campaigns.status }).from(campaigns).where(eq(campaigns.id, campagne.id));
+        if (ouverte?.status !== "open") throw new ErreurPassation("pasOuverte");
+        const [reponse] = await tx
+          .insert(responses)
+          .values({ campaignId: campagne.id, groupId: groupe.id, instrumentVersions: versions })
+          .returning({ id: responses.id });
+        await tx.insert(answers).values(recus.map(([itemId, value]) => ({ responseId: reponse.id, itemId, value })));
+      });
+    } catch (e) {
+      // La réponse n'a pas pu être enregistrée : le code redevient utilisable
+      await db.update(tokens).set({ status: "active" }).where(and(eq(tokens.tokenHash, empreinte), eq(tokens.status, "consumed")));
+      throw e;
+    }
     return { ok: true };
   } catch (e) {
     if (e instanceof ErreurPassation) return { ok: false, raison: e.raison };

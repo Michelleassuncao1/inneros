@@ -262,7 +262,7 @@
   },
   "Jetons": {
     "title": "Jetons des répondants",
-    "help": "Chaque répondant reçoit un code à usage unique. Les codes ne s'affichent qu'une seule fois, au moment de leur création : téléchargez immédiatement le tableau et le PDF à imprimer.",
+    "help": "Chaque répondant reçoit un code à usage unique. Les codes ne s'affichent qu'une seule fois, au moment de leur création : téléchargez immédiatement le tableau et le PDF à imprimer. Distribuez les cartes au hasard (par exemple dans une pile mélangée) et ne notez jamais qui reçoit quel code : c'est une condition de l'anonymat.",
     "counts": "{actifs} disponibles · {utilises} utilisés · {revoques} révoqués",
     "number": "Nombre de jetons à générer",
     "numberHelp": "Proposition : effectif prévu total + 10 %.",

@@ -262,7 +262,7 @@
   },
   "Jetons": {
     "title": "Códigos dos respondentes",
-    "help": "Cada respondente recebe um código de uso único. Os códigos são exibidos uma única vez, no momento da criação: baixe imediatamente a planilha e o PDF para impressão.",
+    "help": "Cada respondente recebe um código de uso único. Os códigos são exibidos uma única vez, no momento da criação: baixe imediatamente a planilha e o PDF para impressão. Distribua os cartões ao acaso (por exemplo, de uma pilha embaralhada) e nunca anote quem recebe qual código: essa é uma condição do anonimato.",
     "counts": "{actifs} disponíveis · {utilises} usados · {revoques} revogados",
     "number": "Número de códigos a gerar",
     "numberHelp": "Sugestão: número total previsto + 10 %.",

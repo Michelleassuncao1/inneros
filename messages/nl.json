@@ -262,7 +262,7 @@
   },
   "Jetons": {
     "title": "Codes voor de respondenten",
-    "help": "Elke respondent krijgt een code voor eenmalig gebruik. De codes worden maar één keer getoond, op het moment dat ze worden aangemaakt: download meteen de tabel en de pdf om af te drukken.",
+    "help": "Elke respondent krijgt een code voor eenmalig gebruik. De codes worden maar één keer getoond, op het moment dat ze worden aangemaakt: download meteen de tabel en de pdf om af te drukken. Deel de kaarten willekeurig uit (bijvoorbeeld uit een geschudde stapel) en noteer nooit wie welke code krijgt: dat is een voorwaarde voor de anonimiteit.",
     "counts": "{actifs} beschikbaar · {utilises} gebruikt · {revoques} ingetrokken",
     "number": "Aantal te genereren codes",
     "numberHelp": "Voorstel: totale verwachte omvang + 10 %.",
