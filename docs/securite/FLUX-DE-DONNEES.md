@@ -120,7 +120,7 @@ Un travailleur reçoit une carte avec un code, répond à un questionnaire sans 
 | --- | --- | --- | --- | --- |
 | OVHcloud | Base de données | Toutes les données InnerOS | UE (région à choisir) | À CONTRACTUALISER (DPA) — base pas encore créée |
 | Vercel | Hébergement de l'application | Données en transit ; journaux techniques des requêtes (dont adresse IP et heure) | Société américaine, fonctions en UE | À CONTRACTUALISER ; durée des journaux À VÉRIFIER |
-| Brevo | E-mails de connexion des référents | Nom et e-mail des référents | UE (France) | À CONTRACTUALISER |
+| Brevo | E-mails de connexion des référents | Nom et e-mail des référents | Société française ; transferts vers les États-Unis et l'Inde mentionnés dans sa politique de confidentialité | À CONTRACTUALISER (DPA : vérifier le mécanisme de transfert actuel) ; durée de conservation des e-mails À DÉCIDER par IMA |
 | Anthropic | Brouillon du rapport (IA) | Moyennes de groupes, contexte du mandat, code interne | Société américaine | DPA à consulter et signer ; transfert hors UE à encadrer |
 
 ## 8. Ce qui reste à surveiller (risques résiduels)

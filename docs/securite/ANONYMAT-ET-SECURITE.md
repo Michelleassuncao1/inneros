@@ -129,8 +129,8 @@ Les tests suivants s'exécutent à chaque modification (`npm test`, 125 tests au
 ### Hébergement et sous-traitants
 7. **OVHcloud** : région exacte (France, Allemagne…), offre (base PostgreSQL managée), chiffrement au repos, durée de rétention des sauvegardes et des journaux, accès des équipes OVH, DPA signé. Option « HDS » nécessaire pour la France ?
 8. **Vercel** : région des fonctions (UE), durée de conservation des journaux de requêtes (adresse IP, heure), DPA et clauses contractuelles types, membres ayant accès au projet.
-9. **Brevo** : DPA, région, durée de conservation des e-mails envoyés.
-10. **Anthropic** : DPA, durée de conservation des requêtes, absence d'entraînement sur les données, transfert vers les États-Unis (clauses contractuelles types / cadre de protection des données UE–États-Unis), mention au registre.
+9. **Brevo** : DPA à récupérer depuis le compte ; vérifier le mécanisme de transfert réellement utilisé (une page d'aide de Brevo cite encore le « Privacy Shield », invalidé en 2020 : ne pas la citer comme garantie) ; localisation réelle (transferts vers les États-Unis et l'Inde mentionnés) ; durée de conservation des e-mails envoyés à décider et documenter par IMA (Brevo est sous-traitant).
+10. **Anthropic** : `claude-sonnet-5-5` n'est pas un « Covered Model » (seuls Fable 5/5.1 et Mythos 5/5.1 imposent 30 jours) ; selon la documentation officielle, le contenu des échanges n'est pas conservé par défaut, hors contenus signalés et obligations légales. Demander la ZDR en complément ; documenter le transfert vers les États-Unis (clauses contractuelles types).
 11. **GitHub** (code source, dépôt privé) : ne contient aucune donnée personnelle ; à confirmer comme hors périmètre.
 
 ### Accès et organisation chez IMA

@@ -241,7 +241,7 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
       <tbody>
         <tr><td>OVHcloud</td><td>Base de données</td><td>Toutes les données InnerOS</td><td>Union européenne (région à choisir)</td></tr>
         <tr><td>Vercel</td><td>Hébergement de l'application</td><td>Données en transit ; journaux techniques (adresse IP, heure)</td><td>Société américaine, fonctions en Europe</td></tr>
-        <tr><td>Brevo</td><td>E-mails de connexion des référents</td><td>Nom et e-mail des référents</td><td>Union européenne</td></tr>
+        <tr><td>Brevo</td><td>E-mails de connexion des référents</td><td>Nom et e-mail des référents</td><td>Société française ; transferts vers les États-Unis et l'Inde mentionnés — à clarifier (DPA)</td></tr>
         <tr><td>Anthropic</td><td>Brouillon du rapport (IA)</td><td>Résultats de groupes, contexte du mandat, code interne</td><td>Société américaine</td></tr>
       </tbody>
     </table>
@@ -263,8 +263,8 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
   <ol class="manquants" style="counter-reset: q 6">
     <li>OVHcloud : région exacte, chiffrement au repos, durée de conservation des sauvegardes et des journaux, accès des équipes OVH, DPA, option HDS pour la France.</li>
     <li>Vercel : région européenne, durée de conservation des journaux de requêtes (adresse IP, heure), DPA et clauses contractuelles types, personnes ayant accès au projet.</li>
-    <li>Brevo : DPA, région, durée de conservation des e-mails envoyés.</li>
-    <li>Anthropic : DPA, durée de conservation des requêtes, absence d'entraînement sur les données, encadrement du transfert vers les États-Unis.</li>
+    <li>Brevo : DPA (mécanisme de transfert actuel, pas le « Privacy Shield »), localisation réelle des données et des sous-traitants (États-Unis, Inde), durée de conservation des e-mails envoyés à fixer par IMA.</li>
+    <li>Anthropic : demander la conservation nulle (ZDR) ; documenter le transfert vers les États-Unis (clauses contractuelles types du DPA) au registre. Conservation et absence d'entraînement : voir 11.3.</li>
     <li>GitHub (code source, sans donnée personnelle) : confirmer qu'il est hors périmètre.</li>
   </ol>
   <h3>Accès et organisation chez IMA</h3>
@@ -316,10 +316,11 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
     <li><strong>DPA</strong> : intégré automatiquement aux conditions commerciales (en vigueur depuis le 17/06/2025) ; DPA du 24/02/2025.</li>
     <li><strong>Transferts hors UE</strong> : clauses contractuelles types de l'UE (modules 2 et 3), avec avenants britannique et suisse. Le cadre UE–États-Unis (Data Privacy Framework) n'y est pas mentionné.</li>
     <li><strong>Pas d'entraînement</strong> sur les contenus des clients : « Anthropic may not train models on Customer Content from Services ».</li>
-    <li><strong>Conservation</strong> : requêtes et réponses supprimées sous 30 jours, sauf accord de conservation nulle, application de la politique d'usage ou obligation légale (page de confidentialité datée du 01/07/2026). Une conservation nulle (« zero data retention ») est possible sur accord.</li>
+    <li><strong>Conservation</strong> (corrigé le 14/10/2026) : <code>claude-sonnet-5-5</code> n'est <strong>pas</strong> un « Covered Model ». Seuls Claude Fable 5, Fable 5.1, Mythos 5 et Mythos 5.1 imposent une conservation de 30 jours. Pour les autres modèles, la documentation officielle d'Anthropic indique que seul ce qui est techniquement nécessaire est conservé et que <strong>le contenu des échanges (requêtes et réponses) n'est pas conservé par défaut</strong>. Une page de confidentialité d'Anthropic (01/07/2026) mentionne une suppression « sous 30 jours » : à lire comme un plafond, non comme la règle applicable à ce modèle. Exception dans tous les cas : contenus signalés par les contrôles de sécurité d'Anthropic, ou obligation légale.</li>
+    <li><strong>Conservation nulle (ZDR)</strong> : recommandée en complément, pour une garantie contractuelle ; disponible sur demande commerciale.</li>
     <li><strong>Contenu transmis</strong> : uniquement des moyennes de groupes d'au moins 10 personnes, le contexte du mandat et un code interne, jamais le nom de l'entreprise ni une réponse individuelle. Le transfert reste à documenter au registre et dans l'AIPD.</li>
     <li><strong>Modèle appelé</strong> : <code>claude-sonnet-5-5</code> (Claude Sonnet 5.5), fixé dans la configuration du serveur. Le modèle réellement utilisé sera enregistré avec chaque brouillon.</li>
-    <li><strong>Conservation nulle (ZDR)</strong> : disponible sur demande commerciale auprès d'Anthropic. À demander pour l'espace de travail InnerOS, en confirmant que <code>claude-sonnet-5-5</code> y est couvert.</li>
+    <li><strong>Demande de ZDR</strong> : pour l'espace de travail InnerOS ; <code>claude-sonnet-5-5</code>, n'étant pas un « Covered Model », y est éligible.</li>
     <li><strong>Modèle de secours</strong> : en cas de refus exceptionnel du modèle, l'API peut relancer la demande sur un autre modèle Claude choisi par Anthropic. <strong>Proposition, à confirmer par IMA</strong> : désactiver ce secours, pour garantir un seul modèle connu et compatible avec la conservation nulle ; un refus s'afficherait simplement au praticien, qui pourrait rédiger à la main.</li>
   </ul>
 
@@ -335,9 +336,10 @@ footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line);
   <h3>11.5 Brevo (e-mails)</h3>
   <ul>
     <li><strong>Ce qui est envoyé</strong> (vérifié dans le code) : nom et adresse e-mail du référent, et un lien de connexion à usage unique valable 15 minutes. À l'étape 8 s'ajouteront des notifications sans contenu du rapport (« un rapport est disponible », « rapport accepté », « correction demandée »). <strong>Aucune donnée de répondant.</strong></li>
-    <li><strong>Hébergement</strong> : société française, données hébergées dans l'Union européenne d'après les sources consultées. À confirmer dans le DPA.</li>
+    <li><strong>Localisation : non garantie.</strong> Brevo est une société française, mais sa politique de confidentialité mentionne des transferts vers les États-Unis et l'Inde (signalé par l'agent juridique le 14/10/2026). L'hébergement exclusivement européen n'est donc pas acquis pour l'ensemble du traitement : à clarifier dans le DPA.</li>
+    <li><strong>Mécanisme de transfert : à vérifier dans le DPA.</strong> Une page d'aide de Brevo justifierait les transferts vers ses sous-traitants américains par le « Privacy Shield », invalidé par la Cour de justice de l'UE en 2020 (arrêt Schrems II). Cette page semble obsolète et <strong>ne doit pas être citée comme garantie</strong>. Le DPA actuel doit indiquer le mécanisme réellement utilisé (clauses contractuelles types, cadre UE–États-Unis de 2023).</li>
     <li><strong>DPA</strong> : à télécharger et signer depuis le compte Brevo (rubrique RGPD), avec la liste des sous-traitants de Brevo.</li>
-    <li><strong>Conservation des journaux d'envoi</strong> : non précisée publiquement ; à demander à Brevo.</li>
+    <li><strong>Durée de conservation des e-mails envoyés</strong> : Brevo agit en sous-traitant ; c'est à <strong>IMA de la décider et de la documenter</strong> (À DÉCIDER). Le lien de connexion qu'ils contiennent n'est valable que 15 minutes et une seule fois.</li>
     <li><strong>Suivi des ouvertures et des clics</strong> : à désactiver pour les e-mails transactionnels d'InnerOS. Sinon, Brevo enregistre qui ouvre l'e-mail et remplace le lien de connexion par un lien de suivi qui passe par ses serveurs.</li>
   </ul>
 
