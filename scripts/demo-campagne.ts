@@ -2,7 +2,8 @@
 // Groupes : Soins (25 réponses), Administration (12) et Logistique (9, sous le seuil : jamais affiché).
 // Questionnaires : COPSOQ III belge et Flourishing s'ils sont enregistrés, sinon le questionnaire de test.
 // Réservé au développement (PGlite) : refusé si DATABASE_URL désigne une base PostgreSQL.
-// Usage : npm run demo:campagne   (serveur de développement arrêté)
+// Option --rapport-accepte-il-y-a=13 : ajoute un rapport fictif validé et accepté il y a 13 mois (test de suppression).
+// Usage : npm run demo:campagne [-- --rapport-accepte-il-y-a=13]   (serveur de développement arrêté)
 import { loadEnvConfig } from "@next/env";
 import { and, eq, inArray } from "drizzle-orm";
 
@@ -15,6 +16,8 @@ async function principal() {
   const { chargerQuestionnaireDeTest } = await import("../lib/db/test-db");
   const { creerCampagneDemo } = await import("../lib/resultats/demo");
   const db = getDb();
+  const ilYa = process.argv.find((a) => a.startsWith("--rapport-accepte-il-y-a="))?.split("=")[1];
+  if (ilYa !== undefined && !/^\d+$/.test(ilYa)) throw new Error("Nombre de mois attendu, par exemple --rapport-accepte-il-y-a=13.");
 
   const [admin] = await db.select().from(users).where(and(eq(users.role, "admin")));
   if (!admin) throw new Error("Aucun administrateur : créez-en un avec npm run admin:create.");
@@ -33,6 +36,8 @@ async function principal() {
   const id = await creerCampagneDemo(db, {
     adminId: admin.id,
     instrumentIds,
+    rapportAccepteIlYaMois: ilYa === undefined ? undefined : Number(ilYa),
+    graine: Date.now() % 2147483647, // une nouvelle campagne fictive à chaque lancement
     groupes: [
       { libelle: "Soins", attendus: 30, repondants: 25 },
       { libelle: "Administration", attendus: 14, repondants: 12 },
@@ -43,10 +48,12 @@ async function principal() {
   console.log(`Questionnaires : ${reels.length ? reels.map((r) => r.code).join(", ") : "questionnaire de test"}`);
 }
 
-principal().then(
-  () => process.exit(0),
-  (e) => {
-    console.error(e instanceof Error ? e.message : e);
-    process.exit(1);
-  },
-);
+principal()
+  .finally(async () => (await import("../lib/db/client")).fermerDb())
+  .then(
+    () => process.exit(0),
+    (e) => {
+      console.error(e instanceof Error ? e.message : e);
+      process.exit(1);
+    },
+  );

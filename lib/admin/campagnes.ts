@@ -265,6 +265,10 @@ export async function choisirReferents(
   if (autorises.length !== new Set(ids.data).size) return { ok: false, erreur: "saisieInvalide" };
 
   await db.transaction(async (tx) => {
+    // Un signataire retiré de la campagne perd aussi sa désignation
+    if (campagne.signatoryReferentId && !autorises.some((r) => r.id === campagne.signatoryReferentId)) {
+      await tx.update(campaigns).set({ signatoryReferentId: null }).where(eq(campaigns.id, campaignId));
+    }
     await tx.delete(campaignReferents).where(eq(campaignReferents.campaignId, campaignId));
     if (autorises.length) {
       await tx.insert(campaignReferents).values(autorises.map((r) => ({ campaignId, userId: r.id })));

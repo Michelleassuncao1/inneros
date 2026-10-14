@@ -6,7 +6,8 @@ import { ajouterGroupe, choisirQuestionnaires, choisirReferents, creerCampagne }
 import { cloturerCampagne, ouvrirCampagne } from "../admin/cycle";
 import { ajouterReferent, creerEntreprise } from "../admin/entreprises";
 import { genererJetons } from "../admin/jetons";
-import { groups, instruments, users } from "../db/schema";
+import { campaigns, groups, instruments, reports, users } from "../db/schema";
+import { moisAvant } from "../confidentialite/conservation";
 import type { Db } from "../db/types";
 import { definitionPour } from "../instruments/chargement";
 import { cleItem } from "../instruments/format";
@@ -30,7 +31,15 @@ const jour = (d: Date) => d.toISOString().slice(0, 10);
 
 export async function creerCampagneDemo(
   db: Db,
-  options: { adminId: string; instrumentIds: string[]; groupes: GroupeDemo[]; maintenant?: Date; graine?: number; nom?: string },
+  options: {
+    adminId: string;
+    instrumentIds: string[];
+    groupes: GroupeDemo[];
+    maintenant?: Date;
+    graine?: number;
+    nom?: string;
+    rapportAccepteIlYaMois?: number;
+  },
 ) {
   const maintenant = options.maintenant ?? new Date();
   const hasard = aleatoire(options.graine ?? 2026);
@@ -111,5 +120,25 @@ export async function creerCampagneDemo(
     }
   }
   verifier(await cloturerCampagne(db, options.adminId, campagne.id, maintenant));
+
+  // Option : rapport fictif validé par IMA et accepté par le référent signataire il y a N mois
+  // (pour tester la suppression programmée des réponses brutes)
+  if (options.rapportAccepteIlYaMois !== undefined) {
+    const date = moisAvant(maintenant, options.rapportAccepteIlYaMois);
+    await db.update(campaigns).set({ signatoryReferentId: referent.id }).where(eq(campaigns.id, campagne.id));
+    await db.insert(reports).values({
+      campaignId: campagne.id,
+      status: "validated",
+      finalText: "Rapport de démonstration — texte fictif.",
+      checkSourcesVerified: true,
+      checkNoSmallGroup: true,
+      checkLanguageRule: true,
+      checkLimitsMentioned: true,
+      validatedBy: options.adminId,
+      validatedAt: date,
+      acceptedBy: referent.id,
+      acceptedAt: date,
+    });
+  }
   return campagne.id;
 }

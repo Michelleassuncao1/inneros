@@ -81,7 +81,8 @@
     "home": "Start",
     "organizations": "Bedrijven",
     "campaigns": "Campagnes",
-    "signOut": "Afmelden"
+    "signOut": "Afmelden",
+    "journal": "Logboek"
   },
   "Libelles": {
     "all": "Alle landen",
@@ -355,7 +356,8 @@
     "toValidate": "Tekst te laten valideren door een jurist.",
     "helpTitle": "Hulp nodig?",
     "help": "Gaat u door een moeilijke periode? U staat er niet alleen voor. Praat erover met iemand die u vertrouwt, met uw arts of met de preventiedienst van uw bedrijf. U kunt ook contact opnemen met:",
-    "contact": "Een vraag over deze bevraging? Institut Mindset en Action® — info@institutmindsetenaction.com"
+    "contact": "Een vraag over deze bevraging? Institut Mindset en Action® — info@institutmindsetenaction.com",
+    "privacy": "Privacy: {url}"
   },
   "Pays": {
     "BE": {
@@ -521,7 +523,8 @@
   },
   "Footer": {
     "values": "Inspireren · Motiveren · Handelen",
-    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® is een eigen methode van het Instituut."
+    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® is een eigen methode van het Instituut.",
+    "privacy": "Privacy"
   },
   "Resultats": {
     "participationTitle": "Deelname",
@@ -555,6 +558,54 @@
       "environnement": "Omgeving",
       "sante": "Gezondheid",
       "aucun": "Resultaatindicatoren"
+    },
+    "rawDeleted": "Ruwe antwoorden verwijderd op {date} (bewaartermijn bereikt). De resultaten hieronder blijven bewaard."
+  },
+  "Journal": {
+    "title": "Logboek",
+    "help": "Wie deed wat en wanneer, bij IMA en de referentiepersonen. Er staan geen gegevens van respondenten in. Bewaring: {mois} maanden.",
+    "date": "Datum",
+    "author": "Auteur",
+    "action": "Actie",
+    "target": "Doel",
+    "details": "Details",
+    "system": "Geplande taak",
+    "unknown": "Verwijderd account",
+    "all": "Alle acties",
+    "filter": "Filteren",
+    "empty": "Geen vermeldingen.",
+    "previous": "Recentere",
+    "next": "Oudere",
+    "page": "Pagina {page}",
+    "actions": {
+      "admin_login": "Aanmelding beheerder",
+      "admin_login_failed": "Mislukte aanmelding beheerder",
+      "admin_login_blocked": "Aanmelding beheerder geblokkeerd (te veel pogingen)",
+      "referent_login": "Aanmelding referentiepersoon",
+      "referent_link_sent": "Aanmeldlink verzonden naar een referentiepersoon",
+      "organization_created": "Onderneming aangemaakt",
+      "organization_updated": "Onderneming gewijzigd",
+      "referent_created": "Referentiepersoon toegevoegd",
+      "referent_updated": "Referentiepersoon gewijzigd",
+      "referent_enabled": "Referentiepersoon opnieuw geactiveerd",
+      "referent_disabled": "Referentiepersoon gedeactiveerd",
+      "referent_deleted": "Referentiepersoon verwijderd",
+      "campaign_created": "Bevraging aangemaakt",
+      "campaign_updated": "Bevraging gewijzigd",
+      "group_created": "Groep toegevoegd",
+      "group_deleted": "Groep verwijderd",
+      "campaign_instruments_set": "Vragenlijsten gekozen",
+      "campaign_referents_set": "Toegang referentiepersonen gewijzigd",
+      "campaign_support_set": "Ondersteuning respondenten gewijzigd",
+      "tokens_generated": "Codes aangemaakt",
+      "tokens_revoked": "Codes ingetrokken",
+      "campaign_opened": "Bevraging geopend",
+      "campaign_extended": "Bevraging verlengd",
+      "campaign_language_added": "Taal toegevoegd aan de bevraging",
+      "campaign_closed": "Bevraging afgesloten (resultaten berekend)",
+      "results_viewed": "Resultaten bekeken",
+      "raw_responses_deleted": "Ruwe antwoorden verwijderd (vervaldatum)",
+      "audit_log_purged": "Oud logboek verwijderd (vervaldatum)"
     }
   }
 }

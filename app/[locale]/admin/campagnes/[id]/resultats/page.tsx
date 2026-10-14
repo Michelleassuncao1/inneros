@@ -7,6 +7,7 @@ import { z } from "zod";
 import { Cellule, EspaceAdmin, Tableau, TitrePage } from "@/components/EspaceAdmin";
 import { MessageInfo } from "@/components/Formulaire";
 import { Link } from "@/i18n/navigation";
+import { journaliser } from "@/lib/audit";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 import { campaigns, organizations } from "@/lib/db/schema";
@@ -17,7 +18,7 @@ const ORDRE_NIVEAUX = ["travail", "roles", "interactions", "management", "organi
 export default async function ResultatsPage({ params }: PageProps<"/[locale]/admin/campagnes/[id]/resultats">) {
   const { locale, id } = await params;
   setRequestLocale(locale);
-  await exigerAdmin(locale);
+  const admin = await exigerAdmin(locale);
   if (!z.string().uuid().safeParse(id).success) notFound();
 
   const db = getDb();
@@ -31,6 +32,7 @@ export default async function ResultatsPage({ params }: PageProps<"/[locale]/adm
 
   const t = await getTranslations("Resultats");
   const resultats = campagne.status === "closed" ? await lireResultats(db, id, locale) : null;
+  if (resultats) await journaliser(db, { actorUserId: admin.id, action: "results_viewed", targetType: "campaign", targetId: id });
   const nombre = (v: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 1, minimumFractionDigits: 1 }).format(v);
 
   return (
@@ -49,6 +51,11 @@ export default async function ResultatsPage({ params }: PageProps<"/[locale]/adm
       ) : (
         <>
           <div className="mb-8 flex max-w-3xl flex-col gap-2">
+            {campagne.rawDeletedAt && (
+              <MessageInfo>
+                {t("rawDeleted", { date: new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(campagne.rawDeletedAt) })}
+              </MessageInfo>
+            )}
             <MessageInfo>{t("noReference")}</MessageInfo>
             <p className="text-sm text-ima-muted">
               {t("computedOn", {

@@ -29,3 +29,11 @@ export function getDb(): Db {
   globalPourDb.innerosDb ??= creerClient();
   return globalPourDb.innerosDb;
 }
+
+// Fermeture propre en fin de script (évite un arrêt brutal pendant que PGlite écrit encore)
+export async function fermerDb() {
+  const client = (globalPourDb.innerosDb as unknown as { $client?: { close?: () => Promise<void>; end?: () => Promise<void> } } | undefined)?.$client;
+  globalPourDb.innerosDb = undefined;
+  if (client?.close) await client.close();
+  else if (client?.end) await client.end();
+}

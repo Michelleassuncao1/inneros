@@ -88,6 +88,6 @@ export async function contenuKit({
           }
         : undefined,
     },
-    contact: t("contact"),
+    contact: `${t("contact")} · ${t("privacy", { url: `${process.env.APP_URL ?? "http://localhost:3000"}/${langue}/confidentialite` })}`,
   };
 }

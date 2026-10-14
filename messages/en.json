@@ -81,7 +81,8 @@
     "home": "Home",
     "organizations": "Companies",
     "campaigns": "Campaigns",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "journal": "Log"
   },
   "Libelles": {
     "all": "All countries",
@@ -355,7 +356,8 @@
     "toValidate": "Text to be validated by a legal expert.",
     "helpTitle": "Need help?",
     "help": "If you are going through a difficult time, you are not alone. Talk to someone you trust, to your doctor or to your company's prevention service. You can also contact:",
-    "contact": "A question about this survey? Institut Mindset en Action® — info@institutmindsetenaction.com"
+    "contact": "A question about this survey? Institut Mindset en Action® — info@institutmindsetenaction.com",
+    "privacy": "Privacy: {url}"
   },
   "Pays": {
     "BE": {
@@ -521,7 +523,8 @@
   },
   "Footer": {
     "values": "Inspire · Motivate · Act",
-    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® is a proprietary method of the Institute."
+    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® is a proprietary method of the Institute.",
+    "privacy": "Privacy"
   },
   "Resultats": {
     "participationTitle": "Participation",
@@ -555,6 +558,54 @@
       "environnement": "Environment",
       "sante": "Health",
       "aucun": "Outcome indicators"
+    },
+    "rawDeleted": "Raw responses deleted on {date} (retention period reached). The results below are kept."
+  },
+  "Journal": {
+    "title": "Log",
+    "help": "Who did what and when, at IMA and among referents. It contains no respondent data. Kept for {mois} months.",
+    "date": "Date",
+    "author": "Author",
+    "action": "Action",
+    "target": "Target",
+    "details": "Details",
+    "system": "Scheduled task",
+    "unknown": "Deleted account",
+    "all": "All actions",
+    "filter": "Filter",
+    "empty": "No entries.",
+    "previous": "Newer",
+    "next": "Older",
+    "page": "Page {page}",
+    "actions": {
+      "admin_login": "Administrator sign-in",
+      "admin_login_failed": "Failed administrator sign-in",
+      "admin_login_blocked": "Administrator sign-in blocked (too many attempts)",
+      "referent_login": "Referent sign-in",
+      "referent_link_sent": "Sign-in link sent to a referent",
+      "organization_created": "Company created",
+      "organization_updated": "Company updated",
+      "referent_created": "Referent added",
+      "referent_updated": "Referent updated",
+      "referent_enabled": "Referent reactivated",
+      "referent_disabled": "Referent deactivated",
+      "referent_deleted": "Referent deleted",
+      "campaign_created": "Survey created",
+      "campaign_updated": "Survey updated",
+      "group_created": "Group added",
+      "group_deleted": "Group deleted",
+      "campaign_instruments_set": "Questionnaires chosen",
+      "campaign_referents_set": "Referent access changed",
+      "campaign_support_set": "Respondent support changed",
+      "tokens_generated": "Codes generated",
+      "tokens_revoked": "Codes revoked",
+      "campaign_opened": "Survey opened",
+      "campaign_extended": "Survey extended",
+      "campaign_language_added": "Language added to the survey",
+      "campaign_closed": "Survey closed (results calculated)",
+      "results_viewed": "Results viewed",
+      "raw_responses_deleted": "Raw responses deleted (retention period reached)",
+      "audit_log_purged": "Old log entries deleted (retention period reached)"
     }
   }
 }

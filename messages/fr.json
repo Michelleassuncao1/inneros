@@ -81,7 +81,8 @@
     "home": "Accueil",
     "organizations": "Entreprises",
     "campaigns": "Campagnes",
-    "signOut": "Se déconnecter"
+    "signOut": "Se déconnecter",
+    "journal": "Journal"
   },
   "Libelles": {
     "all": "Tous les pays",
@@ -355,7 +356,8 @@
     "toValidate": "Texte à faire valider par un juriste.",
     "helpTitle": "Besoin d'aide ?",
     "help": "Si vous traversez une période difficile, vous n'êtes pas seul·e. Parlez-en à une personne de confiance, à votre médecin ou au service de prévention de votre entreprise. Vous pouvez aussi contacter :",
-    "contact": "Une question sur cette démarche ? Institut Mindset en Action® — info@institutmindsetenaction.com"
+    "contact": "Une question sur cette démarche ? Institut Mindset en Action® — info@institutmindsetenaction.com",
+    "privacy": "Confidentialité : {url}"
   },
   "Pays": {
     "BE": {
@@ -521,7 +523,8 @@
   },
   "Footer": {
     "values": "Inspirer · Motiver · Agir",
-    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® est une méthode propriétaire de l'Institut."
+    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® est une méthode propriétaire de l'Institut.",
+    "privacy": "Confidentialité"
   },
   "Resultats": {
     "participationTitle": "Participation",
@@ -555,6 +558,54 @@
       "environnement": "Environnement",
       "sante": "Santé",
       "aucun": "Indicateurs de résultat"
+    },
+    "rawDeleted": "Réponses brutes supprimées le {date} (durée de conservation atteinte). Les résultats ci-dessous sont conservés."
+  },
+  "Journal": {
+    "title": "Journal",
+    "help": "Qui a fait quoi et quand, côté IMA et référents. Aucune donnée de répondant n'y figure. Conservation : {mois} mois.",
+    "date": "Date",
+    "author": "Auteur",
+    "action": "Action",
+    "target": "Cible",
+    "details": "Détails",
+    "system": "Tâche programmée",
+    "unknown": "Compte supprimé",
+    "all": "Toutes les actions",
+    "filter": "Filtrer",
+    "empty": "Aucune entrée.",
+    "previous": "Plus récentes",
+    "next": "Plus anciennes",
+    "page": "Page {page}",
+    "actions": {
+      "admin_login": "Connexion administrateur",
+      "admin_login_failed": "Échec de connexion administrateur",
+      "admin_login_blocked": "Connexion administrateur bloquée (trop d'essais)",
+      "referent_login": "Connexion référent",
+      "referent_link_sent": "Lien de connexion envoyé à un référent",
+      "organization_created": "Entreprise créée",
+      "organization_updated": "Entreprise modifiée",
+      "referent_created": "Référent ajouté",
+      "referent_updated": "Référent modifié",
+      "referent_enabled": "Référent réactivé",
+      "referent_disabled": "Référent désactivé",
+      "referent_deleted": "Référent supprimé",
+      "campaign_created": "Campagne créée",
+      "campaign_updated": "Campagne modifiée",
+      "group_created": "Groupe ajouté",
+      "group_deleted": "Groupe supprimé",
+      "campaign_instruments_set": "Questionnaires choisis",
+      "campaign_referents_set": "Accès des référents modifié",
+      "campaign_support_set": "Soutien aux répondants modifié",
+      "tokens_generated": "Codes générés",
+      "tokens_revoked": "Codes révoqués",
+      "campaign_opened": "Campagne ouverte",
+      "campaign_extended": "Campagne prolongée",
+      "campaign_language_added": "Langue ajoutée à la campagne",
+      "campaign_closed": "Campagne clôturée (résultats calculés)",
+      "results_viewed": "Résultats consultés",
+      "raw_responses_deleted": "Réponses brutes supprimées (échéance)",
+      "audit_log_purged": "Journal ancien supprimé (échéance)"
     }
   }
 }

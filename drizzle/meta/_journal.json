@@ -57,6 +57,13 @@
       "when": 1791917790760,
       "tag": "0007_participation-cloture",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1791974341215,
+      "tag": "0008_conservation-acceptation",
+      "breakpoints": true
     }
   ]
 }

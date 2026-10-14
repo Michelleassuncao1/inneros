@@ -192,6 +192,10 @@ export const campaigns = pgTable(
     closedAt: timestamp("closed_at", { withTimezone: true }),
     // Nombre de codes distribués (actifs + utilisés), noté à la clôture puisque les jetons sont alors supprimés
     tokensIssued: integer("tokens_issued"),
+    // Référent signataire du contrat : seul habilité à accepter le rapport au nom de l'entreprise
+    signatoryReferentId: uuid("signatory_referent_id").references(() => users.id, { onDelete: "set null" }),
+    // Date de suppression des réponses brutes (agrégats et rapport conservés)
+    rawDeletedAt: timestamp("raw_deleted_at", { withTimezone: true }),
   },
   (t) => [
     check("campaigns_seuil_minimum", sql`${t.groupMinSize} >= 10`),
@@ -385,6 +389,10 @@ export const reports = pgTable(
       onDelete: "restrict",
     }),
     validatedAt: timestamp("validated_at", { withTimezone: true }),
+    // Acceptation par l'entreprise (référent signataire désigné dans la campagne) : faits conformes au contrat.
+    // Le délai de conservation des réponses brutes démarre à cette date.
+    acceptedBy: uuid("accepted_by").references(() => users.id, { onDelete: "set null" }),
+    acceptedAt: timestamp("accepted_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

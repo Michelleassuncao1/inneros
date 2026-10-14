@@ -81,7 +81,8 @@
     "home": "Início",
     "organizations": "Empresas",
     "campaigns": "Campanhas",
-    "signOut": "Sair"
+    "signOut": "Sair",
+    "journal": "Registro"
   },
   "Libelles": {
     "all": "Todos os países",
@@ -355,7 +356,8 @@
     "toValidate": "Texto a ser validado por um jurista.",
     "helpTitle": "Precisa de ajuda?",
     "help": "Se você está passando por um momento difícil, você não está sozinho(a). Converse com uma pessoa de confiança, com o seu médico ou com o serviço de prevenção da sua empresa. Você também pode entrar em contato com:",
-    "contact": "Dúvidas sobre esta iniciativa? Institut Mindset en Action® — info@institutmindsetenaction.com"
+    "contact": "Dúvidas sobre esta iniciativa? Institut Mindset en Action® — info@institutmindsetenaction.com",
+    "privacy": "Privacidade: {url}"
   },
   "Pays": {
     "BE": {
@@ -521,7 +523,8 @@
   },
   "Footer": {
     "values": "Inspirar · Motivar · Agir",
-    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® é um método proprietário do Instituto."
+    "copyright": "© 2026 Institut Mindset en Action®. MINDSET® é um método proprietário do Instituto.",
+    "privacy": "Privacidade"
   },
   "Resultats": {
     "participationTitle": "Participação",
@@ -555,6 +558,54 @@
       "environnement": "Ambiente",
       "sante": "Saúde",
       "aucun": "Indicadores de resultado"
+    },
+    "rawDeleted": "Respostas brutas excluídas em {date} (prazo de conservação atingido). Os resultados abaixo são mantidos."
+  },
+  "Journal": {
+    "title": "Registro",
+    "help": "Quem fez o quê e quando, na IMA e entre os referentes. Não contém nenhum dado de respondentes. Conservação: {mois} meses.",
+    "date": "Data",
+    "author": "Autor",
+    "action": "Ação",
+    "target": "Alvo",
+    "details": "Detalhes",
+    "system": "Tarefa programada",
+    "unknown": "Conta excluída",
+    "all": "Todas as ações",
+    "filter": "Filtrar",
+    "empty": "Nenhuma entrada.",
+    "previous": "Mais recentes",
+    "next": "Mais antigas",
+    "page": "Página {page}",
+    "actions": {
+      "admin_login": "Acesso de administrador",
+      "admin_login_failed": "Falha de acesso de administrador",
+      "admin_login_blocked": "Acesso de administrador bloqueado (tentativas demais)",
+      "referent_login": "Acesso de referente",
+      "referent_link_sent": "Link de acesso enviado a um referente",
+      "organization_created": "Empresa criada",
+      "organization_updated": "Empresa modificada",
+      "referent_created": "Referente adicionado",
+      "referent_updated": "Referente modificado",
+      "referent_enabled": "Referente reativado",
+      "referent_disabled": "Referente desativado",
+      "referent_deleted": "Referente excluído",
+      "campaign_created": "Campanha criada",
+      "campaign_updated": "Campanha modificada",
+      "group_created": "Grupo adicionado",
+      "group_deleted": "Grupo excluído",
+      "campaign_instruments_set": "Questionários escolhidos",
+      "campaign_referents_set": "Acesso dos referentes modificado",
+      "campaign_support_set": "Apoio aos respondentes modificado",
+      "tokens_generated": "Códigos gerados",
+      "tokens_revoked": "Códigos revogados",
+      "campaign_opened": "Campanha aberta",
+      "campaign_extended": "Campanha prorrogada",
+      "campaign_language_added": "Idioma adicionado à campanha",
+      "campaign_closed": "Campanha encerrada (resultados calculados)",
+      "results_viewed": "Resultados consultados",
+      "raw_responses_deleted": "Respostas brutas excluídas (prazo atingido)",
+      "audit_log_purged": "Registro antigo excluído (prazo atingido)"
     }
   }
 }

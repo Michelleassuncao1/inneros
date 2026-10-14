@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 // Signature visuelle IMA : la vague bleu nuit soulignée d'un filet or (charte, section 3).
 // Une seule signature par écran.
@@ -30,6 +31,11 @@ export function WaveFooter() {
           {t("values")}
         </p>
         <p>{t("copyright")}</p>
+        <p className="mt-2">
+          <Link href="/confidentialite" className="underline hover:text-ima-gold">
+            {t("privacy")}
+          </Link>
+        </p>
       </div>
     </footer>
   );
