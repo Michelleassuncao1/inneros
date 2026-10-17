@@ -496,7 +496,9 @@
     "source": "Source : {source}",
     "thanksTitle": "Merci pour votre participation",
     "thanksText": "Vos réponses ont été envoyées de façon anonyme et effacées de cet appareil. Vous pouvez fermer cette page.",
-    "languageUnavailable": "Ce questionnaire n'est pas proposé en {demandee} pour votre organisation : il s'affiche en {actuelle}."
+    "languageUnavailable": "Ce questionnaire n'est pas proposé en {demandee} pour votre organisation : il s'affiche en {actuelle}.",
+    "severalAnswers": "Plusieurs réponses possibles.",
+    "behaviourHelp": "Si vous êtes concerné(e) par l'une de ces situations, vous pouvez en parler aux personnes et services indiqués ci-dessous. Ce questionnaire est anonyme : votre réponse ne constitue pas un signalement et ne déclenche aucune démarche."
   },
   "Soutien": {
     "title": "Soutien aux répondants",
@@ -728,7 +730,9 @@
       "SESMT": "SESMT",
       "direction": "Direction",
       "RH": "Ressources humaines",
-      "CPPT": "Comité de prévention (CPPT)"
+      "CPPT": "Comité de prévention (CPPT)",
+      "referent_harcelement": "Référent harcèlement",
+      "CSE": "CSE (comité social et économique)"
     }
   },
   "FormationIA": {
@@ -822,5 +826,16 @@
     "acceptedBy": "Rapport accepté par {nom} le {date}.",
     "signatoryOnly": "Seul le référent signataire désigné par l'Institut Mindset en Action peut accepter le rapport.",
     "download": "Télécharger le rapport (PDF)"
+  },
+  "Comportements": {
+    "title": "Comportements indésirables (toute l'entreprise)",
+    "intro": "Présentés pour l'ensemble des répondants seulement, jamais par groupe, pour protéger les personnes concernées. Chaque situation signalée demande une attention particulière.",
+    "concernes": "{concernes} sur {base} répondants concernés ({taux} %)",
+    "frequency": "Fréquence",
+    "authors": "De la part de qui (plusieurs réponses possibles)",
+    "notSpecified": "Non précisé : {n}",
+    "cumulTitle": "Au moins un comportement indésirable",
+    "cumul": "{concernes} répondants sur {base} ({taux} %) ont signalé au moins un de ces comportements au cours des 12 derniers mois.",
+    "byNumber": "{nombre, plural, one {# type de comportement} other {# types de comportements}} : {n, plural, one {# personne} other {# personnes}}"
   }
 }

@@ -9,7 +9,7 @@
 //   du manuel est atteint (3 sur 6 personnel, 4 sur 7 travail, 3 sur 6 bénéficiaires), réglable ;
 // - Flourishing Scale : somme des 8 items (8 à 56), seulement si les 8 sont renseignés.
 // « Je préfère ne pas répondre » (null) et les options marquées « manquant » comptent comme non répondues.
-import { cleItem, type FichierInstrument } from "../instruments/format";
+import { cleItem, cleOption, type FichierInstrument } from "../instruments/format";
 
 // Version des règles de calcul, enregistrée avec chaque agrégat
 export const VERSION_CALCUL = "calcul-1";
@@ -68,7 +68,57 @@ export function scorerDimension(f: FichierInstrument, d: Dimension, reponses: Re
   return regle.calcul === "somme" ? somme : somme / valeurs.length;
 }
 
-// Scores de toutes les dimensions d'un questionnaire pour un répondant
+// Scores de toutes les échelles d'un questionnaire pour un répondant (les comportements indésirables
+// n'ont pas de score : ils sont comptés, voir comptesComportements)
 export function scorerReponse(f: FichierInstrument, reponses: Reponses, reglages: Reglages = {}) {
-  return Object.fromEntries(f.dimensions.map((d) => [d.id, scorerDimension(f, d, reponses, reglages)]));
+  return Object.fromEntries(
+    f.dimensions.filter((d) => d.type !== "comportement").map((d) => [d.id, scorerDimension(f, d, reponses, reglages)]),
+  );
+}
+
+// --- Comportements indésirables (COPSOQ français Q55 à Q62) ---------------------------------------
+// Pour chaque comportement : personnes ayant répondu à la question de fréquence (base), personnes
+// concernées (réponse « oui »), répartition par fréquence et par type d'auteur (plusieurs choix possibles).
+// Total : personnes concernées par au moins un comportement, et par nombre de comportements.
+
+export type CompteComportement = {
+  id: string;
+  base: number;
+  concernes: number;
+  frequences: Record<number, number>;
+  auteurs: Record<number, number>;
+  auteursNonPrecises: number; // personnes concernées qui ont préféré ne pas dire de la part de qui
+};
+
+export function comptesComportements(f: FichierInstrument, liste: Reponses[]) {
+  const dims = f.dimensions.filter((d) => d.type === "comportement");
+  const comptes: CompteComportement[] = dims.map((d) => ({ id: d.id, base: 0, concernes: 0, frequences: {}, auteurs: {}, auteursNonPrecises: 0 }));
+  const cumul = { base: 0, auMoinsUn: 0, parNombre: {} as Record<number, number> };
+  for (const reponses of liste) {
+    let repondu = false;
+    let nombre = 0;
+    dims.forEach((d, j) => {
+      const [frequence, auteurs] = d.items;
+      const v = reponses[cleItem(f.instrument, frequence.id)];
+      if (v === null || v === undefined) return;
+      repondu = true;
+      const c = comptes[j];
+      c.base++;
+      if (!auteurs.si!.codes.includes(v)) return;
+      nombre++;
+      c.concernes++;
+      c.frequences[v] = (c.frequences[v] ?? 0) + 1;
+      const codes = f.echelles_reponse.find((e) => e.id === auteurs.reponse)!.options.map((o) => o.code);
+      const coches = codes.filter((code) => reponses[cleOption(f.instrument, auteurs.id, code)] === 1);
+      if (!coches.length) c.auteursNonPrecises++;
+      for (const code of coches) c.auteurs[code] = (c.auteurs[code] ?? 0) + 1;
+    });
+    if (!repondu) continue;
+    cumul.base++;
+    if (nombre) {
+      cumul.auMoinsUn++;
+      cumul.parNombre[nombre] = (cumul.parNombre[nombre] ?? 0) + 1;
+    }
+  }
+  return { comptes, cumul };
 }

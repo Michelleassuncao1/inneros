@@ -496,7 +496,9 @@
     "source": "Source: {source}",
     "thanksTitle": "Thank you for taking part",
     "thanksText": "Your answers have been submitted anonymously and deleted from this device. You can close this page.",
-    "languageUnavailable": "This questionnaire is not offered in {demandee} for your organisation: it is shown in {actuelle}."
+    "languageUnavailable": "This questionnaire is not offered in {demandee} for your organisation: it is shown in {actuelle}.",
+    "severalAnswers": "Several answers possible.",
+    "behaviourHelp": "If any of these situations concerns you, you can talk to the people and services listed below. This questionnaire is anonymous: your answer is not a report and does not trigger any procedure."
   },
   "Soutien": {
     "title": "Support for respondents",
@@ -728,7 +730,9 @@
       "SESMT": "SESMT",
       "direction": "Management",
       "RH": "Human resources",
-      "CPPT": "Prevention committee"
+      "CPPT": "Prevention committee",
+      "referent_harcelement": "Harassment officer (France)",
+      "CSE": "CSE (works council, France)"
     }
   },
   "FormationIA": {
@@ -822,5 +826,16 @@
     "acceptedBy": "Report accepted by {nom} on {date}.",
     "signatoryOnly": "Only the signatory referent designated by the Institut Mindset en Action can accept the report.",
     "download": "Download the report (PDF)"
+  },
+  "Comportements": {
+    "title": "Offensive behaviour (whole organisation)",
+    "intro": "Shown for all respondents together only, never by group, to protect the people concerned. Every reported situation calls for particular attention.",
+    "concernes": "{concernes} of {base} respondents concerned ({taux}%)",
+    "frequency": "Frequency",
+    "authors": "From whom (several answers possible)",
+    "notSpecified": "Not specified: {n}",
+    "cumulTitle": "At least one offensive behaviour",
+    "cumul": "{concernes} of {base} respondents ({taux}%) reported at least one of these behaviours in the last 12 months.",
+    "byNumber": "{nombre, plural, one {# type of behaviour} other {# types of behaviour}}: {n, plural, one {# person} other {# people}}"
   }
 }

@@ -11,6 +11,7 @@ import { moisAvant } from "../confidentialite/conservation";
 import type { Db } from "../db/types";
 import { definitionPour } from "../instruments/chargement";
 import { cleItem } from "../instruments/format";
+import { clesDe, reponsesCompletes } from "../instruments/reponses";
 import { enregistrerReponses } from "../passation";
 
 export type GroupeDemo = { libelle: string; attendus: number; repondants: number };
@@ -39,6 +40,7 @@ export async function creerCampagneDemo(
     graine?: number;
     nom?: string;
     rapportAccepteIlYaMois?: number;
+    pays?: "BE" | "FR"; // pays de l'entreprise fictive (BE par défaut)
   },
 ) {
   const maintenant = options.maintenant ?? new Date();
@@ -52,7 +54,7 @@ export async function creerCampagneDemo(
   const org = verifier(
     await creerEntreprise(db, options.adminId, {
       name: options.nom ?? `DÉMO — données fictives ${suffixe}`,
-      country: "BE",
+      country: options.pays ?? "BE",
       locale: "fr",
       sector: "Démonstration",
       sizeBand: "50-249",
@@ -101,6 +103,21 @@ export async function creerCampagneDemo(
       const reponses: Record<string, number | null> = {};
       for (const def of definitions) {
         for (const d of def.dimensions) {
+          if (d.type === "comportement") {
+            // Comportements indésirables : la plupart répondent « Non » ; sinon une fréquence et un ou deux auteurs
+            const [frequence, auteurs] = d.items;
+            const codes = def.echelles_reponse.find((e) => e.id === frequence.reponse)!.options.map((o) => o.code);
+            const oui = auteurs.si!.codes;
+            const non = codes.find((c) => !oui.includes(c))!;
+            const v = hasard() < 0.85 ? non : oui[Math.floor(hasard() * oui.length)];
+            reponses[cleItem(def.instrument, frequence.id)] = v;
+            if (oui.includes(v)) {
+              const cles = clesDe(def, auteurs);
+              const choisies = new Set([Math.floor(hasard() * cles.length), Math.floor(hasard() * cles.length)]);
+              cles.forEach((k, j) => (reponses[k] = choisies.has(j) ? 1 : 0));
+            }
+            continue;
+          }
           for (const item of d.items) {
             const options = def.echelles_reponse.find((e) => e.id === item.reponse)!.options;
             const valides = options.filter((o) => !o.manquant);
@@ -115,7 +132,8 @@ export async function creerCampagneDemo(
           }
         }
       }
-      const envoi = await enregistrerReponses(db, { code: codes[indice++], groupe: groupeId, reponses }, maintenant);
+      const completes = Object.assign({}, ...definitions.map((def) => reponsesCompletes(def, reponses)));
+      const envoi = await enregistrerReponses(db, { code: codes[indice++], groupe: groupeId, reponses: completes }, maintenant);
       if (!envoi.ok) throw new Error(`réponse refusée : ${envoi.raison}`);
     }
   }

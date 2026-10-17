@@ -5,7 +5,7 @@ import { z } from "zod";
 export const NIVEAUX_MINDSET = ["travail", "roles", "interactions", "management", "organisation", "environnement"] as const;
 export const NATURES = ["donnee", "perception_rapportee", "hypothese", "conclusion_etayee"] as const;
 export const CONFIANCES = ["eleve", "intermediaire", "limite"] as const;
-export const ACTEURS = ["CPAP", "medecin_travail", "SESMT", "direction", "RH", "CPPT"] as const;
+export const ACTEURS = ["CPAP", "medecin_travail", "SESMT", "direction", "RH", "CPPT", "referent_harcelement", "CSE"] as const;
 export const LANGUES_RAPPORT = ["fr", "nl", "en", "pt-BR"] as const;
 
 const texte = (max: number) => z.string().max(max);

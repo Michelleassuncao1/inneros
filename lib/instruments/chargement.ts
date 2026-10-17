@@ -86,10 +86,14 @@ export function apercuInstrument(f: FichierInstrument): string {
   ];
   let total = 0;
   for (const d of f.dimensions) {
-    lignes.push("", `Dimension ${d.id} — ${d.nom}${d.niveau_mindset ? ` (niveau MINDSET : ${d.niveau_mindset})` : ""}`);
+    lignes.push(
+      "",
+      `Dimension ${d.id} — ${d.nom}${d.niveau_mindset ? ` (niveau MINDSET : ${d.niveau_mindset})` : ""}${d.type === "comportement" ? " [comportement indésirable : comptage, sans score]" : ""}`,
+    );
     if (d.consigne) lignes.push(`  Consigne : ${d.consigne}`);
     for (const i of d.items) {
-      lignes.push(`  ${i.id}. ${i.texte}   [réponses : ${i.reponse} ; sens : ${i.sens}]`);
+      const extra = `${i.multiple ? " ; plusieurs choix" : ""}${i.si ? ` ; posée si ${i.si.item} = ${i.si.codes.join(", ")}` : ""}`;
+      lignes.push(`  ${i.id}. ${i.texte}   [réponses : ${i.reponse} ; sens : ${i.sens}${extra}]`);
       total++;
     }
   }

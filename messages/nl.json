@@ -496,7 +496,9 @@
     "source": "Bron: {source}",
     "thanksTitle": "Bedankt voor uw deelname",
     "thanksText": "Uw antwoorden zijn anoniem verzonden en van dit toestel gewist. U mag deze pagina sluiten.",
-    "languageUnavailable": "Deze vragenlijst wordt voor uw organisatie niet aangeboden in het {demandee}: hij wordt getoond in het {actuelle}."
+    "languageUnavailable": "Deze vragenlijst wordt voor uw organisatie niet aangeboden in het {demandee}: hij wordt getoond in het {actuelle}.",
+    "severalAnswers": "Meerdere antwoorden mogelijk.",
+    "behaviourHelp": "Als u met een van deze situaties te maken hebt, kunt u erover praten met de personen en diensten hieronder. Deze vragenlijst is anoniem: uw antwoord is geen melding en leidt tot geen enkele stap."
   },
   "Soutien": {
     "title": "Ondersteuning van de respondenten",
@@ -728,7 +730,9 @@
       "SESMT": "SESMT",
       "direction": "Directie",
       "RH": "Human resources",
-      "CPPT": "Comité voor preventie (CPBW)"
+      "CPPT": "Comité voor preventie (CPBW)",
+      "referent_harcelement": "Referent intimidatie (Frankrijk)",
+      "CSE": "CSE (ondernemingsraad, Frankrijk)"
     }
   },
   "FormationIA": {
@@ -822,5 +826,16 @@
     "acceptedBy": "Rapport aanvaard door {nom} op {date}.",
     "signatoryOnly": "Alleen de door het Institut Mindset en Action aangewezen ondertekenende referentiepersoon kan het rapport aanvaarden.",
     "download": "Rapport downloaden (pdf)"
+  },
+  "Comportements": {
+    "title": "Ongewenst gedrag (hele organisatie)",
+    "intro": "Alleen voor alle respondenten samen weergegeven, nooit per groep, om de betrokken personen te beschermen. Elke gemelde situatie verdient bijzondere aandacht.",
+    "concernes": "{concernes} van {base} respondenten betrokken ({taux} %)",
+    "frequency": "Frequentie",
+    "authors": "Door wie (meerdere antwoorden mogelijk)",
+    "notSpecified": "Niet vermeld: {n}",
+    "cumulTitle": "Minstens één vorm van ongewenst gedrag",
+    "cumul": "{concernes} van {base} respondenten ({taux} %) meldden minstens één van deze vormen van gedrag in de afgelopen 12 maanden.",
+    "byNumber": "{nombre, plural, one {# soort gedrag} other {# soorten gedrag}}: {n, plural, one {# persoon} other {# personen}}"
   }
 }

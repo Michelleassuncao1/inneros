@@ -7,7 +7,9 @@ import { lireContenu, NIVEAUX_MINDSET } from "../rapport/contenu";
 import { rapportCourant } from "../rapport/rapports";
 import { lireResultats } from "../resultats/agregats";
 import { traducteur } from "../traduction";
-import type { ContenuPdfRapport, TableauResultats } from "./rapport";
+import type { BlocComportements, ContenuPdfRapport, TableauResultats } from "./rapport";
+import { textesComportements } from "../../components/ResultatsComportements";
+import type { ResultatsComportements } from "../resultats/agregats";
 
 const ORDRE = [...NIVEAUX_MINDSET, "sante", "aucun"] as const;
 
@@ -54,8 +56,44 @@ export async function contenuPdfRapport(db: Db, campaignId: string): Promise<Con
   ];
   if (resultats?.groupesMasques) participation.push(t("groupesMasques", { count: resultats.groupesMasques, seuil: campagne.groupMinSize }));
 
+  const tc = textesComportements(traducteur(langue, "Comportements"));
+  const pourcent = (n: number, base: number) => new Intl.NumberFormat(langue, { maximumFractionDigits: 1 }).format(base ? (n / base) * 100 : 0);
+  const comportements = (c: ResultatsComportements | null): BlocComportements | undefined =>
+    c
+      ? {
+          titre: tc.titre,
+          intro: tc.intro,
+          blocs: [
+            ...c.liste.map((b) => ({
+              titre: b.nom,
+              lignes: [
+                tc.concernes({ concernes: b.concernes, base: b.base, taux: pourcent(b.concernes, b.base) }),
+                ...(b.concernes
+                  ? [
+                      `${tc.frequence} : ${b.frequences.map((f) => `${f.libelle} ${f.n}`).join(" · ")}`,
+                      `${tc.auteurs} : ${b.auteurs.map((a) => `${a.libelle} ${a.n}`).join(" · ")}${b.auteursNonPrecises ? ` · ${tc.nonPrecise(b.auteursNonPrecises)}` : ""}`,
+                    ]
+                  : []),
+              ],
+            })),
+            ...(c.cumul
+              ? [
+                  {
+                    titre: tc.cumulTitre,
+                    lignes: [
+                      tc.cumul({ concernes: c.cumul.concernes, base: c.cumul.base, taux: pourcent(c.cumul.concernes, c.cumul.base) }),
+                      ...c.cumul.parNombre.map((p) => tc.parNombre(p)),
+                    ],
+                  },
+                ]
+              : []),
+          ],
+        }
+      : undefined;
+
   const questionnaires = (resultats?.questionnaires ?? []).map((q) => ({
     titre: q.titre,
+    comportements: comportements(q.comportements),
     tableaux: ORDRE.flatMap((niveau): TableauResultats[] => {
       const dims = q.dimensions.filter((d) => (d.niveau ?? "aucun") === niveau && d.resultats.length);
       if (!dims.length) return [];

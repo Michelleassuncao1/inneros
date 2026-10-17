@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { z } from "zod";
 import { Cellule, EspaceAdmin, Tableau, TitrePage } from "@/components/EspaceAdmin";
 import { MessageInfo } from "@/components/Formulaire";
+import { ResultatsComportements, textesComportements } from "@/components/ResultatsComportements";
 import { Link } from "@/i18n/navigation";
 import { journaliser } from "@/lib/audit";
 import { exigerAdmin } from "@/lib/auth/acces";
@@ -31,6 +32,7 @@ export default async function ResultatsPage({ params }: PageProps<"/[locale]/adm
   const { campagne, entreprise } = ligne;
 
   const t = await getTranslations("Resultats");
+  const textesC = textesComportements(await getTranslations("Comportements"));
   const resultats = campagne.status === "closed" ? await lireResultats(db, id, locale) : null;
   if (resultats) await journaliser(db, { actorUserId: admin.id, action: "results_viewed", targetType: "campaign", targetId: id });
   const nombre = (v: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 1, minimumFractionDigits: 1 }).format(v);
@@ -105,6 +107,7 @@ export default async function ResultatsPage({ params }: PageProps<"/[locale]/adm
                   </div>
                 );
               })}
+              {q.comportements && <ResultatsComportements donnees={q.comportements} textes={textesC} locale={locale} />}
             </section>
           ))}
         </>

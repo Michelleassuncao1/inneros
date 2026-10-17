@@ -4,7 +4,7 @@
 // Le contenu est vérifié avant chaque envoi : toute anomalie bloque l'envoi.
 import { asc, eq, inArray } from "drizzle-orm";
 import { z } from "zod";
-import { aggregates, campaigns, groups, instruments, organizations } from "../db/schema";
+import { aggregates, behaviourCounts, campaigns, groups, instruments, organizations } from "../db/schema";
 import type { Db } from "../db/types";
 import { definitionPour } from "../instruments/chargement";
 import type { FichierInstrument } from "../instruments/format";
@@ -43,6 +43,24 @@ export const schemaChargeUtile = z
         })
         .strict(),
     ),
+    // Comportements indésirables : pour toute la campagne seulement, jamais par groupe
+    comportements: z.array(
+      z
+        .object({
+          questionnaire: texte(40),
+          comportement: texte(20),
+          nom: texte(200),
+          base: z.number().int(), // répondants à la question
+          concernes: z.number().int(),
+          frequences: z.array(z.object({ libelle: texte(200), n: z.number().int() }).strict()),
+          auteurs: z.array(z.object({ libelle: texte(200), n: z.number().int() }).strict()),
+          auteurs_non_precises: z.number().int(),
+        })
+        .strict(),
+    ),
+    comportements_cumul: z.array(
+      z.object({ questionnaire: texte(40), base: z.number().int(), au_moins_un: z.number().int() }).strict(),
+    ),
     sources: z.array(texte(2000)),
     limites_connues: z.array(texte(500)),
   })
@@ -61,6 +79,7 @@ export function verifierChargeUtile(charge: unknown, garde: { nomEntreprise: str
   const c = lecture.data;
   if (c.resultats.some((r) => r.n < Math.max(10, garde.seuil))) erreurs.push("résultat sous le seuil");
   if (c.groupes.some((g) => g.effectif < Math.max(10, garde.seuil))) erreurs.push("groupe sous le seuil");
+  if ([...c.comportements, ...c.comportements_cumul].some((r) => r.base < Math.max(10, garde.seuil))) erreurs.push("comportements sous le seuil");
   const nom = normaliser(garde.nomEntreprise);
   if (nom.length >= 3 && normaliser(JSON.stringify(c)).includes(nom)) erreurs.push("le nom de l'entreprise apparaît dans le message");
   return erreurs;
@@ -77,6 +96,7 @@ export async function construireChargeUtile(db: Db, campaignId: string, langue: 
   const { campagne, entreprise } = ligne;
 
   const lignes = await db.select().from(aggregates).where(eq(aggregates.campaignId, campaignId));
+  const comptages = await db.select().from(behaviourCounts).where(eq(behaviourCounts.campaignId, campaignId));
   const listeGroupes = await db.select().from(groups).where(eq(groups.campaignId, campaignId)).orderBy(asc(groups.label));
   const visibles = listeGroupes.filter((g) => lignes.some((l) => l.groupId === g.id));
   const idGroupe = new Map(visibles.map((g, i) => [g.id, `G${i + 1}`]));
@@ -90,6 +110,34 @@ export async function construireChargeUtile(db: Db, campaignId: string, langue: 
       definitionPour(i.definitions, langue) ??
       Object.keys((i.definitions ?? {}) as object).map((lg) => definitionPour(i.definitions, lg)).find(Boolean);
     if (d) definitions.set(i.id, d);
+  }
+
+  // Comportements indésirables (toute la campagne)
+  const comportements: ChargeUtile["comportements"] = [];
+  const comportementsCumul: ChargeUtile["comportements_cumul"] = [];
+  for (const [instrumentId, def] of definitions) {
+    const siennes = comptages.filter((c) => c.instrumentId === instrumentId);
+    const valeur = (b: string, cat: string) => siennes.find((c) => c.behaviourId === b && c.category === cat)?.count ?? 0;
+    const options = (e: string) => def.echelles_reponse.find((x) => x.id === e)?.options ?? [];
+    for (const d of def.dimensions.filter((x) => x.type === "comportement")) {
+      const base = siennes.find((c) => c.behaviourId === d.id)?.base;
+      if (base === undefined) continue;
+      const [frequence, auteurs] = d.items;
+      comportements.push({
+        questionnaire: def.instrument,
+        comportement: d.id,
+        nom: d.nom,
+        base,
+        concernes: valeur(d.id, "concernes"),
+        frequences: options(frequence.reponse)
+          .filter((o) => auteurs.si!.codes.includes(o.code))
+          .map((o) => ({ libelle: o.libelle, n: valeur(d.id, `frequence_${o.code}`) })),
+        auteurs: options(auteurs.reponse).map((o) => ({ libelle: o.libelle, n: valeur(d.id, `auteur_${o.code}`) })),
+        auteurs_non_precises: valeur(d.id, "auteur_np"),
+      });
+    }
+    const cumul = siennes.find((c) => c.behaviourId === "cumul" && c.category === "concernes");
+    if (cumul) comportementsCumul.push({ questionnaire: def.instrument, base: cumul.base, au_moins_un: cumul.count });
   }
 
   const resultats: ChargeUtile["resultats"] = lignes.map((l) => {
@@ -137,6 +185,8 @@ export async function construireChargeUtile(db: Db, campaignId: string, langue: 
       effectif: Math.max(...lignes.filter((l) => l.groupId === g.id).map((l) => l.n)),
     })),
     resultats,
+    comportements,
+    comportements_cumul: comportementsCumul,
     sources: [...definitions.values()].map((d) => `${d.titre} — ${d.source}`),
     limites_connues: limites,
   };

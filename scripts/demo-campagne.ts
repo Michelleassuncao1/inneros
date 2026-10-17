@@ -3,7 +3,8 @@
 // Questionnaires : COPSOQ III belge et Flourishing s'ils sont enregistrés, sinon le questionnaire de test.
 // Réservé au développement (PGlite) : refusé si DATABASE_URL désigne une base PostgreSQL.
 // Option --rapport-accepte-il-y-a=13 : ajoute un rapport fictif validé et accepté il y a 13 mois (test de suppression).
-// Usage : npm run demo:campagne [-- --rapport-accepte-il-y-a=13]   (serveur de développement arrêté)
+// Option --pays=FR : entreprise française, avec le COPSOQ III français (comportements indésirables compris).
+// Usage : npm run demo:campagne [-- --rapport-accepte-il-y-a=13] [-- --pays=FR]   (serveur de développement arrêté)
 import { loadEnvConfig } from "@next/env";
 import { and, eq, inArray } from "drizzle-orm";
 
@@ -19,6 +20,9 @@ async function principal() {
   const ilYa = process.argv.find((a) => a.startsWith("--rapport-accepte-il-y-a="))?.split("=")[1];
   if (ilYa !== undefined && !/^\d+$/.test(ilYa)) throw new Error("Nombre de mois attendu, par exemple --rapport-accepte-il-y-a=13.");
 
+  const pays = process.argv.find((a) => a.startsWith("--pays="))?.split("=")[1] ?? "BE";
+  if (pays !== "BE" && pays !== "FR") throw new Error("Pays attendu : BE ou FR.");
+
   const [admin] = await db.select().from(users).where(and(eq(users.role, "admin")));
   if (!admin) throw new Error("Aucun administrateur : créez-en un avec npm run admin:create.");
 
@@ -28,7 +32,7 @@ async function principal() {
     .where(
       and(
         inArray(instruments.code, ["copsoq3", "flourishing"]),
-        inArray(instruments.version, ["be-2023-12-13", "diener-2009"]),
+        inArray(instruments.version, [pays === "FR" ? "fr-2018-09-14" : "be-2023-12-13", "diener-2009"]),
       ),
     );
   const instrumentIds = reels.length ? reels.map((r) => r.id) : [await chargerQuestionnaireDeTest(db, ["fr"])];
@@ -36,6 +40,7 @@ async function principal() {
   const id = await creerCampagneDemo(db, {
     adminId: admin.id,
     instrumentIds,
+    pays,
     rapportAccepteIlYaMois: ilYa === undefined ? undefined : Number(ilYa),
     graine: Date.now() % 2147483647, // une nouvelle campagne fictive à chaque lancement
     groupes: [

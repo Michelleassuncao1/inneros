@@ -7,7 +7,8 @@ import { empreinteJeton } from "./admin/jetons";
 import { answers, campaignInstruments, campaigns, groups, instruments, organizations, responses, tokens } from "./db/schema";
 import type { Db } from "./db/types";
 import { definitionPour } from "./instruments/chargement";
-import { cleItem, type FichierInstrument } from "./instruments/format";
+import type { FichierInstrument } from "./instruments/format";
+import { codesAutorises, reponsesCoherentes } from "./instruments/reponses";
 import { aidesPour } from "./pays";
 import { lireSoutien } from "./admin/soutien";
 
@@ -83,6 +84,7 @@ async function itemsAttendus(db: Db, campaignId: string) {
     .where(eq(campaignInstruments.campaignId, campaignId));
   const attendus = new Map<string, Set<number>>();
   const versions: Record<string, string> = {};
+  const definitions: FichierInstrument[] = [];
   for (const l of liens) {
     // La structure est identique dans toutes les langues : n'importe laquelle convient
     const definition = Object.keys((l.definitions ?? {}) as object)
@@ -90,12 +92,10 @@ async function itemsAttendus(db: Db, campaignId: string) {
       .find(Boolean);
     if (!definition) throw new ErreurPassation("indisponible");
     versions[l.code] = l.version;
-    const echelles = new Map(definition.echelles_reponse.map((e) => [e.id, new Set(e.options.map((o) => o.code))]));
-    for (const d of definition.dimensions) {
-      for (const i of d.items) attendus.set(cleItem(l.code, i.id), echelles.get(i.reponse)!);
-    }
+    definitions.push(definition);
+    for (const [k, codes] of codesAutorises(definition)) attendus.set(k, codes);
   }
-  return { attendus, versions };
+  return { attendus, versions, definitions };
 }
 
 class ErreurPassation extends Error {
@@ -131,13 +131,15 @@ export async function enregistrerReponses(
       .where(and(eq(groups.id, saisie.groupe), eq(groups.campaignId, campagne.id)));
     if (!groupe) throw new ErreurPassation("groupe");
     // Exactement les items de la campagne, avec des codes autorisés (ou vide : « je préfère ne pas répondre »)
-    const { attendus, versions } = await itemsAttendus(db, campagne.id);
+    const { attendus, versions, definitions } = await itemsAttendus(db, campagne.id);
     const recus = Object.entries(saisie.reponses);
     if (recus.length !== attendus.size) throw new ErreurPassation("reponses");
     for (const [cle, valeur] of recus) {
       const codes = attendus.get(cle);
       if (!codes || (valeur !== null && !codes.has(valeur))) throw new ErreurPassation("reponses");
     }
+    // Pas de réponse à une question non posée (« si oui… »), cases d'un choix multiple cohérentes
+    if (definitions.some((f) => !reponsesCoherentes(f, saisie.reponses))) throw new ErreurPassation("reponses");
 
     // 2. Transaction A : le jeton passe à « utilisé », une seule fois (un second envoi simultané ne trouve plus rien)
     const consommes = await db

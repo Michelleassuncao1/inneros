@@ -15,6 +15,7 @@ import { campaigns, organizations, users } from "@/lib/db/schema";
 import { contenuVide, LANGUES_RAPPORT, lireContenu } from "@/lib/rapport/contenu";
 import { iaActiveGlobalement, rapportCourant } from "@/lib/rapport/rapports";
 import { lireResultats } from "@/lib/resultats/agregats";
+import { ResultatsComportements, textesComportements } from "@/components/ResultatsComportements";
 import {
   actionEnregistrerRapport,
   actionGenererBrouillon,
@@ -67,6 +68,7 @@ export default async function RapportPage({ params }: PageProps<"/[locale]/admin
 
   const rapport = campagne.status === "closed" ? await rapportCourant(db, id) : null;
   const resultats = campagne.status === "closed" ? await lireResultats(db, id, rapport?.language ?? locale) : null;
+  const textesC = textesComportements(await getTranslations("Comportements"));
   const iaPossible = iaActiveGlobalement() && campagne.aiDraftingEnabled;
   const [moi] = await db.select({ aiLiteracyAt: users.aiLiteracyAt }).from(users).where(eq(users.id, admin.id));
   const date = (d: Date) => new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(d);
@@ -119,6 +121,7 @@ export default async function RapportPage({ params }: PageProps<"/[locale]/admin
               </div>
             );
           })}
+          {q.comportements && <ResultatsComportements donnees={q.comportements} textes={textesC} locale={locale} />}
         </div>
       ))}
     </div>

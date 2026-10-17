@@ -496,7 +496,9 @@
     "source": "Fonte: {source}",
     "thanksTitle": "Obrigado pela sua participação",
     "thanksText": "Suas respostas foram enviadas de forma anônima e apagadas deste aparelho. Você pode fechar esta página.",
-    "languageUnavailable": "Este questionário não é oferecido em {demandee} para a sua organização: ele é exibido em {actuelle}."
+    "languageUnavailable": "Este questionário não é oferecido em {demandee} para a sua organização: ele é exibido em {actuelle}.",
+    "severalAnswers": "Várias respostas possíveis.",
+    "behaviourHelp": "Se alguma dessas situações diz respeito a você, você pode conversar com as pessoas e os serviços indicados abaixo. Este questionário é anônimo: sua resposta não constitui uma denúncia e não dá início a nenhum procedimento."
   },
   "Soutien": {
     "title": "Apoio aos respondentes",
@@ -728,7 +730,9 @@
       "SESMT": "SESMT",
       "direction": "Direção",
       "RH": "Recursos Humanos",
-      "CPPT": "Comitê de prevenção (CIPA)"
+      "CPPT": "Comitê de prevenção (CIPA)",
+      "referent_harcelement": "Referente de assédio (França)",
+      "CSE": "CSE (comitê social e econômico, França)"
     }
   },
   "FormationIA": {
@@ -822,5 +826,16 @@
     "acceptedBy": "Relatório aceito por {nom} em {date}.",
     "signatoryOnly": "Somente o referente signatário designado pelo Institut Mindset en Action pode aceitar o relatório.",
     "download": "Baixar o relatório (PDF)"
+  },
+  "Comportements": {
+    "title": "Comportamentos indesejados (toda a organização)",
+    "intro": "Apresentados apenas para o conjunto dos respondentes, nunca por grupo, para proteger as pessoas envolvidas. Cada situação relatada exige atenção especial.",
+    "concernes": "{concernes} de {base} respondentes envolvidos ({taux} %)",
+    "frequency": "Frequência",
+    "authors": "Por parte de quem (várias respostas possíveis)",
+    "notSpecified": "Não informado: {n}",
+    "cumulTitle": "Pelo menos um comportamento indesejado",
+    "cumul": "{concernes} de {base} respondentes ({taux} %) relataram pelo menos um desses comportamentos nos últimos 12 meses.",
+    "byNumber": "{nombre, plural, one {# tipo de comportamento} other {# tipos de comportamento}}: {n, plural, one {# pessoa} other {# pessoas}}"
   }
 }

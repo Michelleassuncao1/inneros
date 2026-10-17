@@ -365,6 +365,36 @@ export const aggregates = pgTable(
   ],
 );
 
+// Comportements indésirables (COPSOQ français Q55 à Q62) : nombre de personnes concernées, pour toute
+// la campagne seulement, jamais par groupe (décision de Michelle du 17/10/2026). « base » = personnes
+// ayant répondu à la question ; base ≥ seuil de la campagne, vérifié par déclencheur (règle 3).
+export const behaviourCounts = pgTable(
+  "behaviour_counts",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    campaignId: uuid("campaign_id")
+      .notNull()
+      .references(() => campaigns.id, { onDelete: "cascade" }),
+    instrumentId: uuid("instrument_id")
+      .notNull()
+      .references(() => instruments.id, { onDelete: "restrict" }),
+    behaviourId: text("behaviour_id").notNull(), // dimension du questionnaire, ou « cumul »
+    category: text("category").notNull(), // concernes, frequence_<code>, auteur_<code>, auteur_np, nombre_<n>
+    count: integer("count").notNull(),
+    base: integer("base").notNull(),
+    scoringVersion: text("scoring_version").notNull(),
+    computedAt: timestamp("computed_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => [
+    check("behaviour_counts_base_minimum", sql`${t.base} >= 10`),
+    check("behaviour_counts_nombre", sql`${t.count} BETWEEN 0 AND ${t.base}`),
+    check("behaviour_counts_categorie", sql`${t.category} ~ '^(concernes|auteur_np|(frequence|auteur|nombre)_[0-9]{1,2})$'`),
+    unique("behaviour_counts_unique").on(t.campaignId, t.instrumentId, t.behaviourId, t.category),
+  ],
+);
+
 // Rapport : brouillon IA éventuel, texte validé, traçabilité IA, validation humaine (règles 6 à 8).
 export const reports = pgTable(
   "reports",

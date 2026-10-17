@@ -4,11 +4,11 @@
 // - Aucun résultat pour moins de « seuil » personnes (10 au minimum), ni directement ni par soustraction :
 //   si la part masquée est entre 1 et seuil - 1, le plus petit groupe visible est masqué à son tour.
 import { and, asc, count, eq, inArray } from "drizzle-orm";
-import { aggregates, answers, campaignInstruments, campaigns, groups, instruments, responses, tokens } from "../db/schema";
+import { aggregates, answers, behaviourCounts, campaignInstruments, campaigns, groups, instruments, responses, tokens } from "../db/schema";
 import type { Db } from "../db/types";
 import { definitionPour } from "../instruments/chargement";
 import type { FichierInstrument } from "../instruments/format";
-import { scorerDimension, VERSION_CALCUL, type Reponses } from "../scoring";
+import { comptesComportements, scorerDimension, VERSION_CALCUL, type Reponses } from "../scoring";
 
 // --- Masquage ---------------------------------------------------------------------------------
 
@@ -72,8 +72,32 @@ export async function calculerAgregats(db: Db, campaignId: string) {
   for (const a of lignesItems) parReponse.get(a.responseId)![a.itemId] = a.value;
 
   const nouvelles: (typeof aggregates.$inferInsert)[] = [];
+  const comptages: (typeof behaviourCounts.$inferInsert)[] = [];
   for (const { id: instrumentId, definition } of questionnaires) {
+    // Comportements indésirables : pour toute la campagne seulement, si au moins « seuil » personnes ont répondu
+    const { comptes, cumul } = comptesComportements(definition, lignesReponses.map((r) => parReponse.get(r.id)!));
+    const ajouter = (behaviourId: string, base: number, valeurs: Record<string, number>) => {
+      if (base < seuil) return;
+      for (const [category, count] of Object.entries(valeurs))
+        comptages.push({ campaignId, instrumentId, behaviourId, category, count, base, scoringVersion: VERSION_CALCUL });
+    };
+    for (const c of comptes) {
+      ajouter(c.id, c.base, {
+        concernes: c.concernes,
+        auteur_np: c.auteursNonPrecises,
+        ...Object.fromEntries(Object.entries(c.frequences).map(([code, n]) => [`frequence_${code}`, n])),
+        ...Object.fromEntries(Object.entries(c.auteurs).map(([code, n]) => [`auteur_${code}`, n])),
+      });
+    }
+    if (comptes.length) {
+      ajouter("cumul", cumul.base, {
+        concernes: cumul.auMoinsUn,
+        ...Object.fromEntries(Object.entries(cumul.parNombre).map(([nombre, n]) => [`nombre_${nombre}`, n])),
+      });
+    }
+
     for (const d of definition.dimensions) {
+      if (d.type === "comportement") continue;
       // Scores individuels : en mémoire seulement, jamais enregistrés
       const scores = new Map<string, number[]>();
       for (const r of lignesReponses) {
@@ -104,7 +128,9 @@ export async function calculerAgregats(db: Db, campaignId: string) {
   }
 
   await db.delete(aggregates).where(eq(aggregates.campaignId, campaignId));
+  await db.delete(behaviourCounts).where(eq(behaviourCounts.campaignId, campaignId));
   if (nouvelles.length) await db.insert(aggregates).values(nouvelles);
+  if (comptages.length) await db.insert(behaviourCounts).values(comptages);
   return nouvelles.length;
 }
 
@@ -164,6 +190,7 @@ export async function lireResultats(db: Db, campaignId: string, langue: string) 
     .where(inArray(instruments.id, [...new Set(lignes.map((l) => l.instrumentId))]))
     .orderBy(asc(instruments.code));
   const listeGroupes = await db.select().from(groups).where(eq(groups.campaignId, campaignId)).orderBy(asc(groups.label));
+  const comptages = await db.select().from(behaviourCounts).where(eq(behaviourCounts.campaignId, campaignId));
 
   return {
     calculeLe: lignes[0].computedAt,
@@ -178,7 +205,8 @@ export async function lireResultats(db: Db, campaignId: string, langue: string) 
       return {
         titre: definition?.titre ?? "",
         source: definition ? `${definition.titre} — ${definition.source}` : "",
-        dimensions: (definition?.dimensions ?? []).map((d) => ({
+        comportements: lireComportements(definition, comptages.filter((c) => c.instrumentId === q.id)),
+        dimensions: (definition?.dimensions ?? []).filter((d) => d.type !== "comportement").map((d) => ({
           id: d.id,
           nom: d.nom,
           niveau: d.niveau_mindset ?? null,
@@ -190,3 +218,43 @@ export async function lireResultats(db: Db, campaignId: string, langue: string) 
     }),
   };
 }
+
+// Comportements indésirables, avec les libellés du questionnaire dans la langue demandée
+type LigneComptage = typeof behaviourCounts.$inferSelect;
+function lireComportements(definition: FichierInstrument | null, lignes: LigneComptage[]) {
+  if (!definition || !lignes.length) return null;
+  const valeur = (behaviourId: string, category: string) => lignes.find((l) => l.behaviourId === behaviourId && l.category === category)?.count ?? 0;
+  const options = (echelle: string) => definition.echelles_reponse.find((e) => e.id === echelle)?.options ?? [];
+  const liste = definition.dimensions
+    .filter((d) => d.type === "comportement")
+    .flatMap((d) => {
+      const base = lignes.find((l) => l.behaviourId === d.id)?.base;
+      if (base === undefined) return []; // moins de « seuil » réponses : non présenté
+      const [frequence, auteurs] = d.items;
+      return [
+        {
+          id: d.id,
+          nom: d.nom,
+          question: frequence.texte,
+          base,
+          concernes: valeur(d.id, "concernes"),
+          frequences: options(frequence.reponse)
+            .filter((o) => auteurs.si!.codes.includes(o.code))
+            .map((o) => ({ libelle: o.libelle, n: valeur(d.id, `frequence_${o.code}`) })),
+          auteurs: options(auteurs.reponse).map((o) => ({ libelle: o.libelle, n: valeur(d.id, `auteur_${o.code}`) })),
+          auteursNonPrecises: valeur(d.id, "auteur_np"),
+        },
+      ];
+    });
+  const base = lignes.find((l) => l.behaviourId === "cumul")?.base;
+  const nombres = lignes
+    .filter((l) => l.behaviourId === "cumul" && l.category.startsWith("nombre_"))
+    .map((l) => ({ nombre: Number(l.category.slice(7)), n: l.count }))
+    .sort((a, b) => a.nombre - b.nombre);
+  return {
+    liste,
+    cumul: base === undefined ? null : { base, concernes: valeur("cumul", "concernes"), parNombre: nombres },
+  };
+}
+
+export type ResultatsComportements = NonNullable<ReturnType<typeof lireComportements>>;

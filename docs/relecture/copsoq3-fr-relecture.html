@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relecture COPSOQ III français</title>
+<style>
+  :root { --navy:#14284b; --or:#9a7b2f; --creme:#f7f3ea; --ligne:#ddd6c8; --texte:#1d1d1d; --doux:#5b5b5b; --note:#fff6dc; --alerte:#fbe9e7; }
+  body { margin:0; background:#fff; color:var(--texte); font:15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width:1300px; margin:0 auto; padding:24px 16px 64px; }
+  h1 { color:var(--navy); font-size:26px; margin:0 0 4px; } h2 { color:var(--navy); font-size:19px; margin:32px 0 8px; }
+  .chapeau { color:var(--doux); max-width:80ch; } ul, ol { max-width:90ch; }
+  .confidentiel { background:var(--alerte); border-left:4px solid #b3261e; padding:8px 12px; max-width:90ch; }
+  .tableau { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; min-width:860px; }
+  th, td { border-bottom:1px solid var(--ligne); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:var(--navy); color:#fff; font-weight:600; position:sticky; top:0; }
+  tr.dim td { background:var(--creme); color:var(--navy); padding-top:14px; }
+  tr.consigne td { font-style:italic; color:var(--doux); }
+  tr.note td { background:var(--note); }
+  .niv { float:right; color:var(--or); font-weight:600; }
+  .badge { background:var(--or); color:#fff; border-radius:4px; padding:1px 6px; font-size:12px; margin-left:6px; }
+  .petit { font-size:12.5px; color:var(--doux); margin-top:4px; }
+  @media print { th { position:static; } body { font-size:11px; } }
+</style></head>
+<body><main>
+<h1>Relecture — COPSOQ III, version française</h1>
+<p class="chapeau">Questionnaire et guide de cotation du 14/09/2018 (équipe française, É. Dupret et C. Bocéréan), convertis pour InnerOS.
+62 questions, 28 échelles, en français, réservé aux entreprises françaises. Rien n'est enregistré avant votre accord.</p>
+<p class="confidentiel"><strong>Document interne.</strong> Le guide de cotation est marqué « confidentiel – diffusion restreinte ». Cette page montre la composition des échelles : ne pas la transmettre en dehors d'IMA.</p>
+
+<h2>Ce qui a été fait</h2>
+<ul>
+  <li>Textes repris <strong>mot pour mot</strong> du questionnaire, y compris l'orthographe (anomalies surlignées en jaune).</li>
+  <li>Échelles et regroupement des questions : ceux du guide de cotation (24 échelles).</li>
+  <li>Libellés de réponse : ceux du questionnaire quand le guide en donne d'autres.</li>
+  <li>Calcul : chaque échelle est ramenée de 0 à 100, comme le guide (« harmoniser les scores sur une échelle de 0 à 100 »). Seule différence : le guide additionne, InnerOS fait la moyenne des réponses données (score calculé si au moins la moitié des questions de l'échelle sont répondues). Quand tout est répondu, le résultat est identique.</li>
+  <li>Les questions s'affichent regroupées par échelle (par pages de 6 au plus), pas dans l'ordre Q1 → Q54 du questionnaire papier.</li>
+</ul>
+
+<h2>Décisions prises (17/10/2026)</h2>
+<ol>
+  <li><strong>Sens de lecture</strong> : dans InnerOS, un score élevé = plus de ce que dit le nom de l'échelle (Stress 80 = beaucoup de stress), comme dans la version belge. Cinq échelles sont donc inversées par rapport au guide (Exigences émotionnelles, Conflit de valeurs, Insécurité professionnelle, Stress, Épuisement) ; score du guide = 100 − score InnerOS.</li>
+  <li><strong>Questions 55 à 62 reprises</strong> : quatre comportements indésirables, chacun avec « Si oui, de la part de qui ? » (plusieurs choix, posée seulement après un « Oui »). Pas de score : nombre de personnes concernées, répartition par fréquence et par type d'auteur, et total « au moins un comportement ». <strong>Pour toute l'entreprise seulement, jamais par groupe</strong>, et seulement si au moins 10 personnes (ou le seuil de la campagne) ont répondu. Après ces questions, le répondant voit les personnes de soutien et la mention que le questionnaire anonyme n'est pas un signalement.</li>
+  <li><strong>Q19</strong> : « suffisament » corrigé en « suffisamment ». <strong>Q55</strong> : texte gardé tel quel.</li>
+  <li><strong>Pas de version anglaise</strong> : les campagnes françaises qui utilisent ce questionnaire seront en français seulement.</li>
+</ol>
+
+<h2>Questions et cotation</h2>
+<p class="chapeau">« Cotation questionnaire » : ordre des codes imprimé sur le questionnaire (4 → 0 ou 0 → 4). « InnerOS » : direct = Toujours / très grande mesure donne le score le plus haut ; inversé = l'inverse.</p>
+<div class="tableau"><table>
+<thead><tr><th>N°</th><th>Question</th><th>Réponses</th><th>Cotation questionnaire</th><th>InnerOS</th></tr></thead>
+<tbody>
+<tr class="dim"><td colspan="5"><strong>Charge de travail</strong> <span class="petit">(charge)</span><span class="niv">Travail</span></td></tr>
+<tr><td>Q22</td><td>Prenez-vous du retard dans votre travail ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q28</td><td>Vous arrive-t-il de manquer de temps pour accomplir toutes vos tâches professionnelles ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q48</td><td>Disposez-vous d’un temps suffisant pour accomplir vos tâches professionnelles ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>inversé</td></tr>
+<tr class="dim"><td colspan="5"><strong>Rythme de travail</strong> <span class="petit">(rythme)</span><span class="niv">Travail</span></td></tr>
+<tr><td>Q18</td><td>Travaillez-vous à une cadence élevée tout au long de la journée ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q25</td><td>Devez-vous travailler très rapidement ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q32</td><td>Est-il nécessaire de maintenir un rythme soutenu au travail ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Exigences cognitives</strong> <span class="petit">(cognitif)</span><span class="niv">Travail</span></td></tr>
+<tr><td>Q17</td><td>Durant votre travail, devez-vous avoir l’œil sur beaucoup de choses ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q27</td><td>Votre travail exige-t-il que vous vous souveniez de beaucoup de choses ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Exigences émotionnelles</strong> <span class="petit">(emotion)</span> <span class="badge">sens inversé par rapport au guide</span><span class="niv">Travail</span></td></tr>
+<tr><td>Q21</td><td>Votre travail vous place-t-il dans des situations déstabilisantes sur le plan émotionnel ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>direct</td></tr>
+<tr><td>Q31</td><td>Votre travail est-il éprouvant sur le plan émotionnel ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>direct</td></tr>
+<tr><td>Q24</td><td>Devez-vous faire face aux problèmes des autres dans le cadre de votre travail ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Marge de manœuvre</strong> <span class="petit">(marge)</span><span class="niv">Travail</span></td></tr>
+<tr><td>Q34</td><td>Avez-vous une grande influence sur les prises de décisions par rapport à votre travail ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q39</td><td>Pouvez-vous intervenir sur la quantité de travail qui vous est attribuée ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Possibilités d'épanouissement</strong> <span class="petit">(epanouis)</span><span class="niv">Travail</span></td></tr>
+<tr><td>Q4</td><td>Votre travail nécessite-t-il que vous preniez des initiatives ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q36</td><td>Votre travail vous donne-t-il la possibilité d’apprendre des choses nouvelles ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q12</td><td>Pouvez-vous utiliser vos compétences ou votre expertise dans votre travail ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Sens du travail</strong> <span class="petit">(sens)</span><span class="niv">Travail</span></td></tr>
+<tr><td>Q40</td><td>Votre travail a-t-il du sens pour vous ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q11</td><td>Avez-vous le sentiment que le travail que vous faites est important ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Clarté des rôles</strong> <span class="petit">(clarte)</span><span class="niv">Rôles</span></td></tr>
+<tr><td>Q7</td><td>Votre travail a-t-il des objectifs clairs ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q1</td><td>Savez-vous précisément ce que l’on attend de vous au travail ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Conflit de valeurs</strong> <span class="petit">(conflitval)</span> <span class="badge">sens inversé par rapport au guide</span><span class="niv">Rôles</span></td></tr>
+<tr><td>Q23</td><td>Au travail, êtes-vous soumis(e) à des demandes contradictoires ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>direct</td></tr>
+<tr><td>Q46</td><td>Devez-vous faire des choses qui auraient dû être faites autrement ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Prévisibilité</strong> <span class="petit">(previsib)</span><span class="niv">Management</span></td></tr>
+<tr class="note"><td>Q19</td><td>Au travail, êtes-vous informé(e) suffisamment à l’avance au sujet de décisions importantes, de changements ou de projets à venir ?<div class="petit">⚠ Faute de frappe corrigée (votre accord du 17/10) : le questionnaire écrit « suffisament ».</div></td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q30</td><td>Recevez-vous toutes les informations dont vous avez besoin pour bien faire votre travail ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Reconnaissance</strong> <span class="petit">(reconnais)</span><span class="niv">Management</span></td></tr>
+<tr><td>Q10</td><td>Votre travail est-il reconnu et apprécié par le management ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q45</td><td>Etes-vous traité(e) équitablement au travail ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Qualité de leadership du responsable hiérarchique</strong> <span class="petit">(leadership)</span><span class="niv">Management</span></td></tr>
+<tr class="note"><td>Q6</td><td>Votre responsable hiérarchique accorde-t-il (elle) une priorité à la satisfaction au travail ?<div class="petit">⚠ « il (elle) » avec espace, Q16 et Q47 écrivent « il(elle) ». Gardé tel quel.</div></td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="note"><td>Q35</td><td>Votre responsable hiérarchique est-il (elle) compétent(e) dans la planification du travail ?<div class="petit">⚠ « il (elle) » avec espace. Gardé tel quel.</div></td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q16</td><td>Votre responsable hiérarchique est-il(elle) compétent(e) dans la résolution des conflits ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Soutien de la part du responsable hiérarchique</strong> <span class="petit">(soutienhier)</span><span class="niv">Management</span></td></tr>
+<tr><td>Q47</td><td>Votre responsable hiérarchique est-il(elle) disposé(e) à vous écouter au sujet de vos problèmes professionnels lorsque vous en avez besoin ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q20</td><td>Recevez-vous de l’aide et du soutien de votre supérieur(e) hiérarchique lorsque vous en avez besoin ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Confiance et coopération entre collègues</strong> <span class="petit">(coopcoll)</span><span class="niv">Interactions</span></td></tr>
+<tr class="note"><td>Q5</td><td>Y a-t-il une bonne coopération entre les collègues au travail ?<div class="petit">⚠ Le guide indique « Toujours… Jamais », le questionnaire « Dans une très grande mesure… ». Repris : le questionnaire.</div></td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="note"><td>Q13</td><td>Dans l’ensemble, les salariés se font-ils confiance entre eux ?<div class="petit">⚠ Idem Q5.</div></td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="note"><td>Q44</td><td>Y a-t-il une bonne ambiance entre vous et vos collègues ?<div class="petit">⚠ Idem Q5.</div></td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Soutien de la part des collègues</strong> <span class="petit">(soutiencoll)</span><span class="niv">Interactions</span></td></tr>
+<tr><td>Q26</td><td>Recevez-vous de l’aide et du soutien de la part de vos collègues lorsque vous en avez besoin ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q29</td><td>Vos collègues se montrent-ils à l’écoute de vos problèmes professionnels lorsque vous en avez besoin ?</td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Confiance entre les salariés et le management</strong> <span class="petit">(confmgmt)</span><span class="niv">Organisation</span></td></tr>
+<tr><td>Q2</td><td>Les salariés peuvent-ils faire confiance aux informations venant de la ligne managériale ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q33</td><td>Dans l’ensemble, le management fait-il confiance aux salariés quant à leur capacité à bien faire leur travail ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Justice organisationnelle</strong> <span class="petit">(justice)</span><span class="niv">Organisation</span></td></tr>
+<tr><td>Q38</td><td>Les conflits sont-ils résolus de manière équitable ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q42</td><td>Le travail est-il réparti équitablement ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Conciliation entre vie privée et vie professionnelle</strong> <span class="petit">(concil)</span><span class="niv">Organisation</span></td></tr>
+<tr><td>Q37</td><td>Avez-vous le sentiment que votre travail vous prend tellement d’énergie que cela a un impact négatif sur votre vie privée ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>0 → 4</td><td>inversé</td></tr>
+<tr><td>Q8</td><td>Avez-vous le sentiment que votre travail vous prend tellement de temps que cela a un impact négatif sur votre vie privée ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>0 → 4</td><td>inversé</td></tr>
+<tr><td>Q3</td><td>Vos contraintes professionnelles interfèrent-elles avec votre vie privée et familiale ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>0 → 4</td><td>inversé</td></tr>
+<tr class="dim"><td colspan="5"><strong>Insécurité professionnelle</strong> <span class="petit">(insecur)</span> <span class="badge">sens inversé par rapport au guide</span><span class="niv">Environnement</span></td></tr>
+<tr><td>Q9</td><td>Êtes-vous inquiet(ète) à l’idée de perdre votre emploi ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>0 → 4</td><td>direct</td></tr>
+<tr><td>Q14</td><td>Craignez-vous d’être muté(e) à un autre poste de travail contre votre volonté ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>0 → 4</td><td>direct</td></tr>
+<tr class="note"><td>Q41</td><td>Êtes-vous inquiet à l’idée de rencontrer des difficultés à trouver un autre emploi si vous perdiez le vôtre ?<div class="petit">⚠ « inquiet » sans « (ète) », alors que Q9 écrit « inquiet(ète) ». Gardé tel quel.</div></td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>0 → 4</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Engagement dans l'entreprise</strong> <span class="petit">(engage)</span><span class="niv">hors niveau</span></td></tr>
+<tr><td>Q43</td><td>Recommanderiez-vous à quelqu’un de postuler sur un emploi dans votre entreprise ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr><td>Q15</td><td>Avez-vous le sentiment que votre entreprise est d’une grande importance pour vous ?</td><td class="petit">4 Dans une très grande mesure · 3 Dans une grande mesure · 2 Plus ou moins · 1 Dans une faible mesure · 0 Dans une très faible mesure</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Satisfaction au travail</strong> <span class="petit">(satisf)</span><span class="niv">hors niveau</span></td></tr>
+<tr class="note"><td>Q49</td><td>A quel point êtes-vous satisfait(e) de votre travail dans son ensemble ?<div class="petit">⚠ Le questionnaire dit « Pas satisfait(e) / Pas satisfait(e) du tout », le guide « Peu satisfait(e) / Pas satisfait(e) ». Repris : le questionnaire.</div></td><td class="petit">3 Très satisfait(e) · 2 Satisfait(e) · 1 Pas satisfait(e) · 0 Pas satisfait(e) du tout</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Stress</strong> <span class="petit">(stress)</span> <span class="badge">sens inversé par rapport au guide</span><span class="niv">Santé</span></td></tr>
+<tr class="consigne"><td colspan="5">Consigne : Ces questions portent sur votre état au cours des 4 dernières semaines.</td></tr>
+<tr class="note"><td>Q51</td><td>A quelle fréquence avez-vous été irritable ?<div class="petit">⚠ Idem Q50.</div></td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>direct</td></tr>
+<tr class="note"><td>Q53</td><td>A quelle fréquence avez-vous été stressé(e) ?<div class="petit">⚠ Idem Q50.</div></td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Épuisement</strong> <span class="petit">(epuise)</span> <span class="badge">sens inversé par rapport au guide</span><span class="niv">Santé</span></td></tr>
+<tr class="consigne"><td colspan="5">Consigne : Ces questions portent sur votre état au cours des 4 dernières semaines.</td></tr>
+<tr class="note"><td>Q50</td><td>A quelle fréquence vous êtes-vous senti(e) à bout de force ?<div class="petit">⚠ Le guide indique « Tout le temps / Très souvent », le questionnaire « Toujours / Souvent ». Repris : le questionnaire.</div></td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>direct</td></tr>
+<tr class="note"><td>Q52</td><td>A quelle fréquence avez-vous été émotionnellement épuisé(e) ?<div class="petit">⚠ Idem Q50.</div></td><td class="petit">4 Toujours · 3 Souvent · 2 Parfois · 1 Rarement · 0 Jamais</td><td>0 → 4</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Santé auto-évaluée</strong> <span class="petit">(santegen)</span><span class="niv">hors niveau</span></td></tr>
+<tr><td>Q54</td><td>En général, diriez-vous que votre santé est :</td><td class="petit">4 Excellente · 3 Bonne · 2 Plus ou moins bonne · 1 Plutôt mauvaise · 0 Mauvaise</td><td>4 → 0</td><td>direct</td></tr>
+<tr class="dim"><td colspan="5"><strong>Attentions sexuelles non désirées</strong> <span class="petit">(sexuel)</span><span class="niv">comportement indésirable</span></td></tr>
+<tr class="note"><td>Q55</td><td>Au travail, avez-vous été l'objet d'intentions sexuelles non désirées au cours des 12 derniers mois ?<div class="petit">⚠ Texte gardé tel quel (votre décision) : « intentions » sexuelles. Le nom de la rubrique dans les résultats est « Attentions sexuelles non désirées ».</div></td><td class="petit">0 Oui, quotidiennement · 1 Oui, hebdomadairement · 2 Oui, mensuellement · 3 Oui, quelquefois · 4 Non</td><td colspan="2">Comptage (pas de score)</td></tr>
+<tr class="note"><td>Q56</td><td>Si oui, de la part de qui ?<div class="petit">⚠ Libellés : coupures de ligne du PDF retirées (« Sub-ordonné(e) » → « Subordonné(e) », « Manager/ supérieur » → « Manager/supérieur »).</div></td><td class="petit">0 Collègues · 1 Manager/supérieur · 2 Subordonné(e) · 3 Client/Personne extérieure</td><td colspan="2">Plusieurs choix · posée seulement si « Oui »</td></tr>
+<tr class="dim"><td colspan="5"><strong>Menaces de violence</strong> <span class="petit">(menaces)</span><span class="niv">comportement indésirable</span></td></tr>
+<tr><td>Q57</td><td>Avez-vous été l’objet de menaces de violence au travail au cours des 12 derniers mois ?</td><td class="petit">0 Oui, quotidiennement · 1 Oui, hebdomadairement · 2 Oui, mensuellement · 3 Oui, quelquefois · 4 Non</td><td colspan="2">Comptage (pas de score)</td></tr>
+<tr><td>Q58</td><td>Si oui, de la part de qui ?</td><td class="petit">0 Collègues · 1 Manager/supérieur · 2 Subordonné(e) · 3 Client/Personne extérieure</td><td colspan="2">Plusieurs choix · posée seulement si « Oui »</td></tr>
+<tr class="dim"><td colspan="5"><strong>Violence physique</strong> <span class="petit">(violence)</span><span class="niv">comportement indésirable</span></td></tr>
+<tr><td>Q59</td><td>Avez-vous été l’objet de violence physique au travail au cours des 12 derniers mois ?</td><td class="petit">0 Oui, quotidiennement · 1 Oui, hebdomadairement · 2 Oui, mensuellement · 3 Oui, quelquefois · 4 Non</td><td colspan="2">Comptage (pas de score)</td></tr>
+<tr class="note"><td>Q60</td><td>Si oui, de la part de qui ?<div class="petit">⚠ Q59 et Q61 proposent « Clients/usagers/patients » au lieu de « Client/Personne extérieure » : repris tel quel.</div></td><td class="petit">0 Collègues · 1 Manager/supérieur · 2 Subordonnés · 3 Clients/usagers/patients</td><td colspan="2">Plusieurs choix · posée seulement si « Oui »</td></tr>
+<tr class="dim"><td colspan="5"><strong>Harcèlement</strong> <span class="petit">(harcelement)</span><span class="niv">comportement indésirable</span></td></tr>
+<tr class="consigne"><td colspan="5">Consigne : Le harcèlement moral veut dire qu’une personne est exposée de manière répétée à des agissements qui ont pour objet ou pour effet une dégradation des conditions de travail susceptible de porter atteinte aux droits et à la dignité, d'altérer la santé physique ou mentale ou de compromettre l'avenir professionnel.</td></tr>
+<tr class="note"><td>Q61</td><td>Avez-vous été l’objet de harcèlement au travail au cours des 12 derniers mois ?<div class="petit">⚠ Le questionnaire place la définition du harcèlement moral avant Q61, « au cas où une définition est demandée ». Elle est affichée au répondant, sans cette mention destinée à l'enquêteur.</div></td><td class="petit">0 Oui, quotidiennement · 1 Oui, hebdomadairement · 2 Oui, mensuellement · 3 Oui, quelquefois · 4 Non</td><td colspan="2">Comptage (pas de score)</td></tr>
+<tr><td>Q62</td><td>Si oui, de la part de qui ?</td><td class="petit">0 Collègues · 1 Manager/supérieur · 2 Subordonnés · 3 Clients/usagers/patients</td><td colspan="2">Plusieurs choix · posée seulement si « Oui »</td></tr>
+</tbody></table></div>
+
+</main></body></html>

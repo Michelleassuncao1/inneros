@@ -1,0 +1,788 @@
+{
+  "format": 2,
+  "instrument": "copsoq3",
+  "version": "fr-2018-09-14",
+  "langue": "fr",
+  "titre": "COPSOQ III — Questionnaire psychosocial de Copenhague (version française)",
+  "source": "COPSOQ III, version française : questionnaire et guide de cotation du 14/09/2018, transmis par É. Dupret et C. Bocéréan (2026). Version internationale : Burr H., Berthelsen H., Moncada S., Nübling M., Dupret E., et al. (2019). The Third Version of the Copenhagen Psychosocial Questionnaire. Safety and Health at Work, 10(4), 482–503.",
+  "licence": "Questionnaire libre de droits (confirmation de l'équipe française, 2026), utilisé selon les lignes directrices du COPSOQ International Network ; tous les items CORE sont conservés. Le guide de cotation est confidentiel et n'est pas diffusé.",
+  "test": false,
+  "pays": [
+    "FR"
+  ],
+  "echelles_reponse": [
+    {
+      "id": "mesure",
+      "options": [
+        {
+          "code": 4,
+          "libelle": "Dans une très grande mesure"
+        },
+        {
+          "code": 3,
+          "libelle": "Dans une grande mesure"
+        },
+        {
+          "code": 2,
+          "libelle": "Plus ou moins"
+        },
+        {
+          "code": 1,
+          "libelle": "Dans une faible mesure"
+        },
+        {
+          "code": 0,
+          "libelle": "Dans une très faible mesure"
+        }
+      ]
+    },
+    {
+      "id": "frequence",
+      "options": [
+        {
+          "code": 4,
+          "libelle": "Toujours"
+        },
+        {
+          "code": 3,
+          "libelle": "Souvent"
+        },
+        {
+          "code": 2,
+          "libelle": "Parfois"
+        },
+        {
+          "code": 1,
+          "libelle": "Rarement"
+        },
+        {
+          "code": 0,
+          "libelle": "Jamais"
+        }
+      ]
+    },
+    {
+      "id": "satisfaction",
+      "options": [
+        {
+          "code": 3,
+          "libelle": "Très satisfait(e)"
+        },
+        {
+          "code": 2,
+          "libelle": "Satisfait(e)"
+        },
+        {
+          "code": 1,
+          "libelle": "Pas satisfait(e)"
+        },
+        {
+          "code": 0,
+          "libelle": "Pas satisfait(e) du tout"
+        }
+      ]
+    },
+    {
+      "id": "sante",
+      "options": [
+        {
+          "code": 4,
+          "libelle": "Excellente"
+        },
+        {
+          "code": 3,
+          "libelle": "Bonne"
+        },
+        {
+          "code": 2,
+          "libelle": "Plus ou moins bonne"
+        },
+        {
+          "code": 1,
+          "libelle": "Plutôt mauvaise"
+        },
+        {
+          "code": 0,
+          "libelle": "Mauvaise"
+        }
+      ]
+    },
+    {
+      "id": "exposition",
+      "options": [
+        {
+          "code": 0,
+          "libelle": "Oui, quotidiennement"
+        },
+        {
+          "code": 1,
+          "libelle": "Oui, hebdomadairement"
+        },
+        {
+          "code": 2,
+          "libelle": "Oui, mensuellement"
+        },
+        {
+          "code": 3,
+          "libelle": "Oui, quelquefois"
+        },
+        {
+          "code": 4,
+          "libelle": "Non"
+        }
+      ]
+    },
+    {
+      "id": "auteurs",
+      "options": [
+        {
+          "code": 0,
+          "libelle": "Collègues"
+        },
+        {
+          "code": 1,
+          "libelle": "Manager/supérieur"
+        },
+        {
+          "code": 2,
+          "libelle": "Subordonné(e)"
+        },
+        {
+          "code": 3,
+          "libelle": "Client/Personne extérieure"
+        }
+      ]
+    },
+    {
+      "id": "auteursusagers",
+      "options": [
+        {
+          "code": 0,
+          "libelle": "Collègues"
+        },
+        {
+          "code": 1,
+          "libelle": "Manager/supérieur"
+        },
+        {
+          "code": 2,
+          "libelle": "Subordonnés"
+        },
+        {
+          "code": 3,
+          "libelle": "Clients/usagers/patients"
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "charge",
+      "nom": "Charge de travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "q22",
+          "texte": "Prenez-vous du retard dans votre travail ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q28",
+          "texte": "Vous arrive-t-il de manquer de temps pour accomplir toutes vos tâches professionnelles ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q48",
+          "texte": "Disposez-vous d’un temps suffisant pour accomplir vos tâches professionnelles ?",
+          "reponse": "frequence",
+          "sens": "inverse"
+        }
+      ]
+    },
+    {
+      "id": "rythme",
+      "nom": "Rythme de travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "q18",
+          "texte": "Travaillez-vous à une cadence élevée tout au long de la journée ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q25",
+          "texte": "Devez-vous travailler très rapidement ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q32",
+          "texte": "Est-il nécessaire de maintenir un rythme soutenu au travail ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "cognitif",
+      "nom": "Exigences cognitives",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "q17",
+          "texte": "Durant votre travail, devez-vous avoir l’œil sur beaucoup de choses ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q27",
+          "texte": "Votre travail exige-t-il que vous vous souveniez de beaucoup de choses ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "emotion",
+      "nom": "Exigences émotionnelles",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "q21",
+          "texte": "Votre travail vous place-t-il dans des situations déstabilisantes sur le plan émotionnel ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q31",
+          "texte": "Votre travail est-il éprouvant sur le plan émotionnel ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q24",
+          "texte": "Devez-vous faire face aux problèmes des autres dans le cadre de votre travail ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "marge",
+      "nom": "Marge de manœuvre",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "q34",
+          "texte": "Avez-vous une grande influence sur les prises de décisions par rapport à votre travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q39",
+          "texte": "Pouvez-vous intervenir sur la quantité de travail qui vous est attribuée ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "epanouis",
+      "nom": "Possibilités d'épanouissement",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "q04",
+          "texte": "Votre travail nécessite-t-il que vous preniez des initiatives ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q36",
+          "texte": "Votre travail vous donne-t-il la possibilité d’apprendre des choses nouvelles ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q12",
+          "texte": "Pouvez-vous utiliser vos compétences ou votre expertise dans votre travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sens",
+      "nom": "Sens du travail",
+      "niveau_mindset": "travail",
+      "items": [
+        {
+          "id": "q40",
+          "texte": "Votre travail a-t-il du sens pour vous ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q11",
+          "texte": "Avez-vous le sentiment que le travail que vous faites est important ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "clarte",
+      "nom": "Clarté des rôles",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "q07",
+          "texte": "Votre travail a-t-il des objectifs clairs ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q01",
+          "texte": "Savez-vous précisément ce que l’on attend de vous au travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "conflitval",
+      "nom": "Conflit de valeurs",
+      "niveau_mindset": "roles",
+      "items": [
+        {
+          "id": "q23",
+          "texte": "Au travail, êtes-vous soumis(e) à des demandes contradictoires ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q46",
+          "texte": "Devez-vous faire des choses qui auraient dû être faites autrement ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "previsib",
+      "nom": "Prévisibilité",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "q19",
+          "texte": "Au travail, êtes-vous informé(e) suffisamment à l’avance au sujet de décisions importantes, de changements ou de projets à venir ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q30",
+          "texte": "Recevez-vous toutes les informations dont vous avez besoin pour bien faire votre travail ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "reconnais",
+      "nom": "Reconnaissance",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "q10",
+          "texte": "Votre travail est-il reconnu et apprécié par le management ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q45",
+          "texte": "Etes-vous traité(e) équitablement au travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "leadership",
+      "nom": "Qualité de leadership du responsable hiérarchique",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "q06",
+          "texte": "Votre responsable hiérarchique accorde-t-il (elle) une priorité à la satisfaction au travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q35",
+          "texte": "Votre responsable hiérarchique est-il (elle) compétent(e) dans la planification du travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q16",
+          "texte": "Votre responsable hiérarchique est-il(elle) compétent(e) dans la résolution des conflits ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "soutienhier",
+      "nom": "Soutien de la part du responsable hiérarchique",
+      "niveau_mindset": "management",
+      "items": [
+        {
+          "id": "q47",
+          "texte": "Votre responsable hiérarchique est-il(elle) disposé(e) à vous écouter au sujet de vos problèmes professionnels lorsque vous en avez besoin ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q20",
+          "texte": "Recevez-vous de l’aide et du soutien de votre supérieur(e) hiérarchique lorsque vous en avez besoin ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "coopcoll",
+      "nom": "Confiance et coopération entre collègues",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "q05",
+          "texte": "Y a-t-il une bonne coopération entre les collègues au travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q13",
+          "texte": "Dans l’ensemble, les salariés se font-ils confiance entre eux ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q44",
+          "texte": "Y a-t-il une bonne ambiance entre vous et vos collègues ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "soutiencoll",
+      "nom": "Soutien de la part des collègues",
+      "niveau_mindset": "interactions",
+      "items": [
+        {
+          "id": "q26",
+          "texte": "Recevez-vous de l’aide et du soutien de la part de vos collègues lorsque vous en avez besoin ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q29",
+          "texte": "Vos collègues se montrent-ils à l’écoute de vos problèmes professionnels lorsque vous en avez besoin ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "confmgmt",
+      "nom": "Confiance entre les salariés et le management",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "q02",
+          "texte": "Les salariés peuvent-ils faire confiance aux informations venant de la ligne managériale ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q33",
+          "texte": "Dans l’ensemble, le management fait-il confiance aux salariés quant à leur capacité à bien faire leur travail ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "justice",
+      "nom": "Justice organisationnelle",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "q38",
+          "texte": "Les conflits sont-ils résolus de manière équitable ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q42",
+          "texte": "Le travail est-il réparti équitablement ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "concil",
+      "nom": "Conciliation entre vie privée et vie professionnelle",
+      "niveau_mindset": "organisation",
+      "items": [
+        {
+          "id": "q37",
+          "texte": "Avez-vous le sentiment que votre travail vous prend tellement d’énergie que cela a un impact négatif sur votre vie privée ?",
+          "reponse": "mesure",
+          "sens": "inverse"
+        },
+        {
+          "id": "q08",
+          "texte": "Avez-vous le sentiment que votre travail vous prend tellement de temps que cela a un impact négatif sur votre vie privée ?",
+          "reponse": "mesure",
+          "sens": "inverse"
+        },
+        {
+          "id": "q03",
+          "texte": "Vos contraintes professionnelles interfèrent-elles avec votre vie privée et familiale ?",
+          "reponse": "mesure",
+          "sens": "inverse"
+        }
+      ]
+    },
+    {
+      "id": "insecur",
+      "nom": "Insécurité professionnelle",
+      "niveau_mindset": "environnement",
+      "items": [
+        {
+          "id": "q09",
+          "texte": "Êtes-vous inquiet(ète) à l’idée de perdre votre emploi ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q14",
+          "texte": "Craignez-vous d’être muté(e) à un autre poste de travail contre votre volonté ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q41",
+          "texte": "Êtes-vous inquiet à l’idée de rencontrer des difficultés à trouver un autre emploi si vous perdiez le vôtre ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "engage",
+      "nom": "Engagement dans l'entreprise",
+      "items": [
+        {
+          "id": "q43",
+          "texte": "Recommanderiez-vous à quelqu’un de postuler sur un emploi dans votre entreprise ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        },
+        {
+          "id": "q15",
+          "texte": "Avez-vous le sentiment que votre entreprise est d’une grande importance pour vous ?",
+          "reponse": "mesure",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "satisf",
+      "nom": "Satisfaction au travail",
+      "items": [
+        {
+          "id": "q49",
+          "texte": "A quel point êtes-vous satisfait(e) de votre travail dans son ensemble ?",
+          "reponse": "satisfaction",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "stress",
+      "nom": "Stress",
+      "consigne": "Ces questions portent sur votre état au cours des 4 dernières semaines.",
+      "niveau_mindset": "sante",
+      "items": [
+        {
+          "id": "q51",
+          "texte": "A quelle fréquence avez-vous été irritable ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q53",
+          "texte": "A quelle fréquence avez-vous été stressé(e) ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "epuise",
+      "nom": "Épuisement",
+      "consigne": "Ces questions portent sur votre état au cours des 4 dernières semaines.",
+      "niveau_mindset": "sante",
+      "items": [
+        {
+          "id": "q50",
+          "texte": "A quelle fréquence vous êtes-vous senti(e) à bout de force ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        },
+        {
+          "id": "q52",
+          "texte": "A quelle fréquence avez-vous été émotionnellement épuisé(e) ?",
+          "reponse": "frequence",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "santegen",
+      "nom": "Santé auto-évaluée",
+      "items": [
+        {
+          "id": "q54",
+          "texte": "En général, diriez-vous que votre santé est :",
+          "reponse": "sante",
+          "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sexuel",
+      "nom": "Attentions sexuelles non désirées",
+      "type": "comportement",
+      "items": [
+        {
+          "id": "q55",
+          "texte": "Au travail, avez-vous été l'objet d'intentions sexuelles non désirées au cours des 12 derniers mois ?",
+          "reponse": "exposition",
+          "sens": "direct"
+        },
+        {
+          "id": "q56",
+          "texte": "Si oui, de la part de qui ?",
+          "reponse": "auteurs",
+          "sens": "direct",
+          "si": {
+            "item": "q55",
+            "codes": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "multiple": true
+        }
+      ]
+    },
+    {
+      "id": "menaces",
+      "nom": "Menaces de violence",
+      "type": "comportement",
+      "items": [
+        {
+          "id": "q57",
+          "texte": "Avez-vous été l’objet de menaces de violence au travail au cours des 12 derniers mois ?",
+          "reponse": "exposition",
+          "sens": "direct"
+        },
+        {
+          "id": "q58",
+          "texte": "Si oui, de la part de qui ?",
+          "reponse": "auteurs",
+          "sens": "direct",
+          "si": {
+            "item": "q57",
+            "codes": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "multiple": true
+        }
+      ]
+    },
+    {
+      "id": "violence",
+      "nom": "Violence physique",
+      "type": "comportement",
+      "items": [
+        {
+          "id": "q59",
+          "texte": "Avez-vous été l’objet de violence physique au travail au cours des 12 derniers mois ?",
+          "reponse": "exposition",
+          "sens": "direct"
+        },
+        {
+          "id": "q60",
+          "texte": "Si oui, de la part de qui ?",
+          "reponse": "auteursusagers",
+          "sens": "direct",
+          "si": {
+            "item": "q59",
+            "codes": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "multiple": true
+        }
+      ]
+    },
+    {
+      "id": "harcelement",
+      "nom": "Harcèlement",
+      "type": "comportement",
+      "consigne": "Le harcèlement moral veut dire qu’une personne est exposée de manière répétée à des agissements qui ont pour objet ou pour effet une dégradation des conditions de travail susceptible de porter atteinte aux droits et à la dignité, d'altérer la santé physique ou mentale ou de compromettre l'avenir professionnel.",
+      "items": [
+        {
+          "id": "q61",
+          "texte": "Avez-vous été l’objet de harcèlement au travail au cours des 12 derniers mois ?",
+          "reponse": "exposition",
+          "sens": "direct"
+        },
+        {
+          "id": "q62",
+          "texte": "Si oui, de la part de qui ?",
+          "reponse": "auteursusagers",
+          "sens": "direct",
+          "si": {
+            "item": "q61",
+            "codes": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "multiple": true
+        }
+      ]
+    }
+  ]
+}

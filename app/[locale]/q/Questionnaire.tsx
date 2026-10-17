@@ -10,6 +10,7 @@ import { NOMS_LANGUES } from "@/components/LanguageSwitcher";
 import { useRouter } from "@/i18n/navigation";
 import { cleItem, type FichierInstrument } from "@/lib/instruments/format";
 import { consignesAAfficher, regrouperEnPages } from "@/lib/instruments/pages";
+import { clesDe, itemRepondu, itemVisible, reponsesCompletes } from "@/lib/instruments/reponses";
 import type { Contact, SoutienIma } from "@/lib/admin/soutien";
 
 type Donnees = {
@@ -155,14 +156,26 @@ export function Questionnaire() {
     () => donnees?.questionnaires.flatMap((q) => regrouperEnPages(q.dimensions).map((dims) => ({ q, dims }))) ?? [],
     [donnees],
   );
-  const toutesCles = useMemo(
-    () => pages.flatMap(({ q, dims }) => dims.flatMap((d) => d.items.map((i) => cleItem(q.instrument, i.id)))),
-    [pages],
+  // Progression : questions posées (une question « si oui » ne compte que si elle est posée)
+  const posees = pages.flatMap(({ q, dims }) =>
+    dims.flatMap((d) => d.items.filter((i) => itemVisible(q, d, i, sauvegarde.reponses)).map((i) => ({ q, i }))),
   );
-  const faites = toutesCles.filter((k) => sauvegarde.reponses[k] !== undefined).length;
+  const total = posees.length;
+  const faites = posees.filter(({ q, i }) => itemRepondu(q, i, sauvegarde.reponses)).length;
 
   const repondre = (k: string, valeur: number | null) =>
     setSauvegarde((s) => ({ ...s, reponses: { ...s.reponses, [k]: valeur } }));
+  // Choix multiple : cocher une case annule « je préfère ne pas répondre », et inversement
+  const cocher = (cles: string[], k: string | null) =>
+    setSauvegarde((s) => {
+      const reponses = { ...s.reponses };
+      if (k === null) for (const c of cles) reponses[c] = null;
+      else {
+        for (const c of cles) if (reponses[c] === null || reponses[c] === undefined) reponses[c] = 0;
+        reponses[k] = reponses[k] === 1 ? 0 : 1;
+      }
+      return { ...s, reponses };
+    });
 
   const allerPage = (page: number) => {
     setIncomplet(false);
@@ -184,7 +197,12 @@ export function Questionnaire() {
       const r = await fetch("/api/q/reponses", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ code, groupe: sauvegarde.groupe, reponses: sauvegarde.reponses }),
+        body: JSON.stringify({
+          code,
+          groupe: sauvegarde.groupe,
+          // Toutes les clés : vides pour les questions non posées, 0 pour les cases non cochées
+          reponses: Object.assign({}, ...donnees!.questionnaires.map((q) => reponsesCompletes(q, sauvegarde.reponses))),
+        }),
       });
       const d = await r.json();
       if (d.ok) {
@@ -490,8 +508,10 @@ export function Questionnaire() {
   const { q, dims } = pages[etape.page];
   const echelles = new Map(q.echelles_reponse.map((e) => [e.id, e.options]));
   const consignes = consignesAAfficher(dims);
-  const clesPage = dims.flatMap((d) => d.items.map((i) => cleItem(q.instrument, i.id)));
-  const pageComplete = clesPage.every((k) => sauvegarde.reponses[k] !== undefined);
+  const pageComplete = dims.every((d) =>
+    d.items.every((i) => !itemVisible(q, d, i, sauvegarde.reponses) || itemRepondu(q, i, sauvegarde.reponses)),
+  );
+  const comportements = dims.some((d) => d.type === "comportement");
   const derniere = etape.page === pages.length - 1;
 
   return (
@@ -499,17 +519,17 @@ export function Questionnaire() {
       <div className="mb-6">
         <div className="flex justify-between text-sm text-ima-muted">
           <span>{t("part", { page: etape.page + 1, pages: pages.length })}</span>
-          <span>{t("progress", { fait: faites, total: toutesCles.length })}</span>
+          <span>{t("progress", { fait: faites, total })}</span>
         </div>
         <div
           role="progressbar"
           aria-valuemin={0}
-          aria-valuemax={toutesCles.length}
+          aria-valuemax={total}
           aria-valuenow={faites}
-          aria-label={t("progress", { fait: faites, total: toutesCles.length })}
+          aria-label={t("progress", { fait: faites, total })}
           className="mt-2 h-2 overflow-hidden rounded-full bg-ima-line"
         >
-          <div className="h-full bg-ima-navy" style={{ width: `${(faites / toutesCles.length) * 100}%` }} />
+          <div className="h-full bg-ima-navy" style={{ width: `${total ? (faites / total) * 100 : 0}%` }} />
         </div>
       </div>
 
@@ -521,8 +541,31 @@ export function Questionnaire() {
       <div className="mt-6 flex flex-col gap-6">
         {dims.flatMap((d, j) => [
           ...(consignes[j] ? [<p key={`consigne-${d.id}`} className="max-w-[70ch] font-semibold">{consignes[j]}</p>] : []),
-          ...d.items.map((item) => {
+          ...d.items.filter((item) => itemVisible(q, d, item, sauvegarde.reponses)).map((item) => {
           const k = cleItem(q.instrument, item.id);
+          if (item.multiple) {
+            const cles = clesDe(q, item);
+            const prefere = cles.every((c) => sauvegarde.reponses[c] === null);
+            const caseACocher = (libelle: string, c: string | null, coche: boolean) => (
+              <label
+                key={c ?? "prefere"}
+                className="flex cursor-pointer items-center gap-3 rounded-md border border-ima-line bg-white px-4 py-3 has-[:checked]:border-ima-navy has-[:checked]:bg-ima-cream"
+              >
+                <input type="checkbox" checked={coche} onChange={() => cocher(cles, c)} className="h-5 w-5 shrink-0 accent-ima-navy" />
+                <span className="first-letter:uppercase">{libelle}</span>
+              </label>
+            );
+            return (
+              <fieldset key={k} className="rounded-md">
+                <legend className="mb-1 font-semibold text-ima-navy">{item.texte}</legend>
+                <p className="mb-3 text-sm text-ima-muted">{t("severalAnswers")}</p>
+                <div className="flex flex-col gap-2">
+                  {echelles.get(item.reponse)!.map((o, j) => caseACocher(o.libelle, cles[j], sauvegarde.reponses[cles[j]] === 1))}
+                  {caseACocher(t("preferNot"), null, prefere)}
+                </div>
+              </fieldset>
+            );
+          }
           const valeur = sauvegarde.reponses[k];
           const option = (libelle: string, v: number | null) => (
             <label
@@ -552,6 +595,14 @@ export function Questionnaire() {
           }),
         ])}
       </div>
+
+      {/* Questions sur les comportements indésirables : rappel des personnes à qui en parler */}
+      {comportements && (
+        <>
+          <p className="mt-8 max-w-[70ch]">{t("behaviourHelp")}</p>
+          {aides}
+        </>
+      )}
 
       {incomplet && !pageComplete && (
         <div className="mt-6">

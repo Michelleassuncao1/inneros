@@ -10,6 +10,9 @@ export type TableauResultats = {
   lignes: { echelle: string; valeurs: string[] }[];
 };
 
+// Comportements indésirables : toute la campagne seulement (décision du 17/10/2026)
+export type BlocComportements = { titre: string; intro: string; blocs: { titre: string; lignes: string[] }[] };
+
 export type ContenuPdfRapport = {
   fichier: string; // nom du fichier téléchargé
   marque: string;
@@ -23,7 +26,7 @@ export type ContenuPdfRapport = {
   anonymat: string;
   participation: string[];
   sections: { titre: string; paragraphes?: string[]; puces?: string[]; numerotees?: boolean }[];
-  resultats: { titre: string; lecture: string; legende: string; questionnaires: { titre: string; tableaux: TableauResultats[] }[] };
+  resultats: { titre: string; lecture: string; legende: string; questionnaires: { titre: string; tableaux: TableauResultats[]; comportements?: BlocComportements }[] };
   cartographie: { titre: string; niveaux: { niveau: string; constats: { texte: string; detail: string }[] }[] };
   sources: { titre: string; lignes: string[] };
   pied: string;
@@ -197,6 +200,18 @@ export async function pdfRapport(c: ContenuPdfRapport) {
             {q.tableaux.map((t) => (
               <Tableau key={t.niveau} t={t} />
             ))}
+            {q.comportements && (
+              <View>
+                <Text style={s.sousTitre}>{q.comportements.titre}</Text>
+                <Text style={s.note}>{q.comportements.intro}</Text>
+                {q.comportements.blocs.map((b) => (
+                  <View key={b.titre} style={{ marginBottom: 6 }} wrap={false}>
+                    <Text style={{ fontWeight: 700 }}>{b.titre}</Text>
+                    <Puces lignes={b.lignes} />
+                  </View>
+                ))}
+              </View>
+            )}
           </View>
         ))}
         <View style={s.section} wrap={false}>

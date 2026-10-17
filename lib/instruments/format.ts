@@ -44,6 +44,9 @@ export const schemaFichierInstrument = z.object({
         niveau_mindset: z
           .enum(["travail", "roles", "interactions", "management", "organisation", "environnement", "sante"])
           .optional(),
+        // « comportement » : comportements indésirables (COPSOQ français Q55 à Q62). Pas de score :
+        // résultats en nombre de personnes concernées, pour toute la campagne seulement (décision du 17/10/2026)
+        type: z.literal("comportement").optional(),
         items: z
           .array(
             z.object({
@@ -51,6 +54,10 @@ export const schemaFichierInstrument = z.object({
               texte: z.string().min(1).max(500),
               reponse: identifiant, // identifiant de l'échelle de réponse
               sens: z.enum(["direct", "inverse"]),
+              // Question posée seulement si la réponse à une autre question de la même dimension est l'un de ces codes
+              si: z.object({ item: identifiant, codes: z.array(z.number().int().min(0).max(10)).min(1) }).optional(),
+              // Plusieurs réponses possibles : une case à cocher par option, enregistrée 1 (cochée) ou 0
+              multiple: z.literal(true).optional(),
             }),
           )
           .min(1),
@@ -66,6 +73,11 @@ export function cleItem(instrument: string, item: string) {
   return `${instrument}_${item}`;
 }
 
+// Clé enregistrée pour une case d'une question à choix multiple (ex. copsoq3_q56_1)
+export function cleOption(instrument: string, item: string, code: number) {
+  return `${instrument}_${item}_${code}`;
+}
+
 // Contrôles qui vont au-delà de la forme du fichier
 export function verifierInstrument(f: FichierInstrument): string[] {
   const erreurs: string[] = [];
@@ -79,6 +91,18 @@ export function verifierInstrument(f: FichierInstrument): string[] {
       if (!echelles.has(i.reponse)) erreurs.push(`item ${i.id} : échelle de réponse « ${i.reponse} » inconnue`);
       if (vus.has(i.id)) erreurs.push(`item ${i.id} : identifiant en double`);
       vus.add(i.id);
+      if (i.si) {
+        const parent = d.items.find((x) => x.id === i.si!.item);
+        if (!parent || d.items.indexOf(parent) > d.items.indexOf(i)) erreurs.push(`item ${i.id} : la condition doit porter sur une question précédente de la même dimension`);
+        else if (parent.multiple) erreurs.push(`item ${i.id} : la condition ne peut pas porter sur une question à choix multiple`);
+      }
+      if (i.multiple && d.type !== "comportement") erreurs.push(`item ${i.id} : choix multiple réservé aux comportements indésirables`);
+    }
+    if (d.type === "comportement") {
+      // Une question de fréquence, puis « de la part de qui ? » posée seulement si la personne est concernée
+      const [frequence, auteurs, ...reste] = d.items;
+      if (reste.length || !auteurs || frequence.multiple || frequence.si || !auteurs.multiple || auteurs.si?.item !== frequence.id)
+        erreurs.push(`dimension ${d.id} : un comportement compte une question de fréquence suivie d'une question « de la part de qui ? »`);
     }
   }
   for (const e of f.echelles_reponse) {
@@ -93,6 +117,10 @@ export function signature(f: FichierInstrument) {
   return JSON.stringify({
     pays: f.pays ?? null,
     echelles: f.echelles_reponse.map((e) => [e.id, e.options.map((o) => (o.manquant ? [o.code, "manquant"] : o.code))]),
-    dimensions: f.dimensions.map((d) => [d.id, d.items.map((i) => [i.id, i.reponse, i.sens])]),
+    dimensions: f.dimensions.map((d) => [
+      d.id,
+      d.type ?? "echelle",
+      d.items.map((i) => [i.id, i.reponse, i.sens, i.si ?? null, i.multiple ?? false]),
+    ]),
   });
 }
