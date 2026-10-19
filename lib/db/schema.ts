@@ -447,6 +447,45 @@ export const risks = pgTable(
   ],
 );
 
+// Plan de prévention RPS d'une entreprise (module A2) : plan global sur 5 ans et plan d'action de la
+// première année, rédigés par l'IA ou à la main, validés par un praticien IMA formé à l'IA.
+// Un seul plan validé à la fois par entreprise ; une nouvelle version validée remplace la précédente.
+export const statutPlan = pgEnum("plan_status", ["draft", "ai_draft", "validated", "replaced", "rejected"]);
+
+export const preventionPlans = pgTable(
+  "prevention_plans",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    organizationId: uuid("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    status: statutPlan("status").notNull(),
+    country: pays("country").notNull(), // cadre légal suivi (pays de l'entreprise au moment de la rédaction)
+    language: langue("language").notNull(),
+    startYear: integer("start_year").notNull(), // plan global : startYear à startYear + 4 ; plan d'action : startYear
+    content: jsonb("content").notNull(),
+    // Rapport validé sur lequel le plan s'appuie (décision du 19/10/2026 : obligatoire)
+    reportId: uuid("report_id").references(() => reports.id, { onDelete: "set null" }),
+    aiModel: text("ai_model"),
+    aiPromptVersion: text("ai_prompt_version"),
+    aiGeneratedAt: timestamp("ai_generated_at", { withTimezone: true }),
+    rejectionReason: text("rejection_reason"),
+    validatedBy: uuid("validated_by").references(() => users.id, { onDelete: "set null" }),
+    validatedAt: timestamp("validated_at", { withTimezone: true }),
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check("prevention_plans_annee", sql`${t.startYear} BETWEEN 2020 AND 2100`),
+    check(
+      "prevention_plans_validation",
+      sql`${t.status} NOT IN ('validated', 'replaced') OR ${t.validatedAt} IS NOT NULL`,
+    ),
+    uniqueIndex("prevention_plans_un_valide").on(t.organizationId).where(sql`${t.status} = 'validated'`),
+  ],
+);
+
 // Rapport : brouillon IA éventuel, texte validé, traçabilité IA, validation humaine (règles 6 à 8).
 export const reports = pgTable(
   "reports",

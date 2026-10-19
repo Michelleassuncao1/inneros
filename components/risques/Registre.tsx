@@ -40,6 +40,7 @@ export async function Registre({
   base: string;
 }) {
   const t = await getTranslations("Risques");
+  const tp = await getTranslations("Plan");
   const db = getDb();
   const [registre, liste] = await Promise.all([
     lireRegistre(db, utilisateur, organizationId),
@@ -51,6 +52,16 @@ export async function Registre({
 
   return (
     <div className="flex flex-col gap-12">
+      {utilisateur.role === "admin" && (
+        <p>
+          <Link
+            href={`/admin/entreprises/${organizationId}/plan`}
+            className="inline-block rounded-md bg-ima-navy px-5 py-2.5 font-semibold text-white hover:bg-ima-navy-deep"
+          >
+            {tp("open")}
+          </Link>
+        </p>
+      )}
       <section className="max-w-3xl rounded-md border-l-[3px] border-ima-gold bg-ima-cream px-5 py-4">
         <h2 className="text-lg">{t("matrixTitle")}</h2>
         <p className="mt-2">{t("intro")}</p>

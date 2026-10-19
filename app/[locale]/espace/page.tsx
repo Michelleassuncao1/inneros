@@ -7,6 +7,7 @@ import { getDb } from "@/lib/db/client";
 import { organizations } from "@/lib/db/schema";
 import { Link } from "@/i18n/navigation";
 import { campagnesDuReferent } from "@/lib/rapport/entreprise";
+import { planPourReferent } from "@/lib/plan/plans";
 import { deconnexion } from "../deconnexion";
 
 export default async function EspaceReferentPage({ params }: PageProps<"/[locale]/espace">) {
@@ -16,6 +17,8 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
   const t = await getTranslations("Referent");
   const te = await getTranslations("EspaceRapport");
   const tr = await getTranslations("Risques");
+  const tp = await getTranslations("Plan");
+  const plan = await planPourReferent(getDb(), referent);
   const liste = await campagnesDuReferent(getDb(), referent.id);
   const date = (d: string) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
   const [entreprise] = await getDb()
@@ -39,6 +42,14 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
             >
               {tr("spaceLink")}
             </Link>
+            {plan && (
+              <Link
+                href="/espace/plan"
+                className="ml-3 inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+              >
+                {tp("spaceLink")}
+              </Link>
+            )}
           </p>
         )}
         <section aria-labelledby="campagnes" className="mt-8">

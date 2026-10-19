@@ -12,6 +12,7 @@ import type { Db } from "../db/types";
 import { definitionPour } from "../instruments/chargement";
 import { cleItem } from "../instruments/format";
 import { clesDe, reponsesCompletes } from "../instruments/reponses";
+import { contenuVide } from "../rapport/contenu";
 import { enregistrerReponses } from "../passation";
 
 export type GroupeDemo = { libelle: string; attendus: number; repondants: number };
@@ -151,7 +152,7 @@ export async function creerCampagneDemo(
     await db.insert(reports).values({
       campaignId: campagne.id,
       status: "validated",
-      finalText: "Rapport de démonstration — texte fictif.",
+      finalText: JSON.stringify({ ...contenuVide(), synthese: "Rapport de démonstration — texte fictif." }),
       checkSourcesVerified: true,
       checkNoSmallGroup: true,
       checkLanguageRule: true,
