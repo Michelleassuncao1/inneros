@@ -449,7 +449,10 @@
     "signataireRequis": "Seul le référent signataire désigné peut accepter le rapport ou demander une correction.",
     "rapportDejaAccepte": "Ce rapport est déjà accepté.",
     "acceptationIncomplete": "Cochez les deux vérifications avant d'accepter le rapport.",
-    "correctionMotifRequis": "Décrivez la correction demandée (10 à 2 000 caractères)."
+    "correctionMotifRequis": "Décrivez la correction demandée (10 à 2 000 caractères).",
+    "risqueCoordonnees": "Les textes du registre ne doivent contenir ni adresse e-mail ni numéro de téléphone : décrivez la situation sans citer personne.",
+    "risqueDejaAuRegistre": "Cette échelle de cette campagne est déjà inscrite au registre.",
+    "risqueComportementObligatoire": "Un comportement indésirable signalé ne peut pas être supprimé du registre : passez-le à l'état « Clos » avec une justification."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",
@@ -643,7 +646,12 @@
       "campaign_signatory_set": "Référent signataire désigné",
       "report_accepted": "Rapport accepté par l'entreprise",
       "report_correction_requested": "Correction demandée par l'entreprise",
-      "report_downloaded": "Rapport téléchargé (PDF)"
+      "report_downloaded": "Rapport téléchargé (PDF)",
+      "risk_created": "Risque ajouté au registre",
+      "risk_updated": "Risque modifié",
+      "risk_deleted": "Risque supprimé du registre",
+      "prevention_advisor_granted": "Conseiller en prévention désigné",
+      "prevention_advisor_revoked": "Conseiller en prévention retiré"
     }
   },
   "Rapport": {
@@ -837,5 +845,109 @@
     "cumulTitle": "Au moins un comportement indésirable",
     "cumul": "{concernes} répondants sur {base} ({taux} %) ont signalé au moins un de ces comportements au cours des 12 derniers mois.",
     "byNumber": "{nombre, plural, one {# type de comportement} other {# types de comportements}} : {n, plural, one {# personne} other {# personnes}}"
+  },
+  "Risques": {
+    "title": "Registre des risques RPS",
+    "intro": "Chaque risque est évalué avec la matrice Kinney : Risque = Probabilité × Exposition × Gravité. Le registre est tenu par IMA et par le conseiller en prévention de l'entreprise.",
+    "back": "Retour à l'entreprise",
+    "backSpace": "Retour à mon espace",
+    "backRegister": "Retour au registre",
+    "empty": "Aucun risque inscrit pour le moment.",
+    "colRisk": "Risque",
+    "colScore": "Score",
+    "colClass": "Classe",
+    "colStatus": "État",
+    "edit": "Modifier",
+    "editTitle": "Modifier le risque",
+    "delete": "Supprimer ce risque",
+    "deleteConfirm": "Supprimer définitivement ce risque du registre ?",
+    "groups": "Groupes : {groupes}",
+    "classes": {
+      "tres_eleve": "Très élevé",
+      "eleve": "Élevé",
+      "important": "Important",
+      "possible": "Possible",
+      "acceptable": "Acceptable"
+    },
+    "delais": {
+      "tres_eleve": "action immédiate",
+      "eleve": "action à court terme",
+      "important": "à inscrire au plan annuel",
+      "possible": "à surveiller",
+      "acceptable": "pas d'action particulière"
+    },
+    "statuts": {
+      "ouvert": "Ouvert",
+      "traite": "Traité",
+      "clos": "Clos"
+    },
+    "sources": {
+      "echelle": "Résultat de campagne",
+      "comportement": "Comportement indésirable signalé",
+      "manuel": "Ajouté à la main"
+    },
+    "probabilites": {
+      "1": "Peu probable",
+      "3": "Inhabituel mais possible",
+      "6": "Tout à fait possible",
+      "10": "On peut s'y attendre",
+      "0_5": "Imaginable, très improbable",
+      "0_2": "Presque impossible",
+      "0_1": "Pratiquement impossible"
+    },
+    "expositions": {
+      "1": "Quelques fois par an",
+      "2": "Mensuelle",
+      "3": "Hebdomadaire",
+      "6": "Quotidienne",
+      "10": "Continue",
+      "0_5": "Très rarement"
+    },
+    "gravites": {
+      "1": "Gêne légère, sans effet sur la santé",
+      "3": "Gêne ou inconfort notable (tensions ponctuelles, démotivation)",
+      "7": "Atteinte réversible sans absence prolongée (fatigue marquée, sommeil perturbé, tensions répétées)",
+      "15": "Atteinte à la santé avec absence de quelques jours à quelques semaines",
+      "40": "Atteinte durable à la santé physique ou mentale, absence de longue durée",
+      "100": "Mise en danger de la vie ou atteinte irréversible"
+    },
+    "fieldTitle": "Intitulé du risque",
+    "fieldDescription": "Description",
+    "noNames": "Décrivez la situation sans citer personne : pas de nom, d'adresse e-mail ni de numéro de téléphone.",
+    "fieldLevel": "Niveau MINDSET®",
+    "noLevel": "— aucun —",
+    "fieldGroups": "Groupes concernés",
+    "groupsHelp": "Seulement les groupes présentés dans les résultats (au moins le seuil de la campagne).",
+    "fieldP": "Probabilité (P)",
+    "fieldE": "Exposition (E)",
+    "fieldG": "Gravité (G)",
+    "choose": "— choisir —",
+    "fieldJustification": "Justification des valeurs",
+    "fieldStatus": "État",
+    "add": "Ajouter au registre",
+    "adding": "Ajout…",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "added": "Risque ajouté au registre.",
+    "saved": "Modifications enregistrées.",
+    "proposalsTitle": "Propositions issues des campagnes",
+    "proposalsHelp": "InnerOS propose une probabilité à partir du résultat de chaque échelle, lu du côté défavorable, et une exposition quotidienne. Ce sont des suggestions (convention IMA, sans référence nationale) : vérifiez-les. La gravité est toujours votre choix.",
+    "proposalsNone": "Aucune proposition : il faut une campagne clôturée (et, pour le conseiller en prévention, un rapport validé par IMA).",
+    "campaign": "Campagne {reference}",
+    "result": "Résultat : {detail}",
+    "mandatory": "Comportement signalé : à inscrire au registre (classe au moins « élevé »)",
+    "already": "Déjà au registre",
+    "manualTitle": "Ajouter un risque à la main",
+    "manualHelp": "Par exemple à la suite d'entretiens, d'une observation de terrain ou d'un accident.",
+    "matrixTitle": "Comment lire la matrice",
+    "matrixClasses": "Score de plus de 400 : très élevé · plus de 200 : élevé · plus de 70 : important · plus de 20 : possible · 20 ou moins : acceptable. Un comportement indésirable signalé est toujours au moins « élevé ».",
+    "openRegister": "Registre des risques RPS",
+    "colAdvisor": "Conseiller en prévention",
+    "advisorYes": "Oui",
+    "advisorNo": "Non",
+    "advisorGrant": "Désigner",
+    "advisorRevoke": "Retirer",
+    "advisorHelp": "Le conseiller en prévention désigné peut tenir le registre des risques RPS de l'entreprise avec IMA. Il voit les résultats d'une campagne seulement après validation du rapport.",
+    "spaceLink": "Registre des risques RPS de votre entreprise"
   }
 }

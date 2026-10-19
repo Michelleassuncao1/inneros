@@ -8,7 +8,7 @@ import { aggregates, answers, behaviourCounts, campaignInstruments, campaigns, g
 import type { Db } from "../db/types";
 import { definitionPour } from "../instruments/chargement";
 import type { FichierInstrument } from "../instruments/format";
-import { comptesComportements, scorerDimension, VERSION_CALCUL, type Reponses } from "../scoring";
+import { comptesComportements, REGLES, scorerDimension, VERSION_CALCUL, type Reponses } from "../scoring";
 
 // --- Masquage ---------------------------------------------------------------------------------
 
@@ -203,6 +203,8 @@ export async function lireResultats(db: Db, campaignId: string, langue: string) 
         Object.keys((q.definitions ?? {}) as object).map((lg) => definitionPour(q.definitions, lg)).find(Boolean) ??
         null;
       return {
+        instrumentId: q.id,
+        code: definition?.instrument ?? "",
         titre: definition?.titre ?? "",
         source: definition ? `${definition.titre} — ${definition.source}` : "",
         comportements: lireComportements(definition, comptages.filter((c) => c.instrumentId === q.id)),
@@ -210,6 +212,7 @@ export async function lireResultats(db: Db, campaignId: string, langue: string) 
           id: d.id,
           nom: d.nom,
           niveau: d.niveau_mindset ?? null,
+          etendue: definition ? etendueEchelle(definition, d) : ([0, 100] as [number, number]),
           resultats: lignes
             .filter((l) => l.instrumentId === q.id && l.scaleId === d.id)
             .map((l) => ({ groupId: l.groupId, n: l.n, moyenne: Number(l.mean), ecartType: Number(l.sd) })),
@@ -258,3 +261,15 @@ function lireComportements(definition: FichierInstrument | null, lignes: LigneCo
 }
 
 export type ResultatsComportements = NonNullable<ReturnType<typeof lireComportements>>;
+
+// Valeurs possibles d'un score : 0 à 100 (moyenne recodée), ou la somme des codes (ex. Flourishing 8 à 56)
+export function etendueEchelle(f: FichierInstrument, d: FichierInstrument["dimensions"][number]): [number, number] {
+  if (REGLES[f.instrument]?.calcul !== "somme") return [0, 100];
+  return d.items.reduce<[number, number]>(
+    ([min, max], i) => {
+      const codes = (f.echelles_reponse.find((e) => e.id === i.reponse)?.options ?? []).filter((o) => !o.manquant).map((o) => o.code);
+      return [min + Math.min(...codes), max + Math.max(...codes)];
+    },
+    [0, 0],
+  );
+}

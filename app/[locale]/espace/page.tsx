@@ -15,6 +15,7 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
   const referent = await exigerReferent(locale);
   const t = await getTranslations("Referent");
   const te = await getTranslations("EspaceRapport");
+  const tr = await getTranslations("Risques");
   const liste = await campagnesDuReferent(getDb(), referent.id);
   const date = (d: string) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
   const [entreprise] = await getDb()
@@ -30,6 +31,16 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
         <h1 className="mt-2 text-2xl sm:text-3xl">{t("welcome", { name: referent.name })}</h1>
         <div aria-hidden="true" className="mt-4 h-0.5 w-16 bg-ima-gold" />
         {entreprise && <p className="mt-6 font-semibold text-ima-navy">{t("organization", { name: entreprise.name })}</p>}
+        {referent.preventionAdvisor && (
+          <p className="mt-6">
+            <Link
+              href="/espace/risques"
+              className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+            >
+              {tr("spaceLink")}
+            </Link>
+          </p>
+        )}
         <section aria-labelledby="campagnes" className="mt-8">
           <h2 id="campagnes" className="text-xl">{te("campaignsTitle")}</h2>
           {liste.length === 0 ? (

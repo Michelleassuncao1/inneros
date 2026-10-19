@@ -35,3 +35,8 @@ export async function exigerReferent(locale: string) {
 export async function referentConnecte() {
   return utilisateurActif("referent");
 }
+
+// Registre des risques : administrateur IMA ou référent (les droits fins sont vérifiés par lib/risques)
+export async function utilisateurConnecte() {
+  return (await utilisateurActif("admin")) ?? (await utilisateurActif("referent"));
+}

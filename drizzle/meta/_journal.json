@@ -85,6 +85,13 @@
       "when": 1792243691600,
       "tag": "0011_comportements-indesirables",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1792429763168,
+      "tag": "0012_registre-risques",
+      "breakpoints": true
     }
   ]
 }

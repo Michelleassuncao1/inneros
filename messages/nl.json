@@ -449,7 +449,10 @@
     "signataireRequis": "Alleen de aangewezen ondertekenende referentiepersoon kan het rapport aanvaarden of een correctie vragen.",
     "rapportDejaAccepte": "Dit rapport is al aanvaard.",
     "acceptationIncomplete": "Vink de twee controles aan voordat u het rapport aanvaardt.",
-    "correctionMotifRequis": "Beschrijf de gevraagde correctie (10 tot 2 000 tekens)."
+    "correctionMotifRequis": "Beschrijf de gevraagde correctie (10 tot 2 000 tekens).",
+    "risqueCoordonnees": "De teksten van het register mogen geen e-mailadres of telefoonnummer bevatten: beschrijf de situatie zonder iemand te noemen.",
+    "risqueDejaAuRegistre": "Deze schaal van deze campagne staat al in het register.",
+    "risqueComportementObligatoire": "Gemeld ongewenst gedrag kan niet uit het register worden verwijderd: zet het op « Afgesloten » met een verantwoording."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
@@ -643,7 +646,12 @@
       "campaign_signatory_set": "Ondertekenende referentiepersoon aangewezen",
       "report_accepted": "Rapport aanvaard door de onderneming",
       "report_correction_requested": "Correctie gevraagd door de onderneming",
-      "report_downloaded": "Rapport gedownload (pdf)"
+      "report_downloaded": "Rapport gedownload (pdf)",
+      "risk_created": "Risico aan het register toegevoegd",
+      "risk_updated": "Risico gewijzigd",
+      "risk_deleted": "Risico uit het register verwijderd",
+      "prevention_advisor_granted": "Preventieadviseur aangewezen",
+      "prevention_advisor_revoked": "Preventieadviseur ingetrokken"
     }
   },
   "Rapport": {
@@ -837,5 +845,109 @@
     "cumulTitle": "Minstens één vorm van ongewenst gedrag",
     "cumul": "{concernes} van {base} respondenten ({taux} %) meldden minstens één van deze vormen van gedrag in de afgelopen 12 maanden.",
     "byNumber": "{nombre, plural, one {# soort gedrag} other {# soorten gedrag}}: {n, plural, one {# persoon} other {# personen}}"
+  },
+  "Risques": {
+    "title": "Register van psychosociale risico's",
+    "intro": "Elk risico wordt beoordeeld met de Kinney-matrix: Risico = Waarschijnlijkheid × Blootstelling × Ernst. Het register wordt bijgehouden door IMA en door de preventieadviseur van de organisatie.",
+    "back": "Terug naar de organisatie",
+    "backSpace": "Terug naar mijn ruimte",
+    "backRegister": "Terug naar het register",
+    "empty": "Nog geen risico's geregistreerd.",
+    "colRisk": "Risico",
+    "colScore": "Score",
+    "colClass": "Klasse",
+    "colStatus": "Status",
+    "edit": "Wijzigen",
+    "editTitle": "Risico wijzigen",
+    "delete": "Dit risico verwijderen",
+    "deleteConfirm": "Dit risico definitief uit het register verwijderen?",
+    "groups": "Groepen: {groupes}",
+    "classes": {
+      "tres_eleve": "Zeer hoog",
+      "eleve": "Hoog",
+      "important": "Belangrijk",
+      "possible": "Mogelijk",
+      "acceptable": "Aanvaardbaar"
+    },
+    "delais": {
+      "tres_eleve": "onmiddellijke actie",
+      "eleve": "actie op korte termijn",
+      "important": "op te nemen in het jaaractieplan",
+      "possible": "op te volgen",
+      "acceptable": "geen bijzondere actie"
+    },
+    "statuts": {
+      "ouvert": "Open",
+      "traite": "Behandeld",
+      "clos": "Afgesloten"
+    },
+    "sources": {
+      "echelle": "Resultaat van een campagne",
+      "comportement": "Gemeld ongewenst gedrag",
+      "manuel": "Handmatig toegevoegd"
+    },
+    "probabilites": {
+      "1": "Weinig waarschijnlijk",
+      "3": "Ongewoon maar mogelijk",
+      "6": "Heel goed mogelijk",
+      "10": "Te verwachten",
+      "0_5": "Denkbaar, zeer onwaarschijnlijk",
+      "0_2": "Bijna onmogelijk",
+      "0_1": "Praktisch onmogelijk"
+    },
+    "expositions": {
+      "1": "Enkele keren per jaar",
+      "2": "Maandelijks",
+      "3": "Wekelijks",
+      "6": "Dagelijks",
+      "10": "Voortdurend",
+      "0_5": "Zeer zelden"
+    },
+    "gravites": {
+      "1": "Licht ongemak, zonder gevolgen voor de gezondheid",
+      "3": "Merkbaar ongemak (occasionele spanningen, demotivatie)",
+      "7": "Omkeerbare schade zonder langdurige afwezigheid (duidelijke vermoeidheid, verstoorde slaap, herhaalde spanningen)",
+      "15": "Schade aan de gezondheid met afwezigheid van enkele dagen tot enkele weken",
+      "40": "Blijvende schade aan de fysieke of mentale gezondheid, langdurige afwezigheid",
+      "100": "Levensgevaar of onomkeerbare schade"
+    },
+    "fieldTitle": "Omschrijving van het risico",
+    "fieldDescription": "Beschrijving",
+    "noNames": "Beschrijf de situatie zonder iemand te noemen: geen naam, e-mailadres of telefoonnummer.",
+    "fieldLevel": "MINDSET®-niveau",
+    "noLevel": "— geen —",
+    "fieldGroups": "Betrokken groepen",
+    "groupsHelp": "Alleen de groepen die in de resultaten worden getoond (minstens de drempel van de campagne).",
+    "fieldP": "Waarschijnlijkheid (W)",
+    "fieldE": "Blootstelling (B)",
+    "fieldG": "Ernst (E)",
+    "choose": "— kiezen —",
+    "fieldJustification": "Verantwoording van de waarden",
+    "fieldStatus": "Status",
+    "add": "Aan het register toevoegen",
+    "adding": "Toevoegen…",
+    "save": "Opslaan",
+    "saving": "Opslaan…",
+    "added": "Risico aan het register toegevoegd.",
+    "saved": "Wijzigingen opgeslagen.",
+    "proposalsTitle": "Voorstellen uit de campagnes",
+    "proposalsHelp": "InnerOS stelt een waarschijnlijkheid voor op basis van het resultaat van elke schaal, gelezen aan de ongunstige kant, en een dagelijkse blootstelling. Het zijn suggesties (IMA-conventie, zonder nationale referentie): controleer ze. De ernst kiest u altijd zelf.",
+    "proposalsNone": "Geen voorstellen: daarvoor is een afgesloten campagne nodig (en, voor de preventieadviseur, een door IMA gevalideerd rapport).",
+    "campaign": "Campagne {reference}",
+    "result": "Resultaat: {detail}",
+    "mandatory": "Gemeld gedrag: in het register op te nemen (klasse minstens « hoog »)",
+    "already": "Al in het register",
+    "manualTitle": "Handmatig een risico toevoegen",
+    "manualHelp": "Bijvoorbeeld na gesprekken, een observatie op het terrein of een ongeval.",
+    "matrixTitle": "Hoe de matrix te lezen",
+    "matrixClasses": "Score boven 400: zeer hoog · boven 200: hoog · boven 70: belangrijk · boven 20: mogelijk · 20 of minder: aanvaardbaar. Gemeld ongewenst gedrag is altijd minstens « hoog ».",
+    "openRegister": "Register van psychosociale risico's",
+    "colAdvisor": "Preventieadviseur",
+    "advisorYes": "Ja",
+    "advisorNo": "Nee",
+    "advisorGrant": "Aanwijzen",
+    "advisorRevoke": "Intrekken",
+    "advisorHelp": "De aangewezen preventieadviseur kan samen met IMA het register van psychosociale risico's van de organisatie bijhouden. Hij of zij ziet de resultaten van een campagne pas na validatie van het rapport.",
+    "spaceLink": "Register van psychosociale risico's van uw organisatie"
   }
 }

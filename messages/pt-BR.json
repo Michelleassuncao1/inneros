@@ -449,7 +449,10 @@
     "signataireRequis": "Somente o referente signatário designado pode aceitar o relatório ou solicitar uma correção.",
     "rapportDejaAccepte": "Este relatório já foi aceito.",
     "acceptationIncomplete": "Marque as duas verificações antes de aceitar o relatório.",
-    "correctionMotifRequis": "Descreva a correção solicitada (10 a 2.000 caracteres)."
+    "correctionMotifRequis": "Descreva a correção solicitada (10 a 2.000 caracteres).",
+    "risqueCoordonnees": "Os textos do registro não podem conter e-mail nem telefone: descreva a situação sem citar ninguém.",
+    "risqueDejaAuRegistre": "Esta escala desta campanha já está no registro.",
+    "risqueComportementObligatoire": "Um comportamento indesejado relatado não pode ser excluído do registro: mude-o para “Encerrado” com uma justificativa."
   },
   "Passation": {
     "enterTitle": "Acessar o questionário",
@@ -643,7 +646,12 @@
       "campaign_signatory_set": "Referente signatário designado",
       "report_accepted": "Relatório aceito pela empresa",
       "report_correction_requested": "Correção solicitada pela empresa",
-      "report_downloaded": "Relatório baixado (PDF)"
+      "report_downloaded": "Relatório baixado (PDF)",
+      "risk_created": "Risco adicionado ao registro",
+      "risk_updated": "Risco editado",
+      "risk_deleted": "Risco excluído do registro",
+      "prevention_advisor_granted": "Responsável pela prevenção designado",
+      "prevention_advisor_revoked": "Responsável pela prevenção removido"
     }
   },
   "Rapport": {
@@ -837,5 +845,109 @@
     "cumulTitle": "Pelo menos um comportamento indesejado",
     "cumul": "{concernes} de {base} respondentes ({taux} %) relataram pelo menos um desses comportamentos nos últimos 12 meses.",
     "byNumber": "{nombre, plural, one {# tipo de comportamento} other {# tipos de comportamento}}: {n, plural, one {# pessoa} other {# pessoas}}"
+  },
+  "Risques": {
+    "title": "Registro de riscos psicossociais",
+    "intro": "Cada risco é avaliado com a matriz de Kinney: Risco = Probabilidade × Exposição × Gravidade. O registro é mantido pelo IMA e pelo responsável pela prevenção da organização.",
+    "back": "Voltar para a organização",
+    "backSpace": "Voltar para o meu espaço",
+    "backRegister": "Voltar para o registro",
+    "empty": "Nenhum risco registrado até o momento.",
+    "colRisk": "Risco",
+    "colScore": "Pontuação",
+    "colClass": "Classe",
+    "colStatus": "Situação",
+    "edit": "Editar",
+    "editTitle": "Editar o risco",
+    "delete": "Excluir este risco",
+    "deleteConfirm": "Excluir definitivamente este risco do registro?",
+    "groups": "Grupos: {groupes}",
+    "classes": {
+      "tres_eleve": "Muito alto",
+      "eleve": "Alto",
+      "important": "Importante",
+      "possible": "Possível",
+      "acceptable": "Aceitável"
+    },
+    "delais": {
+      "tres_eleve": "ação imediata",
+      "eleve": "ação a curto prazo",
+      "important": "incluir no plano anual",
+      "possible": "acompanhar",
+      "acceptable": "nenhuma ação específica"
+    },
+    "statuts": {
+      "ouvert": "Aberto",
+      "traite": "Tratado",
+      "clos": "Encerrado"
+    },
+    "sources": {
+      "echelle": "Resultado de campanha",
+      "comportement": "Comportamento indesejado relatado",
+      "manuel": "Adicionado manualmente"
+    },
+    "probabilites": {
+      "1": "Pouco provável",
+      "3": "Incomum, mas possível",
+      "6": "Bem possível",
+      "10": "É de se esperar",
+      "0_5": "Concebível, muito improvável",
+      "0_2": "Quase impossível",
+      "0_1": "Praticamente impossível"
+    },
+    "expositions": {
+      "1": "Algumas vezes por ano",
+      "2": "Mensal",
+      "3": "Semanal",
+      "6": "Diária",
+      "10": "Contínua",
+      "0_5": "Muito raramente"
+    },
+    "gravites": {
+      "1": "Desconforto leve, sem efeito na saúde",
+      "3": "Desconforto perceptível (tensões pontuais, desmotivação)",
+      "7": "Dano reversível sem afastamento prolongado (cansaço marcado, sono perturbado, tensões repetidas)",
+      "15": "Dano à saúde com afastamento de alguns dias a algumas semanas",
+      "40": "Dano duradouro à saúde física ou mental, afastamento prolongado",
+      "100": "Risco de vida ou dano irreversível"
+    },
+    "fieldTitle": "Título do risco",
+    "fieldDescription": "Descrição",
+    "noNames": "Descreva a situação sem citar ninguém: sem nome, e-mail ou telefone.",
+    "fieldLevel": "Nível MINDSET®",
+    "noLevel": "— nenhum —",
+    "fieldGroups": "Grupos envolvidos",
+    "groupsHelp": "Somente os grupos apresentados nos resultados (no mínimo o limite da campanha).",
+    "fieldP": "Probabilidade (P)",
+    "fieldE": "Exposição (E)",
+    "fieldG": "Gravidade (G)",
+    "choose": "— escolher —",
+    "fieldJustification": "Justificativa dos valores",
+    "fieldStatus": "Situação",
+    "add": "Adicionar ao registro",
+    "adding": "Adicionando…",
+    "save": "Salvar",
+    "saving": "Salvando…",
+    "added": "Risco adicionado ao registro.",
+    "saved": "Alterações salvas.",
+    "proposalsTitle": "Sugestões a partir das campanhas",
+    "proposalsHelp": "O InnerOS sugere uma probabilidade a partir do resultado de cada escala, lido do lado desfavorável, e uma exposição diária. São sugestões (convenção IMA, sem referência nacional): verifique-as. A gravidade é sempre escolha sua.",
+    "proposalsNone": "Nenhuma sugestão: é necessária uma campanha encerrada (e, para o responsável pela prevenção, um relatório validado pelo IMA).",
+    "campaign": "Campanha {reference}",
+    "result": "Resultado: {detail}",
+    "mandatory": "Comportamento relatado: deve ser incluído no registro (classe no mínimo “alto”)",
+    "already": "Já está no registro",
+    "manualTitle": "Adicionar um risco manualmente",
+    "manualHelp": "Por exemplo, após entrevistas, uma observação de campo ou um acidente.",
+    "matrixTitle": "Como ler a matriz",
+    "matrixClasses": "Pontuação acima de 400: muito alto · acima de 200: alto · acima de 70: importante · acima de 20: possível · 20 ou menos: aceitável. Um comportamento indesejado relatado é sempre, no mínimo, “alto”.",
+    "openRegister": "Registro de riscos psicossociais",
+    "colAdvisor": "Responsável pela prevenção",
+    "advisorYes": "Sim",
+    "advisorNo": "Não",
+    "advisorGrant": "Designar",
+    "advisorRevoke": "Remover",
+    "advisorHelp": "O responsável pela prevenção designado pode manter, com o IMA, o registro de riscos psicossociais da organização. Ele vê os resultados de uma campanha somente após a validação do relatório.",
+    "spaceLink": "Registro de riscos psicossociais da sua organização"
   }
 }

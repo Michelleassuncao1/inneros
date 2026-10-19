@@ -449,7 +449,10 @@
     "signataireRequis": "Only the designated signatory referent can accept the report or request a correction.",
     "rapportDejaAccepte": "This report has already been accepted.",
     "acceptationIncomplete": "Tick both checks before accepting the report.",
-    "correctionMotifRequis": "Describe the requested correction (10 to 2,000 characters)."
+    "correctionMotifRequis": "Describe the requested correction (10 to 2,000 characters).",
+    "risqueCoordonnees": "Register texts must not contain email addresses or phone numbers: describe the situation without naming anyone.",
+    "risqueDejaAuRegistre": "This scale from this campaign is already in the register.",
+    "risqueComportementObligatoire": "Reported offensive behaviour cannot be deleted from the register: set it to “Closed” with a justification."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",
@@ -643,7 +646,12 @@
       "campaign_signatory_set": "Signatory referent designated",
       "report_accepted": "Report accepted by the company",
       "report_correction_requested": "Correction requested by the company",
-      "report_downloaded": "Report downloaded (PDF)"
+      "report_downloaded": "Report downloaded (PDF)",
+      "risk_created": "Risk added to the register",
+      "risk_updated": "Risk edited",
+      "risk_deleted": "Risk deleted from the register",
+      "prevention_advisor_granted": "Prevention advisor appointed",
+      "prevention_advisor_revoked": "Prevention advisor removed"
     }
   },
   "Rapport": {
@@ -837,5 +845,109 @@
     "cumulTitle": "At least one offensive behaviour",
     "cumul": "{concernes} of {base} respondents ({taux}%) reported at least one of these behaviours in the last 12 months.",
     "byNumber": "{nombre, plural, one {# type of behaviour} other {# types of behaviour}}: {n, plural, one {# person} other {# people}}"
+  },
+  "Risques": {
+    "title": "Psychosocial risk register",
+    "intro": "Each risk is assessed with the Kinney matrix: Risk = Probability × Exposure × Severity. The register is kept by IMA and by the organisation's prevention advisor.",
+    "back": "Back to the organisation",
+    "backSpace": "Back to my space",
+    "backRegister": "Back to the register",
+    "empty": "No risks recorded yet.",
+    "colRisk": "Risk",
+    "colScore": "Score",
+    "colClass": "Class",
+    "colStatus": "Status",
+    "edit": "Edit",
+    "editTitle": "Edit risk",
+    "delete": "Delete this risk",
+    "deleteConfirm": "Permanently delete this risk from the register?",
+    "groups": "Groups: {groupes}",
+    "classes": {
+      "tres_eleve": "Very high",
+      "eleve": "High",
+      "important": "Substantial",
+      "possible": "Possible",
+      "acceptable": "Acceptable"
+    },
+    "delais": {
+      "tres_eleve": "immediate action",
+      "eleve": "short-term action",
+      "important": "include in the annual plan",
+      "possible": "monitor",
+      "acceptable": "no specific action"
+    },
+    "statuts": {
+      "ouvert": "Open",
+      "traite": "Addressed",
+      "clos": "Closed"
+    },
+    "sources": {
+      "echelle": "Campaign result",
+      "comportement": "Reported offensive behaviour",
+      "manuel": "Added manually"
+    },
+    "probabilites": {
+      "1": "Only remotely possible",
+      "3": "Unusual but possible",
+      "6": "Quite possible",
+      "10": "Might well be expected",
+      "0_5": "Conceivable but very unlikely",
+      "0_2": "Practically impossible",
+      "0_1": "Virtually impossible"
+    },
+    "expositions": {
+      "1": "A few times a year",
+      "2": "Monthly",
+      "3": "Weekly",
+      "6": "Daily",
+      "10": "Continuous",
+      "0_5": "Very rarely"
+    },
+    "gravites": {
+      "1": "Slight discomfort, no effect on health",
+      "3": "Noticeable discomfort (occasional tension, loss of motivation)",
+      "7": "Reversible harm without prolonged absence (marked fatigue, disturbed sleep, repeated tension)",
+      "15": "Harm to health with absence of a few days to a few weeks",
+      "40": "Lasting harm to physical or mental health, long-term absence",
+      "100": "Danger to life or irreversible harm"
+    },
+    "fieldTitle": "Risk title",
+    "fieldDescription": "Description",
+    "noNames": "Describe the situation without naming anyone: no names, email addresses or phone numbers.",
+    "fieldLevel": "MINDSET® level",
+    "noLevel": "— none —",
+    "fieldGroups": "Groups concerned",
+    "groupsHelp": "Only groups shown in the results (at least the campaign threshold).",
+    "fieldP": "Probability (P)",
+    "fieldE": "Exposure (E)",
+    "fieldG": "Severity (S)",
+    "choose": "— choose —",
+    "fieldJustification": "Justification of the values",
+    "fieldStatus": "Status",
+    "add": "Add to the register",
+    "adding": "Adding…",
+    "save": "Save",
+    "saving": "Saving…",
+    "added": "Risk added to the register.",
+    "saved": "Changes saved.",
+    "proposalsTitle": "Suggestions from campaigns",
+    "proposalsHelp": "InnerOS suggests a probability from each scale's result, read on the unfavourable side, and daily exposure. These are suggestions (IMA convention, no national reference): check them. Severity is always your choice.",
+    "proposalsNone": "No suggestions: a closed campaign is needed (and, for the prevention advisor, a report validated by IMA).",
+    "campaign": "Campaign {reference}",
+    "result": "Result: {detail}",
+    "mandatory": "Reported behaviour: must be recorded (class at least “high”)",
+    "already": "Already in the register",
+    "manualTitle": "Add a risk manually",
+    "manualHelp": "For example after interviews, a field observation or an accident.",
+    "matrixTitle": "How to read the matrix",
+    "matrixClasses": "Score above 400: very high · above 200: high · above 70: substantial · above 20: possible · 20 or less: acceptable. Reported offensive behaviour is always at least “high”.",
+    "openRegister": "Psychosocial risk register",
+    "colAdvisor": "Prevention advisor",
+    "advisorYes": "Yes",
+    "advisorNo": "No",
+    "advisorGrant": "Appoint",
+    "advisorRevoke": "Remove",
+    "advisorHelp": "The appointed prevention advisor can keep the organisation's psychosocial risk register with IMA. They see a campaign's results only once the report has been validated.",
+    "spaceLink": "Your organisation's psychosocial risk register"
   }
 }

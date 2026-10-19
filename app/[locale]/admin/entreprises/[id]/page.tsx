@@ -18,6 +18,7 @@ import {
   actionSupprimerReferent,
 } from "../../actions";
 import { MenuReferent } from "./MenuReferent";
+import { actionConseillerPrevention } from "../../../registre/actions";
 import { ChampsEntreprise } from "../../ChampsFormulaires";
 
 export default async function EntreprisePage({ params }: PageProps<"/[locale]/admin/entreprises/[id]">) {
@@ -41,6 +42,7 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
   const t = await getTranslations("Entreprises");
   const tc = await getTranslations("Campagnes");
   const l = await getTranslations("Libelles");
+  const tr = await getTranslations("Risques");
 
   return (
     <EspaceAdmin locale={locale} actif="entreprises">
@@ -49,7 +51,15 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
         <Pays code={org.country} nom={l(`country.${org.country}`)} />
         <span>{t("internalCode", { code: org.internalCode })}</span>
       </p>
-      <p className="mb-8 text-sm text-ima-muted">{t("internalCodeHelp")}</p>
+      <p className="mb-4 text-sm text-ima-muted">{t("internalCodeHelp")}</p>
+      <p className="mb-8">
+        <Link
+          href={`/admin/entreprises/${id}/risques`}
+          className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+        >
+          {tr("openRegister")}
+        </Link>
+      </p>
 
       <FormulaireAction
         action={actionModifierEntreprise.bind(null, locale, id)}
@@ -62,16 +72,25 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
       <section aria-labelledby="referents" className="mt-12">
         <h2 id="referents" className="text-xl">{t("referentsTitle")}</h2>
         <p className="mb-4 mt-2 max-w-[70ch] text-sm text-ima-muted">{t("referentsHelp")}</p>
+        <p className="mb-4 max-w-[70ch] text-sm text-ima-muted">{tr("advisorHelp")}</p>
         {referents.length === 0 ? (
           <p className="mb-6">{t("noReferent")}</p>
         ) : (
           <div className="mb-6">
-            <Tableau entetes={[t("colName"), t("colEmail"), t("colState"), t("colActions")]}>
+            <Tableau entetes={[t("colName"), t("colEmail"), t("colState"), tr("colAdvisor"), t("colActions")]}>
               {referents.map((r) => (
                 <tr key={r.id}>
                   <Cellule>{r.name}</Cellule>
                   <Cellule>{r.email}</Cellule>
                   <Cellule>{r.disabledAt ? t("disabled") : t("active")}</Cellule>
+                  <Cellule>
+                    <form action={actionConseillerPrevention.bind(null, locale, id, r.id, !r.preventionAdvisor)} className="flex items-center gap-2">
+                      <span>{r.preventionAdvisor ? tr("advisorYes") : tr("advisorNo")}</span>
+                      <button type="submit" className="text-sm text-ima-navy underline">
+                        {r.preventionAdvisor ? tr("advisorRevoke") : tr("advisorGrant")}
+                      </button>
+                    </form>
+                  </Cellule>
                   <Cellule>
                     <MenuReferent
                       referent={{ id: r.id, name: r.name, email: r.email }}

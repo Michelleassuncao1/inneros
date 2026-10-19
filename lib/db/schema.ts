@@ -108,6 +108,9 @@ export const users = pgTable(
     // Maîtrise de l'IA (article 4 AI Act) : date de la formation suivie ; requise pour valider un rapport
     aiLiteracyAt: date("ai_literacy_at"),
     aiLiteracyNote: text("ai_literacy_note"),
+    // Référents seulement : conseiller en prévention de l'entreprise, autorisé à tenir le registre
+    // des risques RPS avec IMA (module A1, décision du 19/10/2026)
+    preventionAdvisor: boolean("prevention_advisor").notNull().default(false),
   },
   (t) => [
     // Un administrateur n'est rattaché à aucune entreprise ;
@@ -119,6 +122,7 @@ export const users = pgTable(
     ),
     // Adresses toujours enregistrées en minuscules, sans espaces
     check("users_email_normalise", sql`${t.email} = lower(trim(${t.email}))`),
+    check("users_conseiller_referent", sql`NOT ${t.preventionAdvisor} OR ${t.role} = 'referent'`),
   ],
 );
 
@@ -392,6 +396,54 @@ export const behaviourCounts = pgTable(
     check("behaviour_counts_nombre", sql`${t.count} BETWEEN 0 AND ${t.base}`),
     check("behaviour_counts_categorie", sql`${t.category} ~ '^(concernes|auteur_np|(frequence|auteur|nombre)_[0-9]{1,2})$'`),
     unique("behaviour_counts_unique").on(t.campaignId, t.instrumentId, t.behaviourId, t.category),
+  ],
+);
+
+// ─── Plan de prévention RPS (module A) ───────────────────────────────────────
+
+export const sourceRisque = pgEnum("risk_source", ["echelle", "comportement", "manuel"]);
+export const statutRisque = pgEnum("risk_status", ["ouvert", "traite", "clos"]);
+
+// Registre des risques RPS d'une entreprise, évalués avec la matrice Kinney (Risque = P × E × G).
+// Alimenté par les résultats collectifs des campagnes (jamais par des réponses individuelles) ou à la main.
+// Les textes ne doivent citer personne (rappelé à la saisie).
+export const risks = pgTable(
+  "risks",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    organizationId: uuid("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    // Campagne et échelle d'origine (vides pour un risque ajouté à la main)
+    campaignId: uuid("campaign_id").references(() => campaigns.id, { onDelete: "set null" }),
+    instrumentId: uuid("instrument_id").references(() => instruments.id, { onDelete: "set null" }),
+    scaleId: text("scale_id"),
+    source: sourceRisque("source").notNull(),
+    title: text("title").notNull(),
+    description: text("description"),
+    mindsetLevel: text("mindset_level"),
+    groupLabels: jsonb("group_labels").$type<string[]>().notNull().default([]),
+    probability: numeric("probability", { precision: 4, scale: 1 }).notNull(),
+    exposure: numeric("exposure", { precision: 4, scale: 1 }).notNull(),
+    gravity: numeric("gravity", { precision: 4, scale: 1 }).notNull(),
+    justification: text("justification"),
+    status: statutRisque("status").notNull().default("ouvert"),
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+    updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    // Valeurs de la grille Kinney uniquement
+    check("risks_probabilite", sql`${t.probability} IN (10, 6, 3, 1, 0.5, 0.2, 0.1)`),
+    check("risks_exposition", sql`${t.exposure} IN (10, 6, 3, 2, 1, 0.5)`),
+    check("risks_gravite", sql`${t.gravity} IN (100, 40, 15, 7, 3, 1)`),
+    check("risks_titre", sql`length(${t.title}) BETWEEN 1 AND 200`),
+    check("risks_textes", sql`coalesce(length(${t.description}), 0) <= 2000 AND coalesce(length(${t.justification}), 0) <= 2000`),
+    // Un risque issu des résultats garde le nom de son échelle (la campagne peut être supprimée plus tard)
+    check("risks_origine", sql`${t.source} = 'manuel' OR ${t.scaleId} IS NOT NULL`),
+    // Une échelle d'une campagne n'entre qu'une fois dans le registre
+    unique("risks_echelle_unique").on(t.organizationId, t.campaignId, t.instrumentId, t.scaleId),
   ],
 );
 
