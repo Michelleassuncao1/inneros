@@ -945,7 +945,7 @@
     "added": "Risco adicionado ao registro.",
     "saved": "Alterações salvas.",
     "proposalsTitle": "Sugestões a partir das campanhas",
-    "proposalsHelp": "O InnerOS sugere uma probabilidade a partir do resultado de cada escala, lido do lado desfavorável, e uma exposição diária. São sugestões (convenção IMA, sem referência nacional): verifique-as. A gravidade é sempre escolha sua.",
+    "proposalsHelp": "O InnerOS pré-preenche cada risco a partir do diagnóstico: nível MINDSET®, grupos do lado desfavorável, probabilidade (resultado lido do lado desfavorável), exposição diária e gravidade (conforme o tipo de risco, um nível acima se o relatório validado o citar). São sugestões (convenção IMA, sem referência nacional): altere-as se não concordar.",
     "proposalsNone": "Nenhuma sugestão: é necessária uma campanha encerrada (e, para o responsável pela prevenção, um relatório validado pelo IMA).",
     "campaign": "Campanha {reference}",
     "result": "Resultado: {detail}",
@@ -962,7 +962,11 @@
     "advisorGrant": "Designar",
     "advisorRevoke": "Remover",
     "advisorHelp": "O responsável pela prevenção designado pode manter, com o IMA, o registro de riscos psicossociais da organização. Ele vê os resultados de uma campanha somente após a validação do relatório.",
-    "spaceLink": "Registro de riscos psicossociais da sua organização"
+    "spaceLink": "Registro de riscos psicossociais da sua organização",
+    "importAll": "Incluir no registro todas as sugestões da campanha {reference}",
+    "importHelp": "O nível MINDSET®, os grupos envolvidos e os valores P, E e G são pré-preenchidos a partir do diagnóstico e do relatório validado. Cada risco continua editável caso você não concorde com a avaliação sugerida.",
+    "imported": "{n, plural, one {# risco incluído} other {# riscos incluídos}} no registro: verifique os valores sugeridos.",
+    "citedInReport": "citado no relatório"
   },
   "Plan": {
     "title": "Plano de prevenção de riscos psicossociais",
@@ -1052,6 +1056,12 @@
     "mentionAi": "Plano redigido com a assistência da IA e validado por {nom}, profissional do IMA.",
     "mentionManual": "Plano redigido e validado por {nom}, profissional do IMA.",
     "spaceLink": "Plano de prevenção de riscos psicossociais da sua organização",
-    "unknownRisk": "risco retirado do registro"
+    "unknownRisk": "risco retirado do registro",
+    "colEffort": "Esforço",
+    "efforts": {
+      "simple": "Simples",
+      "moyen": "Médio",
+      "important": "Grande"
+    }
   }
 }

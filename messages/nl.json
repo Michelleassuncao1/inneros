@@ -945,7 +945,7 @@
     "added": "Risico aan het register toegevoegd.",
     "saved": "Wijzigingen opgeslagen.",
     "proposalsTitle": "Voorstellen uit de campagnes",
-    "proposalsHelp": "InnerOS stelt een waarschijnlijkheid voor op basis van het resultaat van elke schaal, gelezen aan de ongunstige kant, en een dagelijkse blootstelling. Het zijn suggesties (IMA-conventie, zonder nationale referentie): controleer ze. De ernst kiest u altijd zelf.",
+    "proposalsHelp": "InnerOS vult elk risico vooraf in op basis van de diagnose: MINDSET®-niveau, groepen aan de ongunstige kant, waarschijnlijkheid (resultaat gelezen aan de ongunstige kant), dagelijkse blootstelling en ernst (volgens het soort risico, één stap hoger als het gevalideerde rapport het vermeldt). Het zijn voorstellen (IMA-conventie, zonder nationale referentie): wijzig ze als u het er niet mee eens bent.",
     "proposalsNone": "Geen voorstellen: daarvoor is een afgesloten campagne nodig (en, voor de preventieadviseur, een door IMA gevalideerd rapport).",
     "campaign": "Campagne {reference}",
     "result": "Resultaat: {detail}",
@@ -962,7 +962,11 @@
     "advisorGrant": "Aanwijzen",
     "advisorRevoke": "Intrekken",
     "advisorHelp": "De aangewezen preventieadviseur kan samen met IMA het register van psychosociale risico's van de organisatie bijhouden. Hij of zij ziet de resultaten van een campagne pas na validatie van het rapport.",
-    "spaceLink": "Register van psychosociale risico's van uw organisatie"
+    "spaceLink": "Register van psychosociale risico's van uw organisatie",
+    "importAll": "Alle voorstellen van campagne {reference} in het register opnemen",
+    "importHelp": "Het MINDSET®-niveau, de betrokken groepen en de waarden W, B en E worden vooraf ingevuld op basis van de diagnose en het gevalideerde rapport. Elk risico blijft daarna wijzigbaar als u het niet eens bent met de voorgestelde beoordeling.",
+    "imported": "{n, plural, one {# risico opgenomen} other {# risico's opgenomen}} in het register: controleer de voorgestelde waarden.",
+    "citedInReport": "vermeld in het rapport"
   },
   "Plan": {
     "title": "Preventieplan psychosociale risico's",
@@ -1052,6 +1056,12 @@
     "mentionAi": "Plan opgesteld met de hulp van AI en gevalideerd door {nom}, IMA-practitioner.",
     "mentionManual": "Plan opgesteld en gevalideerd door {nom}, IMA-practitioner.",
     "spaceLink": "Preventieplan psychosociale risico's van uw organisatie",
-    "unknownRisk": "risico verwijderd uit het register"
+    "unknownRisk": "risico verwijderd uit het register",
+    "colEffort": "Inspanning",
+    "efforts": {
+      "simple": "Eenvoudig",
+      "moyen": "Gemiddeld",
+      "important": "Groot"
+    }
   }
 }

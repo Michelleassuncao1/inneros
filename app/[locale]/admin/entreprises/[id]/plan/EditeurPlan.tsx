@@ -5,12 +5,12 @@
 import { useState, useTransition } from "react";
 import type { EtatFormulaire } from "@/components/FormulaireAction";
 import { MessageErreur, MessageInfo } from "@/components/Formulaire";
-import { NIVEAUX_PREVENTION, risquesNonCouverts, type ContenuPlan } from "@/lib/plan/contenu";
+import { EFFORTS, NIVEAUX_PREVENTION, risquesNonCouverts, type ContenuPlan } from "@/lib/plan/contenu";
 import { NIVEAUX_MINDSET } from "@/lib/rapport/contenu";
 import type { ClasseRisque, SourceRisque } from "@/lib/risques/kinney";
 
 export type RisqueEditeur = { id: string; title: string; classe: ClasseRisque; source: SourceRisque; status: "ouvert" | "traite" | "clos"; libelleClasse: string };
-type Textes = { l: Record<string, string>; niveaux: Record<string, string>; prevention: Record<string, string> };
+type Textes = { l: Record<string, string>; niveaux: Record<string, string>; prevention: Record<string, string>; efforts: Record<string, string> };
 
 const champ = "w-full rounded-md border border-ima-line bg-white px-3 py-2 text-ima-ink focus:outline-none focus-visible:shadow-[var(--focus-ring)]";
 const bouton = "rounded-md border border-ima-navy px-3 py-1.5 text-sm font-semibold text-ima-navy hover:bg-ima-cream";
@@ -204,10 +204,18 @@ export function EditeurPlan({
               </select>
             </label>
             <label className="flex flex-col gap-1 text-sm">
+              {l.colEffort}
+              <select className={champ} value={a.effort} onChange={(e) => maj((x) => ((x.actions[i].effort = e.target.value as (typeof EFFORTS)[number]), x))}>
+                {EFFORTS.map((n) => (
+                  <option key={n} value={n}>{textes.efforts[n]}</option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-1 text-sm">
               {l.colBudget}
               <input className={champ} value={a.budget} onChange={(e) => maj((x) => ((x.actions[i].budget = e.target.value), x))} />
             </label>
-            <label className="flex flex-col gap-1 text-sm sm:col-span-2">
+            <label className="flex flex-col gap-1 text-sm">
               {l.colIndicateur}
               <input className={champ} value={a.indicateur} onChange={(e) => maj((x) => ((x.actions[i].indicateur = e.target.value), x))} />
             </label>
@@ -228,7 +236,7 @@ export function EditeurPlan({
           className={bouton}
           onClick={() =>
             maj((x) => (
-              x.actions.push({ id: crypto.randomUUID(), titre: "", description: "", risques: [], niveau_prevention: "primaire", responsable: "", trimestre: 1, budget: "", indicateur: "" }),
+              x.actions.push({ id: crypto.randomUUID(), titre: "", description: "", risques: [], niveau_prevention: "primaire", responsable: "", trimestre: 1, effort: "simple", budget: "", indicateur: "" }),
               x
             ))
           }

@@ -12,7 +12,8 @@ import { creerCampagneDemo } from "../resultats/demo";
 import { creerRisque, designerConseillerPrevention, lireRegistre, propositions } from "../risques/registre";
 import { verifierChargePlan, type ChargePlan } from "./charge-utile";
 import { lireContenuPlan, planVide, risquesNonCouverts, type ContenuPlan } from "./contenu";
-import { creerPlanManuel, enregistrerPlan, genererPlanIA, lirePlans, planPourReferent, validerPlan } from "./plans";
+import { lirePrompt } from "../rapport/ia";
+import { FICHIER_PROMPT_PLAN, creerPlanManuel, enregistrerPlan, genererPlanIA, lirePlans, planPourReferent, validerPlan } from "./plans";
 
 beforeAll(() => {
   process.env.AUTH_SECRET = randomBytes(32).toString("base64");
@@ -77,6 +78,7 @@ function iaSimulee(recus: ChargePlan[] = []) {
         niveau_prevention: "primaire" as const,
         responsable: "Direction",
         trimestre: 1,
+        effort: "simple" as const,
         budget: "temps interne",
         indicateur: "indicateur",
       })),
@@ -84,6 +86,13 @@ function iaSimulee(recus: ChargePlan[] = []) {
     return { ok: true as const, contenu, modele: "claude-sonnet-5-5", versionPrompt: "plan-v1.0", jetonsEntree: 1, jetonsSortie: 1 };
   };
 }
+
+describe("Prompts versionnés", () => {
+  it("lit la version du prompt du rapport et du plan", () => {
+    expect(lirePrompt().version).toMatch(/^rapport-v\d+\.\d+$/);
+    expect(lirePrompt(FICHIER_PROMPT_PLAN).version).toBe("plan-v1.1");
+  });
+});
 
 describe("Plan de prévention RPS", () => {
   it("exige un rapport validé", async () => {
@@ -130,7 +139,7 @@ describe("Plan de prévention RPS", () => {
     if (!r.ok) throw new Error(r.erreur);
     const action = (risque: string, trimestre: number) => ({
       id: `a-${risque}`, titre: "Action", description: "", risques: [risque], niveau_prevention: "primaire" as const,
-      responsable: "Direction", trimestre, budget: "", indicateur: "",
+      responsable: "Direction", trimestre, effort: "simple" as const, budget: "", indicateur: "",
     });
     // Comportement (très élevé) seulement au trimestre 2, échelle sans action : refus
     let contenu = { ...planVide(), actions: [action(ids[0], 2)] };
@@ -150,7 +159,7 @@ describe("Plan de prévention RPS", () => {
     const { db, admin, orgId, ids } = await preparer();
     const action = (risque: string) => ({
       id: risque, titre: "Action", description: "", risques: [risque], niveau_prevention: "primaire" as const,
-      responsable: "RH", trimestre: 1, budget: "", indicateur: "",
+      responsable: "RH", trimestre: 1, effort: "moyen" as const, budget: "", indicateur: "",
     });
     const contenu = { ...planVide(), actions: ids.map(action) };
     const premier = await creerPlanManuel(db, admin.id, orgId, "fr", 2027);
@@ -190,7 +199,7 @@ describe("Plan de prévention RPS", () => {
     await designerConseillerPrevention(db, admin.id, orgId, cp0.id, true);
     const [cp] = await db.select().from(users).where(eq(users.id, cp0.id));
     expect(await planPourReferent(db, cp)).toBeNull(); // brouillon : invisible
-    const contenu = { ...planVide(), actions: ids.map((id) => ({ id, titre: "A", description: "", risques: [id], niveau_prevention: "primaire" as const, responsable: "RH", trimestre: 1, budget: "", indicateur: "" })) };
+    const contenu = { ...planVide(), actions: ids.map((id) => ({ id, titre: "A", description: "", risques: [id], niveau_prevention: "primaire" as const, responsable: "RH", trimestre: 1, effort: "moyen" as const, budget: "", indicateur: "" })) };
     await validerPlan(db, admin.id, p.valeur.planId, { contenu, liste: LISTE });
     expect((await planPourReferent(db, cp))!.id).toBe(p.valeur.planId);
     expect(await planPourReferent(db, cp0)).toBeNull(); // compte relu avant désignation

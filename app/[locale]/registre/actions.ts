@@ -11,7 +11,7 @@ import type { EtatFormulaire } from "@/components/FormulaireAction";
 import { langueValide } from "@/i18n/locale";
 import { exigerAdmin, utilisateurConnecte } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
-import { creerRisque, designerConseillerPrevention, modifierRisque, supprimerRisque, type SaisieRisque } from "@/lib/risques/registre";
+import { creerRisque, designerConseillerPrevention, importerCampagne, modifierRisque, supprimerRisque, type SaisieRisque } from "@/lib/risques/registre";
 import { risks } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
@@ -60,6 +60,16 @@ export async function actionCreerRisque(
   if (!r.ok) return erreur(r.erreur);
   revalidatePath(chemin(langue, u.role, organizationId));
   return { succes: tr("added"), envoi: Date.now() };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function actionImporterCampagne(locale: string, organizationId: string, campaignId: string, _etat: EtatFormulaire): Promise<EtatFormulaire> {
+  const { langue, u, db, tr, erreur } = await contexte(locale);
+  if (!uuid.safeParse(organizationId).success || !uuid.safeParse(campaignId).success) return erreur("introuvable");
+  const r = await importerCampagne(db, u, organizationId, campaignId, langue);
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(chemin(langue, u.role, organizationId));
+  return { succes: tr("imported", { n: r.valeur.nombre }), envoi: Date.now() };
 }
 
 export async function actionModifierRisque(locale: string, riskId: string, _etat: EtatFormulaire, formData: FormData): Promise<EtatFormulaire> {

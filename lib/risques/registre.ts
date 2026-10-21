@@ -20,6 +20,8 @@ import {
   type SourceRisque,
 } from "./kinney";
 import { sensDefavorable } from "./sens";
+import { echellesCitees, graviteSuggeree } from "./gravite";
+import { lireContenu } from "../rapport/contenu";
 
 type Utilisateur = typeof users.$inferSelect;
 type LigneRisque = typeof risks.$inferSelect;
@@ -79,8 +81,11 @@ export type Proposition = {
   niveau: (typeof NIVEAUX_MINDSET)[number] | null;
   detail: string; // « 62,4 / 100 (n = 37) » ou « 3 sur 37 répondants »
   groupes: string[]; // groupes affichables de la campagne
+  groupesSuggeres: string[]; // groupes du côté défavorable de l'ensemble (au moins 5 points sur 100)
   p: number;
   e: number;
+  g: number; // gravité proposée (convention IMA, voir gravite.ts)
+  citeDansRapport: boolean;
   dejaAuRegistre: boolean;
   obligatoire: boolean; // comportement indésirable signalé
 };
@@ -101,6 +106,13 @@ export async function propositions(db: Db, u: Utilisateur, organizationId: strin
     const resultats = await lireResultats(db, c.id, langue);
     if (!resultats) continue;
     const groupes = resultats.groupes.map((g) => g.libelle);
+    const libelle = new Map(resultats.groupes.map((g) => [g.id, g.libelle]));
+    // Rapport validé de la campagne : les échelles qu'il cite reçoivent une gravité d'un cran plus élevée
+    const [rapportValide] = await db
+      .select({ finalText: reports.finalText })
+      .from(reports)
+      .where(and(eq(reports.campaignId, c.id), eq(reports.status, "validated")));
+    const cites = echellesCitees(lireContenu(rapportValide?.finalText));
     for (const q of resultats.questionnaires) {
       for (const d of q.dimensions) {
         const ensemble = d.resultats.find((r) => r.groupId === null);
@@ -108,6 +120,17 @@ export async function propositions(db: Db, u: Utilisateur, organizationId: strin
         const sens = sensDefavorable(q.code, d.id);
         const [min, max] = d.etendue;
         const sur100 = ((ensemble.moyenne - min) / (max - min)) * 100;
+        // Groupes nettement du côté défavorable de l'ensemble
+        const groupesSuggeres = sens
+          ? d.resultats
+              .filter((r) => r.groupId !== null)
+              .filter((r) => {
+                const ecart = (((r.moyenne - min) / (max - min)) * 100 - sur100) * (sens === "haut" ? 1 : -1);
+                return ecart >= 5;
+              })
+              .map((r) => libelle.get(r.groupId!)!)
+              .filter(Boolean)
+          : [];
         liste.push({
           campaignId: c.id,
           reference: c.mandateReference,
@@ -118,8 +141,11 @@ export async function propositions(db: Db, u: Utilisateur, organizationId: strin
           niveau: estNiveau(d.niveau) ? d.niveau : null,
           detail: `${nombre(ensemble.moyenne)}${max === 100 ? " / 100" : ` (${min}–${max})`} (n = ${ensemble.n})`,
           groupes,
+          groupesSuggeres,
           p: sens ? probabiliteSuggeree(sur100, sens) : 1,
           e: expositionSuggeree(),
+          g: graviteSuggeree(q.code, d.id, false, cites.has(d.id)),
+          citeDansRapport: cites.has(d.id),
           dejaAuRegistre: deja.has(`${c.id}:${q.instrumentId}:${d.id}`),
           obligatoire: false,
         });
@@ -137,6 +163,9 @@ export async function propositions(db: Db, u: Utilisateur, organizationId: strin
           niveau: "interactions",
           detail: `${b.concernes} / ${b.base}`,
           groupes: [], // jamais par groupe (décision du 17/10/2026)
+          groupesSuggeres: [],
+          g: graviteSuggeree(q.code, b.id, true, cites.has(b.id)),
+          citeDansRapport: cites.has(b.id),
           // Situation déjà survenue : « tout à fait possible », ou « on peut s'y attendre » à partir de 10 %
           p: b.concernes / b.base >= 0.1 ? 10 : 6,
           e: expositionSuggeree(plusFrequente),
@@ -184,6 +213,7 @@ export async function creerRisque(
   saisie: SaisieRisque,
   origine?: { campaignId: string; instrumentId: string; scaleId: string },
   langue = "fr",
+  connue?: Proposition, // déjà calculée (import d'une campagne entière)
 ): Promise<Resultat<{ id: string }>> {
   if (!peutModifierRegistre(u, organizationId)) return { ok: false, erreur: "introuvable" };
   const lu = schemaRisque.safeParse(saisie);
@@ -194,7 +224,7 @@ export async function creerRisque(
   let groupes: string[] = [];
   if (origine) {
     // L'échelle doit faire partie des résultats visibles de cette campagne de l'entreprise
-    const p = (await propositions(db, u, organizationId, langue)).find(
+    const p = connue ?? (await propositions(db, u, organizationId, langue)).find(
       (x) => x.campaignId === origine.campaignId && x.instrumentId === origine.instrumentId && x.scaleId === origine.scaleId,
     );
     if (!p) return { ok: false, erreur: "introuvable" };
@@ -275,6 +305,23 @@ export async function supprimerRisque(db: Db, u: Utilisateur, riskId: string): P
   await db.delete(risks).where(eq(risks.id, riskId));
   await journaliser(db, { actorUserId: u.id, action: "risk_deleted", targetType: "risk", targetId: riskId, details: { source: r.source } });
   return { ok: true, valeur: undefined };
+}
+
+// Inscrit d'un coup toutes les propositions d'une campagne, avec les valeurs proposées (à vérifier ensuite)
+export async function importerCampagne(db: Db, u: Utilisateur, organizationId: string, campaignId: string, langue = "fr"): Promise<Resultat<{ nombre: number }>> {
+  if (!peutModifierRegistre(u, organizationId)) return { ok: false, erreur: "introuvable" };
+  const aAjouter = (await propositions(db, u, organizationId, langue)).filter((p) => p.campaignId === campaignId && !p.dejaAuRegistre);
+  for (const p of aAjouter) {
+    const r = await creerRisque(
+      db, u, organizationId,
+      { titre: p.nom, niveau: p.niveau, groupes: p.groupesSuggeres, p: p.p, e: p.e, g: p.g },
+      { campaignId: p.campaignId, instrumentId: p.instrumentId, scaleId: p.scaleId },
+      langue,
+      p,
+    );
+    if (!r.ok) return r;
+  }
+  return { ok: true, valeur: { nombre: aAjouter.length } };
 }
 
 // --- Désignation du conseiller en prévention (IMA) ------------------------------------------------

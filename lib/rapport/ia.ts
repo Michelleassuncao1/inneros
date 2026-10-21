@@ -15,7 +15,7 @@ export const FICHIER_PROMPT = path.join(process.cwd(), "prompts", "redaction-rap
 
 export function lirePrompt(fichier = FICHIER_PROMPT) {
   const texte = readFileSync(fichier, "utf8");
-  const version = texte.match(/^# Version : (S+)/m)?.[1] ?? "inconnue";
+  const version = texte.match(/^# Version : (\S+)/m)?.[1] ?? "inconnue";
   return { texte, version };
 }
 

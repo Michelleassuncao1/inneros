@@ -6,6 +6,8 @@ import { NIVEAUX_MINDSET } from "../rapport/contenu";
 import type { Risque } from "../risques/registre";
 
 export const NIVEAUX_PREVENTION = ["primaire", "secondaire", "tertiaire"] as const;
+// Effort de mise en œuvre : les actions simples peuvent être nombreuses (décision du 21/10/2026)
+export const EFFORTS = ["simple", "moyen", "important"] as const;
 
 const texte = (max: number) => z.string().max(max);
 const refs = z.array(texte(40));
@@ -30,6 +32,7 @@ export const schemaContenuPlan = z.object({
       niveau_prevention: z.enum(NIVEAUX_PREVENTION),
       responsable: texte(120), // une fonction, jamais un nom (décision du 19/10/2026)
       trimestre: z.number().int().min(1).max(4),
+      effort: z.enum(EFFORTS),
       budget: texte(200),
       indicateur: texte(500),
     }),

@@ -24,7 +24,7 @@ import { EditeurPlan } from "./EditeurPlan";
 const CLES_EDITEUR = [
   "pgpTitle", "rappel", "objectifs", "objectif", "mesures", "mesure", "niveauPrevention", "moyens", "roles", "fonction", "role",
   "calendrier", "annee", "evaluation", "cadre", "paaTitle", "actionTitre", "actionDescription", "colResponsable", "colEcheance",
-  "colBudget", "colIndicateur", "trimestre", "risquesVises", "noName", "add", "addAction", "remove", "up", "questions", "save",
+  "colBudget", "colIndicateur", "colEffort", "trimestre", "risquesVises", "noName", "add", "addAction", "remove", "up", "questions", "save",
   "saving", "validateTitle", "trainingMissing", "check_risques", "check_fonctions", "check_cadre", "check_langage", "validateHelp",
   "validate", "validating",
 ] as const;
@@ -113,6 +113,7 @@ export default async function PlanAdminPage({ params }: PageProps<"/[locale]/adm
               l: { ...Object.fromEntries(CLES_EDITEUR.map((k) => [k, t.raw(k) as string])), manquants: te("planRisquesNonCouverts") },
               niveaux: tres.raw("levels") as Record<string, string>,
               prevention: t.raw("niveaux") as Record<string, string>,
+              efforts: t.raw("efforts") as Record<string, string>,
             }}
             enregistrer={actionEnregistrerPlan.bind(null, locale, id, brouillon.id)}
             valider={actionValiderPlan.bind(null, locale, id, brouillon.id)}

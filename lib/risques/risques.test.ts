@@ -9,7 +9,8 @@ import { creerBaseDeTest } from "../db/test-db";
 import { enregistrerInstrument, lireInstrument } from "../instruments/chargement";
 import { creerCampagneDemo } from "../resultats/demo";
 import { classeDuScore, classeRisque, expositionSuggeree, probabiliteSuggeree, scoreKinney } from "./kinney";
-import { creerRisque, designerConseillerPrevention, lireRegistre, modifierRisque, propositions, supprimerRisque } from "./registre";
+import { graviteSuggeree, echellesCitees } from "./gravite";
+import { creerRisque, designerConseillerPrevention, importerCampagne, lireRegistre, modifierRisque, propositions, supprimerRisque } from "./registre";
 import { TABLEAU_SENS } from "./sens";
 
 beforeAll(() => {
@@ -38,6 +39,16 @@ describe("Matrice Kinney", () => {
     expect(probabiliteSuggeree(5, "haut")).toBe(0.2);
     expect(expositionSuggeree()).toBe(6);
     expect([0, 1, 2, 3].map((i) => expositionSuggeree(i))).toEqual([6, 3, 2, 1]);
+  });
+
+  it("propose une gravité selon le type de risque, un cran plus haut si le rapport validé cite l'échelle", () => {
+    expect(graviteSuggeree("copsoq3", "charge", false, false)).toBe(7);
+    expect(graviteSuggeree("copsoq3", "charge", false, true)).toBe(15);
+    expect(graviteSuggeree("copsoq3", "stress", false, false)).toBe(15);
+    expect(graviteSuggeree("copsoq3", "stress", false, true)).toBe(40);
+    expect(graviteSuggeree("copsoq3", "harcelement", true, false)).toBe(40);
+    const cites = echellesCitees({ cartographie: [{ constats: [{ sources: ["stress, G1", "copsoq3:charge"] }] }] });
+    expect(["stress", "charge", "g1"].every((x) => cites.has(x))).toBe(true);
   });
 
   it("connaît le côté défavorable de chaque échelle des questionnaires chargés", () => {
@@ -108,6 +119,24 @@ describe("Registre des risques", () => {
     // Journal : valeurs seulement, jamais les textes
     const [j] = await db.select().from(auditLog).where(eq(auditLog.action, "risk_created"));
     expect(j.details).toEqual({ p: charge.p, e: charge.e, g: 15, score: scoreKinney(charge.p, charge.e, 15), statut: "ouvert", source: "echelle" });
+  });
+
+  it("inscrit une campagne entière avec les valeurs pré-remplies (niveau, groupes défavorables, P, E, G)", async () => {
+    const { db, admin, campagneId, orgId } = await preparer();
+    const liste = await propositions(db, admin, orgId, "fr");
+    expect(liste.every((p) => [100, 40, 15, 7, 3, 1].includes(p.g))).toBe(true);
+    // Les groupes proposés sont toujours parmi les groupes affichables
+    expect(liste.every((p) => p.groupesSuggeres.every((g) => p.groupes.includes(g)))).toBe(true);
+    const r = await importerCampagne(db, admin, orgId, campagneId);
+    expect(r).toEqual({ ok: true, valeur: { nombre: liste.length } });
+    const registre = (await lireRegistre(db, admin, orgId))!;
+    expect(registre).toHaveLength(liste.length);
+    const charge = registre.find((x) => x.scaleId === "charge")!;
+    const prop = liste.find((p) => p.scaleId === "charge")!;
+    expect([charge.p, charge.e, charge.g, charge.mindsetLevel]).toEqual([prop.p, prop.e, prop.g, "travail"]);
+    expect(charge.groupLabels).toEqual(prop.groupesSuggeres);
+    // Une seconde fois : rien de plus
+    expect(await importerCampagne(db, admin, orgId, campagneId)).toEqual({ ok: true, valeur: { nombre: 0 } });
   });
 
   it("refuse les valeurs hors grille et les coordonnées dans les textes", async () => {

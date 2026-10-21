@@ -945,7 +945,7 @@
     "added": "Risque ajouté au registre.",
     "saved": "Modifications enregistrées.",
     "proposalsTitle": "Propositions issues des campagnes",
-    "proposalsHelp": "InnerOS propose une probabilité à partir du résultat de chaque échelle, lu du côté défavorable, et une exposition quotidienne. Ce sont des suggestions (convention IMA, sans référence nationale) : vérifiez-les. La gravité est toujours votre choix.",
+    "proposalsHelp": "InnerOS pré-remplit chaque risque à partir du diagnostic : niveau MINDSET®, groupes du côté défavorable, probabilité (résultat lu du côté défavorable), exposition quotidienne et gravité (selon le type de risque, un cran plus haut si le rapport validé le cite). Ce sont des propositions (convention IMA, sans référence nationale) : modifiez-les si vous n'êtes pas d'accord.",
     "proposalsNone": "Aucune proposition : il faut une campagne clôturée (et, pour le conseiller en prévention, un rapport validé par IMA).",
     "campaign": "Campagne {reference}",
     "result": "Résultat : {detail}",
@@ -962,7 +962,11 @@
     "advisorGrant": "Désigner",
     "advisorRevoke": "Retirer",
     "advisorHelp": "Le conseiller en prévention désigné peut tenir le registre des risques RPS de l'entreprise avec IMA. Il voit les résultats d'une campagne seulement après validation du rapport.",
-    "spaceLink": "Registre des risques RPS de votre entreprise"
+    "spaceLink": "Registre des risques RPS de votre entreprise",
+    "importAll": "Inscrire toutes les propositions de la campagne {reference}",
+    "importHelp": "Le niveau MINDSET®, les groupes concernés et les valeurs P, E et G sont pré-remplis à partir du diagnostic et du rapport validé. Chaque risque reste ensuite modifiable si vous n'êtes pas d'accord avec l'évaluation proposée.",
+    "imported": "{n, plural, one {# risque inscrit} other {# risques inscrits}} au registre : vérifiez les valeurs proposées.",
+    "citedInReport": "cité dans le rapport"
   },
   "Plan": {
     "title": "Plan de prévention RPS",
@@ -1052,6 +1056,12 @@
     "mentionAi": "Plan rédigé avec l'assistance de l'IA et validé par {nom}, praticien IMA.",
     "mentionManual": "Plan rédigé et validé par {nom}, praticien IMA.",
     "spaceLink": "Plan de prévention RPS de votre entreprise",
-    "unknownRisk": "risque retiré du registre"
+    "unknownRisk": "risque retiré du registre",
+    "colEffort": "Effort",
+    "efforts": {
+      "simple": "Simple",
+      "moyen": "Moyen",
+      "important": "Important"
+    }
   }
 }

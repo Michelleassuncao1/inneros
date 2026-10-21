@@ -945,7 +945,7 @@
     "added": "Risk added to the register.",
     "saved": "Changes saved.",
     "proposalsTitle": "Suggestions from campaigns",
-    "proposalsHelp": "InnerOS suggests a probability from each scale's result, read on the unfavourable side, and daily exposure. These are suggestions (IMA convention, no national reference): check them. Severity is always your choice.",
+    "proposalsHelp": "InnerOS pre-fills each risk from the diagnosis: MINDSET® level, groups on the unfavourable side, probability (result read on the unfavourable side), daily exposure and severity (by type of risk, one step higher if the validated report cites it). These are suggestions (IMA convention, no national reference): change them if you disagree.",
     "proposalsNone": "No suggestions: a closed campaign is needed (and, for the prevention advisor, a report validated by IMA).",
     "campaign": "Campaign {reference}",
     "result": "Result: {detail}",
@@ -962,7 +962,11 @@
     "advisorGrant": "Appoint",
     "advisorRevoke": "Remove",
     "advisorHelp": "The appointed prevention advisor can keep the organisation's psychosocial risk register with IMA. They see a campaign's results only once the report has been validated.",
-    "spaceLink": "Your organisation's psychosocial risk register"
+    "spaceLink": "Your organisation's psychosocial risk register",
+    "importAll": "Add all suggestions from campaign {reference} to the register",
+    "importHelp": "The MINDSET® level, groups concerned and P, E and S values are pre-filled from the diagnosis and the validated report. Each risk can then be edited if you disagree with the suggested assessment.",
+    "imported": "{n, plural, one {# risk added} other {# risks added}} to the register: check the suggested values.",
+    "citedInReport": "cited in the report"
   },
   "Plan": {
     "title": "Psychosocial risk prevention plan",
@@ -1052,6 +1056,12 @@
     "mentionAi": "Plan written with AI assistance and validated by {nom}, IMA practitioner.",
     "mentionManual": "Plan written and validated by {nom}, IMA practitioner.",
     "spaceLink": "Your organisation's psychosocial risk prevention plan",
-    "unknownRisk": "risk removed from the register"
+    "unknownRisk": "risk removed from the register",
+    "colEffort": "Effort",
+    "efforts": {
+      "simple": "Simple",
+      "moyen": "Moderate",
+      "important": "Major"
+    }
   }
 }

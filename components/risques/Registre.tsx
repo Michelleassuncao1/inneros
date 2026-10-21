@@ -1,7 +1,7 @@
 // Contenu de la page « Registre des risques RPS » (module A1), commun à l'espace IMA et à l'espace
 // du conseiller en prévention : matrice, tableau des risques, propositions des campagnes, ajout à la main.
 import { getTranslations } from "next-intl/server";
-import { actionCreerRisque } from "@/app/[locale]/registre/actions";
+import { actionCreerRisque, actionImporterCampagne } from "@/app/[locale]/registre/actions";
 import { Cellule, Tableau } from "@/components/EspaceAdmin";
 import { FormulaireAction } from "@/components/FormulaireAction";
 import { Link } from "@/i18n/navigation";
@@ -113,6 +113,19 @@ export async function Registre({
         {aAjouter.length === 0 ? (
           <p>{t("proposalsNone")}</p>
         ) : (
+          <>
+          <div className="mb-4 flex flex-col gap-2">
+            {[...new Map(aAjouter.map((p) => [p.campaignId, p.reference])).entries()].map(([campaignId, reference]) => (
+              <FormulaireAction
+                key={campaignId}
+                action={actionImporterCampagne.bind(null, locale, organizationId, campaignId)}
+                libelle={t("importAll", { reference })}
+                enCours={t("adding")}
+                className="flex max-w-xl flex-col gap-2"
+              />
+            ))}
+            <p className="max-w-[70ch] text-sm text-ima-muted">{t("importHelp")}</p>
+          </div>
           <ul className="flex flex-col gap-3">
             {aAjouter.map((p) => {
               const cle = `${p.campaignId}-${p.instrumentId}-${p.scaleId}`;
@@ -122,7 +135,8 @@ export async function Registre({
                     <summary className="cursor-pointer px-4 py-3">
                       <span className="font-semibold text-ima-navy">{p.nom}</span>
                       <span className="ml-2 text-sm text-ima-muted">
-                        {t("campaign", { reference: p.reference })} · {t("result", { detail: p.detail })} · P {nombre(p.p)} · E {nombre(p.e)}
+                        {t("campaign", { reference: p.reference })} · {t("result", { detail: p.detail })} · P {nombre(p.p)} · E {nombre(p.e)} · G {nombre(p.g)}
+                        {p.citeDansRapport && ` · ${t("citedInReport")}`}
                       </span>
                       {p.obligatoire && <span className="block text-sm font-semibold text-repere-prioritaire">{t("mandatory")}</span>}
                     </summary>
@@ -136,7 +150,7 @@ export async function Registre({
                         libelle={t("add")}
                         enCours={t("adding")}
                       >
-                        <ChampsRisque id={cle} valeurs={{ titre: p.nom, niveau: p.niveau, p: p.p, e: p.e }} groupesPossibles={p.groupes} />
+                        <ChampsRisque id={cle} valeurs={{ titre: p.nom, niveau: p.niveau, p: p.p, e: p.e, g: p.g, groupes: p.groupesSuggeres }} groupesPossibles={p.groupes} />
                       </FormulaireAction>
                     </div>
                   </details>
@@ -144,6 +158,7 @@ export async function Registre({
               );
             })}
           </ul>
+          </>
         )}
       </section>
 

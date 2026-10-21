@@ -114,7 +114,7 @@ export async function AffichagePlan({
 
       <section className="flex flex-col gap-4">
         <h3 className="text-xl">{t("paaTitle", { annee: startYear })}</h3>
-        <Tableau entetes={[t("colAction"), t("colResponsable"), t("colEcheance"), t("colBudget"), t("colIndicateur")]}>
+        <Tableau entetes={[t("colAction"), t("colResponsable"), t("colEcheance"), t("colEffort"), t("colBudget"), t("colIndicateur")]}>
           {[...contenu.actions]
             .sort((a, b) => a.trimestre - b.trimestre)
             .map((a) => (
@@ -129,6 +129,7 @@ export async function AffichagePlan({
                 </Cellule>
                 <Cellule>{a.responsable}</Cellule>
                 <Cellule>{t("trimestre", { n: a.trimestre })} {startYear}</Cellule>
+                <Cellule>{t(`efforts.${a.effort}`)}</Cellule>
                 <Cellule>{a.budget}</Cellule>
                 <Cellule>{a.indicateur}</Cellule>
               </tr>
