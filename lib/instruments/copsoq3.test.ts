@@ -1,5 +1,6 @@
 // COPSOQ III, version belge (étape 5B) : fichiers conformes, mêmes structures en fr/nl/en,
-// items CORE présents, WE exclu, version réservée aux entreprises belges.
+// items CORE présents, WE exclu, version réservée aux entreprises belges ; 4 comportements indésirables
+// de la version longue ajoutés le 21/10/2026 (accord de la prof. Clays pour composer la version).
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { choisirQuestionnaires, creerCampagne } from "../admin/campagnes";
@@ -28,7 +29,9 @@ describe("COPSOQ III — version belge", () => {
     const [fr, nl, en] = LANGUES.map(lire);
     expect(signature(nl)).toBe(signature(fr));
     expect(signature(en)).toBe(signature(fr));
-    expect(fr.dimensions.flatMap((d) => d.items)).toHaveLength(62);
+    // 62 items CORE et MIDDLE + 4 comportements indésirables de la version longue avec « de la part de qui ? »
+    expect(fr.dimensions.filter((d) => d.type !== "comportement").flatMap((d) => d.items)).toHaveLength(62);
+    expect(fr.dimensions.filter((d) => d.type === "comportement").map((d) => d.id)).toEqual(["sh", "tv", "pv", "bu"]);
   });
 
   it("contient tous les items CORE et aucun item d'engagement au travail (WE)", () => {

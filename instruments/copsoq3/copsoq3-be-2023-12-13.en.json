@@ -200,6 +200,56 @@
           "code": 0
         }
       ]
+    },
+    {
+      "id": "exposition",
+      "options": [
+        {
+          "code": 0,
+          "libelle": "Yes, daily"
+        },
+        {
+          "code": 1,
+          "libelle": "Yes, weekly"
+        },
+        {
+          "code": 2,
+          "libelle": "Yes, monthly"
+        },
+        {
+          "code": 3,
+          "libelle": "Yes, a few times"
+        },
+        {
+          "code": 4,
+          "libelle": "Yes, once"
+        },
+        {
+          "code": 5,
+          "libelle": "No"
+        }
+      ]
+    },
+    {
+      "id": "auteurs",
+      "options": [
+        {
+          "code": 0,
+          "libelle": "colleagues"
+        },
+        {
+          "code": 1,
+          "libelle": "manager/superior"
+        },
+        {
+          "code": 2,
+          "libelle": "subordinates"
+        },
+        {
+          "code": 3,
+          "libelle": "clients/customers/patients"
+        }
+      ]
     }
   ],
   "dimensions": [
@@ -757,6 +807,126 @@
           "texte": "In general, would you say your health is:",
           "reponse": "sante",
           "sens": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sh",
+      "nom": "Sexual harassment",
+      "type": "comportement",
+      "items": [
+        {
+          "id": "sh1",
+          "texte": "Have you been exposed to undesired sexual attention at your workplace during the last 12 months?",
+          "reponse": "exposition",
+          "sens": "direct"
+        },
+        {
+          "id": "sh2",
+          "texte": "If yes, from whom? (You may tick off more than one)",
+          "reponse": "auteurs",
+          "sens": "direct",
+          "si": {
+            "item": "sh1",
+            "codes": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "multiple": true
+        }
+      ]
+    },
+    {
+      "id": "tv",
+      "nom": "Threats of violence",
+      "type": "comportement",
+      "items": [
+        {
+          "id": "tv1",
+          "texte": "Have you been exposed to threats of violence at your workplace during the last 12 months?",
+          "reponse": "exposition",
+          "sens": "direct"
+        },
+        {
+          "id": "tv2",
+          "texte": "If yes, from whom? (You may tick off more than one)",
+          "reponse": "auteurs",
+          "sens": "direct",
+          "si": {
+            "item": "tv1",
+            "codes": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "multiple": true
+        }
+      ]
+    },
+    {
+      "id": "pv",
+      "nom": "Physical violence",
+      "type": "comportement",
+      "items": [
+        {
+          "id": "pv1",
+          "texte": "Have you been exposed to physical violence at your workplace during the last 12 months?",
+          "reponse": "exposition",
+          "sens": "direct"
+        },
+        {
+          "id": "pv2",
+          "texte": "If yes, from whom? (You may tick off more than one)",
+          "reponse": "auteurs",
+          "sens": "direct",
+          "si": {
+            "item": "pv1",
+            "codes": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "multiple": true
+        }
+      ]
+    },
+    {
+      "id": "bu",
+      "nom": "Bullying",
+      "type": "comportement",
+      "items": [
+        {
+          "id": "bu1",
+          "texte": "Have you been exposed to bullying at your workplace during the last 12 months?",
+          "reponse": "exposition",
+          "sens": "direct"
+        },
+        {
+          "id": "bu3",
+          "texte": "If yes, from whom? (You may tick off more than one)",
+          "reponse": "auteurs",
+          "sens": "direct",
+          "si": {
+            "item": "bu1",
+            "codes": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "multiple": true
         }
       ]
     }
