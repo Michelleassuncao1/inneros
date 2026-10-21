@@ -56,7 +56,9 @@ export type ChargePlan = z.infer<typeof schemaChargePlan>;
 const normaliser = (s: string) =>
   s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
 
-export function verifierChargePlan(charge: unknown, nomEntreprise: string) {
+// Contrôle bloquant avant envoi (règle 5) ; la consigne du prompt n'est qu'un second filet.
+// groupesAffichables : groupes présentés dans les résultats (au moins le seuil de la campagne).
+export function verifierChargePlan(charge: unknown, nomEntreprise: string, groupesAffichables?: Set<string>) {
   const lecture = schemaChargePlan.safeParse(charge);
   if (!lecture.success) return ["format du message non conforme"];
   const brut = JSON.stringify(lecture.data);
@@ -65,8 +67,19 @@ export function verifierChargePlan(charge: unknown, nomEntreprise: string) {
   if (nom.length >= 3 && normaliser(brut).includes(nom)) erreurs.push("le nom de l'entreprise apparaît dans le message");
   if (/[^\s@"]+@[^\s@"]+\.[^\s@"]+/.test(brut)) erreurs.push("adresse e-mail dans le message");
   if (/(\+?\d[\s.-]?){8,}/.test(brut.replace(/"(p|e|g|score|annee_debut)":[\d.]+/g, ""))) erreurs.push("numéro de téléphone dans le message");
+  if (ADRESSE.test(brut)) erreurs.push("adresse postale dans le message");
+  const r = lecture.data.risques;
+  // Un comportement indésirable n'est jamais rattaché à un groupe (décision du 17/10/2026)
+  if (r.some((x) => x.origine === "comportement" && x.groupes.length)) erreurs.push("comportement indésirable rattaché à un groupe");
+  // Seulement des groupes présentés dans les résultats (au moins 10 personnes)
+  if (groupesAffichables && r.some((x) => x.groupes.some((g) => !groupesAffichables.has(g)))) erreurs.push("groupe non présenté dans les résultats");
   return erreurs;
 }
+
+// Adresse postale : numéro puis type de voie (« 12 rue… », France), ou type de voie puis numéro
+// (« Rue de la Loi 16 », Belgique ; « Rua Augusta, 25 », Portugal et Brésil)
+const VOIE = "rue|avenue|boulevard|chaussée|chemin|impasse|place|straat|laan|plein|rua|avenida|travessa|praça";
+const ADRESSE = new RegExp(`\\b\\d{1,4}\\s*(bis|ter)?,?\\s+(${VOIE})\\s|\\b(${VOIE})\\s+[^"\\d]{2,40}?\\d{1,4}\\b`, "i");
 
 // Les risques clôturés ne figurent pas dans le plan ; R1, R2… dans l'ordre du registre (score décroissant)
 export function construireChargePlan(

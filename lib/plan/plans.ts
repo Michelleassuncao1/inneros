@@ -6,7 +6,7 @@ import path from "node:path";
 import { and, desc, eq, inArray } from "drizzle-orm";
 import { z } from "zod";
 import { journaliser } from "../audit";
-import { campaigns, organizations, preventionPlans, reports, users } from "../db/schema";
+import { aggregates, campaigns, groups, organizations, preventionPlans, reports, users } from "../db/schema";
 import type { Db } from "../db/types";
 import { LANGUES_RAPPORT, lireContenu } from "../rapport/contenu";
 import { appelStructure, type ResultatStructure } from "../rapport/ia";
@@ -47,6 +47,17 @@ export async function rapportDeReference(db: Db, organizationId: string) {
     .orderBy(desc(reports.validatedAt))
     .limit(1);
   return r ?? null;
+}
+
+// Groupes présentés dans les résultats des campagnes de l'entreprise (agrégats enregistrés, donc ≥ seuil)
+async function groupesAffichables(db: Db, organizationId: string) {
+  const lignes = await db
+    .selectDistinct({ label: groups.label })
+    .from(aggregates)
+    .innerJoin(groups, eq(aggregates.groupId, groups.id))
+    .innerJoin(campaigns, eq(aggregates.campaignId, campaigns.id))
+    .where(eq(campaigns.organizationId, organizationId));
+  return new Set(lignes.map((l) => l.label));
 }
 
 async function preparer(db: Db, adminId: string, organizationId: string, langueSaisie: string, anneeSaisie: unknown) {
@@ -102,7 +113,7 @@ export async function genererPlanIA(
   if (!registre.some((r) => r.status !== "clos")) return { ok: false, erreur: "planSansRisque" };
 
   const { charge, refs } = construireChargePlan(p.org, registre, rapport, p.langue, p.annee);
-  const anomalies = verifierChargePlan(charge, p.org.name);
+  const anomalies = verifierChargePlan(charge, p.org.name, await groupesAffichables(db, organizationId));
   if (anomalies.length) {
     await journaliser(db, { actorUserId: adminId, action: "plan_ai_blocked", targetType: "organization", targetId: organizationId, details: { anomalies } });
     return { ok: false, erreur: "iaEnvoiBloque", detail: anomalies.join(" ; ") };

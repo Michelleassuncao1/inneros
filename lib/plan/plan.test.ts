@@ -90,7 +90,7 @@ function iaSimulee(recus: ChargePlan[] = []) {
 describe("Prompts versionnés", () => {
   it("lit la version du prompt du rapport et du plan", () => {
     expect(lirePrompt().version).toMatch(/^rapport-v\d+\.\d+$/);
-    expect(lirePrompt(FICHIER_PROMPT_PLAN).version).toBe("plan-v1.1");
+    expect(lirePrompt(FICHIER_PROMPT_PLAN).version).toBe("plan-v1.2");
   });
 });
 
@@ -131,6 +131,20 @@ describe("Plan de prévention RPS", () => {
       "le nom de l'entreprise apparaît dans le message",
       "adresse e-mail dans le message",
     ]);
+  });
+
+  it("bloque aussi une adresse postale, un groupe non présenté et un comportement rattaché à un groupe", () => {
+    const risque = { ref: "R1", titre: "Risque", description: "", origine: "echelle", niveau_mindset: null, groupes: ["Atelier"], p: 1, e: 1, g: 1, score: 1, classe: "acceptable", etat: "ouvert" };
+    const charge = (risques: object[], synthese = "") => ({
+      entreprise: { code_interne: "ORG-X", secteur: "Industrie", tranche_effectif: "50-249", pays: "BE", langue: "fr", annee_debut: 2027 },
+      risques,
+      rapport: { synthese, priorites: [], orientations: [] },
+    });
+    const affichables = new Set(["Atelier"]);
+    expect(verifierChargePlan(charge([risque]), "Usine Fictive", affichables)).toEqual([]);
+    expect(verifierChargePlan(charge([risque], "Réunion au 12 rue de la Loi"), "Usine Fictive", affichables)).toContain("adresse postale dans le message");
+    expect(verifierChargePlan(charge([{ ...risque, groupes: ["Équipe de nuit"] }]), "Usine Fictive", affichables)).toEqual(["groupe non présenté dans les résultats"]);
+    expect(verifierChargePlan(charge([{ ...risque, origine: "comportement" }]), "Usine Fictive", affichables)).toEqual(["comportement indésirable rattaché à un groupe"]);
   });
 
   it("refuse la validation tant que les risques prioritaires n'ont pas d'action", async () => {
