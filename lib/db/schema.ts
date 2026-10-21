@@ -203,6 +203,9 @@ export const campaigns = pgTable(
     tokensIssued: integer("tokens_issued"),
     // Référent signataire du contrat : seul habilité à accepter le rapport au nom de l'entreprise
     signatoryReferentId: uuid("signatory_referent_id").references(() => users.id, { onDelete: "set null" }),
+    // Délégation du signataire au conseiller en prévention : acceptation du rapport et adoption du plan
+    // (une seule case, décision de Michelle du 21/10/2026)
+    advisorDelegation: boolean("advisor_delegation").notNull().default(false),
     // Date de suppression des réponses brutes (agrégats et rapport conservés)
     rawDeletedAt: timestamp("raw_deleted_at", { withTimezone: true }),
   },
@@ -475,14 +478,46 @@ export const preventionPlans = pgTable(
     createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    // Adoption par l'employeur (module A3) : signataire, ou conseiller en prévention par délégation
+    adoptedBy: uuid("adopted_by").references(() => users.id, { onDelete: "set null" }),
+    adoptedAt: date("adopted_at"),
+    consultationBody: text("consultation_body"), // organe consulté (selon le pays)
+    consultationDate: date("consultation_date"),
   },
   (t) => [
+    check(
+      "prevention_plans_organe",
+      sql`${t.consultationBody} IS NULL OR ${t.consultationBody} IN ('cppt', 'delegation_syndicale', 'travailleurs', 'cse', 'aucun_cse', 'cipa', 'participation_travailleurs', 'representants_sst')`,
+    ),
     check("prevention_plans_annee", sql`${t.startYear} BETWEEN 2020 AND 2100`),
     check(
       "prevention_plans_validation",
       sql`${t.status} NOT IN ('validated', 'replaced') OR ${t.validatedAt} IS NOT NULL`,
     ),
     uniqueIndex("prevention_plans_un_valide").on(t.organizationId).where(sql`${t.status} = 'validated'`),
+  ],
+);
+
+// Avancement des actions d'un plan validé (module A3), mis à jour par IMA et le conseiller en prévention.
+export const statutAction = pgEnum("action_status", ["a_faire", "en_cours", "realisee", "reportee", "abandonnee"]);
+
+export const planActionStatus = pgTable(
+  "plan_action_status",
+  {
+    planId: uuid("plan_id")
+      .notNull()
+      .references(() => preventionPlans.id, { onDelete: "cascade" }),
+    actionId: text("action_id").notNull(), // identifiant de l'action dans le contenu du plan
+    status: statutAction("status").notNull(),
+    doneOn: date("done_on"),
+    comment: text("comment"),
+    updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.planId, t.actionId] }),
+    check("plan_action_status_commentaire", sql`coalesce(length(${t.comment}), 0) <= 500`),
+    check("plan_action_status_date", sql`${t.doneOn} IS NULL OR ${t.status} = 'realisee'`),
   ],
 );
 

@@ -459,7 +459,9 @@
     "planNonModifiable": "Dit plan kan niet meer worden gewijzigd.",
     "planContenuInvalide": "De inhoud van het plan is niet geldig.",
     "planSansAction": "Het actieplan moet minstens één actie bevatten.",
-    "planRisquesNonCouverts": "Prioritaire risico's zonder actie (of, voor een zeer hoog risico, zonder actie in kwartaal 1):"
+    "planRisquesNonCouverts": "Prioritaire risico's zonder actie (of, voor een zeer hoog risico, zonder actie in kwartaal 1):",
+    "planDejaAdopte": "Dit plan is al goedgekeurd. Om het te wijzigen, maakt IMA een nieuwe versie.",
+    "adoptionDates": "Onsamenhangende data: de datum van het advies moet vóór de goedkeuring liggen, en geen enkele datum mag in de toekomst liggen."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
@@ -665,7 +667,12 @@
       "plan_manual_created": "Plan handmatig begonnen",
       "plan_saved": "Ontwerpplan opgeslagen",
       "plan_rejected": "Ontwerpplan geweigerd",
-      "plan_validated": "Preventieplan gevalideerd"
+      "plan_validated": "Preventieplan gevalideerd",
+      "advisor_delegation_granted": "Delegatie aan de preventieadviseur",
+      "advisor_delegation_revoked": "Delegatie aan de preventieadviseur ingetrokken",
+      "plan_adopted": "Preventieplan goedgekeurd door de organisatie",
+      "plan_action_updated": "Voortgang van een actie bijgewerkt",
+      "plan_reminder_sent": "Kwartaalherinnering van het plan verzonden"
     }
   },
   "Rapport": {
@@ -778,7 +785,9 @@
     "correctionSujet": "InnerOS: correctie gevraagd ({reference})",
     "correctionTexte": "De ondertekenende referentiepersoon vraagt een correctie van het rapport van de bevraging {reference}. De reden staat in InnerOS.",
     "ouvrirRapport": "Rapport openen",
-    "sansContenu": "Om redenen van vertrouwelijkheid bevat deze e-mail geen enkel element van het rapport."
+    "sansContenu": "Om redenen van vertrouwelijkheid bevat deze e-mail geen enkel element van het rapport.",
+    "rappelPlanSujet": "Preventieplan: stand van zaken dit kwartaal",
+    "rappelPlanTexte": "Uw preventieplan telt {aVenir, plural, =0 {geen acties gepland dit kwartaal} one {# actie gepland dit kwartaal} other {# acties gepland dit kwartaal}} en {enRetard, plural, =0 {geen vertraagde acties} one {# vertraagde actie} other {# vertraagde acties}}. Vergeet niet de voortgang bij te werken in uw ruimte."
   },
   "RapportPdf": {
     "titre": "Rapport van de collectieve diagnose van psychosociale risico's",
@@ -847,7 +856,13 @@
     "correctionDone": "Vraag verzonden naar het Institut Mindset en Action.",
     "acceptedBy": "Rapport aanvaard door {nom} op {date}.",
     "signatoryOnly": "Alleen de door het Institut Mindset en Action aangewezen ondertekenende referentiepersoon kan het rapport aanvaarden.",
-    "download": "Rapport downloaden (pdf)"
+    "download": "Rapport downloaden (pdf)",
+    "delegationTitle": "Delegatie aan de preventieadviseur",
+    "delegationHelp": "Als ondertekenende referent kunt u de aanvaarding van het rapport en de goedkeuring van het preventieplan toevertrouwen aan de preventieadviseur van uw organisatie. U kunt deze delegatie op elk moment intrekken.",
+    "delegationLabel": "Ik delegeer de aanvaarding van het rapport en de goedkeuring van het preventieplan aan de preventieadviseur.",
+    "delegationSave": "Opslaan",
+    "delegationDone": "Delegatie opgeslagen.",
+    "byDelegation": "U handelt in opdracht van de ondertekenende referent."
   },
   "Comportements": {
     "title": "Ongewenst gedrag (hele organisatie)",
@@ -1062,6 +1077,48 @@
       "simple": "Eenvoudig",
       "moyen": "Gemiddeld",
       "important": "Groot"
-    }
+    },
+    "toAdopt": "goed te keuren",
+    "adoptionTitle": "Goedkeuring door de werkgever",
+    "adoptionHelp": "Het door IMA gevalideerde plan is een voorstel: de werkgever keurt het goed, na raadpleging van het wettelijk voorziene orgaan. Vermeld het geraadpleegde orgaan en de data.",
+    "adoptionBE": "België: het jaarlijks actieplan wordt vóór 1 november van het voorgaande jaar voor advies voorgelegd aan het CPBW.",
+    "organe": "Geraadpleegd orgaan",
+    "organes": {
+      "cppt": "Comité voor preventie en bescherming op het werk (CPBW)",
+      "delegation_syndicale": "Vakbondsafvaardiging (geen CPBW)",
+      "travailleurs": "Werknemers rechtstreeks",
+      "cse": "Comité social et économique (CSE, Frankrijk)",
+      "aucun_cse": "Geen CSE in de onderneming",
+      "cipa": "CIPA",
+      "participation_travailleurs": "Inspraak van de werknemers",
+      "representants_sst": "Werknemersvertegenwoordigers voor veiligheid en gezondheid"
+    },
+    "avisLe": "Datum van het advies of de raadpleging",
+    "avisLeHelp": "Alleen leeg laten als er geen CSE is (Frankrijk).",
+    "adopteLe": "Datum van goedkeuring",
+    "adopt": "Goedkeuring registreren",
+    "adopting": "Registreren…",
+    "adoptedDone": "Goedkeuring geregistreerd.",
+    "adoptedMeta": "Goedgekeurd door {nom} op {date} · geraadpleegd orgaan: {organe} (advies van {avis}).",
+    "notAdopted": "Nog niet goedgekeurd door de organisatie.",
+    "dashboardTitle": "Voortgang van het actieplan {annee}",
+    "doneCount": "{faites} van {total} {total, plural, one {actie} other {acties}} uitgevoerd",
+    "lateCount": "{n, plural, one {actie met vertraging} other {acties met vertraging}}",
+    "progressTitle": "Acties",
+    "progressReadOnly": "Alleen de preventieadviseur en IMA werken de voortgang bij.",
+    "late": "vertraagd",
+    "updateProgress": "Bijwerken",
+    "colStatut": "Status",
+    "statutsAction": {
+      "a_faire": "Te doen",
+      "en_cours": "Bezig",
+      "realisee": "Uitgevoerd",
+      "reportee": "Uitgesteld",
+      "abandonnee": "Stopgezet"
+    },
+    "doneOn": "Uitgevoerd op",
+    "comment": "Opmerking",
+    "commentHelp": "Zonder naam, e-mail of telefoonnummer (max. 500 tekens).",
+    "progressSaved": "Voortgang opgeslagen."
   }
 }

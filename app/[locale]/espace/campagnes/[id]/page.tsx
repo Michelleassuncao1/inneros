@@ -15,7 +15,7 @@ import { getDb } from "@/lib/db/client";
 import { users } from "@/lib/db/schema";
 import { contenuVide, lireContenu } from "@/lib/rapport/contenu";
 import { rapportPourReferent } from "@/lib/rapport/entreprise";
-import { actionAccepterRapport, actionDemanderCorrection } from "../../actions";
+import { actionAccepterRapport, actionDefinirDelegation, actionDemanderCorrection } from "../../actions";
 
 export default async function RapportReferentPage({ params }: PageProps<"/[locale]/espace/campagnes/[id]">) {
   const { locale, id } = await params;
@@ -54,6 +54,27 @@ export default async function RapportReferentPage({ params }: PageProps<"/[local
           </Link>
         </p>
 
+        {/* Délégation au conseiller en prévention : réservée au signataire (décision du 21/10/2026) */}
+        {vue.estSignataire && (
+          <section className="mb-8 max-w-2xl rounded-md border border-ima-line bg-white p-4">
+            <h2 className="text-lg">{te("delegationTitle")}</h2>
+            <p className="mb-3 mt-1 text-sm text-ima-muted">{te("delegationHelp")}</p>
+            <FormulaireAction
+              action={actionDefinirDelegation.bind(null, locale, id)}
+              libelle={te("delegationSave")}
+              enCours={te("sending")}
+              secondaire
+              className="flex flex-col gap-3"
+            >
+              <label className="flex items-start gap-2">
+                <input type="checkbox" name="delegation" value="oui" defaultChecked={vue.campagne.advisorDelegation} className="mt-1 h-5 w-5 accent-ima-navy" />
+                <span>{te("delegationLabel")}</span>
+              </label>
+            </FormulaireAction>
+          </section>
+        )}
+        {vue.parDelegation && <p className="mb-6 text-sm text-ima-muted">{te("byDelegation")}</p>}
+
         {!rapport ? (
           <MessageInfo>{vue.etat === "enCorrection" ? te("inCorrection") : te("notAvailable")}</MessageInfo>
         ) : (
@@ -71,7 +92,7 @@ export default async function RapportReferentPage({ params }: PageProps<"/[local
             <AffichageRapport contenu={lireContenu(rapport.finalText) ?? contenuVide()} textes={textes} />
 
             {!rapport.acceptedAt &&
-              (vue.estSignataire ? (
+              (vue.peutSigner ? (
                 <div className="flex flex-col gap-8 border-t border-ima-line pt-8">
                   <section className="max-w-2xl">
                     <h2 className="text-xl">{te("acceptTitle")}</h2>

@@ -1,4 +1,5 @@
-// Plan de prévention RPS validé, côté conseiller en prévention de l'entreprise (module A2, lecture seule)
+// Plan de prévention RPS validé, côté entreprise (modules A2 et A3) : lecture, adoption par le signataire
+// (ou le conseiller en prévention par délégation), avancement des actions par le conseiller en prévention.
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -8,21 +9,23 @@ import { AffichagePlan } from "@/components/plan/AffichagePlan";
 import { Link } from "@/i18n/navigation";
 import { exigerReferent } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
-import { users } from "@/lib/db/schema";
+import { risks, users } from "@/lib/db/schema";
 import { lireContenuPlan } from "@/lib/plan/contenu";
-import { planPourReferent } from "@/lib/plan/plans";
-import { lireRegistre } from "@/lib/risques/registre";
+import { planPourReferentSuivi } from "@/lib/plan/suivi";
+import { SuiviPlan } from "@/components/plan/SuiviPlan";
 
 export default async function PlanReferentPage({ params }: PageProps<"/[locale]/espace/plan">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const referent = await exigerReferent(locale);
   const db = getDb();
-  const plan = await planPourReferent(db, referent);
+  const acces = await planPourReferentSuivi(db, referent);
+  const plan = acces?.plan;
   const contenu = plan ? lireContenuPlan(plan.content) : null;
   if (!plan || !contenu || !referent.organizationId) notFound();
   const t = await getTranslations("Plan");
-  const registre = (await lireRegistre(db, referent, referent.organizationId)) ?? [];
+  // Intitulés des risques cités par le plan (le signataire n'a pas forcément accès au registre lui-même)
+  const registre = await db.select({ id: risks.id, title: risks.title }).from(risks).where(eq(risks.organizationId, referent.organizationId));
   const [validateur] = plan.validatedBy ? await db.select({ name: users.name }).from(users).where(eq(users.id, plan.validatedBy)) : [];
   const nom = validateur?.name ?? "—";
 
@@ -46,6 +49,9 @@ export default async function PlanReferentPage({ params }: PageProps<"/[locale]/
           })}
         </p>
         <p className="mb-8 text-sm font-semibold">{plan.aiModel ? t("mentionAi", { nom }) : t("mentionManual", { nom })}</p>
+        <div className="mb-12">
+          <SuiviPlan plan={plan} locale={locale} peutAdopter={acces!.peutAdopter} peutSuivre={acces!.peutSuivre} />
+        </div>
         <AffichagePlan contenu={contenu} startYear={plan.startYear} risques={new Map(registre.map((r) => [r.id, r.title]))} />
       </main>
       <WaveFooter />

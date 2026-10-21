@@ -9,7 +9,7 @@ import type { EtatFormulaire } from "@/components/FormulaireAction";
 import { langueValide } from "@/i18n/locale";
 import { exigerReferent } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
-import { accepterRapport, demanderCorrection } from "@/lib/rapport/entreprise";
+import { accepterRapport, definirDelegation, demanderCorrection } from "@/lib/rapport/entreprise";
 
 const uuid = z.string().uuid();
 
@@ -50,4 +50,14 @@ export async function actionDemanderCorrection(
   if (!r.ok) return erreur(r.erreur);
   revalidatePath(`/${langue}/espace/campagnes/${campaignId}`);
   return { succes: te("correctionDone"), envoi: Date.now() };
+}
+
+// Le signataire délègue (ou reprend) au conseiller en prévention l'acceptation du rapport et l'adoption du plan
+export async function actionDefinirDelegation(locale: string, campaignId: string, _etat: EtatFormulaire, formData: FormData): Promise<EtatFormulaire> {
+  const { langue, referent, db, te, erreur } = await contexte(locale);
+  if (!uuid.safeParse(campaignId).success) return erreur("introuvable");
+  const r = await definirDelegation(db, referent.id, campaignId, formData.get("delegation") === "oui");
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(`/${langue}/espace/campagnes/${campaignId}`);
+  return { succes: te("delegationDone"), envoi: Date.now() };
 }

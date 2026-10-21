@@ -459,7 +459,9 @@
     "planNonModifiable": "This plan can no longer be edited.",
     "planContenuInvalide": "The plan content is not valid.",
     "planSansAction": "The action plan must contain at least one action.",
-    "planRisquesNonCouverts": "Priority risks without an action (or, for a very high risk, without an action in Q1):"
+    "planRisquesNonCouverts": "Priority risks without an action (or, for a very high risk, without an action in Q1):",
+    "planDejaAdopte": "This plan has already been adopted. To change it, IMA prepares a new version.",
+    "adoptionDates": "Inconsistent dates: the advice date must precede the adoption, and no date can be in the future."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",
@@ -665,7 +667,12 @@
       "plan_manual_created": "Plan started manually",
       "plan_saved": "Draft plan saved",
       "plan_rejected": "Draft plan rejected",
-      "plan_validated": "Prevention plan validated"
+      "plan_validated": "Prevention plan validated",
+      "advisor_delegation_granted": "Delegation to the prevention advisor",
+      "advisor_delegation_revoked": "Delegation to the prevention advisor withdrawn",
+      "plan_adopted": "Prevention plan adopted by the organisation",
+      "plan_action_updated": "Action progress updated",
+      "plan_reminder_sent": "Quarterly plan reminder sent"
     }
   },
   "Rapport": {
@@ -778,7 +785,9 @@
     "correctionSujet": "InnerOS: correction requested ({reference})",
     "correctionTexte": "The signatory referent is requesting a correction to the report for survey {reference}. The reason is shown in InnerOS.",
     "ouvrirRapport": "Open the report",
-    "sansContenu": "For confidentiality reasons, this email contains no part of the report."
+    "sansContenu": "For confidentiality reasons, this email contains no part of the report.",
+    "rappelPlanSujet": "Prevention plan: quarterly update",
+    "rappelPlanTexte": "Your prevention plan has {aVenir, plural, =0 {no actions planned this quarter} one {# action planned this quarter} other {# actions planned this quarter}} and {enRetard, plural, =0 {no late actions} one {# late action} other {# late actions}}. Remember to update progress in your space."
   },
   "RapportPdf": {
     "titre": "Collective psychosocial risk assessment report",
@@ -847,7 +856,13 @@
     "correctionDone": "Request sent to the Institut Mindset en Action.",
     "acceptedBy": "Report accepted by {nom} on {date}.",
     "signatoryOnly": "Only the signatory referent designated by the Institut Mindset en Action can accept the report.",
-    "download": "Download the report (PDF)"
+    "download": "Download the report (PDF)",
+    "delegationTitle": "Delegation to the prevention advisor",
+    "delegationHelp": "As the signatory referent, you can entrust your organisation's prevention advisor with accepting the report and adopting the prevention plan. You can withdraw this delegation at any time.",
+    "delegationLabel": "I delegate acceptance of the report and adoption of the prevention plan to the prevention advisor.",
+    "delegationSave": "Save",
+    "delegationDone": "Delegation saved.",
+    "byDelegation": "You are acting on behalf of the signatory referent."
   },
   "Comportements": {
     "title": "Offensive behaviour (whole organisation)",
@@ -1062,6 +1077,48 @@
       "simple": "Simple",
       "moyen": "Moderate",
       "important": "Major"
-    }
+    },
+    "toAdopt": "to adopt",
+    "adoptionTitle": "Adoption by the employer",
+    "adoptionHelp": "The plan validated by IMA is a proposal: the employer adopts it after consulting the body required by law. State the body consulted and the dates.",
+    "adoptionBE": "Belgium: the annual action plan is submitted to the CPPT for advice before 1 November of the previous year.",
+    "organe": "Body consulted",
+    "organes": {
+      "cppt": "Committee for prevention and protection at work (CPPT)",
+      "delegation_syndicale": "Union delegation (no CPPT)",
+      "travailleurs": "Workers directly",
+      "cse": "Social and economic committee (CSE)",
+      "aucun_cse": "No CSE in the company",
+      "cipa": "CIPA",
+      "participation_travailleurs": "Worker participation",
+      "representants_sst": "Workers' health and safety representatives"
+    },
+    "avisLe": "Date of the advice or consultation",
+    "avisLeHelp": "Leave empty only if there is no CSE (France).",
+    "adopteLe": "Adoption date",
+    "adopt": "Record the adoption",
+    "adopting": "Recording…",
+    "adoptedDone": "Adoption recorded.",
+    "adoptedMeta": "Adopted by {nom} on {date} · body consulted: {organe} (advice of {avis}).",
+    "notAdopted": "Not yet adopted by the organisation.",
+    "dashboardTitle": "Progress of the {annee} action plan",
+    "doneCount": "{faites} of {total} {total, plural, one {action} other {actions}} completed",
+    "lateCount": "{n, plural, one {late action} other {late actions}}",
+    "progressTitle": "Actions",
+    "progressReadOnly": "Only the prevention advisor and IMA update progress.",
+    "late": "late",
+    "updateProgress": "Update",
+    "colStatut": "Status",
+    "statutsAction": {
+      "a_faire": "To do",
+      "en_cours": "In progress",
+      "realisee": "Completed",
+      "reportee": "Postponed",
+      "abandonnee": "Dropped"
+    },
+    "doneOn": "Completed on",
+    "comment": "Comment",
+    "commentHelp": "No names, emails or phone numbers (500 characters max).",
+    "progressSaved": "Progress saved."
   }
 }

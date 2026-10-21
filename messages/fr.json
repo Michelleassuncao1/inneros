@@ -459,7 +459,9 @@
     "planNonModifiable": "Ce plan ne peut plus être modifié.",
     "planContenuInvalide": "Le contenu du plan n'est pas valide.",
     "planSansAction": "Le plan d'action doit contenir au moins une action.",
-    "planRisquesNonCouverts": "Risques prioritaires sans action (ou, pour un risque très élevé, sans action au trimestre 1) :"
+    "planRisquesNonCouverts": "Risques prioritaires sans action (ou, pour un risque très élevé, sans action au trimestre 1) :",
+    "planDejaAdopte": "Ce plan a déjà été adopté. Pour le modifier, IMA prépare une nouvelle version.",
+    "adoptionDates": "Dates incohérentes : la date de l'avis doit précéder l'adoption, et aucune date ne peut être dans le futur."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",
@@ -665,7 +667,12 @@
       "plan_manual_created": "Plan commencé à la main",
       "plan_saved": "Brouillon de plan enregistré",
       "plan_rejected": "Brouillon de plan refusé",
-      "plan_validated": "Plan de prévention validé"
+      "plan_validated": "Plan de prévention validé",
+      "advisor_delegation_granted": "Délégation au conseiller en prévention",
+      "advisor_delegation_revoked": "Délégation au conseiller en prévention retirée",
+      "plan_adopted": "Plan de prévention adopté par l'entreprise",
+      "plan_action_updated": "Avancement d'une action mis à jour",
+      "plan_reminder_sent": "Rappel trimestriel du plan envoyé"
     }
   },
   "Rapport": {
@@ -778,7 +785,9 @@
     "correctionSujet": "InnerOS : correction demandée ({reference})",
     "correctionTexte": "Le référent signataire demande une correction du rapport de la campagne {reference}. Le motif est indiqué dans InnerOS.",
     "ouvrirRapport": "Ouvrir le rapport",
-    "sansContenu": "Pour des raisons de confidentialité, cet e-mail ne contient aucun élément du rapport."
+    "sansContenu": "Pour des raisons de confidentialité, cet e-mail ne contient aucun élément du rapport.",
+    "rappelPlanSujet": "Plan de prévention : point du trimestre",
+    "rappelPlanTexte": "Votre plan de prévention compte {aVenir, plural, =0 {aucune action prévue ce trimestre} one {# action prévue ce trimestre} other {# actions prévues ce trimestre}} et {enRetard, plural, =0 {aucune action en retard} one {# action en retard} other {# actions en retard}}. Pensez à mettre à jour l'avancement dans votre espace."
   },
   "RapportPdf": {
     "titre": "Rapport de diagnostic collectif des risques psychosociaux",
@@ -847,7 +856,13 @@
     "correctionDone": "Demande envoyée à l'Institut Mindset en Action.",
     "acceptedBy": "Rapport accepté par {nom} le {date}.",
     "signatoryOnly": "Seul le référent signataire désigné par l'Institut Mindset en Action peut accepter le rapport.",
-    "download": "Télécharger le rapport (PDF)"
+    "download": "Télécharger le rapport (PDF)",
+    "delegationTitle": "Délégation au conseiller en prévention",
+    "delegationHelp": "En tant que référent signataire, vous pouvez confier au conseiller en prévention de votre entreprise l'acceptation du rapport et l'adoption du plan de prévention. Vous pouvez retirer cette délégation à tout moment.",
+    "delegationLabel": "Je délègue au conseiller en prévention l'acceptation du rapport et l'adoption du plan de prévention.",
+    "delegationSave": "Enregistrer",
+    "delegationDone": "Délégation enregistrée.",
+    "byDelegation": "Vous agissez par délégation du référent signataire."
   },
   "Comportements": {
     "title": "Comportements indésirables (toute l'entreprise)",
@@ -1062,6 +1077,48 @@
       "simple": "Simple",
       "moyen": "Moyen",
       "important": "Important"
-    }
+    },
+    "toAdopt": "à adopter",
+    "adoptionTitle": "Adoption par l'employeur",
+    "adoptionHelp": "Le plan validé par IMA est une proposition : c'est l'employeur qui l'adopte, après avoir consulté l'organe prévu par la loi. Indiquez l'organe consulté et les dates.",
+    "adoptionBE": "Belgique : le plan d'action annuel est soumis pour avis au CPPT avant le 1er novembre de l'année précédente.",
+    "organe": "Organe consulté",
+    "organes": {
+      "cppt": "Comité pour la prévention et la protection au travail (CPPT)",
+      "delegation_syndicale": "Délégation syndicale (pas de CPPT)",
+      "travailleurs": "Travailleurs directement",
+      "cse": "Comité social et économique (CSE)",
+      "aucun_cse": "Pas de CSE dans l'entreprise",
+      "cipa": "CIPA",
+      "participation_travailleurs": "Participation des travailleurs",
+      "representants_sst": "Représentants des travailleurs pour la sécurité et la santé au travail"
+    },
+    "avisLe": "Date de l'avis ou de la consultation",
+    "avisLeHelp": "Laisser vide seulement s'il n'y a pas de CSE (France).",
+    "adopteLe": "Date d'adoption",
+    "adopt": "Enregistrer l'adoption",
+    "adopting": "Enregistrement…",
+    "adoptedDone": "Adoption enregistrée.",
+    "adoptedMeta": "Adopté par {nom} le {date} · organe consulté : {organe} (avis du {avis}).",
+    "notAdopted": "Pas encore adopté par l'entreprise.",
+    "dashboardTitle": "Avancement du plan d'action {annee}",
+    "doneCount": "{faites, plural, one {# action réalisée} other {# actions réalisées}} sur {total}",
+    "lateCount": "{n, plural, one {action en retard} other {actions en retard}}",
+    "progressTitle": "Actions",
+    "progressReadOnly": "Seuls le conseiller en prévention et IMA mettent à jour l'avancement.",
+    "late": "en retard",
+    "updateProgress": "Mettre à jour",
+    "colStatut": "État",
+    "statutsAction": {
+      "a_faire": "À faire",
+      "en_cours": "En cours",
+      "realisee": "Réalisée",
+      "reportee": "Reportée",
+      "abandonnee": "Abandonnée"
+    },
+    "doneOn": "Réalisée le",
+    "comment": "Commentaire",
+    "commentHelp": "Sans nom, e-mail ni téléphone (500 caractères au plus).",
+    "progressSaved": "Avancement enregistré."
   }
 }

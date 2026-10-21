@@ -7,7 +7,7 @@ import { getDb } from "@/lib/db/client";
 import { organizations } from "@/lib/db/schema";
 import { Link } from "@/i18n/navigation";
 import { campagnesDuReferent } from "@/lib/rapport/entreprise";
-import { planPourReferent } from "@/lib/plan/plans";
+import { planPourReferentSuivi } from "@/lib/plan/suivi";
 import { deconnexion } from "../deconnexion";
 
 export default async function EspaceReferentPage({ params }: PageProps<"/[locale]/espace">) {
@@ -18,7 +18,7 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
   const te = await getTranslations("EspaceRapport");
   const tr = await getTranslations("Risques");
   const tp = await getTranslations("Plan");
-  const plan = await planPourReferent(getDb(), referent);
+  const plan = await planPourReferentSuivi(getDb(), referent);
   const liste = await campagnesDuReferent(getDb(), referent.id);
   const date = (d: string) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
   const [entreprise] = await getDb()
@@ -34,20 +34,23 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
         <h1 className="mt-2 text-2xl sm:text-3xl">{t("welcome", { name: referent.name })}</h1>
         <div aria-hidden="true" className="mt-4 h-0.5 w-16 bg-ima-gold" />
         {entreprise && <p className="mt-6 font-semibold text-ima-navy">{t("organization", { name: entreprise.name })}</p>}
-        {referent.preventionAdvisor && (
-          <p className="mt-6">
-            <Link
-              href="/espace/risques"
-              className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
-            >
-              {tr("spaceLink")}
-            </Link>
+        {(referent.preventionAdvisor || plan) && (
+          <p className="mt-6 flex flex-wrap gap-3">
+            {referent.preventionAdvisor && (
+              <Link
+                href="/espace/risques"
+                className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+              >
+                {tr("spaceLink")}
+              </Link>
+            )}
             {plan && (
               <Link
                 href="/espace/plan"
-                className="ml-3 inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+                className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
               >
                 {tp("spaceLink")}
+                {plan.peutAdopter && ` · ${tp("toAdopt")}`}
               </Link>
             )}
           </p>

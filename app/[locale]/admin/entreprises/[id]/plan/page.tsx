@@ -8,6 +8,7 @@ import { Cellule, EspaceAdmin, Tableau, TitrePage } from "@/components/EspaceAdm
 import { Champ, Selection } from "@/components/Formulaire";
 import { FormulaireAction } from "@/components/FormulaireAction";
 import { AffichagePlan } from "@/components/plan/AffichagePlan";
+import { SuiviPlan } from "@/components/plan/SuiviPlan";
 import { Link } from "@/i18n/navigation";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
@@ -87,6 +88,9 @@ export default async function PlanAdminPage({ params }: PageProps<"/[locale]/adm
             <p className="mb-6 text-sm font-semibold">
               {valide.aiModel ? t("mentionAi", { nom: await nomDe(valide.validatedBy) }) : t("mentionManual", { nom: await nomDe(valide.validatedBy) })}
             </p>
+            <div className="mb-10">
+              <SuiviPlan plan={valide} locale={locale} peutAdopter={false} peutSuivre />
+            </div>
             <AffichagePlan contenu={contenuValide} startYear={valide.startYear} risques={nomsRisques} avecQuestions />
           </>
         ) : (

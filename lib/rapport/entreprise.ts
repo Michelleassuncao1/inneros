@@ -1,7 +1,8 @@
 // Côté entreprise (étape 8B, décisions du 14/10/2026) :
 // - IMA désigne un seul référent signataire par campagne ;
 // - les référents ne voient le rapport qu'une fois validé par IMA (jamais un brouillon) ;
-// - le signataire accepte le rapport (faits conformes au contrat) ou demande une correction motivée.
+// - le signataire (ou le conseiller en prévention, si le signataire lui a délégué : décision du 21/10/2026)
+//   accepte le rapport (faits conformes au contrat) ou demande une correction motivée.
 //   Il vérifie les faits, il ne modifie pas l'analyse (indépendance méthodologique MINDSET®).
 import { and, eq, isNull } from "drizzle-orm";
 import { z } from "zod";
@@ -35,6 +36,10 @@ export async function rapportPourReferent(db: Db, referentId: string, campaignId
     .innerJoin(campaigns, eq(campaignReferents.campaignId, campaigns.id))
     .where(and(eq(campaignReferents.campaignId, campaignId), eq(campaignReferents.userId, referentId)));
   if (!acces) return null;
+  const [moi] = await db.select().from(users).where(eq(users.id, referentId));
+  const estSignataire = acces.campagne.signatoryReferentId === referentId;
+  // Délégation du signataire au conseiller en prévention (une seule case, décision du 21/10/2026)
+  const parDelegation = !estSignataire && acces.campagne.advisorDelegation && !!moi?.preventionAdvisor && !moi.disabledAt;
   const rapport = await rapportCourant(db, campaignId);
   const etat: "indisponible" | "disponible" | "enCorrection" =
     rapport?.status === "validated" ? "disponible" : rapport?.status === "correction_requested" ? "enCorrection" : "indisponible";
@@ -43,8 +48,25 @@ export async function rapportPourReferent(db: Db, referentId: string, campaignId
     etat,
     // Le contenu n'est transmis que pour un rapport validé
     rapport: etat === "disponible" ? rapport : null,
-    estSignataire: acces.campagne.signatoryReferentId === referentId,
+    estSignataire,
+    parDelegation,
+    peutSigner: estSignataire || parDelegation,
   };
+}
+
+// Le signataire délègue (ou reprend) au conseiller en prévention l'acceptation du rapport et l'adoption du plan
+export async function definirDelegation(db: Db, referentId: string, campaignId: string, valeur: boolean): Promise<Resultat> {
+  const vue = await rapportPourReferent(db, referentId, campaignId);
+  if (!vue) return { ok: false, erreur: "introuvable" };
+  if (!vue.estSignataire) return { ok: false, erreur: "signataireRequis" };
+  await db.update(campaigns).set({ advisorDelegation: valeur }).where(eq(campaigns.id, campaignId));
+  await journaliser(db, {
+    actorUserId: referentId,
+    action: valeur ? "advisor_delegation_granted" : "advisor_delegation_revoked",
+    targetType: "campaign",
+    targetId: campaignId,
+  });
+  return { ok: true, valeur: undefined };
 }
 
 async function rapportValidePourSignataire(db: Db, referentId: string, reportId: string) {
@@ -52,7 +74,7 @@ async function rapportValidePourSignataire(db: Db, referentId: string, reportId:
   if (!r) return { ok: false as const, erreur: "introuvable" };
   const vue = await rapportPourReferent(db, referentId, r.campaignId);
   if (!vue || vue.etat !== "disponible" || vue.rapport?.id !== reportId) return { ok: false as const, erreur: "introuvable" };
-  if (!vue.estSignataire) return { ok: false as const, erreur: "signataireRequis" };
+  if (!vue.peutSigner) return { ok: false as const, erreur: "signataireRequis" };
   if (r.acceptedAt) return { ok: false as const, erreur: "rapportDejaAccepte" };
   return { ok: true as const, rapport: r };
 }
