@@ -672,7 +672,8 @@
       "advisor_delegation_revoked": "Délégation au conseiller en prévention retirée",
       "plan_adopted": "Plan de prévention adopté par l'entreprise",
       "plan_action_updated": "Avancement d'une action mis à jour",
-      "plan_reminder_sent": "Rappel trimestriel du plan envoyé"
+      "plan_reminder_sent": "Rappel trimestriel du plan envoyé",
+      "plan_downloaded": "Plan de prévention téléchargé"
     }
   },
   "Rapport": {
@@ -1119,6 +1120,19 @@
     "doneOn": "Réalisée le",
     "comment": "Commentaire",
     "commentHelp": "Sans nom, e-mail ni téléphone (500 caractères au plus).",
-    "progressSaved": "Avancement enregistré."
+    "progressSaved": "Avancement enregistré.",
+    "excelActions": "Plan d'action",
+    "excelRisques": "Registre des risques",
+    "colNum": "N°",
+    "pdfFooter": "Institut Mindset en Action® — plan de prévention RPS, document réservé à l'entreprise et à ses représentants",
+    "pdfPeriode": "Plan global {debut}–{fin} · plan d'action {debut}",
+    "pdfValidation": "Validé par {nom}, praticien IMA, le {date}",
+    "pdfDraft": "APERÇU — plan non validé, ne pas diffuser",
+    "downloadsTitle": "Télécharger",
+    "downloadPdf": "PDF",
+    "downloadExcel": "Excel",
+    "downloadPluriprev": "Fichier pour PluriPrev",
+    "pluriprevHelp": "Le fichier PluriPrev reprend le plan validé, le registre des risques et l'avancement, sans aucun nom (code interne de l'entreprise seulement).",
+    "previewPdf": "Aperçu PDF du brouillon"
   }
 }

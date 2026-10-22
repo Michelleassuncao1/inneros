@@ -1,0 +1,595 @@
+{
+  "$id": "https://inneros.app/schemas/inneros.plan-prevention-1.0.json",
+  "title": "InnerOS — plan de prévention RPS (échange PluriPrev)",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "format": {
+      "type": "string",
+      "const": "inneros.plan-prevention"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "genere_le": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "application": {
+          "type": "string",
+          "const": "InnerOS"
+        },
+        "editeur": {
+          "type": "string",
+          "const": "Institut Mindset en Action"
+        }
+      },
+      "required": [
+        "application",
+        "editeur"
+      ],
+      "additionalProperties": false
+    },
+    "organisation": {
+      "type": "object",
+      "properties": {
+        "code_interne": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "pays": {
+          "type": "string",
+          "enum": [
+            "BE",
+            "FR",
+            "BR",
+            "PT"
+          ]
+        },
+        "secteur": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "tranche_effectif": {
+          "type": "string",
+          "enum": [
+            "lt50",
+            "50-249",
+            "250-999",
+            "1000+"
+          ]
+        }
+      },
+      "required": [
+        "code_interne",
+        "pays",
+        "secteur",
+        "tranche_effectif"
+      ],
+      "additionalProperties": false
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+        },
+        "domaine": {
+          "type": "string",
+          "const": "psychosocial"
+        },
+        "annee_debut": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "annee_fin": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "langue": {
+          "type": "string",
+          "enum": [
+            "fr",
+            "nl",
+            "en",
+            "pt-BR"
+          ]
+        },
+        "valide_le": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "redige_avec_ia": {
+          "type": "boolean"
+        },
+        "adoption": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "adopte_le": {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "organe_consulte": {
+                  "type": "string",
+                  "maxLength": 40
+                },
+                "avis_le": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "adopte_le",
+                "organe_consulte",
+                "avis_le"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rappel_risques": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "objectifs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "niveau_mindset": {
+                "type": "string",
+                "maxLength": 20
+              },
+              "objectif": {
+                "type": "string",
+                "maxLength": 800
+              },
+              "risques": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                }
+              }
+            },
+            "required": [
+              "niveau_mindset",
+              "objectif",
+              "risques"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "mesures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "niveau_prevention": {
+                "type": "string",
+                "enum": [
+                  "primaire",
+                  "secondaire",
+                  "tertiaire"
+                ]
+              },
+              "mesure": {
+                "type": "string",
+                "maxLength": 800
+              },
+              "risques": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                }
+              }
+            },
+            "required": [
+              "niveau_prevention",
+              "mesure",
+              "risques"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "moyens": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 800
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fonction": {
+                "type": "string",
+                "maxLength": 120
+              },
+              "role": {
+                "type": "string",
+                "maxLength": 800
+              }
+            },
+            "required": [
+              "fonction",
+              "role"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "calendrier": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "annee": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "etapes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 500
+                }
+              }
+            },
+            "required": [
+              "annee",
+              "etapes"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "evaluation": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 800
+          }
+        },
+        "cadre_legal": {
+          "type": "string",
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "id",
+        "domaine",
+        "annee_debut",
+        "annee_fin",
+        "langue",
+        "valide_le",
+        "redige_avec_ia",
+        "adoption",
+        "rappel_risques",
+        "objectifs",
+        "mesures",
+        "moyens",
+        "roles",
+        "calendrier",
+        "evaluation",
+        "cadre_legal"
+      ],
+      "additionalProperties": false
+    },
+    "risques": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+          },
+          "domaine": {
+            "type": "string",
+            "const": "psychosocial"
+          },
+          "origine": {
+            "type": "string",
+            "enum": [
+              "echelle",
+              "comportement",
+              "manuel"
+            ]
+          },
+          "intitule": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "niveau_mindset": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "groupes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 80
+            }
+          },
+          "methode": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "const": "KINNEY"
+              },
+              "composantes": {
+                "type": "object",
+                "properties": {
+                  "P": {
+                    "type": "number"
+                  },
+                  "E": {
+                    "type": "number"
+                  },
+                  "G": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "P",
+                  "E",
+                  "G"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "code",
+              "composantes"
+            ],
+            "additionalProperties": false
+          },
+          "score": {
+            "type": "number"
+          },
+          "classe": {
+            "type": "string",
+            "enum": [
+              "tres_eleve",
+              "eleve",
+              "important",
+              "possible",
+              "acceptable"
+            ]
+          },
+          "priorite": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "immediate"
+            ]
+          },
+          "justification": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ouvert",
+              "traite",
+              "clos"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "domaine",
+          "origine",
+          "intitule",
+          "description",
+          "niveau_mindset",
+          "groupes",
+          "methode",
+          "score",
+          "classe",
+          "priorite",
+          "justification",
+          "statut"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "cle_dedoublonnage": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1500
+          },
+          "risques": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+            }
+          },
+          "niveau_prevention": {
+            "type": "string",
+            "enum": [
+              "primaire",
+              "secondaire",
+              "tertiaire"
+            ]
+          },
+          "responsable_fonction": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "annee": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "trimestre": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          },
+          "echeance": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "effort": {
+            "type": "string",
+            "enum": [
+              "simple",
+              "moyen",
+              "important"
+            ]
+          },
+          "budget": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "indicateur": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "priorite": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "immediate"
+            ]
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "a_faire",
+              "en_cours",
+              "realisee",
+              "reportee",
+              "abandonnee"
+            ]
+          },
+          "statut_pluriprev": {
+            "type": "string",
+            "enum": [
+              "proposed",
+              "accepted",
+              "closed",
+              "reopened",
+              "cancelled"
+            ]
+          },
+          "realisee_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "commentaire": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "cle_dedoublonnage",
+          "titre",
+          "description",
+          "risques",
+          "niveau_prevention",
+          "responsable_fonction",
+          "annee",
+          "trimestre",
+          "echeance",
+          "effort",
+          "budget",
+          "indicateur",
+          "priorite",
+          "statut",
+          "statut_pluriprev",
+          "realisee_le",
+          "commentaire"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "format",
+    "version",
+    "genere_le",
+    "source",
+    "organisation",
+    "plan",
+    "risques",
+    "actions"
+  ],
+  "additionalProperties": false
+}

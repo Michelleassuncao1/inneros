@@ -1,0 +1,154 @@
+{
+  "format": "inneros.plan-prevention",
+  "version": "1.0",
+  "genere_le": "2027-05-02T10:00:00.000Z",
+  "source": {
+    "application": "InnerOS",
+    "editeur": "Institut Mindset en Action"
+  },
+  "organisation": {
+    "code_interne": "ORG-NUKF",
+    "pays": "BE",
+    "secteur": "Soins",
+    "tranche_effectif": "50-249"
+  },
+  "plan": {
+    "id": "a03d999d-7b2a-4c0b-9881-8e0058b3a2a1",
+    "domaine": "psychosocial",
+    "annee_debut": 2027,
+    "annee_fin": 2031,
+    "langue": "fr",
+    "valide_le": "2027-01-05",
+    "redige_avec_ia": true,
+    "adoption": null,
+    "rappel_risques": "Rappel fictif.",
+    "objectifs": [
+      {
+        "niveau_mindset": "travail",
+        "objectif": "Réguler la charge",
+        "risques": [
+          "8b1a1c61-8c33-4396-a411-77d58c0ecd27"
+        ]
+      }
+    ],
+    "mesures": [],
+    "moyens": [],
+    "roles": [],
+    "calendrier": [
+      {
+        "annee": 2027,
+        "etapes": []
+      },
+      {
+        "annee": 2028,
+        "etapes": []
+      },
+      {
+        "annee": 2029,
+        "etapes": []
+      },
+      {
+        "annee": 2030,
+        "etapes": []
+      },
+      {
+        "annee": 2031,
+        "etapes": []
+      }
+    ],
+    "evaluation": [],
+    "cadre_legal": "Cadre fictif."
+  },
+  "risques": [
+    {
+      "id": "8b1a1c61-8c33-4396-a411-77d58c0ecd27",
+      "domaine": "psychosocial",
+      "origine": "manuel",
+      "intitule": "Charge de travail en soirée",
+      "description": "",
+      "niveau_mindset": "travail",
+      "groupes": [],
+      "methode": {
+        "code": "KINNEY",
+        "composantes": {
+          "P": 6,
+          "E": 6,
+          "G": 15
+        }
+      },
+      "score": 540,
+      "classe": "tres_eleve",
+      "priorite": "immediate",
+      "justification": "",
+      "statut": "ouvert"
+    },
+    {
+      "id": "62ce7b2b-e6b0-4f32-840b-8a4ad324a6d1",
+      "domaine": "psychosocial",
+      "origine": "manuel",
+      "intitule": "Déménagement du service",
+      "description": "",
+      "niveau_mindset": null,
+      "groupes": [],
+      "methode": {
+        "code": "KINNEY",
+        "composantes": {
+          "P": 1,
+          "E": 1,
+          "G": 3
+        }
+      },
+      "score": 3,
+      "classe": "acceptable",
+      "priorite": "low",
+      "justification": "",
+      "statut": "ouvert"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "cle_dedoublonnage": "inneros:a03d999d-7b2a-4c0b-9881-8e0058b3a2a1:A1",
+      "titre": "Renfort en soirée",
+      "description": "",
+      "risques": [
+        "8b1a1c61-8c33-4396-a411-77d58c0ecd27"
+      ],
+      "niveau_prevention": "primaire",
+      "responsable_fonction": "Direction",
+      "annee": 2027,
+      "trimestre": 1,
+      "echeance": "2027-03-31",
+      "effort": "important",
+      "budget": "à chiffrer",
+      "indicateur": "Effectif du soir",
+      "priorite": "immediate",
+      "statut": "a_faire",
+      "statut_pluriprev": "proposed",
+      "realisee_le": null,
+      "commentaire": null
+    },
+    {
+      "id": "A2",
+      "cle_dedoublonnage": "inneros:a03d999d-7b2a-4c0b-9881-8e0058b3a2a1:A2",
+      "titre": "Information du personnel",
+      "description": "",
+      "risques": [
+        "62ce7b2b-e6b0-4f32-840b-8a4ad324a6d1"
+      ],
+      "niveau_prevention": "secondaire",
+      "responsable_fonction": "RH",
+      "annee": 2027,
+      "trimestre": 2,
+      "echeance": "2027-06-30",
+      "effort": "simple",
+      "budget": "temps interne",
+      "indicateur": "Réunion tenue",
+      "priorite": "low",
+      "statut": "realisee",
+      "statut_pluriprev": "closed",
+      "realisee_le": "2027-04-10",
+      "commentaire": null
+    }
+  ]
+}

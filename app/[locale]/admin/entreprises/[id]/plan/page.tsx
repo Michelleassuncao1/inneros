@@ -108,6 +108,11 @@ export default async function PlanAdminPage({ params }: PageProps<"/[locale]/adm
               origine: brouillon.aiModel ? t("fromAi", { modele: brouillon.aiModel }) : t("manual"),
             })}
           </p>
+          <p>
+            <a href={`/api/plan/${brouillon.id}/pdf?lang=${locale}`} className="font-semibold text-ima-navy underline">
+              {t("previewPdf")}
+            </a>
+          </p>
           <EditeurPlan
             contenuInitial={contenuBrouillon}
             startYear={brouillon.startYear}

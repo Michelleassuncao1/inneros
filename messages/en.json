@@ -672,7 +672,8 @@
       "advisor_delegation_revoked": "Delegation to the prevention advisor withdrawn",
       "plan_adopted": "Prevention plan adopted by the organisation",
       "plan_action_updated": "Action progress updated",
-      "plan_reminder_sent": "Quarterly plan reminder sent"
+      "plan_reminder_sent": "Quarterly plan reminder sent",
+      "plan_downloaded": "Prevention plan downloaded"
     }
   },
   "Rapport": {
@@ -1119,6 +1120,19 @@
     "doneOn": "Completed on",
     "comment": "Comment",
     "commentHelp": "No names, emails or phone numbers (500 characters max).",
-    "progressSaved": "Progress saved."
+    "progressSaved": "Progress saved.",
+    "excelActions": "Action plan",
+    "excelRisques": "Risk register",
+    "colNum": "No.",
+    "pdfFooter": "Institut Mindset en Action® — psychosocial risk prevention plan, for the organisation and its representatives only",
+    "pdfPeriode": "Global plan {debut}–{fin} · {debut} action plan",
+    "pdfValidation": "Validated by {nom}, IMA practitioner, on {date}",
+    "pdfDraft": "PREVIEW — plan not validated, do not distribute",
+    "downloadsTitle": "Download",
+    "downloadPdf": "PDF",
+    "downloadExcel": "Excel",
+    "downloadPluriprev": "File for PluriPrev",
+    "pluriprevHelp": "The PluriPrev file contains the validated plan, the risk register and progress, without any names (the organisation's internal code only).",
+    "previewPdf": "PDF preview of the draft"
   }
 }

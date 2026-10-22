@@ -31,8 +31,20 @@ export async function SuiviPlan({
   const [adoptant] = plan.adoptedBy ? await db.select({ name: users.name }).from(users).where(eq(users.id, plan.adoptedBy)) : [];
   const aujourdhui = new Date().toISOString().slice(0, 10);
 
+  const bouton = "inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream";
   return (
     <div className="flex flex-col gap-10">
+      {/* Téléchargements */}
+      <section aria-labelledby="telechargements" className="flex flex-col gap-2">
+        <h2 id="telechargements" className="text-lg">{t("downloadsTitle")}</h2>
+        <p className="flex flex-wrap gap-3">
+          <a href={`/api/plan/${plan.id}/pdf?lang=${locale}`} className={bouton}>{t("downloadPdf")}</a>
+          <a href={`/api/plan/${plan.id}/excel?lang=${locale}`} className={bouton}>{t("downloadExcel")}</a>
+          {peutSuivre && <a href={`/api/plan/${plan.id}/pluriprev`} className={bouton}>{t("downloadPluriprev")}</a>}
+        </p>
+        {peutSuivre && <p className="max-w-[70ch] text-sm text-ima-muted">{t("pluriprevHelp")}</p>}
+      </section>
+
       {/* Adoption par l'employeur */}
       <section aria-labelledby="adoption" className="max-w-3xl rounded-md border-l-[3px] border-ima-gold bg-ima-cream px-5 py-4">
         <h2 id="adoption" className="text-xl">{t("adoptionTitle")}</h2>

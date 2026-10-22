@@ -672,7 +672,8 @@
       "advisor_delegation_revoked": "Delegatie aan de preventieadviseur ingetrokken",
       "plan_adopted": "Preventieplan goedgekeurd door de organisatie",
       "plan_action_updated": "Voortgang van een actie bijgewerkt",
-      "plan_reminder_sent": "Kwartaalherinnering van het plan verzonden"
+      "plan_reminder_sent": "Kwartaalherinnering van het plan verzonden",
+      "plan_downloaded": "Preventieplan gedownload"
     }
   },
   "Rapport": {
@@ -1119,6 +1120,19 @@
     "doneOn": "Uitgevoerd op",
     "comment": "Opmerking",
     "commentHelp": "Zonder naam, e-mail of telefoonnummer (max. 500 tekens).",
-    "progressSaved": "Voortgang opgeslagen."
+    "progressSaved": "Voortgang opgeslagen.",
+    "excelActions": "Actieplan",
+    "excelRisques": "Risicoregister",
+    "colNum": "Nr.",
+    "pdfFooter": "Institut Mindset en Action® — preventieplan psychosociale risico's, document voorbehouden aan de organisatie en haar vertegenwoordigers",
+    "pdfPeriode": "Globaal plan {debut}–{fin} · actieplan {debut}",
+    "pdfValidation": "Gevalideerd door {nom}, IMA-practitioner, op {date}",
+    "pdfDraft": "VOORBEELD — plan niet gevalideerd, niet verspreiden",
+    "downloadsTitle": "Downloaden",
+    "downloadPdf": "PDF",
+    "downloadExcel": "Excel",
+    "downloadPluriprev": "Bestand voor PluriPrev",
+    "pluriprevHelp": "Het PluriPrev-bestand bevat het gevalideerde plan, het risicoregister en de voortgang, zonder enige naam (alleen de interne code van de organisatie).",
+    "previewPdf": "PDF-voorbeeld van het ontwerp"
   }
 }
