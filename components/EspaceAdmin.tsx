@@ -12,7 +12,7 @@ export async function EspaceAdmin({
   children,
 }: {
   locale: string;
-  actif: "accueil" | "entreprises" | "campagnes" | "journal";
+  actif: "accueil" | "entreprises" | "campagnes" | "sensibilisation" | "journal";
   children: React.ReactNode;
 }) {
   const t = await getTranslations("AdminNav");
@@ -20,6 +20,7 @@ export async function EspaceAdmin({
     { cle: "accueil", href: "/admin", libelle: t("home") },
     { cle: "entreprises", href: "/admin/entreprises", libelle: t("organizations") },
     { cle: "campagnes", href: "/admin/campagnes", libelle: t("campaigns") },
+    { cle: "sensibilisation", href: "/admin/sensibilisation", libelle: t("awareness") },
     { cle: "journal", href: "/admin/journal", libelle: t("journal") },
   ] as const;
 

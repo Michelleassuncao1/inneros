@@ -502,6 +502,34 @@ export const preventionPlans = pgTable(
   ],
 );
 
+// ─── Sensibilisation (module B) ──────────────────────────────────────────────
+
+// Bibliothèque de thèmes de sensibilisation, tenue par IMA (module B1). Un thème n'est proposé aux
+// entreprises qu'une fois validé par un praticien formé à l'IA. Contenu générique : aucune donnée d'entreprise.
+export const statutTheme = pgEnum("theme_status", ["draft", "validated", "archived"]);
+
+export const awarenessThemes = pgTable(
+  "awareness_themes",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    code: text("code").notNull().unique(),
+    status: statutTheme("status").notNull().default("draft"),
+    sheet: jsonb("sheet").notNull(), // fiche : mois, journée, niveau MINDSET, échelles visées, sensible, pays
+    kits: jsonb("kits").notNull().default({}), // { fr: Kit, nl: Kit, … }
+    aiModel: text("ai_model"), // dernier brouillon rédigé avec l'IA
+    aiPromptVersion: text("ai_prompt_version"),
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+    validatedBy: uuid("validated_by").references(() => users.id, { onDelete: "set null" }),
+    validatedAt: timestamp("validated_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check("awareness_themes_code", sql`${t.code} ~ '^[a-z0-9-]{3,40}$'`),
+    check("awareness_themes_validation", sql`${t.status} <> 'validated' OR ${t.validatedAt} IS NOT NULL`),
+  ],
+);
+
 // Avancement des actions d'un plan validé (module A3), mis à jour par IMA et le conseiller en prévention.
 export const statutAction = pgEnum("action_status", ["a_faire", "en_cours", "realisee", "reportee", "abandonnee"]);
 
