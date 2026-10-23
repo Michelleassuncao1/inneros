@@ -62,7 +62,7 @@ async function preparer() {
   const contenu: ContenuPlan = { ...planVide(), actions: [action("a1", 1), action("a2", 3)] };
   const [plan] = await db
     .insert(preventionPlans)
-    .values({ organizationId: orgId, status: "validated", country: "FR", language: "fr", startYear: 2027, content: contenu, reportId: rapport.id, validatedBy: admin.id, validatedAt: new Date() })
+    .values({ organizationId: orgId, status: "validated", country: "FR", language: "fr", startYear: 2027, actionYear: 2027, content: contenu, reportId: rapport.id, validatedBy: admin.id, validatedAt: new Date() })
     .returning();
   const relire = async (id: string) => (await db.select().from(users).where(eq(users.id, id)))[0];
   return { db, admin, campagneId, orgId, signataire: await relire(signataire.id), conseiller, rapport, plan };

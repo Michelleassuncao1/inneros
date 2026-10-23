@@ -26,7 +26,7 @@ export async function SuiviPlan({
   const contenu = lireContenuPlan(plan.content);
   if (!contenu) return null;
   const statuts = await lireAvancement(db, plan.id);
-  const bord = tableauDeBord(contenu, plan.startYear, statuts);
+  const bord = tableauDeBord(contenu, plan.actionYear, statuts);
   const date = (d: string) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
   const [adoptant] = plan.adoptedBy ? await db.select({ name: users.name }).from(users).where(eq(users.id, plan.adoptedBy)) : [];
   const aujourdhui = new Date().toISOString().slice(0, 10);
@@ -81,7 +81,7 @@ export async function SuiviPlan({
 
       {/* Tableau de bord */}
       <section aria-labelledby="bord" className="flex flex-col gap-4">
-        <h2 id="bord" className="text-xl">{t("dashboardTitle", { annee: plan.startYear })}</h2>
+        <h2 id="bord" className="text-xl">{t("dashboardTitle", { annee: plan.actionYear })}</h2>
         <div className="flex flex-wrap gap-4">
           <div className="rounded-md border border-ima-line bg-white px-5 py-3">
             <p className="text-3xl font-semibold text-ima-navy">{bord.pourcentage} %</p>
@@ -96,7 +96,7 @@ export async function SuiviPlan({
               <p className="text-xl font-semibold text-ima-navy">
                 {q.realisees}/{q.total}
               </p>
-              <p className="text-sm text-ima-muted">{t("trimestre", { n: q.trimestre })} {plan.startYear}</p>
+              <p className="text-sm text-ima-muted">{t("trimestre", { n: q.trimestre })} {plan.actionYear}</p>
             </div>
           ))}
         </div>
@@ -115,7 +115,7 @@ export async function SuiviPlan({
                 <p className="font-semibold">
                   {a.titre}
                   <span className="ml-2 text-sm font-normal text-ima-muted">
-                    {t("trimestre", { n: a.trimestre })} {plan.startYear} · {a.responsable} · {t(`efforts.${a.effort}`)}
+                    {t("trimestre", { n: a.trimestre })} {plan.actionYear} · {a.responsable} · {t(`efforts.${a.effort}`)}
                   </span>
                 </p>
                 <p className="mt-1 text-sm">

@@ -51,7 +51,7 @@ export async function excelPlan(d: DonneesPlan, langue: string) {
         risques: a.risques.map((id) => titres.get(id) ?? t("unknownRisk")).join(" ; "),
         niveau: t(`niveaux.${a.niveau_prevention}`),
         responsable: a.responsable,
-        echeance: `${t("trimestre", { n: a.trimestre })} ${d.plan.startYear}`,
+        echeance: `${t("trimestre", { n: a.trimestre })} ${d.plan.actionYear}`,
         effort: t(`efforts.${a.effort}`),
         budget: a.budget,
         indicateur: a.indicateur,

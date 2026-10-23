@@ -19,6 +19,7 @@ const lien = "text-sm text-ima-navy underline";
 export function EditeurPlan({
   contenuInitial,
   startYear,
+  actionYear,
   risques,
   textes,
   formationOk,
@@ -27,6 +28,7 @@ export function EditeurPlan({
 }: {
   contenuInitial: ContenuPlan;
   startYear: number;
+  actionYear: number;
   risques: RisqueEditeur[];
   textes: Textes;
   formationOk: boolean;
@@ -177,7 +179,7 @@ export function EditeurPlan({
         <textarea className={champ} rows={4} value={c.cadre_legal} onChange={(e) => maj((x) => ((x.cadre_legal = e.target.value), x))} />
       </label>
 
-      <h3 className="text-xl">{l.paaTitle.replace("{annee}", String(startYear))}</h3>
+      <h3 className="text-xl">{l.paaTitle.replace("{annee}", String(actionYear))}</h3>
       {c.actions.map((a, i) => (
         <div key={a.id} className="flex flex-col gap-2 rounded-md border border-ima-line bg-white p-3">
           <input aria-label={l.actionTitre} placeholder={l.actionTitre} className={`${champ} font-semibold`} value={a.titre} onChange={(e) => maj((x) => ((x.actions[i].titre = e.target.value), x))} />
@@ -199,7 +201,7 @@ export function EditeurPlan({
               {l.colEcheance}
               <select className={champ} value={a.trimestre} onChange={(e) => maj((x) => ((x.actions[i].trimestre = Number(e.target.value)), x))}>
                 {[1, 2, 3, 4].map((n) => (
-                  <option key={n} value={n}>{l.trimestre.replace("{n}", String(n))} {startYear}</option>
+                  <option key={n} value={n}>{l.trimestre.replace("{n}", String(n))} {actionYear}</option>
                 ))}
               </select>
             </label>

@@ -7,16 +7,17 @@
     "editeur": "Institut Mindset en Action"
   },
   "organisation": {
-    "code_interne": "ORG-NUKF",
+    "code_interne": "ORG-7KC5",
     "pays": "BE",
     "secteur": "Soins",
     "tranche_effectif": "50-249"
   },
   "plan": {
-    "id": "a03d999d-7b2a-4c0b-9881-8e0058b3a2a1",
+    "id": "6c1e12ce-3576-4f57-9743-1d1ea26262fa",
     "domaine": "psychosocial",
     "annee_debut": 2027,
     "annee_fin": 2031,
+    "annee_plan_action": 2027,
     "langue": "fr",
     "valide_le": "2027-01-05",
     "redige_avec_ia": true,
@@ -27,7 +28,7 @@
         "niveau_mindset": "travail",
         "objectif": "Réguler la charge",
         "risques": [
-          "8b1a1c61-8c33-4396-a411-77d58c0ecd27"
+          "67c75e27-7856-44b8-92d0-d44faaf3a7f4"
         ]
       }
     ],
@@ -61,7 +62,7 @@
   },
   "risques": [
     {
-      "id": "8b1a1c61-8c33-4396-a411-77d58c0ecd27",
+      "id": "67c75e27-7856-44b8-92d0-d44faaf3a7f4",
       "domaine": "psychosocial",
       "origine": "manuel",
       "intitule": "Charge de travail en soirée",
@@ -83,7 +84,7 @@
       "statut": "ouvert"
     },
     {
-      "id": "62ce7b2b-e6b0-4f32-840b-8a4ad324a6d1",
+      "id": "2f6f6d2b-5e25-44bb-8530-96d0feb3f4bf",
       "domaine": "psychosocial",
       "origine": "manuel",
       "intitule": "Déménagement du service",
@@ -108,11 +109,11 @@
   "actions": [
     {
       "id": "A1",
-      "cle_dedoublonnage": "inneros:a03d999d-7b2a-4c0b-9881-8e0058b3a2a1:A1",
+      "cle_dedoublonnage": "inneros:6c1e12ce-3576-4f57-9743-1d1ea26262fa:A1",
       "titre": "Renfort en soirée",
       "description": "",
       "risques": [
-        "8b1a1c61-8c33-4396-a411-77d58c0ecd27"
+        "67c75e27-7856-44b8-92d0-d44faaf3a7f4"
       ],
       "niveau_prevention": "primaire",
       "responsable_fonction": "Direction",
@@ -130,11 +131,11 @@
     },
     {
       "id": "A2",
-      "cle_dedoublonnage": "inneros:a03d999d-7b2a-4c0b-9881-8e0058b3a2a1:A2",
+      "cle_dedoublonnage": "inneros:6c1e12ce-3576-4f57-9743-1d1ea26262fa:A2",
       "titre": "Information du personnel",
       "description": "",
       "risques": [
-        "62ce7b2b-e6b0-4f32-840b-8a4ad324a6d1"
+        "2f6f6d2b-5e25-44bb-8530-96d0feb3f4bf"
       ],
       "niveau_prevention": "secondaire",
       "responsable_fonction": "RH",

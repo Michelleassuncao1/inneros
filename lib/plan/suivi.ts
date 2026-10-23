@@ -202,10 +202,10 @@ export async function envoyerRappelsTrimestriels(db: Db, maintenant = new Date()
     if (dejaEnvoyes.has(`${plan.id}:${trimestre}`)) continue;
     const contenu = lireContenuPlan(plan.content);
     if (!contenu) continue;
-    const bord = tableauDeBord(contenu, plan.startYear, await lireAvancement(db, plan.id), aujourdhui);
+    const bord = tableauDeBord(contenu, plan.actionYear, await lireAvancement(db, plan.id), aujourdhui);
     const tAnnee = Number(trimestre.slice(0, 4));
     const tNum = Number(trimestre.slice(-1));
-    const aVenir = tAnnee === plan.startYear ? bord.actions.filter((a) => a.trimestre === tNum && a.statut !== "realisee" && a.statut !== "abandonnee").length : 0;
+    const aVenir = tAnnee === plan.actionYear ? bord.actions.filter((a) => a.trimestre === tNum && a.statut !== "realisee" && a.statut !== "abandonnee").length : 0;
     if (!aVenir && !bord.enRetard.length) continue;
     const conseillers = await db
       .select({ email: users.email, name: users.name })

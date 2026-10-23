@@ -5,6 +5,7 @@
 import { z } from "zod";
 import type { organizations } from "../db/schema";
 import type { ContenuRapport } from "../rapport/contenu";
+import type { ContenuPlan } from "./contenu";
 import type { Risque } from "../risques/registre";
 
 const texte = (max: number) => z.string().max(max);
@@ -19,6 +20,7 @@ export const schemaChargePlan = z
         pays: z.enum(["BE", "FR", "BR", "PT"]),
         langue: z.enum(["fr", "nl", "en", "pt-BR"]),
         annee_debut: z.number().int(),
+        annee_plan_action: z.number().int(), // année du plan d'action à rédiger (annee_debut la première année)
       })
       .strict(),
     risques: z
@@ -41,6 +43,33 @@ export const schemaChargePlan = z
           .strict(),
       )
       .min(1),
+    // Année suivante (module A3, partie 3) : plan en vigueur et avancement de ses actions
+    suite: z
+      .object({
+        annee_precedente: z.number().int(),
+        plan_en_vigueur: z
+          .object({
+            objectifs: z.array(z.object({ niveau: texte(20), objectif: texte(800), risques: z.array(texte(6)) }).strict()),
+            mesures: z.array(z.object({ niveau_prevention: texte(20), mesure: texte(800), risques: z.array(texte(6)) }).strict()),
+            calendrier: z.array(z.object({ annee: z.number().int(), etapes: z.array(texte(500)) }).strict()),
+            actions: z.array(
+              z
+                .object({
+                  id: texte(40),
+                  titre: texte(300),
+                  description: texte(1500),
+                  risques: z.array(texte(6)),
+                  trimestre: z.number().int(),
+                  effort: texte(20),
+                  etat: z.enum(["a_faire", "en_cours", "realisee", "reportee", "abandonnee"]),
+                })
+                .strict(),
+            ),
+          })
+          .strict(),
+      })
+      .strict()
+      .optional(),
     rapport: z
       .object({
         synthese: texte(3000),
@@ -88,9 +117,13 @@ export function construireChargePlan(
   rapport: ContenuRapport,
   langue: ChargePlan["entreprise"]["langue"],
   anneeDebut: number,
+  suite?: { annee_precedente: number; contenu: ContenuPlan; statuts: Map<string, string> },
+  anneePlanAction = anneeDebut,
 ) {
   const retenus = registre.filter((r) => r.status !== "clos");
   const refs = new Map(retenus.map((r, i) => [`R${i + 1}`, r.id]));
+  const versRef = new Map([...refs].map(([ref, id]) => [id, ref]));
+  const enRefs = (ids: string[]) => ids.map((id) => versRef.get(id)).filter((x): x is string => !!x);
   const charge: ChargePlan = {
     entreprise: {
       code_interne: org.internalCode,
@@ -99,6 +132,7 @@ export function construireChargePlan(
       pays: org.country,
       langue,
       annee_debut: anneeDebut,
+      annee_plan_action: anneePlanAction,
     },
     risques: retenus.map((r, i) => ({
       ref: `R${i + 1}`,
@@ -114,6 +148,27 @@ export function construireChargePlan(
       classe: r.classe,
       etat: r.status as "ouvert" | "traite",
     })),
+    ...(suite
+      ? {
+          suite: {
+            annee_precedente: suite.annee_precedente,
+            plan_en_vigueur: {
+              objectifs: suite.contenu.objectifs.map((o) => ({ niveau: o.niveau, objectif: o.objectif, risques: enRefs(o.risques) })),
+              mesures: suite.contenu.mesures.map((m) => ({ niveau_prevention: m.niveau_prevention, mesure: m.mesure, risques: enRefs(m.risques) })),
+              calendrier: suite.contenu.calendrier,
+              actions: suite.contenu.actions.map((a) => ({
+                id: a.id,
+                titre: a.titre,
+                description: a.description,
+                risques: enRefs(a.risques),
+                trimestre: a.trimestre,
+                effort: a.effort,
+                etat: (suite.statuts.get(a.id) ?? "a_faire") as "a_faire",
+              })),
+            },
+          },
+        }
+      : {}),
     rapport: {
       synthese: rapport.synthese,
       priorites: rapport.priorites_proposees.map((p) => `${p.priorite} — ${p.justification}`),

@@ -25,10 +25,19 @@ async function contexte(locale: string, organizationId: string) {
   return { admin, db: getDb(), tp, chemin, erreur, valide: uuid.safeParse(organizationId).success };
 }
 
-export async function actionGenererPlan(locale: string, organizationId: string, _etat: EtatFormulaire, formData: FormData): Promise<EtatFormulaire> {
+export async function actionGenererPlan(
+  locale: string,
+  organizationId: string,
+  modeBrut: unknown,
+  _etat: EtatFormulaire,
+  formData: FormData,
+): Promise<EtatFormulaire> {
   const { admin, db, chemin, erreur, valide } = await contexte(locale, organizationId);
   if (!valide) return erreur("introuvable");
-  const r = await genererPlanIA(db, admin.id, organizationId, String(formData.get("langue") ?? ""), formData.get("annee"));
+  // Mode reçu du navigateur : revérifié
+  const mode = z.enum(["nouveau", "suite"]).safeParse(modeBrut);
+  if (!mode.success) return erreur("introuvable");
+  const r = await genererPlanIA(db, admin.id, organizationId, String(formData.get("langue") ?? ""), formData.get("annee"), undefined, mode.data);
   if (!r.ok) return erreur(r.erreur, r.erreur === "iaEnvoiBloque" ? r.detail : undefined);
   revalidatePath(chemin);
   return { envoi: Date.now() };
@@ -37,13 +46,15 @@ export async function actionGenererPlan(locale: string, organizationId: string, 
 export async function actionPlanManuel(
   locale: string,
   organizationId: string,
-  depuisValide: boolean,
+  modeBrut: unknown,
   _etat: EtatFormulaire,
   formData: FormData,
 ): Promise<EtatFormulaire> {
   const { admin, db, chemin, erreur, valide } = await contexte(locale, organizationId);
   if (!valide) return erreur("introuvable");
-  const r = await creerPlanManuel(db, admin.id, organizationId, String(formData.get("langue") ?? ""), formData.get("annee"), depuisValide === true);
+  const mode = z.enum(["nouveau", "version", "suite"]).safeParse(modeBrut);
+  if (!mode.success) return erreur("introuvable");
+  const r = await creerPlanManuel(db, admin.id, organizationId, String(formData.get("langue") ?? ""), formData.get("annee"), mode.data);
   if (!r.ok) return erreur(r.erreur);
   revalidatePath(chemin);
   return { envoi: Date.now() };

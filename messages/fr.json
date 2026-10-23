@@ -461,7 +461,8 @@
     "planSansAction": "Le plan d'action doit contenir au moins une action.",
     "planRisquesNonCouverts": "Risques prioritaires sans action (ou, pour un risque très élevé, sans action au trimestre 1) :",
     "planDejaAdopte": "Ce plan a déjà été adopté. Pour le modifier, IMA prépare une nouvelle version.",
-    "adoptionDates": "Dates incohérentes : la date de l'avis doit précéder l'adoption, et aucune date ne peut être dans le futur."
+    "adoptionDates": "Dates incohérentes : la date de l'avis doit précéder l'adoption, et aucune date ne peut être dans le futur.",
+    "planDerniereAnnee": "Le plan global de 5 ans est terminé : préparez un nouveau plan global."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",
@@ -1125,7 +1126,7 @@
     "excelRisques": "Registre des risques",
     "colNum": "N°",
     "pdfFooter": "Institut Mindset en Action® — plan de prévention RPS, document réservé à l'entreprise et à ses représentants",
-    "pdfPeriode": "Plan global {debut}–{fin} · plan d'action {debut}",
+    "pdfPeriode": "Plan global {debut}–{fin} · plan d'action {annee}",
     "pdfValidation": "Validé par {nom}, praticien IMA, le {date}",
     "pdfDraft": "APERÇU — plan non validé, ne pas diffuser",
     "downloadsTitle": "Télécharger",
@@ -1133,6 +1134,12 @@
     "downloadExcel": "Excel",
     "downloadPluriprev": "Fichier pour PluriPrev",
     "pluriprevHelp": "Le fichier PluriPrev reprend le plan validé, le registre des risques et l'avancement, sans aucun nom (code interne de l'entreprise seulement).",
-    "previewPdf": "Aperçu PDF du brouillon"
+    "previewPdf": "Aperçu PDF du brouillon",
+    "continueTitle": "Suite du plan en vigueur",
+    "nextYearTitle": "Plan d'action {annee}",
+    "nextYearHelp": "Même plan global sur 5 ans. Les actions non réalisées sont reprises (avec leur avancement) ; le plan d'action de l'année est ensuite validé par IMA puis adopté par l'entreprise.",
+    "nextYearAi": "Rédiger le plan d'action avec l'IA",
+    "nextYearManual": "Préparer à la main (actions non terminées reprises)",
+    "lastYear": "Le plan global arrive à sa 5e année : préparez un nouveau plan global (nouveau diagnostic recommandé)."
   }
 }

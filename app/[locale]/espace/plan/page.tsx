@@ -52,7 +52,7 @@ export default async function PlanReferentPage({ params }: PageProps<"/[locale]/
         <div className="mb-12">
           <SuiviPlan plan={plan} locale={locale} peutAdopter={acces!.peutAdopter} peutSuivre={acces!.peutSuivre} />
         </div>
-        <AffichagePlan contenu={contenu} startYear={plan.startYear} risques={new Map(registre.map((r) => [r.id, r.title]))} />
+        <AffichagePlan contenu={contenu} startYear={plan.startYear} actionYear={plan.actionYear} risques={new Map(registre.map((r) => [r.id, r.title]))} />
       </main>
       <WaveFooter />
     </>

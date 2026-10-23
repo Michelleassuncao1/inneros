@@ -6,7 +6,7 @@ import path from "node:path";
 import { and, desc, eq, inArray } from "drizzle-orm";
 import { z } from "zod";
 import { journaliser } from "../audit";
-import { aggregates, campaigns, groups, organizations, preventionPlans, reports, users } from "../db/schema";
+import { aggregates, campaigns, groups, organizations, planActionStatus, preventionPlans, reports, users } from "../db/schema";
 import type { Db } from "../db/types";
 import { LANGUES_RAPPORT, lireContenu } from "../rapport/contenu";
 import { appelStructure, type ResultatStructure } from "../rapport/ia";
@@ -60,17 +60,46 @@ async function groupesAffichables(db: Db, organizationId: string) {
   return new Set(lignes.map((l) => l.label));
 }
 
-async function preparer(db: Db, adminId: string, organizationId: string, langueSaisie: string, anneeSaisie: unknown) {
+// Trois façons de commencer un plan (module A3, partie 3) :
+// - « nouveau » : nouveau plan global sur 5 ans à partir de l'année choisie ;
+// - « version » : nouvelle version du plan en vigueur, même année de plan d'action ;
+// - « suite » : plan d'action de l'année suivante, même plan global sur 5 ans.
+export type ModePlan = "nouveau" | "version" | "suite";
+
+async function preparer(db: Db, adminId: string, organizationId: string, langueSaisie: string, anneeSaisie: unknown, mode: ModePlan = "nouveau") {
   const [admin] = await db.select().from(users).where(eq(users.id, adminId));
   const [org] = await db.select().from(organizations).where(eq(organizations.id, organizationId));
   if (!admin || admin.role !== "admin" || !org) return { ok: false as const, erreur: "introuvable" };
   const lg = langue.safeParse(langueSaisie);
-  const an = annee.safeParse(anneeSaisie);
-  if (!lg.success || !an.success) return { ok: false as const, erreur: "saisieInvalide" };
+  if (!lg.success) return { ok: false as const, erreur: "saisieInvalide" };
   const ref = await rapportDeReference(db, organizationId);
   if (!ref) return { ok: false as const, erreur: "planSansRapport" };
-  const { brouillon } = await lirePlans(db, organizationId);
-  return { ok: true as const, admin, org, langue: lg.data, annee: an.data, ref, brouillon };
+  const { valide, brouillon } = await lirePlans(db, organizationId);
+  let startYear: number;
+  let actionYear: number;
+  if (mode === "nouveau") {
+    const an = annee.safeParse(anneeSaisie);
+    if (!an.success) return { ok: false as const, erreur: "saisieInvalide" };
+    startYear = actionYear = an.data;
+  } else {
+    if (!valide) return { ok: false as const, erreur: "introuvable" };
+    startYear = valide.startYear;
+    actionYear = mode === "suite" ? valide.actionYear + 1 : valide.actionYear;
+    // Après la 5e année, il faut un nouveau plan global
+    if (actionYear > startYear + 4) return { ok: false as const, erreur: "planDerniereAnnee" };
+  }
+  return { ok: true as const, admin, org, langue: lg.data, startYear, actionYear, ref, valide, brouillon };
+}
+
+// Actions du plan en vigueur qui ne sont ni réalisées ni abandonnées : reprises l'année suivante,
+// avec le même identifiant (leur avancement est repris à la validation), à l'échéance du 1er trimestre
+async function actionsAReprendre(db: Db, valide: Ligne) {
+  const contenu = schemaContenuPlan.parse(valide.content);
+  const statuts = await db.select().from(planActionStatus).where(eq(planActionStatus.planId, valide.id));
+  const termine = new Set(statuts.filter((s) => s.status === "realisee" || s.status === "abandonnee").map((s) => s.actionId));
+  return contenu.actions
+    .filter((a) => !termine.has(a.id))
+    .map((a) => ({ action: { ...a, trimestre: 1 }, statut: statuts.find((s) => s.actionId === a.id)?.status ?? "a_faire" }));
 }
 
 // Un brouillon précédent non validé est remplacé : on le marque refusé, avec le motif
@@ -102,8 +131,9 @@ export async function genererPlanIA(
   langueSaisie: string,
   anneeSaisie: unknown,
   appel: AppelPlan = appelClaudePlan,
+  mode: Exclude<ModePlan, "version"> = "nouveau",
 ): Promise<Resultat<{ planId: string }>> {
-  const p = await preparer(db, adminId, organizationId, langueSaisie, anneeSaisie);
+  const p = await preparer(db, adminId, organizationId, langueSaisie, anneeSaisie, mode);
   if (!p.ok) return p;
   // Interrupteur IA : global et celui de la campagne du rapport de référence (règle 7)
   if (!iaActiveGlobalement() || !p.ref.campagne.aiDraftingEnabled) return { ok: false, erreur: "iaDesactivee" };
@@ -112,7 +142,18 @@ export async function genererPlanIA(
   if (!rapport) return { ok: false, erreur: "planSansRapport" };
   if (!registre.some((r) => r.status !== "clos")) return { ok: false, erreur: "planSansRisque" };
 
-  const { charge, refs } = construireChargePlan(p.org, registre, rapport, p.langue, p.annee);
+  // Année suivante : l'IA reçoit le plan en vigueur et l'avancement de ses actions (références R1, R2…)
+  let suite: Parameters<typeof construireChargePlan>[5];
+  if (mode === "suite" && p.valide) {
+    const contenu = schemaContenuPlan.parse(p.valide.content);
+    const statuts = await db.select().from(planActionStatus).where(eq(planActionStatus.planId, p.valide.id));
+    suite = {
+      annee_precedente: p.valide.actionYear,
+      contenu,
+      statuts: new Map(statuts.map((s) => [s.actionId, s.status])),
+    };
+  }
+  const { charge, refs } = construireChargePlan(p.org, registre, rapport, p.langue, p.startYear, suite, p.actionYear);
   const anomalies = verifierChargePlan(charge, p.org.name, await groupesAffichables(db, organizationId));
   if (anomalies.length) {
     await journaliser(db, { actorUserId: adminId, action: "plan_ai_blocked", targetType: "organization", targetId: organizationId, details: { anomalies } });
@@ -131,7 +172,8 @@ export async function genererPlanIA(
       status: "ai_draft",
       country: p.org.country,
       language: p.langue,
-      startYear: p.annee,
+      startYear: p.startYear,
+      actionYear: p.actionYear,
       content: convertirReferences(r.contenu, refs),
       reportId: p.ref.rapport.id,
       aiModel: r.modele,
@@ -150,20 +192,26 @@ export async function genererPlanIA(
   return { ok: true, valeur: { planId: nouveau.id } };
 }
 
-// Rédaction à la main : plan vide, ou nouvelle version à partir du plan validé
+// Rédaction à la main : plan vide (« nouveau »), nouvelle version du plan en vigueur (« version »),
+// ou plan d'action de l'année suivante (« suite » : plan global repris, actions non terminées reprises)
 export async function creerPlanManuel(
   db: Db,
   adminId: string,
   organizationId: string,
   langueSaisie: string,
   anneeSaisie: unknown,
-  depuisValide = false,
+  mode: ModePlan = "nouveau",
 ): Promise<Resultat<{ planId: string }>> {
-  const p = await preparer(db, adminId, organizationId, langueSaisie, anneeSaisie);
+  const p = await preparer(db, adminId, organizationId, langueSaisie, anneeSaisie, mode);
   if (!p.ok) return p;
   if (p.brouillon) return { ok: false, erreur: "planBrouillonExistant" };
-  const { valide } = await lirePlans(db, organizationId);
-  const contenu = depuisValide && valide ? schemaContenuPlan.parse(valide.content) : planVide();
+  const valide = p.valide;
+  let contenu = planVide();
+  if (mode !== "nouveau" && valide) {
+    contenu = schemaContenuPlan.parse(valide.content);
+    if (mode === "suite") contenu = { ...contenu, actions: (await actionsAReprendre(db, valide)).map((x) => x.action) };
+  }
+  const depuisValide = mode !== "nouveau";
   const [nouveau] = await db
     .insert(preventionPlans)
     .values({
@@ -171,7 +219,8 @@ export async function creerPlanManuel(
       status: "draft",
       country: p.org.country,
       language: depuisValide && valide ? valide.language : p.langue,
-      startYear: p.annee,
+      startYear: p.startYear,
+      actionYear: p.actionYear,
       content: contenu,
       reportId: p.ref.rapport.id,
       createdBy: adminId,
@@ -182,7 +231,7 @@ export async function creerPlanManuel(
     action: "plan_manual_created",
     targetType: "organization",
     targetId: organizationId,
-    details: depuisValide ? { depuisValide: true } : undefined,
+    details: mode !== "nouveau" ? { mode } : undefined,
   });
   return { ok: true, valeur: { planId: nouveau.id } };
 }
@@ -242,6 +291,10 @@ export async function validerPlan(
 
   await db.transaction(async (tx) => {
     // L'ancien plan validé est remplacé (il reste consultable dans l'historique)
+    const [ancien] = await tx
+      .select({ id: preventionPlans.id })
+      .from(preventionPlans)
+      .where(and(eq(preventionPlans.organizationId, b.plan.organizationId), eq(preventionPlans.status, "validated")));
     await tx
       .update(preventionPlans)
       .set({ status: "replaced", updatedAt: maintenant })
@@ -250,6 +303,13 @@ export async function validerPlan(
       .update(preventionPlans)
       .set({ status: "validated", content: lecture.data, validatedBy: adminId, validatedAt: maintenant, updatedAt: maintenant })
       .where(eq(preventionPlans.id, planId));
+    // L'avancement des actions reprises (même identifiant) suit la nouvelle version ou l'année suivante
+    if (ancien) {
+      const ids = new Set(lecture.data.actions.map((a) => a.id));
+      const statuts = (await tx.select().from(planActionStatus).where(eq(planActionStatus.planId, ancien.id))).filter((x) => ids.has(x.actionId));
+      if (statuts.length)
+        await tx.insert(planActionStatus).values(statuts.map((x) => ({ ...x, planId, updatedBy: adminId })));
+    }
   });
   await journaliser(db, { actorUserId: adminId, action: "plan_validated", targetType: "organization", targetId: b.plan.organizationId });
   return { ok: true, valeur: undefined };

@@ -465,7 +465,10 @@ export const preventionPlans = pgTable(
     status: statutPlan("status").notNull(),
     country: pays("country").notNull(), // cadre légal suivi (pays de l'entreprise au moment de la rédaction)
     language: langue("language").notNull(),
-    startYear: integer("start_year").notNull(), // plan global : startYear à startYear + 4 ; plan d'action : startYear
+    startYear: integer("start_year").notNull(), // plan global : startYear à startYear + 4
+    // Année du plan d'action (module A3, partie 3) : startYear la première année, puis une nouvelle version
+    // du plan par année suivante (même plan global, plan d'action de l'année actionYear)
+    actionYear: integer("action_year").notNull(),
     content: jsonb("content").notNull(),
     // Rapport validé sur lequel le plan s'appuie (décision du 19/10/2026 : obligatoire)
     reportId: uuid("report_id").references(() => reports.id, { onDelete: "set null" }),
@@ -490,6 +493,7 @@ export const preventionPlans = pgTable(
       sql`${t.consultationBody} IS NULL OR ${t.consultationBody} IN ('cppt', 'delegation_syndicale', 'travailleurs', 'cse', 'aucun_cse', 'cipa', 'participation_travailleurs', 'representants_sst')`,
     ),
     check("prevention_plans_annee", sql`${t.startYear} BETWEEN 2020 AND 2100`),
+    check("prevention_plans_annee_action", sql`${t.actionYear} BETWEEN ${t.startYear} AND ${t.startYear} + 4`),
     check(
       "prevention_plans_validation",
       sql`${t.status} NOT IN ('validated', 'replaced') OR ${t.validatedAt} IS NOT NULL`,

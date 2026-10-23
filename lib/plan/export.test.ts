@@ -40,7 +40,7 @@ async function preparer() {
   };
   const [plan] = await db
     .insert(preventionPlans)
-    .values({ organizationId: org.valeur.id, status: "validated", country: "BE", language: "fr", startYear: 2027, content: contenu, aiModel: "claude-sonnet-5-5", validatedBy: admin.id, validatedAt: new Date("2027-01-05T10:00:00Z") })
+    .values({ organizationId: org.valeur.id, status: "validated", country: "BE", language: "fr", startYear: 2027, actionYear: 2027, content: contenu, aiModel: "claude-sonnet-5-5", validatedBy: admin.id, validatedAt: new Date("2027-01-05T10:00:00Z") })
     .returning();
   expect((await majAvancement(db, admin, plan.id, "A2", { statut: "realisee", realiseeLe: "2027-04-10" }, new Date("2027-05-01"))).ok).toBe(true);
   return { db, plan, r1: r1.valeur.id };

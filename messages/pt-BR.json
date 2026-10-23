@@ -461,7 +461,8 @@
     "planSansAction": "O plano de ação deve conter pelo menos uma ação.",
     "planRisquesNonCouverts": "Riscos prioritários sem ação (ou, para um risco muito alto, sem ação no T1):",
     "planDejaAdopte": "Este plano já foi adotado. Para alterá-lo, o IMA prepara uma nova versão.",
-    "adoptionDates": "Datas incoerentes: a data do parecer deve ser anterior à adoção, e nenhuma data pode estar no futuro."
+    "adoptionDates": "Datas incoerentes: a data do parecer deve ser anterior à adoção, e nenhuma data pode estar no futuro.",
+    "planDerniereAnnee": "O plano global de 5 anos terminou: prepare um novo plano global."
   },
   "Passation": {
     "enterTitle": "Acessar o questionário",
@@ -1125,7 +1126,7 @@
     "excelRisques": "Registro de riscos",
     "colNum": "Nº",
     "pdfFooter": "Institut Mindset en Action® — plano de prevenção de riscos psicossociais, documento reservado à organização e a seus representantes",
-    "pdfPeriode": "Plano global {debut}–{fin} · plano de ação {debut}",
+    "pdfPeriode": "Plano global {debut}–{fin} · plano de ação {annee}",
     "pdfValidation": "Validado por {nom}, profissional do IMA, em {date}",
     "pdfDraft": "PRÉVIA — plano não validado, não divulgar",
     "downloadsTitle": "Baixar",
@@ -1133,6 +1134,12 @@
     "downloadExcel": "Excel",
     "downloadPluriprev": "Arquivo para o PluriPrev",
     "pluriprevHelp": "O arquivo PluriPrev contém o plano validado, o registro de riscos e o andamento, sem nenhum nome (somente o código interno da organização).",
-    "previewPdf": "Prévia em PDF do rascunho"
+    "previewPdf": "Prévia em PDF do rascunho",
+    "continueTitle": "Continuação do plano em vigor",
+    "nextYearTitle": "Plano de ação {annee}",
+    "nextYearHelp": "Mesmo plano global de 5 anos. As ações não realizadas são retomadas (com seu andamento); o plano de ação do ano é depois validado pelo IMA e adotado pela organização.",
+    "nextYearAi": "Redigir o plano de ação com a IA",
+    "nextYearManual": "Preparar manualmente (ações não concluídas retomadas)",
+    "lastYear": "O plano global está em seu 5º ano: prepare um novo plano global (novo diagnóstico recomendado)."
   }
 }

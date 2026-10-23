@@ -461,7 +461,8 @@
     "planSansAction": "The action plan must contain at least one action.",
     "planRisquesNonCouverts": "Priority risks without an action (or, for a very high risk, without an action in Q1):",
     "planDejaAdopte": "This plan has already been adopted. To change it, IMA prepares a new version.",
-    "adoptionDates": "Inconsistent dates: the advice date must precede the adoption, and no date can be in the future."
+    "adoptionDates": "Inconsistent dates: the advice date must precede the adoption, and no date can be in the future.",
+    "planDerniereAnnee": "The five-year global plan has ended: prepare a new global plan."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",
@@ -1125,7 +1126,7 @@
     "excelRisques": "Risk register",
     "colNum": "No.",
     "pdfFooter": "Institut Mindset en Action® — psychosocial risk prevention plan, for the organisation and its representatives only",
-    "pdfPeriode": "Global plan {debut}–{fin} · {debut} action plan",
+    "pdfPeriode": "Global plan {debut}–{fin} · {annee} action plan",
     "pdfValidation": "Validated by {nom}, IMA practitioner, on {date}",
     "pdfDraft": "PREVIEW — plan not validated, do not distribute",
     "downloadsTitle": "Download",
@@ -1133,6 +1134,12 @@
     "downloadExcel": "Excel",
     "downloadPluriprev": "File for PluriPrev",
     "pluriprevHelp": "The PluriPrev file contains the validated plan, the risk register and progress, without any names (the organisation's internal code only).",
-    "previewPdf": "PDF preview of the draft"
+    "previewPdf": "PDF preview of the draft",
+    "continueTitle": "Continuation of the plan in force",
+    "nextYearTitle": "{annee} action plan",
+    "nextYearHelp": "Same five-year global plan. Actions not completed are carried over (with their progress); the year's action plan is then validated by IMA and adopted by the organisation.",
+    "nextYearAi": "Draft the action plan with AI",
+    "nextYearManual": "Prepare manually (unfinished actions carried over)",
+    "lastYear": "The global plan is in its 5th year: prepare a new global plan (a new diagnosis is recommended)."
   }
 }

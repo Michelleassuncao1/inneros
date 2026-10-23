@@ -91,7 +91,7 @@ export default async function PlanAdminPage({ params }: PageProps<"/[locale]/adm
             <div className="mb-10">
               <SuiviPlan plan={valide} locale={locale} peutAdopter={false} peutSuivre />
             </div>
-            <AffichagePlan contenu={contenuValide} startYear={valide.startYear} risques={nomsRisques} avecQuestions />
+            <AffichagePlan contenu={contenuValide} startYear={valide.startYear} actionYear={valide.actionYear} risques={nomsRisques} avecQuestions />
           </>
         ) : (
           <p>{t("noValid")}</p>
@@ -116,6 +116,7 @@ export default async function PlanAdminPage({ params }: PageProps<"/[locale]/adm
           <EditeurPlan
             contenuInitial={contenuBrouillon}
             startYear={brouillon.startYear}
+            actionYear={brouillon.actionYear}
             risques={risques.map((r) => ({ id: r.id, title: r.title, classe: r.classe, source: r.source, status: r.status, libelleClasse: tr(`classes.${r.classe}`) }))}
             formationOk={!!admin.aiLiteracyAt}
             textes={{
@@ -145,7 +146,7 @@ export default async function PlanAdminPage({ params }: PageProps<"/[locale]/adm
             <>
               <div className="max-w-xl rounded-md border border-ima-line bg-white p-4">
                 {iaPossible ? (
-                  <FormulaireAction action={actionGenererPlan.bind(null, locale, id)} libelle={t("generate")} enCours={t("generating")}>
+                  <FormulaireAction action={actionGenererPlan.bind(null, locale, id, "nouveau")} libelle={t("generate")} enCours={t("generating")}>
                     {champsDepart("ia")}
                     <p className="text-sm text-ima-muted">{t("aiCost")}</p>
                   </FormulaireAction>
@@ -154,16 +155,35 @@ export default async function PlanAdminPage({ params }: PageProps<"/[locale]/adm
                 )}
               </div>
               <div className="max-w-xl rounded-md border border-ima-line bg-white p-4">
-                <FormulaireAction action={actionPlanManuel.bind(null, locale, id, false)} libelle={t("manualStart")} enCours={t("starting")} secondaire>
+                <FormulaireAction action={actionPlanManuel.bind(null, locale, id, "nouveau")} libelle={t("manualStart")} enCours={t("starting")} secondaire>
                   {champsDepart("main")}
                 </FormulaireAction>
               </div>
               {valide && (
-                <div className="max-w-xl rounded-md border border-ima-line bg-white p-4">
-                  <FormulaireAction action={actionPlanManuel.bind(null, locale, id, true)} libelle={t("newVersion")} enCours={t("starting")} secondaire>
-                    {champsDepart("version")}
-                  </FormulaireAction>
-                </div>
+                <>
+                  <h3 className="mt-4 text-xl">{t("continueTitle")}</h3>
+                  {valide.actionYear < valide.startYear + 4 ? (
+                    <div className="flex max-w-xl flex-col gap-4 rounded-md border border-ima-gold bg-white p-4">
+                      <p className="font-semibold text-ima-navy">{t("nextYearTitle", { annee: valide.actionYear + 1 })}</p>
+                      <p className="text-sm text-ima-muted">{t("nextYearHelp")}</p>
+                      {iaPossible && (
+                        <FormulaireAction action={actionGenererPlan.bind(null, locale, id, "suite")} libelle={t("nextYearAi")} enCours={t("generating")}>
+                          <Selection id="suite-ia-langue" name="langue" label={t("language")} options={optionsLangue} defaultValue={valide.language} />
+                        </FormulaireAction>
+                      )}
+                      <FormulaireAction action={actionPlanManuel.bind(null, locale, id, "suite")} libelle={t("nextYearManual")} enCours={t("starting")} secondaire>
+                        <input type="hidden" name="langue" value={valide.language} />
+                      </FormulaireAction>
+                    </div>
+                  ) : (
+                    <p className="max-w-xl text-sm">{t("lastYear")}</p>
+                  )}
+                  <div className="max-w-xl rounded-md border border-ima-line bg-white p-4">
+                    <FormulaireAction action={actionPlanManuel.bind(null, locale, id, "version")} libelle={t("newVersion")} enCours={t("starting")} secondaire>
+                      <input type="hidden" name="langue" value={valide.language} />
+                    </FormulaireAction>
+                  </div>
+                </>
               )}
             </>
           )}
@@ -177,7 +197,7 @@ export default async function PlanAdminPage({ params }: PageProps<"/[locale]/adm
             {historique.map((p) => (
               <tr key={p.id}>
                 <Cellule>
-                  {p.startYear} → {p.startYear + 4}
+                  {p.startYear} → {p.startYear + 4} · {t("paaTitle", { annee: p.actionYear })}
                 </Cellule>
                 <Cellule>{date(p.createdAt)}</Cellule>
                 <Cellule>

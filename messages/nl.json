@@ -461,7 +461,8 @@
     "planSansAction": "Het actieplan moet minstens één actie bevatten.",
     "planRisquesNonCouverts": "Prioritaire risico's zonder actie (of, voor een zeer hoog risico, zonder actie in kwartaal 1):",
     "planDejaAdopte": "Dit plan is al goedgekeurd. Om het te wijzigen, maakt IMA een nieuwe versie.",
-    "adoptionDates": "Onsamenhangende data: de datum van het advies moet vóór de goedkeuring liggen, en geen enkele datum mag in de toekomst liggen."
+    "adoptionDates": "Onsamenhangende data: de datum van het advies moet vóór de goedkeuring liggen, en geen enkele datum mag in de toekomst liggen.",
+    "planDerniereAnnee": "Het globale plan van 5 jaar is afgelopen: bereid een nieuw globaal plan voor."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
@@ -1125,7 +1126,7 @@
     "excelRisques": "Risicoregister",
     "colNum": "Nr.",
     "pdfFooter": "Institut Mindset en Action® — preventieplan psychosociale risico's, document voorbehouden aan de organisatie en haar vertegenwoordigers",
-    "pdfPeriode": "Globaal plan {debut}–{fin} · actieplan {debut}",
+    "pdfPeriode": "Globaal plan {debut}–{fin} · actieplan {annee}",
     "pdfValidation": "Gevalideerd door {nom}, IMA-practitioner, op {date}",
     "pdfDraft": "VOORBEELD — plan niet gevalideerd, niet verspreiden",
     "downloadsTitle": "Downloaden",
@@ -1133,6 +1134,12 @@
     "downloadExcel": "Excel",
     "downloadPluriprev": "Bestand voor PluriPrev",
     "pluriprevHelp": "Het PluriPrev-bestand bevat het gevalideerde plan, het risicoregister en de voortgang, zonder enige naam (alleen de interne code van de organisatie).",
-    "previewPdf": "PDF-voorbeeld van het ontwerp"
+    "previewPdf": "PDF-voorbeeld van het ontwerp",
+    "continueTitle": "Vervolg van het geldende plan",
+    "nextYearTitle": "Actieplan {annee}",
+    "nextYearHelp": "Hetzelfde globale plan over 5 jaar. Niet uitgevoerde acties worden overgenomen (met hun voortgang); het actieplan van het jaar wordt daarna door IMA gevalideerd en door de organisatie goedgekeurd.",
+    "nextYearAi": "Actieplan laten opstellen door de AI",
+    "nextYearManual": "Handmatig voorbereiden (niet afgeronde acties overgenomen)",
+    "lastYear": "Het globale plan zit in zijn 5e jaar: bereid een nieuw globaal plan voor (nieuwe diagnose aanbevolen)."
   }
 }

@@ -1,6 +1,6 @@
 # Format d'échange InnerOS → PluriPrev
 
-**Format** : `inneros.plan-prevention` · **version** : `1.0` · **date** : 22/10/2026
+**Format** : `inneros.plan-prevention` · **version** : `1.0` · **date** : 23/10/2026 (ajout de `plan.annee_plan_action` avant toute diffusion)
 **Description technique** : [`inneros-plan-prevention-1.0.schema.json`](inneros-plan-prevention-1.0.schema.json) (JSON Schema, généré depuis le code d'InnerOS : `lib/plan/export.ts`).
 
 Ce document s'adresse à l'équipe (et au Claude) qui construit **PluriPrev**. Il décrit le fichier qu'InnerOS (module RPS) produit pour qu'une entreprise équipée des deux outils puisse intégrer son plan RPS dans le plan global de prévention de PluriPrev.
@@ -19,9 +19,9 @@ Ce document s'adresse à l'équipe (et au Claude) qui construit **PluriPrev**. I
 |---|---|
 | `format`, `version`, `genere_le`, `source` | Identification du fichier (InnerOS, Institut Mindset en Action). |
 | `organisation` | `code_interne`, `pays` (BE, FR, BR, PT), `secteur`, `tranche_effectif` (`lt50`, `50-249`, `250-999`, `1000+`). |
-| `plan` | Plan global de prévention RPS sur 5 ans (`annee_debut` → `annee_fin`), langue, date de validation, `redige_avec_ia`, `adoption` (date, organe consulté, date de l'avis), objectifs, mesures, moyens, rôles, calendrier, évaluation, cadre légal. Domaine : toujours `psychosocial`. |
+| `plan` | Plan global de prévention RPS sur 5 ans (`annee_debut` → `annee_fin`), année du plan d'action exporté (`annee_plan_action`, de `annee_debut` à `annee_fin`), langue, date de validation, `redige_avec_ia`, `adoption` (date, organe consulté, date de l'avis), objectifs, mesures, moyens, rôles, calendrier, évaluation, cadre légal. Domaine : toujours `psychosocial`. |
 | `risques` | Registre des risques RPS de l'entreprise (voir ci-dessous). |
-| `actions` | Plan d'action de l'année `annee_debut`, avec l'avancement (voir ci-dessous). |
+| `actions` | Plan d'action de l'année `annee_plan_action`, avec l'avancement (voir ci-dessous). |
 
 ### Risques
 
@@ -54,6 +54,10 @@ Un comportement indésirable signalé (harcèlement, violence…) est toujours a
 | `statut`, `statut_pluriprev` | `a_faire`→`proposed`, `en_cours`→`accepted`, `realisee`→`closed`, `reportee`→`reopened`, `abandonnee`→`cancelled` | `status` |
 | `realisee_le`, `commentaire` | Date de réalisation, commentaire sans nom | `closed_at`, `evidence.note` |
 
+## Années suivantes
+
+Chaque année, InnerOS produit une nouvelle version du plan : même plan global (`annee_debut`, `annee_fin`), plan d'action de l'année `annee_plan_action`. Les actions non terminées sont reprises **avec le même `id`**, donc la même `cle_dedoublonnage` : un import de l'année suivante met à jour l'action existante au lieu de la dupliquer (son échéance change). Les actions réalisées ou abandonnées n'apparaissent plus dans le fichier de l'année suivante : PluriPrev les conserve telles qu'importées précédemment.
+
 ## Point à trancher côté PluriPrev
 
 Dans PluriPrev, le domaine `psychosocial` est actuellement décrit comme utilisant des « méthodes spécialisées, pas de score Kinney » (`src/server/domains.ts`, méthode `PSICOSSOCIAL-BR` au Brésil). InnerOS évalue les risques psychosociaux avec la matrice Kinney (décision d'IMA du 19/10/2026). Pour importer ce fichier, PluriPrev doit donc **autoriser la méthode KINNEY pour le domaine psychosocial**, ou convertir la classe Kinney vers sa méthode psychosociale (par exemple via la `priorite`).
@@ -67,7 +71,7 @@ Dans PluriPrev, le domaine `psychosocial` est actuellement décrit comme utilisa
   "genere_le": "2027-01-20T10:00:00.000Z",
   "source": { "application": "InnerOS", "editeur": "Institut Mindset en Action" },
   "organisation": { "code_interne": "ORG-AB12", "pays": "BE", "secteur": "Soins", "tranche_effectif": "50-249" },
-  "plan": { "id": "…", "domaine": "psychosocial", "annee_debut": 2027, "annee_fin": 2031, "langue": "fr", "valide_le": "2027-01-10", "redige_avec_ia": true, "adoption": null, "…": "…" },
+  "plan": { "id": "…", "domaine": "psychosocial", "annee_debut": 2027, "annee_fin": 2031, "annee_plan_action": 2027, "langue": "fr", "valide_le": "2027-01-10", "redige_avec_ia": true, "adoption": null, "…": "…" },
   "risques": [
     { "id": "…", "domaine": "psychosocial", "origine": "comportement", "intitule": "Menaces de violence", "methode": { "code": "KINNEY", "composantes": { "P": 10, "E": 6, "G": 40 } }, "score": 2400, "classe": "tres_eleve", "priorite": "immediate", "…": "…" }
   ],

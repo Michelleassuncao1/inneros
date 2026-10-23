@@ -90,7 +90,7 @@ function iaSimulee(recus: ChargePlan[] = []) {
 describe("Prompts versionnés", () => {
   it("lit la version du prompt du rapport et du plan", () => {
     expect(lirePrompt().version).toMatch(/^rapport-v\d+\.\d+$/);
-    expect(lirePrompt(FICHIER_PROMPT_PLAN).version).toBe("plan-v1.2");
+    expect(lirePrompt(FICHIER_PROMPT_PLAN).version).toBe("plan-v1.3");
   });
 });
 
@@ -123,7 +123,7 @@ describe("Plan de prévention RPS", () => {
 
   it("bloque l'envoi si le nom de l'entreprise ou une adresse apparaît", () => {
     const charge = {
-      entreprise: { code_interne: "ORG-X", secteur: "Industrie", tranche_effectif: "50-249", pays: "FR", langue: "fr", annee_debut: 2027 },
+      entreprise: { code_interne: "ORG-X", secteur: "Industrie", tranche_effectif: "50-249", pays: "FR", langue: "fr", annee_debut: 2027, annee_plan_action: 2027 },
       risques: [{ ref: "R1", titre: "Tensions à l'Usine Fictive Martin", description: "", origine: "manuel", niveau_mindset: null, groupes: [], p: 1, e: 1, g: 1, score: 1, classe: "acceptable", etat: "ouvert" }],
       rapport: { synthese: "voir rh@exemple.fr", priorites: [], orientations: [] },
     };
@@ -136,7 +136,7 @@ describe("Plan de prévention RPS", () => {
   it("bloque aussi une adresse postale, un groupe non présenté et un comportement rattaché à un groupe", () => {
     const risque = { ref: "R1", titre: "Risque", description: "", origine: "echelle", niveau_mindset: null, groupes: ["Atelier"], p: 1, e: 1, g: 1, score: 1, classe: "acceptable", etat: "ouvert" };
     const charge = (risques: object[], synthese = "") => ({
-      entreprise: { code_interne: "ORG-X", secteur: "Industrie", tranche_effectif: "50-249", pays: "BE", langue: "fr", annee_debut: 2027 },
+      entreprise: { code_interne: "ORG-X", secteur: "Industrie", tranche_effectif: "50-249", pays: "BE", langue: "fr", annee_debut: 2027, annee_plan_action: 2027 },
       risques,
       rapport: { synthese, priorites: [], orientations: [] },
     });
@@ -186,18 +186,18 @@ describe("Plan de prévention RPS", () => {
     expect((await validerPlan(db, admin.id, premier.valeur.planId, { contenu, liste: LISTE })).ok).toBe(true);
 
     // Nouvelle version à partir du plan validé : même contenu, puis validation → l'ancien est « remplacé »
-    const second = await creerPlanManuel(db, admin.id, orgId, "fr", 2028, true);
+    const second = await creerPlanManuel(db, admin.id, orgId, "fr", 2028, "suite");
     if (!second.ok) throw new Error(second.erreur);
     const { valide, brouillon } = await lirePlans(db, orgId);
     expect(valide!.id).toBe(premier.valeur.planId);
     expect(lireContenuPlan(brouillon!.content)!.actions).toHaveLength(ids.length);
     expect((await validerPlan(db, admin.id, second.valeur.planId, { contenu, liste: LISTE })).ok).toBe(true);
     const tous = await db.select().from(preventionPlans).where(eq(preventionPlans.organizationId, orgId));
-    expect(tous.map((p) => `${p.startYear}:${p.status}`).sort()).toEqual(["2027:replaced", "2028:validated"]);
+    expect(tous.map((p) => `${p.actionYear}:${p.status}`).sort()).toEqual(["2027:replaced", "2028:validated"]);
     // La base refuse deux plans validés pour la même entreprise
     await expect(
       db.insert(preventionPlans).values({
-        organizationId: orgId, status: "validated", country: "FR", language: "fr", startYear: 2029, content: contenu,
+        organizationId: orgId, status: "validated", country: "FR", language: "fr", startYear: 2029, actionYear: 2029, content: contenu,
         validatedBy: admin.id, validatedAt: new Date(),
       }),
     ).rejects.toThrow();

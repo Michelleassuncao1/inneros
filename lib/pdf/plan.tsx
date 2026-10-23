@@ -90,7 +90,7 @@ export async function pdfPlan(d: DonneesPlan, langueInterface?: string) {
         <Text style={s.titre}>{t("title")}</Text>
         <View style={s.filet} />
         <Text style={s.entreprise}>{d.org.name}</Text>
-        <Text style={s.meta}>{t("pdfPeriode", { debut: plan.startYear, fin: plan.startYear + 4 })}</Text>
+        <Text style={s.meta}>{t("pdfPeriode", { debut: plan.startYear, fin: plan.startYear + 4, annee: plan.actionYear })}</Text>
         {valide && plan.validatedAt ? (
           <Text style={s.meta}>{t("pdfValidation", { nom: nomValidateur, date: date(plan.validatedAt) })}</Text>
         ) : (
@@ -176,7 +176,7 @@ export async function pdfPlan(d: DonneesPlan, langueInterface?: string) {
       </Page>
 
       <Page size="A4" orientation="landscape" style={s.page}>
-        <Text style={s.titreSection}>{t("paaTitle", { annee: plan.startYear })}</Text>
+        <Text style={s.titreSection}>{t("paaTitle", { annee: plan.actionYear })}</Text>
         <View style={s.ligneEntete} fixed>
           {[t("colAction"), t("colResponsable"), t("colEcheance"), t("colEffort"), t("colBudget"), t("colIndicateur"), t("colStatut")].map((c, i) => (
             <Text key={c} style={[s.celluleEntete, { width: `${COLONNES[i]}%` }]}>
@@ -200,7 +200,7 @@ export async function pdfPlan(d: DonneesPlan, langueInterface?: string) {
                 </View>
                 <Text style={[s.cellule, { width: `${COLONNES[1]}%` }]}>{a.responsable}</Text>
                 <Text style={[s.cellule, { width: `${COLONNES[2]}%` }]}>
-                  {t("trimestre", { n: a.trimestre })} {plan.startYear}
+                  {t("trimestre", { n: a.trimestre })} {plan.actionYear}
                 </Text>
                 <Text style={[s.cellule, { width: `${COLONNES[3]}%` }]}>{t(`efforts.${a.effort}`)}</Text>
                 <Text style={[s.cellule, { width: `${COLONNES[4]}%` }]}>{a.budget}</Text>
