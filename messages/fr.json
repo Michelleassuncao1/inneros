@@ -466,7 +466,8 @@
     "planDerniereAnnee": "Le plan global de 5 ans est terminé : préparez un nouveau plan global.",
     "themeCodeExistant": "Ce code de thème existe déjà.",
     "themeCoordonnees": "Le kit ne doit contenir ni adresse e-mail ni numéro de téléphone : les contacts sont ajoutés automatiquement.",
-    "themeIncomplet": "Kit incomplet : le français est obligatoire et chaque langue commencée doit être entièrement rédigée."
+    "themeIncomplet": "Kit incomplet : le français est obligatoire et chaque langue commencée doit être entièrement rédigée.",
+    "campagneSensibDejaPrevue": "Ce thème est déjà au calendrier de cette année."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",
@@ -686,7 +687,12 @@
       "theme_ai_failed": "Échec de la rédaction d'un kit par l'IA",
       "theme_ai_blocked": "Envoi d'un thème à l'IA bloqué",
       "theme_validated": "Thème de sensibilisation validé",
-      "theme_archived": "Thème de sensibilisation archivé"
+      "theme_archived": "Thème de sensibilisation archivé",
+      "awareness_calendar_proposed": "Calendrier de sensibilisation proposé",
+      "awareness_campaign_added": "Campagne de sensibilisation ajoutée",
+      "awareness_campaign_updated": "Campagne de sensibilisation mise à jour",
+      "awareness_kit_downloaded": "Kit de sensibilisation téléchargé",
+      "awareness_reminder_sent": "Rappel mensuel de sensibilisation envoyé"
     }
   },
   "Rapport": {
@@ -801,7 +807,9 @@
     "ouvrirRapport": "Ouvrir le rapport",
     "sansContenu": "Pour des raisons de confidentialité, cet e-mail ne contient aucun élément du rapport.",
     "rappelPlanSujet": "Plan de prévention : point du trimestre",
-    "rappelPlanTexte": "Votre plan de prévention compte {aVenir, plural, =0 {aucune action prévue ce trimestre} one {# action prévue ce trimestre} other {# actions prévues ce trimestre}} et {enRetard, plural, =0 {aucune action en retard} one {# action en retard} other {# actions en retard}}. Pensez à mettre à jour l'avancement dans votre espace."
+    "rappelPlanTexte": "Votre plan de prévention compte {aVenir, plural, =0 {aucune action prévue ce trimestre} one {# action prévue ce trimestre} other {# actions prévues ce trimestre}} et {enRetard, plural, =0 {aucune action en retard} one {# action en retard} other {# actions en retard}}. Pensez à mettre à jour l'avancement dans votre espace.",
+    "rappelSensibSujet": "Sensibilisation : campagne du mois",
+    "rappelSensibTexte": "{nombre, plural, one {Une campagne de sensibilisation est prévue} other {# campagnes de sensibilisation sont prévues}} ce mois-ci dans votre calendrier. Le kit est prêt dans votre espace ; pensez à indiquer la date de diffusion."
   },
   "RapportPdf": {
     "titre": "Rapport de diagnostic collectif des risques psychosociaux",
@@ -1224,5 +1232,61 @@
     "archiveHelp": "Un thème archivé n'est plus proposé aux entreprises.",
     "archive": "Archiver",
     "isArchived": "Ce thème est archivé."
+  },
+  "Calendrier": {
+    "title": "Calendrier de sensibilisation",
+    "intro": "Une campagne par mois sur les risques psychosociaux et la santé mentale, avec un kit prêt à diffuser : article, message court, affiche, e-mail aux managers et fiche « quart d'heure bien-être ». Le conseiller en prévention planifie les campagnes ; les personnes de soutien de l'entreprise et les numéros d'aide sont ajoutés à chaque kit.",
+    "backSpace": "Retour à mon espace",
+    "backCompany": "Retour à l'entreprise",
+    "backCalendar": "Retour au calendrier",
+    "year": "Année",
+    "readOnly": "Consultation : seul le conseiller en prévention de l'entreprise et IMA modifient le calendrier.",
+    "proposeHelp": "InnerOS propose un calendrier annuel à partir des thèmes validés par IMA (un thème par mois). Vous pouvez ensuite déplacer, retirer ou ajouter des campagnes.",
+    "propose": "Proposer le calendrier {annee}",
+    "proposed": "{n, plural, =0 {Aucune campagne à ajouter : le calendrier est déjà complet.} one {# campagne ajoutée au calendrier.} other {# campagnes ajoutées au calendrier.}}",
+    "working": "En cours…",
+    "empty": "Aucune campagne prévue cette année.",
+    "statuts": {
+      "prevue": "Prévue",
+      "diffusee": "Diffusée",
+      "realisee": "Réalisée",
+      "retiree": "Retirée"
+    },
+    "origines": {
+      "programmee": "Calendrier annuel",
+      "manuelle": "Ajoutée par le conseiller en prévention",
+      "registre": "Proposée à la suite du registre des risques",
+      "evenement": "Proposée à la suite d'un événement",
+      "alerte": "Proposée à la suite d'une alerte réglementaire",
+      "comportement": "Proposée à la suite de comportements indésirables signalés"
+    },
+    "update": "Mettre à jour",
+    "save": "Enregistrer",
+    "saved": "Campagne mise à jour.",
+    "month": "Mois",
+    "status": "État",
+    "diffusedOn": "Diffusée le",
+    "comment": "Commentaire",
+    "commentHelp": "Par exemple : canaux utilisés, participation. Sans nom, e-mail ni téléphone.",
+    "addTitle": "Ajouter une campagne",
+    "theme": "Thème",
+    "add": "Ajouter",
+    "added": "Campagne ajoutée.",
+    "kitLanguage": "Langue du kit",
+    "downloadPoster": "Affiche (PDF)",
+    "downloadSheet": "Fiche d'animation (PDF)",
+    "copy": "Copier",
+    "copied": "Copié ✓",
+    "article": "Article (intranet, journal interne)",
+    "shortMessage": "Message court (messagerie, écran)",
+    "managersEmail": "E-mail aux managers",
+    "teamQuestions": "Questions pour une réunion d'équipe",
+    "ficheTitle": "Quart d'heure bien-être",
+    "ficheMeta": "Durée : {minutes} minutes · chacun peut participer ou simplement écouter",
+    "ficheSteps": "Déroulé",
+    "ficheQuestions": "Questions pour l'échange",
+    "ficheTips": "Conseils à l'animateur",
+    "helpTitle": "Besoin d'aide ? Vous pouvez contacter",
+    "noContacts": "Aucune personne de soutien n'est encore renseignée pour l'entreprise : IMA les ajoute dans la campagne de diagnostic."
   }
 }

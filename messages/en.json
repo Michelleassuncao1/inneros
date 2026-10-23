@@ -466,7 +466,8 @@
     "planDerniereAnnee": "The five-year global plan has ended: prepare a new global plan.",
     "themeCodeExistant": "This theme code already exists.",
     "themeCoordonnees": "The kit must not contain email addresses or phone numbers: contacts are added automatically.",
-    "themeIncomplet": "Incomplete kit: French is required and every language started must be fully written."
+    "themeIncomplet": "Incomplete kit: French is required and every language started must be fully written.",
+    "campagneSensibDejaPrevue": "This theme is already in this year's calendar."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",
@@ -686,7 +687,12 @@
       "theme_ai_failed": "AI kit drafting failed",
       "theme_ai_blocked": "Theme sending to AI blocked",
       "theme_validated": "Awareness theme validated",
-      "theme_archived": "Awareness theme archived"
+      "theme_archived": "Awareness theme archived",
+      "awareness_calendar_proposed": "Awareness calendar suggested",
+      "awareness_campaign_added": "Awareness campaign added",
+      "awareness_campaign_updated": "Awareness campaign updated",
+      "awareness_kit_downloaded": "Awareness kit downloaded",
+      "awareness_reminder_sent": "Monthly awareness reminder sent"
     }
   },
   "Rapport": {
@@ -801,7 +807,9 @@
     "ouvrirRapport": "Open the report",
     "sansContenu": "For confidentiality reasons, this email contains no part of the report.",
     "rappelPlanSujet": "Prevention plan: quarterly update",
-    "rappelPlanTexte": "Your prevention plan has {aVenir, plural, =0 {no actions planned this quarter} one {# action planned this quarter} other {# actions planned this quarter}} and {enRetard, plural, =0 {no late actions} one {# late action} other {# late actions}}. Remember to update progress in your space."
+    "rappelPlanTexte": "Your prevention plan has {aVenir, plural, =0 {no actions planned this quarter} one {# action planned this quarter} other {# actions planned this quarter}} and {enRetard, plural, =0 {no late actions} one {# late action} other {# late actions}}. Remember to update progress in your space.",
+    "rappelSensibSujet": "Awareness: this month's campaign",
+    "rappelSensibTexte": "{nombre, plural, one {One awareness campaign is planned} other {# awareness campaigns are planned}} this month in your calendar. The kit is ready in your space; remember to record the date it was sent."
   },
   "RapportPdf": {
     "titre": "Collective psychosocial risk assessment report",
@@ -1224,5 +1232,61 @@
     "archiveHelp": "An archived theme is no longer offered to organisations.",
     "archive": "Archive",
     "isArchived": "This theme is archived."
+  },
+  "Calendrier": {
+    "title": "Awareness calendar",
+    "intro": "One campaign a month on psychosocial risks and mental health, with a ready-to-use kit: article, short message, poster, email to managers and « wellbeing quarter-hour » sheet. The prevention advisor plans the campaigns; the organisation's support people and helplines are added to each kit.",
+    "backSpace": "Back to my space",
+    "backCompany": "Back to the organisation",
+    "backCalendar": "Back to the calendar",
+    "year": "Year",
+    "readOnly": "Read only: only the organisation's prevention advisor and IMA edit the calendar.",
+    "proposeHelp": "InnerOS suggests a yearly calendar from the themes validated by IMA (one theme a month). You can then move, remove or add campaigns.",
+    "propose": "Suggest the {annee} calendar",
+    "proposed": "{n, plural, =0 {No campaign to add: the calendar is already complete.} one {# campaign added to the calendar.} other {# campaigns added to the calendar.}}",
+    "working": "Working…",
+    "empty": "No campaigns planned this year.",
+    "statuts": {
+      "prevue": "Planned",
+      "diffusee": "Sent",
+      "realisee": "Done",
+      "retiree": "Removed"
+    },
+    "origines": {
+      "programmee": "Yearly calendar",
+      "manuelle": "Added by the prevention advisor",
+      "registre": "Suggested from the risk register",
+      "evenement": "Suggested after an event",
+      "alerte": "Suggested after a regulatory alert",
+      "comportement": "Suggested after reported offensive behaviour"
+    },
+    "update": "Update",
+    "save": "Save",
+    "saved": "Campaign updated.",
+    "month": "Month",
+    "status": "Status",
+    "diffusedOn": "Sent on",
+    "comment": "Comment",
+    "commentHelp": "For example: channels used, participation. No names, emails or phone numbers.",
+    "addTitle": "Add a campaign",
+    "theme": "Theme",
+    "add": "Add",
+    "added": "Campaign added.",
+    "kitLanguage": "Kit language",
+    "downloadPoster": "Poster (PDF)",
+    "downloadSheet": "Facilitation sheet (PDF)",
+    "copy": "Copy",
+    "copied": "Copied ✓",
+    "article": "Article (intranet, staff newsletter)",
+    "shortMessage": "Short message (messaging, screen)",
+    "managersEmail": "Email to managers",
+    "teamQuestions": "Questions for a team meeting",
+    "ficheTitle": "Wellbeing quarter-hour",
+    "ficheMeta": "Duration: {minutes} minutes · everyone can take part or simply listen",
+    "ficheSteps": "Steps",
+    "ficheQuestions": "Questions for the discussion",
+    "ficheTips": "Tips for the facilitator",
+    "helpTitle": "Need help? You can contact",
+    "noContacts": "No support people have been entered for the organisation yet: IMA adds them in the diagnosis campaign."
   }
 }

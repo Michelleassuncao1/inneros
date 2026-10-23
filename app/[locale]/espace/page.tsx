@@ -18,6 +18,7 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
   const te = await getTranslations("EspaceRapport");
   const tr = await getTranslations("Risques");
   const tp = await getTranslations("Plan");
+  const tcal = await getTranslations("Calendrier");
   const plan = await planPourReferentSuivi(getDb(), referent);
   const liste = await campagnesDuReferent(getDb(), referent.id);
   const date = (d: string) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
@@ -34,8 +35,16 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
         <h1 className="mt-2 text-2xl sm:text-3xl">{t("welcome", { name: referent.name })}</h1>
         <div aria-hidden="true" className="mt-4 h-0.5 w-16 bg-ima-gold" />
         {entreprise && <p className="mt-6 font-semibold text-ima-navy">{t("organization", { name: entreprise.name })}</p>}
+        <p className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="/espace/sensibilisation"
+            className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+          >
+            {tcal("title")}
+          </Link>
+        </p>
         {(referent.preventionAdvisor || plan) && (
-          <p className="mt-6 flex flex-wrap gap-3">
+          <p className="mt-3 flex flex-wrap gap-3">
             {referent.preventionAdvisor && (
               <Link
                 href="/espace/risques"

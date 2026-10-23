@@ -466,7 +466,8 @@
     "planDerniereAnnee": "O plano global de 5 anos terminou: prepare um novo plano global.",
     "themeCodeExistant": "Este código de tema já existe.",
     "themeCoordonnees": "O kit não pode conter e-mail nem telefone: os contatos são adicionados automaticamente.",
-    "themeIncomplet": "Kit incompleto: o francês é obrigatório e cada idioma iniciado deve estar totalmente redigido."
+    "themeIncomplet": "Kit incompleto: o francês é obrigatório e cada idioma iniciado deve estar totalmente redigido.",
+    "campagneSensibDejaPrevue": "Este tema já está no calendário deste ano."
   },
   "Passation": {
     "enterTitle": "Acessar o questionário",
@@ -686,7 +687,12 @@
       "theme_ai_failed": "Falha na redação do kit pela IA",
       "theme_ai_blocked": "Envio de um tema à IA bloqueado",
       "theme_validated": "Tema de sensibilização validado",
-      "theme_archived": "Tema de sensibilização arquivado"
+      "theme_archived": "Tema de sensibilização arquivado",
+      "awareness_calendar_proposed": "Calendário de sensibilização sugerido",
+      "awareness_campaign_added": "Campanha de sensibilização adicionada",
+      "awareness_campaign_updated": "Campanha de sensibilização atualizada",
+      "awareness_kit_downloaded": "Kit de sensibilização baixado",
+      "awareness_reminder_sent": "Lembrete mensal de sensibilização enviado"
     }
   },
   "Rapport": {
@@ -801,7 +807,9 @@
     "ouvrirRapport": "Abrir o relatório",
     "sansContenu": "Por motivos de confidencialidade, este e-mail não contém nenhum elemento do relatório.",
     "rappelPlanSujet": "Plano de prevenção: balanço do trimestre",
-    "rappelPlanTexte": "Seu plano de prevenção tem {aVenir, plural, =0 {nenhuma ação prevista neste trimestre} one {# ação prevista neste trimestre} other {# ações previstas neste trimestre}} e {enRetard, plural, =0 {nenhuma ação em atraso} one {# ação em atraso} other {# ações em atraso}}. Lembre-se de atualizar o andamento no seu espaço."
+    "rappelPlanTexte": "Seu plano de prevenção tem {aVenir, plural, =0 {nenhuma ação prevista neste trimestre} one {# ação prevista neste trimestre} other {# ações previstas neste trimestre}} e {enRetard, plural, =0 {nenhuma ação em atraso} one {# ação em atraso} other {# ações em atraso}}. Lembre-se de atualizar o andamento no seu espaço.",
+    "rappelSensibSujet": "Sensibilização: campanha do mês",
+    "rappelSensibTexte": "{nombre, plural, one {Uma campanha de sensibilização está prevista} other {# campanhas de sensibilização estão previstas}} este mês no seu calendário. O kit está pronto no seu espaço; lembre-se de informar a data de divulgação."
   },
   "RapportPdf": {
     "titre": "Relatório de diagnóstico coletivo dos riscos psicossociais",
@@ -1224,5 +1232,61 @@
     "archiveHelp": "Um tema arquivado deixa de ser oferecido às organizações.",
     "archive": "Arquivar",
     "isArchived": "Este tema está arquivado."
+  },
+  "Calendrier": {
+    "title": "Calendário de sensibilização",
+    "intro": "Uma campanha por mês sobre riscos psicossociais e saúde mental, com um kit pronto para usar: artigo, mensagem curta, cartaz, e-mail aos gestores e ficha « quinze minutos de bem-estar ». O responsável pela prevenção planeja as campanhas; as pessoas de apoio da organização e os números de ajuda são adicionados a cada kit.",
+    "backSpace": "Voltar para o meu espaço",
+    "backCompany": "Voltar para a organização",
+    "backCalendar": "Voltar para o calendário",
+    "year": "Ano",
+    "readOnly": "Consulta: somente o responsável pela prevenção da organização e o IMA alteram o calendário.",
+    "proposeHelp": "O InnerOS sugere um calendário anual a partir dos temas validados pelo IMA (um tema por mês). Depois, você pode mover, retirar ou adicionar campanhas.",
+    "propose": "Sugerir o calendário {annee}",
+    "proposed": "{n, plural, =0 {Nenhuma campanha a adicionar: o calendário já está completo.} one {# campanha adicionada ao calendário.} other {# campanhas adicionadas ao calendário.}}",
+    "working": "Em andamento…",
+    "empty": "Nenhuma campanha prevista este ano.",
+    "statuts": {
+      "prevue": "Prevista",
+      "diffusee": "Divulgada",
+      "realisee": "Realizada",
+      "retiree": "Retirada"
+    },
+    "origines": {
+      "programmee": "Calendário anual",
+      "manuelle": "Adicionada pelo responsável pela prevenção",
+      "registre": "Sugerida a partir do registro de riscos",
+      "evenement": "Sugerida após um evento",
+      "alerte": "Sugerida após um alerta regulatório",
+      "comportement": "Sugerida após comportamentos indesejados relatados"
+    },
+    "update": "Atualizar",
+    "save": "Salvar",
+    "saved": "Campanha atualizada.",
+    "month": "Mês",
+    "status": "Situação",
+    "diffusedOn": "Divulgada em",
+    "comment": "Comentário",
+    "commentHelp": "Por exemplo: canais usados, participação. Sem nome, e-mail ou telefone.",
+    "addTitle": "Adicionar uma campanha",
+    "theme": "Tema",
+    "add": "Adicionar",
+    "added": "Campanha adicionada.",
+    "kitLanguage": "Idioma do kit",
+    "downloadPoster": "Cartaz (PDF)",
+    "downloadSheet": "Ficha de condução (PDF)",
+    "copy": "Copiar",
+    "copied": "Copiado ✓",
+    "article": "Artigo (intranet, jornal interno)",
+    "shortMessage": "Mensagem curta (mensageria, tela)",
+    "managersEmail": "E-mail aos gestores",
+    "teamQuestions": "Perguntas para uma reunião de equipe",
+    "ficheTitle": "Quinze minutos de bem-estar",
+    "ficheMeta": "Duração: {minutes} minutos · cada pessoa pode participar ou apenas ouvir",
+    "ficheSteps": "Roteiro",
+    "ficheQuestions": "Perguntas para a conversa",
+    "ficheTips": "Dicas para quem conduz",
+    "helpTitle": "Precisa de ajuda? Você pode contatar",
+    "noContacts": "Nenhuma pessoa de apoio foi informada ainda para a organização: o IMA as adiciona na campanha de diagnóstico."
   }
 }

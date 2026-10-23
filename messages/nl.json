@@ -466,7 +466,8 @@
     "planDerniereAnnee": "Het globale plan van 5 jaar is afgelopen: bereid een nieuw globaal plan voor.",
     "themeCodeExistant": "Deze themacode bestaat al.",
     "themeCoordonnees": "De kit mag geen e-mailadres of telefoonnummer bevatten: de contacten worden automatisch toegevoegd.",
-    "themeIncomplet": "Kit onvolledig: Frans is verplicht en elke begonnen taal moet volledig zijn opgesteld."
+    "themeIncomplet": "Kit onvolledig: Frans is verplicht en elke begonnen taal moet volledig zijn opgesteld.",
+    "campagneSensibDejaPrevue": "Dit thema staat al in de kalender van dit jaar."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
@@ -686,7 +687,12 @@
       "theme_ai_failed": "AI kon de kit niet opstellen",
       "theme_ai_blocked": "Verzending van een thema naar de AI geblokkeerd",
       "theme_validated": "Sensibiliseringsthema gevalideerd",
-      "theme_archived": "Sensibiliseringsthema gearchiveerd"
+      "theme_archived": "Sensibiliseringsthema gearchiveerd",
+      "awareness_calendar_proposed": "Sensibiliseringskalender voorgesteld",
+      "awareness_campaign_added": "Sensibiliseringscampagne toegevoegd",
+      "awareness_campaign_updated": "Sensibiliseringscampagne bijgewerkt",
+      "awareness_kit_downloaded": "Sensibiliseringskit gedownload",
+      "awareness_reminder_sent": "Maandelijkse sensibiliseringsherinnering verzonden"
     }
   },
   "Rapport": {
@@ -801,7 +807,9 @@
     "ouvrirRapport": "Rapport openen",
     "sansContenu": "Om redenen van vertrouwelijkheid bevat deze e-mail geen enkel element van het rapport.",
     "rappelPlanSujet": "Preventieplan: stand van zaken dit kwartaal",
-    "rappelPlanTexte": "Uw preventieplan telt {aVenir, plural, =0 {geen acties gepland dit kwartaal} one {# actie gepland dit kwartaal} other {# acties gepland dit kwartaal}} en {enRetard, plural, =0 {geen vertraagde acties} one {# vertraagde actie} other {# vertraagde acties}}. Vergeet niet de voortgang bij te werken in uw ruimte."
+    "rappelPlanTexte": "Uw preventieplan telt {aVenir, plural, =0 {geen acties gepland dit kwartaal} one {# actie gepland dit kwartaal} other {# acties gepland dit kwartaal}} en {enRetard, plural, =0 {geen vertraagde acties} one {# vertraagde actie} other {# vertraagde acties}}. Vergeet niet de voortgang bij te werken in uw ruimte.",
+    "rappelSensibSujet": "Sensibilisering: campagne van de maand",
+    "rappelSensibTexte": "{nombre, plural, one {Er is een sensibiliseringscampagne gepland} other {Er zijn # sensibiliseringscampagnes gepland}} deze maand in uw kalender. De kit staat klaar in uw ruimte; vergeet niet de verspreidingsdatum in te vullen."
   },
   "RapportPdf": {
     "titre": "Rapport van de collectieve diagnose van psychosociale risico's",
@@ -1224,5 +1232,61 @@
     "archiveHelp": "Een gearchiveerd thema wordt niet meer aan de organisaties voorgesteld.",
     "archive": "Archiveren",
     "isArchived": "Dit thema is gearchiveerd."
+  },
+  "Calendrier": {
+    "title": "Sensibiliseringskalender",
+    "intro": "Eén campagne per maand over psychosociale risico's en mentale gezondheid, met een kant-en-klare kit: artikel, kort bericht, affiche, e-mail aan leidinggevenden en fiche « kwartiertje welzijn ». De preventieadviseur plant de campagnes; de vertrouwenspersonen van de organisatie en de hulplijnen worden aan elke kit toegevoegd.",
+    "backSpace": "Terug naar mijn ruimte",
+    "backCompany": "Terug naar de organisatie",
+    "backCalendar": "Terug naar de kalender",
+    "year": "Jaar",
+    "readOnly": "Raadpleging: alleen de preventieadviseur van de organisatie en IMA wijzigen de kalender.",
+    "proposeHelp": "InnerOS stelt een jaarkalender voor op basis van de door IMA gevalideerde thema's (één thema per maand). Daarna kunt u campagnes verplaatsen, schrappen of toevoegen.",
+    "propose": "Kalender {annee} voorstellen",
+    "proposed": "{n, plural, =0 {Geen campagne toe te voegen: de kalender is al volledig.} one {# campagne aan de kalender toegevoegd.} other {# campagnes aan de kalender toegevoegd.}}",
+    "working": "Bezig…",
+    "empty": "Geen campagnes gepland dit jaar.",
+    "statuts": {
+      "prevue": "Gepland",
+      "diffusee": "Verspreid",
+      "realisee": "Uitgevoerd",
+      "retiree": "Geschrapt"
+    },
+    "origines": {
+      "programmee": "Jaarkalender",
+      "manuelle": "Toegevoegd door de preventieadviseur",
+      "registre": "Voorgesteld op basis van het risicoregister",
+      "evenement": "Voorgesteld na een gebeurtenis",
+      "alerte": "Voorgesteld na een wettelijke waarschuwing",
+      "comportement": "Voorgesteld na gemeld ongewenst gedrag"
+    },
+    "update": "Bijwerken",
+    "save": "Opslaan",
+    "saved": "Campagne bijgewerkt.",
+    "month": "Maand",
+    "status": "Status",
+    "diffusedOn": "Verspreid op",
+    "comment": "Opmerking",
+    "commentHelp": "Bijvoorbeeld: gebruikte kanalen, deelname. Zonder naam, e-mail of telefoonnummer.",
+    "addTitle": "Een campagne toevoegen",
+    "theme": "Thema",
+    "add": "Toevoegen",
+    "added": "Campagne toegevoegd.",
+    "kitLanguage": "Taal van de kit",
+    "downloadPoster": "Affiche (PDF)",
+    "downloadSheet": "Begeleidingsfiche (PDF)",
+    "copy": "Kopiëren",
+    "copied": "Gekopieerd ✓",
+    "article": "Artikel (intranet, personeelsblad)",
+    "shortMessage": "Kort bericht (berichtendienst, scherm)",
+    "managersEmail": "E-mail aan leidinggevenden",
+    "teamQuestions": "Vragen voor een teamoverleg",
+    "ficheTitle": "Kwartiertje welzijn",
+    "ficheMeta": "Duur: {minutes} minuten · iedereen kan deelnemen of gewoon luisteren",
+    "ficheSteps": "Verloop",
+    "ficheQuestions": "Vragen voor het gesprek",
+    "ficheTips": "Tips voor de begeleider",
+    "helpTitle": "Hulp nodig? U kunt contact opnemen met",
+    "noContacts": "Er zijn nog geen vertrouwenspersonen voor de organisatie ingevuld: IMA voegt ze toe in de diagnosecampagne."
   }
 }

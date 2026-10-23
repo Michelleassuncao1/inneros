@@ -530,6 +530,44 @@ export const awarenessThemes = pgTable(
   ],
 );
 
+// Calendrier de sensibilisation d'une entreprise (module B2) : une campagne = un thème validé à un mois donné.
+// Tenu par le conseiller en prévention et IMA ; lu par les autres référents de l'entreprise.
+// Origine : programmée (calendrier annuel), ajoutée à la main, ou déclenchée (module B3).
+export const origineCampagneSensib = pgEnum("awareness_origin", ["programmee", "manuelle", "registre", "evenement", "alerte", "comportement"]);
+export const statutCampagneSensib = pgEnum("awareness_status", ["prevue", "diffusee", "realisee", "retiree"]);
+
+export const awarenessCampaigns = pgTable(
+  "awareness_campaigns",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    organizationId: uuid("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    themeId: uuid("theme_id")
+      .notNull()
+      .references(() => awarenessThemes.id, { onDelete: "restrict" }),
+    year: integer("year").notNull(),
+    month: integer("month").notNull(),
+    origin: origineCampagneSensib("origin").notNull(),
+    originRef: text("origin_ref"), // risque, événement ou alerte à l'origine (module B3)
+    status: statutCampagneSensib("status").notNull().default("prevue"),
+    diffusedOn: date("diffused_on"),
+    comment: text("comment"),
+    planActionId: text("plan_action_id"), // action du plan de prévention liée (module B3)
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+    updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check("awareness_campaigns_mois", sql`${t.month} BETWEEN 1 AND 12 AND ${t.year} BETWEEN 2020 AND 2100`),
+    check("awareness_campaigns_commentaire", sql`coalesce(length(${t.comment}), 0) <= 500`),
+    check("awareness_campaigns_diffusion", sql`${t.diffusedOn} IS NULL OR ${t.status} IN ('diffusee', 'realisee')`),
+    // Un thème au plus une fois par année dans le calendrier d'une entreprise
+    unique("awareness_campaigns_unique").on(t.organizationId, t.themeId, t.year),
+  ],
+);
+
 // Avancement des actions d'un plan validé (module A3), mis à jour par IMA et le conseiller en prévention.
 export const statutAction = pgEnum("action_status", ["a_faire", "en_cours", "realisee", "reportee", "abandonnee"]);
 

@@ -43,6 +43,7 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
   const tc = await getTranslations("Campagnes");
   const l = await getTranslations("Libelles");
   const tr = await getTranslations("Risques");
+  const tcal = await getTranslations("Calendrier");
 
   return (
     <EspaceAdmin locale={locale} actif="entreprises">
@@ -58,6 +59,12 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
           className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
         >
           {tr("openRegister")}
+        </Link>
+        <Link
+          href={`/admin/entreprises/${id}/sensibilisation`}
+          className="ml-3 inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+        >
+          {tcal("title")}
         </Link>
       </p>
 
