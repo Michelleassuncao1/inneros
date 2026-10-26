@@ -83,7 +83,8 @@
     "campaigns": "Campaigns",
     "signOut": "Sign out",
     "journal": "Log",
-    "awareness": "Awareness"
+    "awareness": "Awareness",
+    "training": "AI training"
   },
   "Libelles": {
     "all": "All countries",
@@ -469,7 +470,9 @@
     "themeIncomplet": "Incomplete kit: French is required and every language started must be fully written.",
     "campagneSensibDejaPrevue": "This theme is already in this year's calendar.",
     "evenementDate": "The event date must be within the last twelve months.",
-    "motifRefusRequis": "Give the reason for declining (300 characters at most)."
+    "motifRefusRequis": "Give the reason for declining (300 characters at most).",
+    "quizIncomplet": "Answer every question before submitting.",
+    "formationParcoursIncomplet": "First read the internal guide and pass the quiz."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",
@@ -701,7 +704,11 @@
       "awareness_suggestion_refused": "Campaign suggestion declined",
       "awareness_campaign_linked": "Campaign linked to the prevention plan",
       "awareness_alert_created": "Regulatory alert published",
-      "awareness_alert_withdrawn": "Regulatory alert withdrawn"
+      "awareness_alert_withdrawn": "Regulatory alert withdrawn",
+      "ai_training_guide_read": "AI guide reading confirmed",
+      "ai_training_quiz": "AI training quiz taken",
+      "ai_training_registered": "AI training recorded (certificate)",
+      "ai_training_certificate_downloaded": "AI training certificate downloaded"
     }
   },
   "Rapport": {
@@ -795,14 +802,48 @@
   },
   "FormationIA": {
     "title": "AI literacy training (Article 4 AI Act)",
-    "help": "Required to validate a report. Enter the date and the training followed; this statement is logged.",
+    "help": "Required to validate a report, plan or theme prepared with AI: complete the IMA Talks training, then record it. Each step is logged.",
     "date": "Training date",
     "note": "Training followed (title, provider, duration)",
     "save": "Record my training",
     "saving": "Saving…",
     "saved": "Training recorded.",
     "current": "Recorded training: {date} — {note}",
-    "missing": "No training recorded: you cannot validate a report yet."
+    "missing": "No training recorded: you cannot validate a report yet.",
+    "startTraining": "Start the IMA Talks training",
+    "openTraining": "Review the training and certificate",
+    "meta": "Version {version} · about {minutes} minutes · quiz marked automatically, unlimited attempts.",
+    "frenchOnly": "The training content is available in French.",
+    "stepsLabel": "Training steps",
+    "stepModules": "Modules",
+    "stepGuide": "Internal guide",
+    "stepQuiz": "Quiz",
+    "stepRegister": "Record and certificate",
+    "modulesHelp": "{n} modules, about {minutes} minutes in total. Go through all of them to move on.",
+    "minutes": "{n} min",
+    "previous": "Previous module",
+    "next": "Next module",
+    "toGuide": "Go to the internal guide",
+    "guideHelp": "Read the whole internal guide before the quiz. It sets out IMA's rules for using AI in InnerOS.",
+    "guideAck": "I have read the whole IMA internal guide “Using AI in InnerOS”, version {version}.",
+    "confirmGuide": "Confirm reading",
+    "toQuiz": "Go to the quiz",
+    "quizHelp": "{n} questions. You need at least {seuil}% correct answers; you can try again as often as needed.",
+    "attempts": "Attempts: {n} · best score: {score}%.",
+    "correct": "Correct.",
+    "wrong": "Expected answer: “{reponse}”.",
+    "passed": "Quiz passed: {score}%. You can now record your training.",
+    "failed": "Score: {score}% ({seuil}% needed). Read the explanations and try again.",
+    "checking": "Marking…",
+    "retry": "Retake the quiz",
+    "submitQuiz": "Submit my answers",
+    "toRegister": "Record my training",
+    "registerHelp": "Last step: give the date and the general AI training you completed. Recording it unlocks the validation of content prepared with AI.",
+    "generalTraining": "General AI training completed",
+    "generalTrainingHelp": "For example: Elements of AI (University of Helsinki), 2026. Keep the certificate if there is one.",
+    "registered": "Training recorded. Certificate no. {code}.",
+    "downloadCertificate": "Download my IMA certificate (PDF)",
+    "certificateNote": "Internal training certificate: it is not an official certification of AI Act compliance. Reread the guide with each new version and at least once a year."
   },
   "Notifications": {
     "salutation": "Hello {name},",

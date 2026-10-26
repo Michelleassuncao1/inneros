@@ -83,7 +83,8 @@
     "campaigns": "Campagnes",
     "signOut": "Se déconnecter",
     "journal": "Journal",
-    "awareness": "Sensibilisation"
+    "awareness": "Sensibilisation",
+    "training": "Formation IA"
   },
   "Libelles": {
     "all": "Tous les pays",
@@ -469,7 +470,9 @@
     "themeIncomplet": "Kit incomplet : le français est obligatoire et chaque langue commencée doit être entièrement rédigée.",
     "campagneSensibDejaPrevue": "Ce thème est déjà au calendrier de cette année.",
     "evenementDate": "La date de l'événement doit se situer dans les douze derniers mois.",
-    "motifRefusRequis": "Indiquez le motif du refus (300 caractères au plus)."
+    "motifRefusRequis": "Indiquez le motif du refus (300 caractères au plus).",
+    "quizIncomplet": "Répondez à toutes les questions avant de valider.",
+    "formationParcoursIncomplet": "Lisez d'abord le guide interne et réussissez le quiz."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",
@@ -701,7 +704,11 @@
       "awareness_suggestion_refused": "Proposition de campagne refusée",
       "awareness_campaign_linked": "Campagne reliée au plan de prévention",
       "awareness_alert_created": "Alerte réglementaire publiée",
-      "awareness_alert_withdrawn": "Alerte réglementaire retirée"
+      "awareness_alert_withdrawn": "Alerte réglementaire retirée",
+      "ai_training_guide_read": "Lecture du guide IA confirmée",
+      "ai_training_quiz": "Quiz de la formation IA passé",
+      "ai_training_registered": "Formation IA enregistrée (certificat)",
+      "ai_training_certificate_downloaded": "Certificat de formation IA téléchargé"
     }
   },
   "Rapport": {
@@ -795,14 +802,48 @@
   },
   "FormationIA": {
     "title": "Formation à la maîtrise de l'IA (article 4 AI Act)",
-    "help": "Obligatoire pour valider un rapport. Indiquez la date et la formation suivie ; cette déclaration est journalisée.",
+    "help": "Obligatoire pour valider un rapport, un plan ou un thème préparé avec l'IA : suivez la formation IMA Talks, puis enregistrez-la. Chaque étape est journalisée.",
     "date": "Date de la formation",
     "note": "Formation suivie (intitulé, organisme, durée)",
     "save": "Enregistrer ma formation",
     "saving": "Enregistrement…",
     "saved": "Formation enregistrée.",
     "current": "Formation enregistrée : {date} — {note}",
-    "missing": "Aucune formation enregistrée : vous ne pouvez pas encore valider de rapport."
+    "missing": "Aucune formation enregistrée : vous ne pouvez pas encore valider de rapport.",
+    "startTraining": "Suivre la formation IMA Talks",
+    "openTraining": "Revoir la formation et le certificat",
+    "meta": "Version {version} · environ {minutes} minutes · quiz corrigé automatiquement, tentatives illimitées.",
+    "frenchOnly": "Le contenu de la formation est disponible en français.",
+    "stepsLabel": "Étapes de la formation",
+    "stepModules": "Modules",
+    "stepGuide": "Guide interne",
+    "stepQuiz": "Quiz",
+    "stepRegister": "Enregistrement et certificat",
+    "modulesHelp": "{n} modules, environ {minutes} minutes au total. Parcourez-les tous pour passer à l'étape suivante.",
+    "minutes": "{n} min",
+    "previous": "Module précédent",
+    "next": "Module suivant",
+    "toGuide": "Passer au guide interne",
+    "guideHelp": "Lisez le guide interne en entier avant de passer au quiz. Il décrit les règles d'IMA pour l'usage de l'IA dans InnerOS.",
+    "guideAck": "J'ai lu en entier le guide interne IMA « Utiliser l'IA dans InnerOS », version {version}.",
+    "confirmGuide": "Confirmer la lecture",
+    "toQuiz": "Passer au quiz",
+    "quizHelp": "{n} questions. Il faut au moins {seuil} % de bonnes réponses ; vous pouvez recommencer autant de fois que nécessaire.",
+    "attempts": "Tentatives : {n} · meilleur score : {score} %.",
+    "correct": "Bonne réponse.",
+    "wrong": "Réponse attendue : « {reponse} ».",
+    "passed": "Quiz réussi : {score} %. Vous pouvez enregistrer votre formation.",
+    "failed": "Score : {score} % (il faut {seuil} %). Relisez les explications et recommencez.",
+    "checking": "Correction…",
+    "retry": "Recommencer le quiz",
+    "submitQuiz": "Valider mes réponses",
+    "toRegister": "Enregistrer ma formation",
+    "registerHelp": "Dernière étape : indiquez la date et la formation générale à l'IA que vous avez suivie. L'enregistrement débloque la validation des contenus préparés avec l'IA.",
+    "generalTraining": "Formation générale à l'IA suivie",
+    "generalTrainingHelp": "Par exemple : Elements of AI (Université d'Helsinki), 2026. Gardez l'attestation si elle existe.",
+    "registered": "Formation enregistrée. Certificat n° {code}.",
+    "downloadCertificate": "Télécharger mon certificat IMA (PDF)",
+    "certificateNote": "Attestation pédagogique interne : elle ne constitue pas une certification officielle de conformité à l'AI Act. Relisez le guide à chaque nouvelle version et au moins une fois par an."
   },
   "Notifications": {
     "salutation": "Bonjour {name},",

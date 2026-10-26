@@ -5,9 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 import { campaigns, organizations, users } from "@/lib/db/schema";
-import { Champ, MessageErreur, MessageInfo } from "@/components/Formulaire";
-import { FormulaireAction } from "@/components/FormulaireAction";
-import { actionFormationIA } from "./actions";
+import { MessageErreur, MessageInfo } from "@/components/Formulaire";
 
 export default async function AdminPage({ params }: PageProps<"/[locale]/admin">) {
   const { locale } = await params;
@@ -65,10 +63,9 @@ export default async function AdminPage({ params }: PageProps<"/[locale]/admin">
             <MessageErreur>{tf("missing")}</MessageErreur>
           </div>
         )}
-        <FormulaireAction action={actionFormationIA.bind(null, locale)} libelle={tf("save")} enCours={tf("saving")} secondaire>
-          <Champ id="formation-date" name="date" type="date" label={tf("date")} defaultValue={moi?.aiLiteracyAt ?? ""} required />
-          <Champ id="formation-note" name="note" label={tf("note")} defaultValue={moi?.aiLiteracyNote ?? ""} maxLength={500} required />
-        </FormulaireAction>
+        <Link href="/admin/formation-ia" className="inline-block rounded-md bg-ima-navy px-5 py-2.5 font-semibold text-white hover:bg-ima-navy-deep">
+          {moi?.aiLiteracyAt ? tf("openTraining") : tf("startTraining")}
+        </Link>
       </section>
     </EspaceAdmin>
   );

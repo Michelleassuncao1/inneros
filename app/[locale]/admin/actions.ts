@@ -29,7 +29,6 @@ import { CONTACTS_MAXIMUM, enregistrerSoutien } from "@/lib/admin/soutien";
 import { genererJetons, revoquerJetonsNonUtilises } from "@/lib/admin/jetons";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
-import { enregistrerFormationIA } from "@/lib/rapport/rapports";
 import { designerSignataire } from "@/lib/rapport/entreprise";
 
 const uuid = z.string().uuid();
@@ -320,17 +319,6 @@ export async function actionSoutien(
   if (!r.ok) return erreur(r.erreur);
   revalidatePath(`/${langue}/admin/campagnes/${id}`);
   const t = await getTranslations({ locale: langue, namespace: "Soutien" });
-  return { succes: t("saved"), envoi: Date.now() };
-}
-
-// ─── Formation à la maîtrise de l'IA (article 4 AI Act) ─────────────────────
-
-export async function actionFormationIA(locale: string, _etat: EtatFormulaire, formData: FormData): Promise<EtatFormulaire> {
-  const { langue, admin, db, erreur } = await contexte(locale);
-  const r = await enregistrerFormationIA(db, admin.id, { date: String(formData.get("date") ?? ""), note: String(formData.get("note") ?? "") });
-  if (!r.ok) return erreur(r.erreur);
-  revalidatePath(`/${langue}/admin`);
-  const t = await getTranslations({ locale: langue, namespace: "FormationIA" });
   return { succes: t("saved"), envoi: Date.now() };
 }
 

@@ -83,7 +83,8 @@
     "campaigns": "Campagnes",
     "signOut": "Afmelden",
     "journal": "Logboek",
-    "awareness": "Sensibilisering"
+    "awareness": "Sensibilisering",
+    "training": "AI-opleiding"
   },
   "Libelles": {
     "all": "Alle landen",
@@ -469,7 +470,9 @@
     "themeIncomplet": "Kit onvolledig: Frans is verplicht en elke begonnen taal moet volledig zijn opgesteld.",
     "campagneSensibDejaPrevue": "Dit thema staat al in de kalender van dit jaar.",
     "evenementDate": "De datum van de gebeurtenis moet in de voorbije twaalf maanden liggen.",
-    "motifRefusRequis": "Geef de reden van weigering (maximaal 300 tekens)."
+    "motifRefusRequis": "Geef de reden van weigering (maximaal 300 tekens).",
+    "quizIncomplet": "Beantwoord alle vragen voordat u indient.",
+    "formationParcoursIncomplet": "Lees eerst de interne gids en slaag voor de quiz."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
@@ -701,7 +704,11 @@
       "awareness_suggestion_refused": "Campagnevoorstel geweigerd",
       "awareness_campaign_linked": "Campagne gekoppeld aan het preventieplan",
       "awareness_alert_created": "Regelgevende waarschuwing gepubliceerd",
-      "awareness_alert_withdrawn": "Regelgevende waarschuwing ingetrokken"
+      "awareness_alert_withdrawn": "Regelgevende waarschuwing ingetrokken",
+      "ai_training_guide_read": "Lezing van de AI-gids bevestigd",
+      "ai_training_quiz": "Quiz van de AI-opleiding afgelegd",
+      "ai_training_registered": "AI-opleiding geregistreerd (certificaat)",
+      "ai_training_certificate_downloaded": "Certificaat van de AI-opleiding gedownload"
     }
   },
   "Rapport": {
@@ -795,14 +802,48 @@
   },
   "FormationIA": {
     "title": "Opleiding AI-geletterdheid (artikel 4 AI-verordening)",
-    "help": "Verplicht om een rapport te valideren. Vermeld de datum en de gevolgde opleiding; deze verklaring wordt gelogd.",
+    "help": "Verplicht om een rapport, plan of thema te valideren dat met AI is voorbereid: volg de opleiding IMA Talks en registreer ze daarna. Elke stap wordt gelogd.",
     "date": "Datum van de opleiding",
     "note": "Gevolgde opleiding (titel, organisatie, duur)",
     "save": "Mijn opleiding registreren",
     "saving": "Registreren…",
     "saved": "Opleiding geregistreerd.",
     "current": "Geregistreerde opleiding: {date} — {note}",
-    "missing": "Geen opleiding geregistreerd: u kunt nog geen rapport valideren."
+    "missing": "Geen opleiding geregistreerd: u kunt nog geen rapport valideren.",
+    "startTraining": "De opleiding IMA Talks volgen",
+    "openTraining": "Opleiding en certificaat bekijken",
+    "meta": "Versie {version} · ongeveer {minutes} minuten · quiz automatisch verbeterd, onbeperkt aantal pogingen.",
+    "frenchOnly": "De inhoud van de opleiding is beschikbaar in het Frans.",
+    "stepsLabel": "Stappen van de opleiding",
+    "stepModules": "Modules",
+    "stepGuide": "Interne gids",
+    "stepQuiz": "Quiz",
+    "stepRegister": "Registratie en certificaat",
+    "modulesHelp": "{n} modules, in totaal ongeveer {minutes} minuten. Doorloop ze allemaal om verder te gaan.",
+    "minutes": "{n} min",
+    "previous": "Vorige module",
+    "next": "Volgende module",
+    "toGuide": "Naar de interne gids",
+    "guideHelp": "Lees de volledige interne gids vóór de quiz. Ze beschrijft de regels van IMA voor het gebruik van AI in InnerOS.",
+    "guideAck": "Ik heb de volledige interne gids van IMA ‘AI gebruiken in InnerOS’, versie {version}, gelezen.",
+    "confirmGuide": "Lezing bevestigen",
+    "toQuiz": "Naar de quiz",
+    "quizHelp": "{n} vragen. U hebt minstens {seuil} % juiste antwoorden nodig; u kunt zo vaak opnieuw proberen als nodig.",
+    "attempts": "Pogingen: {n} · beste score: {score} %.",
+    "correct": "Juist antwoord.",
+    "wrong": "Verwacht antwoord: ‘{reponse}’.",
+    "passed": "Quiz geslaagd: {score} %. U kunt uw opleiding nu registreren.",
+    "failed": "Score: {score} % ({seuil} % nodig). Lees de uitleg en probeer opnieuw.",
+    "checking": "Verbeteren…",
+    "retry": "Quiz opnieuw doen",
+    "submitQuiz": "Mijn antwoorden indienen",
+    "toRegister": "Mijn opleiding registreren",
+    "registerHelp": "Laatste stap: geef de datum en de algemene AI-opleiding die u gevolgd hebt. De registratie maakt de validatie van met AI voorbereide inhoud mogelijk.",
+    "generalTraining": "Gevolgde algemene AI-opleiding",
+    "generalTrainingHelp": "Bijvoorbeeld: Elements of AI (Universiteit van Helsinki), 2026. Bewaar het attest als er een is.",
+    "registered": "Opleiding geregistreerd. Certificaat nr. {code}.",
+    "downloadCertificate": "Mijn IMA-certificaat downloaden (pdf)",
+    "certificateNote": "Intern opleidingsattest: het is geen officiële certificering van conformiteit met de AI-verordening. Herlees de gids bij elke nieuwe versie en minstens eenmaal per jaar."
   },
   "Notifications": {
     "salutation": "Beste {name},",

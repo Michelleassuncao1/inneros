@@ -1,0 +1,296 @@
+{
+  "id": "IMA-TALKS-INNEROS-AI-001",
+  "title": "IMA Talks | Utiliser l’IA dans InnerOS",
+  "version": "1.0",
+  "language": "fr-BE",
+  "audience": "Personnes habilitées à valider pour IMA les contenus générés dans InnerOS, y compris intervenants externes",
+  "duration_minutes": 25,
+  "source_document": "Utiliser l’IA dans InnerOS — Guide interne IMA, v1.0, 26/10/2026",
+  "scope": "Formation interne spécifique à InnerOS ; complément d’une formation générale à l’IA et de la lecture du guide",
+  "passing_score_percent": 80,
+  "quiz_attempts": "illimitées",
+  "completion_policy": {
+    "quiz_pass_required": true,
+    "guide_read_acknowledgment_required": true,
+    "manual_training_registration_required": true,
+    "external_general_ai_training_recorded_separately": true,
+    "unlock_validation_only_after_registration": true
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "Comprendre le rôle de l’IA",
+      "objective": "L’IA dans InnerOS prépare des brouillons, sans calculer les scores ni décider à la place d’IMA.",
+      "lessons": [
+        {
+          "title": "Trois productions autorisées",
+          "content": "InnerOS utilise Claude Sonnet pour préparer : (1) un rapport de diagnostic à partir de moyennes de groupes d’au moins 10 personnes et du contexte du mandat ; (2) un plan global de prévention et un plan d’action annuel à partir du registre des risques et du rapport validé ; (3) des kits de sensibilisation à partir d’un brief générique IMA, sans donnée d’entreprise."
+        },
+        {
+          "title": "Ce que l’IA ne fait pas",
+          "content": "Les scores sont calculés par InnerOS selon les règles des questionnaires. Les brouillons ne sont pas transmis aux entreprises avant validation. L’IA n’évalue ni ne classe une personne et ne propose aucune décision individuelle en matière d’emploi."
+        },
+        {
+          "title": "Limites fonctionnelles",
+          "content": "InnerOS n’analyse ni voix, ni visage, ni écriture, ni données physiologiques ; aucune reconnaissance d’émotions fondée sur des données biométriques au travail. Tout nouvel usage exige une évaluation préalable et une mise à jour du guide."
+        }
+      ],
+      "duration_minutes": 4
+    },
+    {
+      "id": "M2",
+      "title": "Protéger les données",
+      "objective": "N’envoyer à l’IA que les données autorisées et prévenir toute identification directe ou indirecte.",
+      "lessons": [
+        {
+          "title": "Données admises",
+          "content": "Moyennes de groupes d’au moins dix personnes ; question diagnostique, périmètre, secteur, pays, langue et tranche d’effectif ; code interne d’entreprise ; registre des risques et rapport validé pour les plans ; brief générique IMA pour les kits."
+        },
+        {
+          "title": "Données exclues",
+          "content": "Aucune réponse individuelle, aucun nom de personne, e-mail, téléphone ou nom d’entreprise. Ne saisissez jamais dans les champs libres un cas individuel, une donnée de santé ou une fonction permettant de reconnaître une seule personne."
+        },
+        {
+          "title": "Le piège du recoupement",
+          "content": "Même avec dix personnes dans un groupe, des croisements ou des descriptions trop précises peuvent permettre une réidentification. Les données agrégées ou pseudonymisées restent à protéger ; elles ne sont pas automatiquement anonymes au sens du RGPD."
+        }
+      ],
+      "duration_minutes": 4
+    },
+    {
+      "id": "M3",
+      "title": "Repérer les erreurs",
+      "objective": "Une rédaction fluide ne prouve ni l’exactitude ni la pertinence.",
+      "lessons": [
+        {
+          "title": "Les erreurs possibles",
+          "content": "L’IA peut reprendre un mauvais chiffre, confondre corrélation et causalité, inventer une référence, généraliser abusivement ou employer un vocabulaire clinique non justifié."
+        },
+        {
+          "title": "Biais et contexte",
+          "content": "Repérez les stéréotypes sur le genre, l’âge, la profession ou la culture ; comparez toujours le brouillon aux résultats sources et au contexte réel du mandat."
+        },
+        {
+          "title": "Droit et sources",
+          "content": "Toute référence légale doit être vérifiée dans une source officielle actuelle : Justel et SPF Emploi (Belgique), Légifrance (France), Diário da República (Portugal), gov.br (Brésil)."
+        }
+      ],
+      "duration_minutes": 4
+    },
+    {
+      "id": "M4",
+      "title": "Valider avec responsabilité",
+      "objective": "La validation engage IMA : la personne qui valide répond du contenu.",
+      "lessons": [
+        {
+          "title": "Contrôle 1 — Faits et confidentialité",
+          "content": "Vérifiez tous les chiffres et affirmations avec les résultats sources. Contrôlez l’absence de groupe de moins de dix personnes, y compris par recoupement."
+        },
+        {
+          "title": "Contrôle 2 — Langage et limites",
+          "content": "Appliquez ETH-IMA-01 : formulation descriptive et proportionnée, sans diagnostic ni jugement individuel. Mentionnez participation, taille des groupes et période ; évitez « dépression », « burn-out diagnostiqué », « harcèlement avéré »."
+        },
+        {
+          "title": "Contrôle 3 — Sources et thèmes sensibles",
+          "content": "Vérifiez les bases légales dans les sources officielles. Pour suicide, harcèlement ou violence, faites relire par un professionnel avant validation. En cas de doute, corrigez, sollicitez un expert ou refusez le brouillon. Ne cochez jamais une vérification non réalisée."
+        }
+      ],
+      "duration_minutes": 4
+    },
+    {
+      "id": "M5",
+      "title": "Transparence et incidents",
+      "objective": "Informer, tracer et savoir agir en cas de problème.",
+      "lessons": [
+        {
+          "title": "Transparence volontaire d’IMA",
+          "content": "Tout rapport comporte : « Analyse préparée avec l’assistance d’une IA et validée par [nom] ». L’information aux travailleurs signale l’usage de l’IA. Le modèle, la version du prompt et les décisions de génération, validation ou refus sont consignés."
+        },
+        {
+          "title": "Garder une solution manuelle",
+          "content": "L’IA peut être désactivée pour une campagne ou la plateforme ; rapports, plans et kits restent réalisables manuellement. Ne copiez jamais les données ou documents clients dans une autre IA ou un traducteur en ligne."
+        },
+        {
+          "title": "Réagir sans délai",
+          "content": "Signalez à Michelle Assunção tout contenu gravement erroné, discriminatoire ou tout refus répété. Toute transmission accidentelle de données personnelles ou accès non autorisé doit être signalé immédiatement pour évaluation RGPD ; le délai de notification de 72 h s’applique lorsque les conditions légales sont réunies."
+        }
+      ],
+      "duration_minutes": 4
+    },
+    {
+      "id": "M6",
+      "title": "Enregistrer sa formation",
+      "objective": "La lecture, la formation générale et l’enregistrement sont des étapes distinctes.",
+      "lessons": [
+        {
+          "title": "Votre parcours",
+          "content": "Suivez une formation générale à l’IA (ex. Elements of AI) et conservez l’attestation si disponible ; lisez le guide interne IMA intégralement ; réalisez ce module et son quiz."
+        },
+        {
+          "title": "Preuve dans InnerOS",
+          "content": "Dans l’espace IMA, page d’accueil « Formation à la maîtrise de l’IA », renseignez date, formation générale suivie, guide interne et version. Sans enregistrement, InnerOS refuse la validation des contenus."
+        },
+        {
+          "title": "Actualisation",
+          "content": "Relisez le guide à chaque nouvelle version et au moins une fois par an. Mettez votre enregistrement à jour. La présente formation n’est pas une certification officielle AI Act."
+        }
+      ],
+      "duration_minutes": 4
+    }
+  ],
+  "quiz": [
+    {
+      "id": "Q1",
+      "question": "L’IA calcule-t-elle les scores des questionnaires ?",
+      "options": [
+        "Oui, elle les recalcule",
+        "Non, InnerOS les calcule selon les règles prévues",
+        "Seulement pour les petits groupes"
+      ],
+      "correct_option_index": 1,
+      "feedback": "Le guide réserve les calculs de scores à InnerOS."
+    },
+    {
+      "id": "Q2",
+      "question": "Quel document peut être généré par l’IA ?",
+      "options": [
+        "Un brouillon de rapport de diagnostic",
+        "Une décision de licenciement",
+        "Une évaluation nominative"
+      ],
+      "correct_option_index": 0,
+      "feedback": "L’IA ne produit que les trois catégories de brouillons autorisées."
+    },
+    {
+      "id": "Q3",
+      "question": "Un groupe de 12 personnes est-il automatiquement anonyme ?",
+      "options": [
+        "Oui",
+        "Non, il faut aussi contrôler les recoupements",
+        "Oui, si le nom de l’entreprise est masqué"
+      ],
+      "correct_option_index": 1,
+      "feedback": "Les données agrégées peuvent encore permettre une identification indirecte."
+    },
+    {
+      "id": "Q4",
+      "question": "Que faire si un champ libre mentionne une personne identifiable ?",
+      "options": [
+        "Envoyer le texte tel quel",
+        "Supprimer ou reformuler l’information avant génération",
+        "Laisser l’IA anonymiser"
+      ],
+      "correct_option_index": 1,
+      "feedback": "Les champs libres partent vers l’IA : ils doivent être expurgés avant l’envoi."
+    },
+    {
+      "id": "Q5",
+      "question": "Le brouillon cite un article de loi. Quelle action ?",
+      "options": [
+        "Le valider car il paraît précis",
+        "Vérifier sur une source officielle actuelle",
+        "Le retirer systématiquement"
+      ],
+      "correct_option_index": 1,
+      "feedback": "Une IA peut inventer ou citer une version périmée."
+    },
+    {
+      "id": "Q6",
+      "question": "Le brouillon affirme « harcèlement avéré » sur la base d’un questionnaire collectif. Que faire ?",
+      "options": [
+        "Valider",
+        "Corriger en formulation descriptive et proportionnée, puis faire vérifier si nécessaire",
+        "Transmettre immédiatement au client"
+      ],
+      "correct_option_index": 1,
+      "feedback": "ETH-IMA-01 proscrit les conclusions individuelles ou juridiquement non établies."
+    },
+    {
+      "id": "Q7",
+      "question": "Un kit de sensibilisation porte sur le suicide. Quelle précaution ?",
+      "options": [
+        "Aucune si le texte est fluide",
+        "Relecture par un professionnel avant validation",
+        "Le publier sans contrôle"
+      ],
+      "correct_option_index": 1,
+      "feedback": "Le guide exige une relecture professionnelle des thèmes sensibles."
+    },
+    {
+      "id": "Q8",
+      "question": "Qui voit le brouillon avant validation ?",
+      "options": [
+        "L’entreprise cliente",
+        "IMA seulement",
+        "Tous les travailleurs"
+      ],
+      "correct_option_index": 1,
+      "feedback": "Les brouillons sont réservés à IMA avant validation."
+    },
+    {
+      "id": "Q9",
+      "question": "Peut-on copier un rapport client dans un outil d’IA externe ?",
+      "options": [
+        "Oui si l’on supprime le logo",
+        "Non",
+        "Oui si le service est gratuit"
+      ],
+      "correct_option_index": 1,
+      "feedback": "Le guide interdit ce transfert hors d’InnerOS."
+    },
+    {
+      "id": "Q10",
+      "question": "Une donnée personnelle a été transmise par erreur. Que faire ?",
+      "options": [
+        "Attendre le prochain audit",
+        "Signaler immédiatement à Michelle Assunção",
+        "Effacer seulement son historique local"
+      ],
+      "correct_option_index": 1,
+      "feedback": "Un incident potentiel doit être signalé sans délai pour évaluation."
+    },
+    {
+      "id": "Q11",
+      "question": "Que faire lorsque l’IA refuse de générer un document ?",
+      "options": [
+        "Contourner les contrôles",
+        "Utiliser la rédaction manuelle et signaler les refus répétés",
+        "Valider un document vide"
+      ],
+      "correct_option_index": 1,
+      "feedback": "L’IA est facultative et une procédure manuelle existe."
+    },
+    {
+      "id": "Q12",
+      "question": "Quand faut-il relire le guide ?",
+      "options": [
+        "Uniquement à l’embauche",
+        "À chaque nouvelle version et au moins annuellement",
+        "Tous les cinq ans"
+      ],
+      "correct_option_index": 1,
+      "feedback": "La formation est mise à jour à chaque version et au moins une fois par an."
+    }
+  ],
+  "attestation": {
+    "title": "Attestation interne de suivi — IMA Talks",
+    "disclaimer": "Attestation pédagogique interne ; ne constitue pas une certification officielle de conformité à l’AI Act.",
+    "fields": [
+      "nom",
+      "identifiant_utilisateur",
+      "date",
+      "version_formation",
+      "version_guide",
+      "score",
+      "formation_generale_declaree",
+      "validation_guide",
+      "horodatage_enregistrement"
+    ]
+  },
+  "implementation_notes": [
+    "Schéma JSON générique : adapter aux champs et API réels d’InnerOS avant import.",
+    "Conserver journal horodaté, version, score et accusé de lecture ; ne pas enregistrer de données de santé dans le suivi pédagogique.",
+    "L’enregistrement de formation est distinct de la réussite du quiz ; respecter le verrou de validation du guide.",
+    "La conformité juridique globale et les points ouverts (DPA, ZDR, transferts, classification haut risque) restent à traiter séparément."
+  ]
+}

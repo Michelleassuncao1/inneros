@@ -134,6 +134,13 @@
       "when": 1793024945618,
       "tag": "0018_campagnes-declenchees",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1793035767060,
+      "tag": "0019_formation-ia",
+      "breakpoints": true
     }
   ]
 }

@@ -754,3 +754,33 @@ export const auditLog = pgTable("audit_log", {
   targetId: uuid("target_id"),
   details: jsonb("details"),
 });
+
+// Formation « IMA Talks — Utiliser l'IA dans InnerOS » (article 4 AI Act) : une ligne par personne et par
+// version de la formation. Lecture du guide, tentatives au quiz, réussite, enregistrement et certificat.
+// Aucune donnée de santé ; le score seul est conservé, pas les réponses.
+export const aiTrainingProgress = pgTable(
+  "ai_training_progress",
+  {
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    trainingId: text("training_id").notNull(),
+    trainingVersion: text("training_version").notNull(),
+    guideVersion: text("guide_version").notNull(),
+    guideAckAt: timestamp("guide_ack_at", { withTimezone: true }),
+    attempts: integer("attempts").notNull().default(0),
+    bestScore: integer("best_score"),
+    passedAt: timestamp("passed_at", { withTimezone: true }),
+    generalTraining: text("general_training"),
+    registeredAt: timestamp("registered_at", { withTimezone: true }),
+    certificateCode: text("certificate_code").unique(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.userId, t.trainingId, t.trainingVersion] }),
+    check("ai_training_score", sql`${t.bestScore} IS NULL OR ${t.bestScore} BETWEEN 0 AND 100`),
+    check("ai_training_formation", sql`coalesce(length(${t.generalTraining}), 0) <= 300`),
+    // Enregistrement seulement après lecture du guide et réussite du quiz
+    check("ai_training_ordre", sql`${t.registeredAt} IS NULL OR (${t.passedAt} IS NOT NULL AND ${t.guideAckAt} IS NOT NULL AND ${t.certificateCode} IS NOT NULL)`),
+  ],
+);
