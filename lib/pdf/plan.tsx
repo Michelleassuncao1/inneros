@@ -59,6 +59,7 @@ export async function pdfPlan(d: DonneesPlan, langueInterface?: string) {
   const t = traducteur(langue, "Plan");
   const tres = traducteur(langue, "Resultats");
   const tr = traducteur(langue, "Risques");
+  const tcal = traducteur(langue, "Calendrier");
   const date = (x: string | Date) =>
     new Intl.DateTimeFormat(langue, { dateStyle: "long", timeZone: "UTC" }).format(typeof x === "string" ? new Date(`${x}T00:00:00Z`) : x);
   const titres = new Map(d.registre.map((r) => [r.id, r.title]));
@@ -197,6 +198,12 @@ export async function pdfPlan(d: DonneesPlan, langueInterface?: string) {
                     {t(`niveaux.${a.niveau_prevention}`)}
                     {a.risques.length ? ` · ${noms(a.risques)}` : ""}
                   </Text>
+                  {(d.campagnes.get(a.id) ?? []).map((c, i) => (
+                    <Text key={i} style={s.detail}>
+                      {t("awarenessLine", { titre: c.titre, etat: tcal(`statuts.${c.statut}`) })}
+                      {c.diffuseeLe ? ` · ${date(c.diffuseeLe)}` : ""}
+                    </Text>
+                  ))}
                 </View>
                 <Text style={[s.cellule, { width: `${COLONNES[1]}%` }]}>{a.responsable}</Text>
                 <Text style={[s.cellule, { width: `${COLONNES[2]}%` }]}>

@@ -9,6 +9,7 @@ import { getDb } from "@/lib/db/client";
 import { preventionPlans, users } from "@/lib/db/schema";
 import { lireContenuPlan } from "@/lib/plan/contenu";
 import { lireAvancement, ORGANES, STATUTS_ACTION, tableauDeBord } from "@/lib/plan/suivi";
+import { campagnesDuPlan } from "@/lib/sensibilisation/declencheurs";
 
 export async function SuiviPlan({
   plan,
@@ -22,10 +23,12 @@ export async function SuiviPlan({
   peutSuivre: boolean;
 }) {
   const t = await getTranslations("Plan");
+  const tcal = await getTranslations("Calendrier");
   const db = getDb();
   const contenu = lireContenuPlan(plan.content);
   if (!contenu) return null;
   const statuts = await lireAvancement(db, plan.id);
+  const campagnes = await campagnesDuPlan(db, plan.id, locale);
   const bord = tableauDeBord(contenu, plan.actionYear, statuts);
   const date = (d: string) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
   const [adoptant] = plan.adoptedBy ? await db.select({ name: users.name }).from(users).where(eq(users.id, plan.adoptedBy)) : [];
@@ -126,6 +129,12 @@ export async function SuiviPlan({
                   {ligne?.doneOn && ` · ${date(ligne.doneOn)}`}
                   {ligne?.comment && <span className="block text-ima-muted">{ligne.comment}</span>}
                 </p>
+                {(campagnes.get(a.id) ?? []).map((c, i) => (
+                  <p key={i} className="mt-1 text-sm">
+                    {t("awarenessLine", { titre: c.titre, etat: tcal(`statuts.${c.statut}`) })}
+                    {c.diffuseeLe && ` · ${date(c.diffuseeLe)}`}
+                  </p>
+                ))}
                 {peutSuivre && (
                   <details className="mt-2">
                     <summary className="cursor-pointer text-sm font-semibold text-ima-navy">{t("updateProgress")}</summary>

@@ -553,7 +553,8 @@ export const awarenessCampaigns = pgTable(
     status: statutCampagneSensib("status").notNull().default("prevue"),
     diffusedOn: date("diffused_on"),
     comment: text("comment"),
-    planActionId: text("plan_action_id"), // action du plan de prévention liée (module B3)
+    planId: uuid("plan_id").references(() => preventionPlans.id, { onDelete: "set null" }), // plan de prévention lié (module B3)
+    planActionId: text("plan_action_id"), // action de ce plan liée (module B3)
     createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
     updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
@@ -565,6 +566,89 @@ export const awarenessCampaigns = pgTable(
     check("awareness_campaigns_diffusion", sql`${t.diffusedOn} IS NULL OR ${t.status} IN ('diffusee', 'realisee')`),
     // Un thème au plus une fois par année dans le calendrier d'une entreprise
     unique("awareness_campaigns_unique").on(t.organizationId, t.themeId, t.year),
+  ],
+);
+
+// Campagnes déclenchées (module B3, décisions de Michelle du 26/10/2026) : InnerOS propose, le conseiller en
+// prévention (ou IMA) accepte ou refuse. Rien n'est ajouté seul au calendrier.
+
+// Événements déclarés par le conseiller en prévention : un type et une date, jamais de nom ni de récit
+export const typeEvenement = pgEnum("awareness_event_type", [
+  "reorganisation",
+  "licenciements",
+  "fusion",
+  "accident_grave",
+  "agression",
+  "forte_charge",
+  "conflit_collectif",
+  "cyberattaque",
+  "deces",
+]);
+
+export const awarenessEvents = pgTable("awareness_events", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  organizationId: uuid("organization_id")
+    .notNull()
+    .references(() => organizations.id, { onDelete: "cascade" }),
+  type: typeEvenement("type").notNull(),
+  occurredOn: date("occurred_on").notNull(),
+  updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+// Alertes réglementaires rédigées par IMA, ciblées par pays et, au besoin, par secteur
+export const awarenessAlerts = pgTable(
+  "awareness_alerts",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    title: text("title").notNull(),
+    message: text("message").notNull(),
+    countries: jsonb("countries").$type<string[]>().notNull(),
+    sectors: jsonb("sectors").$type<string[] | null>(), // null = tous les secteurs
+    themeIds: jsonb("theme_ids").$type<string[]>().notNull(),
+    year: integer("year").notNull(),
+    month: integer("month").notNull(),
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    withdrawnAt: timestamp("withdrawn_at", { withTimezone: true }),
+  },
+  (t) => [
+    check("awareness_alerts_textes", sql`length(${t.title}) BETWEEN 3 AND 120 AND length(${t.message}) <= 1000`),
+    check("awareness_alerts_mois", sql`${t.month} BETWEEN 1 AND 12 AND ${t.year} BETWEEN 2020 AND 2100`),
+  ],
+);
+
+export const statutProposition = pgEnum("awareness_suggestion_status", ["en_attente", "acceptee", "refusee"]);
+
+export const awarenessSuggestions = pgTable(
+  "awareness_suggestions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    organizationId: uuid("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    themeId: uuid("theme_id")
+      .notNull()
+      .references(() => awarenessThemes.id, { onDelete: "cascade" }),
+    origin: origineCampagneSensib("origin").notNull(),
+    originRef: uuid("origin_ref").notNull(), // risque, événement ou alerte
+    year: integer("year").notNull(),
+    month: integer("month").notNull(),
+    priority: boolean("priority").notNull().default(false),
+    status: statutProposition("status").notNull().default("en_attente"),
+    campaignId: uuid("campaign_id").references(() => awarenessCampaigns.id, { onDelete: "set null" }),
+    refusalReason: text("refusal_reason"),
+    decidedBy: uuid("decided_by").references(() => users.id, { onDelete: "set null" }),
+    decidedAt: timestamp("decided_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check("awareness_suggestions_origine", sql`${t.origin} IN ('registre', 'evenement', 'alerte', 'comportement')`),
+    check("awareness_suggestions_mois", sql`${t.month} BETWEEN 1 AND 12 AND ${t.year} BETWEEN 2020 AND 2100`),
+    check("awareness_suggestions_motif", sql`coalesce(length(${t.refusalReason}), 0) <= 300`),
+    check("awareness_suggestions_decision", sql`(${t.status} = 'en_attente') = (${t.decidedAt} IS NULL)`),
+    // Une même cause ne propose un thème qu'une fois
+    unique("awareness_suggestions_unique").on(t.organizationId, t.themeId, t.origin, t.originRef),
   ],
 );
 

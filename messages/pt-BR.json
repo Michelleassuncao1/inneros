@@ -467,7 +467,9 @@
     "themeCodeExistant": "Este código de tema já existe.",
     "themeCoordonnees": "O kit não pode conter e-mail nem telefone: os contatos são adicionados automaticamente.",
     "themeIncomplet": "Kit incompleto: o francês é obrigatório e cada idioma iniciado deve estar totalmente redigido.",
-    "campagneSensibDejaPrevue": "Este tema já está no calendário deste ano."
+    "campagneSensibDejaPrevue": "Este tema já está no calendário deste ano.",
+    "evenementDate": "A data do evento deve estar nos últimos doze meses.",
+    "motifRefusRequis": "Indique o motivo da recusa (no máximo 300 caracteres)."
   },
   "Passation": {
     "enterTitle": "Acessar o questionário",
@@ -692,7 +694,14 @@
       "awareness_campaign_added": "Campanha de sensibilização adicionada",
       "awareness_campaign_updated": "Campanha de sensibilização atualizada",
       "awareness_kit_downloaded": "Kit de sensibilização baixado",
-      "awareness_reminder_sent": "Lembrete mensal de sensibilização enviado"
+      "awareness_reminder_sent": "Lembrete mensal de sensibilização enviado",
+      "awareness_event_declared": "Evento declarado",
+      "awareness_suggestions_created": "Campanhas propostas",
+      "awareness_suggestion_accepted": "Proposta de campanha aceita",
+      "awareness_suggestion_refused": "Proposta de campanha recusada",
+      "awareness_campaign_linked": "Campanha vinculada ao plano de prevenção",
+      "awareness_alert_created": "Alerta regulatório publicado",
+      "awareness_alert_withdrawn": "Alerta regulatório retirado"
     }
   },
   "Rapport": {
@@ -809,7 +818,10 @@
     "rappelPlanSujet": "Plano de prevenção: balanço do trimestre",
     "rappelPlanTexte": "Seu plano de prevenção tem {aVenir, plural, =0 {nenhuma ação prevista neste trimestre} one {# ação prevista neste trimestre} other {# ações previstas neste trimestre}} e {enRetard, plural, =0 {nenhuma ação em atraso} one {# ação em atraso} other {# ações em atraso}}. Lembre-se de atualizar o andamento no seu espaço.",
     "rappelSensibSujet": "Sensibilização: campanha do mês",
-    "rappelSensibTexte": "{nombre, plural, one {Uma campanha de sensibilização está prevista} other {# campanhas de sensibilização estão previstas}} este mês no seu calendário. O kit está pronto no seu espaço; lembre-se de informar a data de divulgação."
+    "rappelSensibTexte": "{nombre, plural, one {Uma campanha de sensibilização está prevista} other {# campanhas de sensibilização estão previstas}} este mês no seu calendário. O kit está pronto no seu espaço; lembre-se de informar a data de divulgação.",
+    "alerteSujet": "Alerta regulatório do Institut Mindset en Action",
+    "alerteTexte": "O IMA publicou um alerta regulatório que diz respeito à sua empresa: “{titre}”. Uma campanha de conscientização é proposta no seu calendário.",
+    "rappelSensibPropositions": "{nombre, plural, one {Uma proposta de campanha aguarda a sua decisão} other {# propostas de campanha aguardam a sua decisão}} no seu calendário de conscientização."
   },
   "RapportPdf": {
     "titre": "Relatório de diagnóstico coletivo dos riscos psicossociais",
@@ -1160,7 +1172,9 @@
     "nextYearHelp": "Mesmo plano global de 5 anos. As ações não realizadas são retomadas (com seu andamento); o plano de ação do ano é depois validado pelo IMA e adotado pela organização.",
     "nextYearAi": "Redigir o plano de ação com a IA",
     "nextYearManual": "Preparar manualmente (ações não concluídas retomadas)",
-    "lastYear": "O plano global está em seu 5º ano: prepare um novo plano global (novo diagnóstico recomendado)."
+    "lastYear": "O plano global está em seu 5º ano: prepare um novo plano global (novo diagnóstico recomendado).",
+    "awarenessLine": "Conscientização: “{titre}” ({etat})",
+    "awarenessCol": "Campanhas de conscientização"
   },
   "Sensibilisation": {
     "surtitre": "Sensibilização",
@@ -1231,7 +1245,29 @@
     "archiveTitle": "Arquivar este tema",
     "archiveHelp": "Um tema arquivado deixa de ser oferecido às organizações.",
     "archive": "Arquivar",
-    "isArchived": "Este tema está arquivado."
+    "isArchived": "Este tema está arquivado.",
+    "fieldEvents": "Eventos da empresa",
+    "fieldEventsHelp": "O tema será proposto quando o responsável pela prevenção declarar um destes eventos.",
+    "alertsLink": "Alertas regulatórios",
+    "alertsTitle": "Alertas regulatórios",
+    "alertsIntro": "Um alerta informa as empresas de um país (e, se necessário, de um setor) sobre uma mudança legal ou regulatória. Ele propõe os temas escolhidos no calendário delas e avisa o responsável pela prevenção por e-mail.",
+    "alertsEmpty": "Nenhum alerta por enquanto.",
+    "allSectors": "todos os setores",
+    "alertIsWithdrawn": "Alerta retirado.",
+    "alertWithdraw": "Retirar o alerta",
+    "alertNew": "Novo alerta",
+    "alertNoTheme": "Valide primeiro ao menos um tema: um alerta propõe temas validados.",
+    "alertCreate": "Publicar o alerta",
+    "alertFieldTitle": "Título",
+    "alertFieldMessage": "Mensagem",
+    "alertFieldMessageHelp": "O que muda, para quem e a partir de quando. Sem e-mail ou telefone.",
+    "alertFieldSectors": "Setores",
+    "alertFieldSectorsHelp": "Nenhuma caixa marcada: todos os setores.",
+    "alertFieldThemes": "Temas propostos",
+    "alertFieldThemesHelp": "De um a cinco temas validados.",
+    "alertFieldYear": "Ano",
+    "alertCreated": "{n, plural, =0 {Alerta publicado. Nenhuma empresa envolvida por enquanto.} one {Alerta publicado para # empresa.} other {Alerta publicado para # empresas.}}",
+    "alertWithdrawn": "Alerta retirado."
   },
   "Calendrier": {
     "title": "Calendário de sensibilização",
@@ -1287,6 +1323,52 @@
     "ficheQuestions": "Perguntas para a conversa",
     "ficheTips": "Dicas para quem conduz",
     "helpTitle": "Precisa de ajuda? Você pode contatar",
-    "noContacts": "Nenhuma pessoa de apoio foi informada ainda para a organização: o IMA as adiciona na campanha de diagnóstico."
+    "noContacts": "Nenhuma pessoa de apoio foi informada ainda para a organização: o IMA as adiciona na campanha de diagnóstico.",
+    "evenements": {
+      "reorganisation": "Reorganização ou mudança de local",
+      "licenciements": "Demissões",
+      "fusion": "Fusão ou aquisição",
+      "accident_grave": "Acidente grave",
+      "agression": "Agressão",
+      "forte_charge": "Período de alta carga de trabalho",
+      "conflit_collectif": "Conflito coletivo",
+      "cyberattaque": "Ataque cibernético ou pane grave",
+      "deces": "Falecimento de um colega"
+    },
+    "causes": {
+      "registre": "Inventário de riscos: “{risque}” (classe {classe}).",
+      "comportement": "Comportamentos indesejados foram relatados durante o diagnóstico.",
+      "evenement": "Evento declarado: {evenement} ({date}).",
+      "alerte": "Alerta regulatório do IMA: “{titre}”."
+    },
+    "decesTitle": "Um falecimento foi declarado: primeiro, apoio profissional",
+    "decesText": "O InnerOS não propõe campanha de comunicação após um falecimento, em especial um suicídio. Recorra primeiro a um profissional: apoio psicológico, serviço externo de prevenção ou medicina do trabalho. Uma campanha de conscientização poderá ser considerada mais tarde, se esse profissional julgar útil.",
+    "alertsTitle": "Alertas regulatórios do IMA",
+    "alertMonth": "Mês recomendado: {mois}",
+    "suggestionsTitle": "{n, plural, =0 {Nenhuma proposta pendente} one {# proposta para analisar} other {# propostas para analisar}}",
+    "suggestionsHelp": "O InnerOS propõe campanhas a partir do inventário de riscos, dos comportamentos relatados, dos eventos que você declara e dos alertas do IMA. Nada é adicionado sem o seu acordo: aceite escolhendo o mês, ou recuse indicando o motivo.",
+    "priority": "Prioritária",
+    "alreadyPlanned": "Este tema já está no calendário em {mois} ({statut}): aceitar o antecipa para o mês escolhido, se for mais cedo.",
+    "suggestedFor": "Mês proposto: {mois}",
+    "accept": "Aceitar",
+    "refuse": "Recusar",
+    "refuseReason": "Motivo da recusa",
+    "refuseReasonHelp": "Por exemplo: tema já tratado de outra forma. Sem nome, e-mail ou telefone.",
+    "accepted": "Proposta aceita: a campanha está no calendário.",
+    "refused": "Proposta recusada.",
+    "causeLine": "Proposta em decorrência de: {cause}",
+    "linkedAction": "Ação do plano de prevenção: {action}",
+    "link": "Vincular",
+    "linked": "Vínculo com o plano de prevenção registrado.",
+    "planAction": "Ação do plano de prevenção",
+    "noAction": "Nenhuma ação vinculada",
+    "suggestedAction": "(sugerida)",
+    "eventsTitle": "Declarar um evento",
+    "eventsHelp": "Um evento que pode afetar as equipes. Indique apenas o tipo e a data, nunca nomes ou relatos. O InnerOS então propõe os temas adequados durante seis meses.",
+    "declare": "Declarar",
+    "eventType": "Tipo de evento",
+    "eventDate": "Data",
+    "declared": "{n, plural, =0 {Evento registrado. Nenhum tema novo a propor.} one {Evento registrado: # proposta adicionada.} other {Evento registrado: # propostas adicionadas.}}",
+    "declaredDeces": "Evento registrado. Nenhuma campanha é proposta: veja primeiro com um profissional o acompanhamento das equipes."
   }
 }

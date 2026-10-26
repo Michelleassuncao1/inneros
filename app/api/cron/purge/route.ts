@@ -6,6 +6,7 @@ import { purgerDonnees } from "@/lib/confidentialite/conservation";
 import { getDb } from "@/lib/db/client";
 import { envoyerRappelsTrimestriels } from "@/lib/plan/suivi";
 import { envoyerRappelsSensibilisation } from "@/lib/sensibilisation/calendrier";
+import { actualiserToutesPropositions } from "@/lib/sensibilisation/declencheurs";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,7 @@ export async function GET(requete: Request) {
   if (!process.env.CRON_SECRET) return new Response(null, { status: 503 });
   if (!autorise(requete)) return new Response(null, { status: 401 });
   const r = await purgerDonnees(getDb());
+  await actualiserToutesPropositions(getDb()); // propositions de campagnes (module B3), avant le rappel mensuel
   const rappels = (await envoyerRappelsTrimestriels(getDb())) + (await envoyerRappelsSensibilisation(getDb()));
   // Seulement des nombres : aucun identifiant ni donnée dans la réponse
   return Response.json({ campagnes: r.campagnes.length, reponses: r.campagnes.reduce((s, c) => s + c.reponses, 0), journal: r.journal, rappels });

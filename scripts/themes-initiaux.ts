@@ -1,6 +1,8 @@
 // Charge les 12 thèmes de sensibilisation initiaux (fiches et titres, en brouillon) dans la base.
 // Option --generer=fr : fait rédiger par l'IA le kit des thèmes dont le kit dans cette langue est incomplet
 // (appels payants, environ 0,05 $ par thème). Les thèmes restent des brouillons à relire et valider par IMA.
+// Les thèmes déjà présents reçoivent les événements de la fiche (module B3) s'ils n'en ont pas encore,
+// sans changer leur statut (simple métadonnée, aucun texte du kit n'est modifié).
 // Usage : npm run themes:initiaux [-- --admin=adresse@ima] [-- --generer=fr]   (serveur de développement arrêté)
 import { readFileSync } from "node:fs";
 import { loadEnvConfig } from "@next/env";
@@ -10,7 +12,8 @@ loadEnvConfig(process.cwd());
 
 async function principal() {
   const { getDb } = await import("../lib/db/client");
-  const { users } = await import("../lib/db/schema");
+  const { awarenessThemes, users } = await import("../lib/db/schema");
+  const { journaliser } = await import("../lib/audit");
   const { creerTheme, genererKitIA, listerThemes } = await import("../lib/sensibilisation/themes");
   const { kitComplet } = await import("../lib/sensibilisation/contenu");
   const db = getDb();
@@ -22,7 +25,7 @@ async function principal() {
     : await db.select().from(users).where(eq(users.role, "admin"));
   if (!admin || admin.role !== "admin") throw new Error("Administrateur introuvable (option --admin=adresse).");
 
-  const themes = JSON.parse(readFileSync("data/sensibilisation/themes-initiaux.json", "utf8")) as { fiche: unknown; titre: string; objectif: string }[];
+  const themes = JSON.parse(readFileSync("data/sensibilisation/themes-initiaux.json", "utf8")) as { fiche: { code: string; evenements?: string[] }; titre: string; objectif: string }[];
   let crees = 0;
   for (const t of themes) {
     const r = await creerTheme(db, admin.id, t);
@@ -30,6 +33,17 @@ async function principal() {
     else if (r.erreur !== "themeCodeExistant") throw new Error(`${t.titre} : ${r.erreur}`);
   }
   console.log(`${crees} thème(s) créé(s), ${themes.length - crees} déjà présent(s).`);
+
+  let completes = 0;
+  for (const t of themes) {
+    const [l] = await db.select().from(awarenessThemes).where(eq(awarenessThemes.code, t.fiche.code));
+    const fiche = l?.sheet as { evenements?: string[] } | undefined;
+    if (!l || !fiche || fiche.evenements !== undefined || !t.fiche.evenements) continue;
+    await db.update(awarenessThemes).set({ sheet: { ...fiche, evenements: t.fiche.evenements } }).where(eq(awarenessThemes.id, l.id));
+    await journaliser(db, { actorUserId: admin.id, action: "theme_sheet_saved", targetType: "theme", targetId: l.id, details: { evenements: t.fiche.evenements } });
+    completes++;
+  }
+  if (completes) console.log(`${completes} thème(s) complété(s) avec leurs événements.`);
 
   const langue = arg("generer");
   if (langue) {

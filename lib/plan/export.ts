@@ -7,6 +7,7 @@ import { z } from "zod";
 import { organizations, preventionPlans, risks, users } from "../db/schema";
 import type { Db } from "../db/types";
 import { CLASSES, scoreKinney, type ClasseRisque } from "../risques/kinney";
+import { campagnesDuPlan } from "../sensibilisation/declencheurs";
 import { enrichir } from "../risques/registre";
 import { EFFORTS, lireContenuPlan, NIVEAUX_PREVENTION, type ContenuPlan } from "./contenu";
 import { finTrimestre, lireAvancement, STATUTS_ACTION, type StatutAction } from "./suivi";
@@ -31,6 +32,7 @@ export async function donneesPlan(db: Db, planId: string) {
     contenu,
     registre,
     avancement,
+    campagnes: await campagnesDuPlan(db, planId, ligne.plan.language), // campagnes de sensibilisation liées (module B3)
     validePar: await nom(ligne.plan.validatedBy),
     adoptePar: await nom(ligne.plan.adoptedBy),
   };

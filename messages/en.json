@@ -467,7 +467,9 @@
     "themeCodeExistant": "This theme code already exists.",
     "themeCoordonnees": "The kit must not contain email addresses or phone numbers: contacts are added automatically.",
     "themeIncomplet": "Incomplete kit: French is required and every language started must be fully written.",
-    "campagneSensibDejaPrevue": "This theme is already in this year's calendar."
+    "campagneSensibDejaPrevue": "This theme is already in this year's calendar.",
+    "evenementDate": "The event date must be within the last twelve months.",
+    "motifRefusRequis": "Give the reason for declining (300 characters at most)."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",
@@ -692,7 +694,14 @@
       "awareness_campaign_added": "Awareness campaign added",
       "awareness_campaign_updated": "Awareness campaign updated",
       "awareness_kit_downloaded": "Awareness kit downloaded",
-      "awareness_reminder_sent": "Monthly awareness reminder sent"
+      "awareness_reminder_sent": "Monthly awareness reminder sent",
+      "awareness_event_declared": "Event declared",
+      "awareness_suggestions_created": "Campaigns suggested",
+      "awareness_suggestion_accepted": "Campaign suggestion accepted",
+      "awareness_suggestion_refused": "Campaign suggestion declined",
+      "awareness_campaign_linked": "Campaign linked to the prevention plan",
+      "awareness_alert_created": "Regulatory alert published",
+      "awareness_alert_withdrawn": "Regulatory alert withdrawn"
     }
   },
   "Rapport": {
@@ -809,7 +818,10 @@
     "rappelPlanSujet": "Prevention plan: quarterly update",
     "rappelPlanTexte": "Your prevention plan has {aVenir, plural, =0 {no actions planned this quarter} one {# action planned this quarter} other {# actions planned this quarter}} and {enRetard, plural, =0 {no late actions} one {# late action} other {# late actions}}. Remember to update progress in your space.",
     "rappelSensibSujet": "Awareness: this month's campaign",
-    "rappelSensibTexte": "{nombre, plural, one {One awareness campaign is planned} other {# awareness campaigns are planned}} this month in your calendar. The kit is ready in your space; remember to record the date it was sent."
+    "rappelSensibTexte": "{nombre, plural, one {One awareness campaign is planned} other {# awareness campaigns are planned}} this month in your calendar. The kit is ready in your space; remember to record the date it was sent.",
+    "alerteSujet": "Regulatory alert from Institut Mindset en Action",
+    "alerteTexte": "IMA has published a regulatory alert that concerns your company: “{titre}”. An awareness campaign is suggested in your calendar.",
+    "rappelSensibPropositions": "{nombre, plural, one {One campaign suggestion is awaiting your decision} other {# campaign suggestions are awaiting your decision}} in your awareness calendar."
   },
   "RapportPdf": {
     "titre": "Collective psychosocial risk assessment report",
@@ -1160,7 +1172,9 @@
     "nextYearHelp": "Same five-year global plan. Actions not completed are carried over (with their progress); the year's action plan is then validated by IMA and adopted by the organisation.",
     "nextYearAi": "Draft the action plan with AI",
     "nextYearManual": "Prepare manually (unfinished actions carried over)",
-    "lastYear": "The global plan is in its 5th year: prepare a new global plan (a new diagnosis is recommended)."
+    "lastYear": "The global plan is in its 5th year: prepare a new global plan (a new diagnosis is recommended).",
+    "awarenessLine": "Awareness: “{titre}” ({etat})",
+    "awarenessCol": "Awareness campaigns"
   },
   "Sensibilisation": {
     "surtitre": "Awareness",
@@ -1231,7 +1245,29 @@
     "archiveTitle": "Archive this theme",
     "archiveHelp": "An archived theme is no longer offered to organisations.",
     "archive": "Archive",
-    "isArchived": "This theme is archived."
+    "isArchived": "This theme is archived.",
+    "fieldEvents": "Company events",
+    "fieldEventsHelp": "The theme will be suggested when the prevention advisor declares one of these events.",
+    "alertsLink": "Regulatory alerts",
+    "alertsTitle": "Regulatory alerts",
+    "alertsIntro": "An alert informs companies in a country (and, if needed, a sector) of a legal or regulatory change. It suggests the chosen themes in their calendar and notifies their prevention advisor by email.",
+    "alertsEmpty": "No alerts yet.",
+    "allSectors": "all sectors",
+    "alertIsWithdrawn": "Alert withdrawn.",
+    "alertWithdraw": "Withdraw the alert",
+    "alertNew": "New alert",
+    "alertNoTheme": "Validate at least one theme first: an alert suggests validated themes.",
+    "alertCreate": "Publish the alert",
+    "alertFieldTitle": "Title",
+    "alertFieldMessage": "Message",
+    "alertFieldMessageHelp": "What changes, for whom, and from when. No email addresses or phone numbers.",
+    "alertFieldSectors": "Sectors",
+    "alertFieldSectorsHelp": "No box ticked: all sectors.",
+    "alertFieldThemes": "Suggested themes",
+    "alertFieldThemesHelp": "One to five validated themes.",
+    "alertFieldYear": "Year",
+    "alertCreated": "{n, plural, =0 {Alert published. No company concerned yet.} one {Alert published for # company.} other {Alert published for # companies.}}",
+    "alertWithdrawn": "Alert withdrawn."
   },
   "Calendrier": {
     "title": "Awareness calendar",
@@ -1287,6 +1323,52 @@
     "ficheQuestions": "Questions for the discussion",
     "ficheTips": "Tips for the facilitator",
     "helpTitle": "Need help? You can contact",
-    "noContacts": "No support people have been entered for the organisation yet: IMA adds them in the diagnosis campaign."
+    "noContacts": "No support people have been entered for the organisation yet: IMA adds them in the diagnosis campaign.",
+    "evenements": {
+      "reorganisation": "Reorganisation or relocation",
+      "licenciements": "Redundancies",
+      "fusion": "Merger or acquisition",
+      "accident_grave": "Serious accident",
+      "agression": "Assault",
+      "forte_charge": "Period of heavy workload",
+      "conflit_collectif": "Collective dispute",
+      "cyberattaque": "Cyberattack or major outage",
+      "deces": "Death of a colleague"
+    },
+    "causes": {
+      "registre": "Risk register: “{risque}” (class {classe}).",
+      "comportement": "Unwanted behaviour was reported during the assessment.",
+      "evenement": "Declared event: {evenement} ({date}).",
+      "alerte": "IMA regulatory alert: “{titre}”."
+    },
+    "decesTitle": "A death has been declared: professional support comes first",
+    "decesText": "InnerOS does not suggest a communication campaign after a death, especially a suicide. First call on a professional: psychological support, external prevention service or occupational health. An awareness campaign may be considered later, if that professional finds it useful.",
+    "alertsTitle": "IMA regulatory alerts",
+    "alertMonth": "Recommended month: {mois}",
+    "suggestionsTitle": "{n, plural, =0 {No pending suggestions} one {# suggestion to review} other {# suggestions to review}}",
+    "suggestionsHelp": "InnerOS suggests campaigns based on the risk register, reported behaviour, the events you declare and IMA alerts. Nothing is added without your consent: accept by choosing the month, or decline and say why.",
+    "priority": "Priority",
+    "alreadyPlanned": "This theme is already in the calendar in {mois} ({statut}): accepting brings it forward if the chosen month is earlier.",
+    "suggestedFor": "Suggested month: {mois}",
+    "accept": "Accept",
+    "refuse": "Decline",
+    "refuseReason": "Reason for declining",
+    "refuseReasonHelp": "For example: topic already covered another way. No names, email addresses or phone numbers.",
+    "accepted": "Suggestion accepted: the campaign is in the calendar.",
+    "refused": "Suggestion declined.",
+    "causeLine": "Suggested following: {cause}",
+    "linkedAction": "Prevention plan action: {action}",
+    "link": "Link",
+    "linked": "Link to the prevention plan saved.",
+    "planAction": "Prevention plan action",
+    "noAction": "No linked action",
+    "suggestedAction": "(suggested)",
+    "eventsTitle": "Declare an event",
+    "eventsHelp": "An event that may affect teams. Give only the type and date, never names or an account. InnerOS then suggests suitable themes for six months.",
+    "declare": "Declare",
+    "eventType": "Type of event",
+    "eventDate": "Date",
+    "declared": "{n, plural, =0 {Event saved. No new theme to suggest.} one {Event saved: # suggestion added.} other {Event saved: # suggestions added.}}",
+    "declaredDeces": "Event saved. No campaign is suggested: first discuss support for the teams with a professional."
   }
 }

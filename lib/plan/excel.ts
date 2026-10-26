@@ -10,6 +10,7 @@ export async function excelPlan(d: DonneesPlan, langue: string) {
   const t = traducteur(langue, "Plan");
   const tr = traducteur(langue, "Risques");
   const tres = traducteur(langue, "Resultats");
+  const tcal = traducteur(langue, "Calendrier");
   const titres = new Map(d.registre.map((r) => [r.id, r.title]));
   const classeur = new ExcelJS.Workbook();
   classeur.creator = "InnerOS — Institut Mindset en Action";
@@ -39,6 +40,7 @@ export async function excelPlan(d: DonneesPlan, langue: string) {
     { header: t("colStatut"), key: "statut", width: 14 },
     { header: t("doneOn"), key: "fait", width: 14 },
     { header: t("comment"), key: "commentaire", width: 40 },
+    { header: t("awarenessCol"), key: "sensibilisation", width: 40 },
   ];
   [...d.contenu.actions]
     .sort((a, b) => a.trimestre - b.trimestre)
@@ -58,6 +60,7 @@ export async function excelPlan(d: DonneesPlan, langue: string) {
         statut: t(`statutsAction.${suivi?.status ?? "a_faire"}`),
         fait: suivi?.doneOn ?? "",
         commentaire: suivi?.comment ?? "",
+        sensibilisation: (d.campagnes.get(a.id) ?? []).map((c) => `${c.titre} (${tcal(`statuts.${c.statut}`)}${c.diffuseeLe ? ` ${c.diffuseeLe}` : ""})`).join(" ; "),
       });
     });
   actions.eachRow((r) => (r.alignment = { vertical: "top", wrapText: true }));

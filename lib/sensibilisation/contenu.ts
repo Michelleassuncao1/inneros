@@ -7,6 +7,21 @@ import { z } from "zod";
 import { NIVEAUX_MINDSET } from "../rapport/contenu";
 
 export const LANGUES_THEME = ["fr", "nl", "en", "pt-BR"] as const;
+
+// Événements que le conseiller en prévention peut déclarer (module B3). Un décès n'appelle pas de campagne de
+// communication : InnerOS oriente d'abord vers un professionnel (décision de Michelle du 26/10/2026).
+export const EVENEMENTS_THEME = [
+  "reorganisation",
+  "licenciements",
+  "fusion",
+  "accident_grave",
+  "agression",
+  "forte_charge",
+  "conflit_collectif",
+  "cyberattaque",
+] as const;
+export const EVENEMENTS = [...EVENEMENTS_THEME, "deces"] as const;
+export type Evenement = (typeof EVENEMENTS)[number];
 export type LangueTheme = (typeof LANGUES_THEME)[number];
 
 const texte = (max: number) => z.string().max(max);
@@ -39,6 +54,9 @@ export const schemaFicheTheme = z.object({
   // Thème sensible (idées suicidaires, violence…) : règles de communication responsable renforcées
   sensible: z.boolean(),
   pays: z.array(z.enum(["BE", "FR", "BR", "PT"])).nullable(), // null = tous les pays
+  // Événements de l'entreprise auxquels le thème répond : servent à le proposer quand le conseiller
+  // en prévention en déclare un (module B3)
+  evenements: z.array(z.enum(EVENEMENTS_THEME)).max(10).default([]),
 });
 export type FicheTheme = z.infer<typeof schemaFicheTheme>;
 

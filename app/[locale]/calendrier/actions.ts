@@ -1,6 +1,6 @@
 "use server";
 
-// Actions du calendrier de sensibilisation (module B2), communes à IMA et au conseiller en prévention.
+// Actions du calendrier de sensibilisation (modules B2 et B3), communes à IMA et au conseiller en prévention.
 // L'utilisateur est revérifié à chaque appel ; les droits sont contrôlés par lib/sensibilisation et par la base.
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -11,6 +11,7 @@ import { langueValide } from "@/i18n/locale";
 import { utilisateurConnecte } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 import { ajouterCampagne, majCampagne, proposerCalendrier } from "@/lib/sensibilisation/calendrier";
+import { accepterProposition, declarerEvenement, lierActionPlan, refuserProposition } from "@/lib/sensibilisation/declencheurs";
 
 const uuid = z.string().uuid();
 
@@ -57,4 +58,42 @@ export async function actionMajCampagne(locale: string, organizationId: string, 
   if (!r.ok) return erreur(r.erreur);
   revalidatePath(chemin(langue, u.role, organizationId));
   return { succes: tc("saved"), envoi: Date.now() };
+}
+
+// --- Module B3 : propositions, événements, lien avec le plan ---------------------------------------
+
+export async function actionAccepterProposition(locale: string, organizationId: string, id: string, _etat: EtatFormulaire, formData: FormData): Promise<EtatFormulaire> {
+  const { langue, u, db, tc, erreur } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return erreur("introuvable");
+  const r = await accepterProposition(db, u, id, { mois: Number(formData.get("mois")) });
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(chemin(langue, u.role, organizationId));
+  return { succes: tc("accepted"), envoi: Date.now() };
+}
+
+export async function actionRefuserProposition(locale: string, organizationId: string, id: string, _etat: EtatFormulaire, formData: FormData): Promise<EtatFormulaire> {
+  const { langue, u, db, tc, erreur } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return erreur("introuvable");
+  const r = await refuserProposition(db, u, id, String(formData.get("motif") ?? ""));
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(chemin(langue, u.role, organizationId));
+  return { succes: tc("refused"), envoi: Date.now() };
+}
+
+export async function actionDeclarerEvenement(locale: string, organizationId: string, _etat: EtatFormulaire, formData: FormData): Promise<EtatFormulaire> {
+  const { langue, u, db, tc, erreur } = await contexte(locale);
+  if (!uuid.safeParse(organizationId).success) return erreur("introuvable");
+  const r = await declarerEvenement(db, u, organizationId, { type: String(formData.get("type") ?? ""), date: String(formData.get("date") ?? "") });
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(chemin(langue, u.role, organizationId));
+  return { succes: r.valeur.deces ? tc("declaredDeces") : tc("declared", { n: r.valeur.propositions }), envoi: Date.now() };
+}
+
+export async function actionLierAction(locale: string, organizationId: string, id: string, _etat: EtatFormulaire, formData: FormData): Promise<EtatFormulaire> {
+  const { langue, u, db, tc, erreur } = await contexte(locale);
+  if (!uuid.safeParse(id).success) return erreur("introuvable");
+  const r = await lierActionPlan(db, u, id, String(formData.get("action") ?? "") || null);
+  if (!r.ok) return erreur(r.erreur);
+  revalidatePath(chemin(langue, u.role, organizationId));
+  return { succes: tc("linked"), envoi: Date.now() };
 }

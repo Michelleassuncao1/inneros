@@ -467,7 +467,9 @@
     "themeCodeExistant": "Deze themacode bestaat al.",
     "themeCoordonnees": "De kit mag geen e-mailadres of telefoonnummer bevatten: de contacten worden automatisch toegevoegd.",
     "themeIncomplet": "Kit onvolledig: Frans is verplicht en elke begonnen taal moet volledig zijn opgesteld.",
-    "campagneSensibDejaPrevue": "Dit thema staat al in de kalender van dit jaar."
+    "campagneSensibDejaPrevue": "Dit thema staat al in de kalender van dit jaar.",
+    "evenementDate": "De datum van de gebeurtenis moet in de voorbije twaalf maanden liggen.",
+    "motifRefusRequis": "Geef de reden van weigering (maximaal 300 tekens)."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
@@ -692,7 +694,14 @@
       "awareness_campaign_added": "Sensibiliseringscampagne toegevoegd",
       "awareness_campaign_updated": "Sensibiliseringscampagne bijgewerkt",
       "awareness_kit_downloaded": "Sensibiliseringskit gedownload",
-      "awareness_reminder_sent": "Maandelijkse sensibiliseringsherinnering verzonden"
+      "awareness_reminder_sent": "Maandelijkse sensibiliseringsherinnering verzonden",
+      "awareness_event_declared": "Gebeurtenis gemeld",
+      "awareness_suggestions_created": "Campagnes voorgesteld",
+      "awareness_suggestion_accepted": "Campagnevoorstel aanvaard",
+      "awareness_suggestion_refused": "Campagnevoorstel geweigerd",
+      "awareness_campaign_linked": "Campagne gekoppeld aan het preventieplan",
+      "awareness_alert_created": "Regelgevende waarschuwing gepubliceerd",
+      "awareness_alert_withdrawn": "Regelgevende waarschuwing ingetrokken"
     }
   },
   "Rapport": {
@@ -809,7 +818,10 @@
     "rappelPlanSujet": "Preventieplan: stand van zaken dit kwartaal",
     "rappelPlanTexte": "Uw preventieplan telt {aVenir, plural, =0 {geen acties gepland dit kwartaal} one {# actie gepland dit kwartaal} other {# acties gepland dit kwartaal}} en {enRetard, plural, =0 {geen vertraagde acties} one {# vertraagde actie} other {# vertraagde acties}}. Vergeet niet de voortgang bij te werken in uw ruimte.",
     "rappelSensibSujet": "Sensibilisering: campagne van de maand",
-    "rappelSensibTexte": "{nombre, plural, one {Er is een sensibiliseringscampagne gepland} other {Er zijn # sensibiliseringscampagnes gepland}} deze maand in uw kalender. De kit staat klaar in uw ruimte; vergeet niet de verspreidingsdatum in te vullen."
+    "rappelSensibTexte": "{nombre, plural, one {Er is een sensibiliseringscampagne gepland} other {Er zijn # sensibiliseringscampagnes gepland}} deze maand in uw kalender. De kit staat klaar in uw ruimte; vergeet niet de verspreidingsdatum in te vullen.",
+    "alerteSujet": "Regelgevende waarschuwing van het Institut Mindset en Action",
+    "alerteTexte": "IMA heeft een regelgevende waarschuwing gepubliceerd die uw onderneming aanbelangt: ‘{titre}’. In uw kalender wordt een sensibiliseringscampagne voorgesteld.",
+    "rappelSensibPropositions": "{nombre, plural, one {Eén campagnevoorstel wacht op uw beslissing} other {# campagnevoorstellen wachten op uw beslissing}} in uw sensibiliseringskalender."
   },
   "RapportPdf": {
     "titre": "Rapport van de collectieve diagnose van psychosociale risico's",
@@ -1160,7 +1172,9 @@
     "nextYearHelp": "Hetzelfde globale plan over 5 jaar. Niet uitgevoerde acties worden overgenomen (met hun voortgang); het actieplan van het jaar wordt daarna door IMA gevalideerd en door de organisatie goedgekeurd.",
     "nextYearAi": "Actieplan laten opstellen door de AI",
     "nextYearManual": "Handmatig voorbereiden (niet afgeronde acties overgenomen)",
-    "lastYear": "Het globale plan zit in zijn 5e jaar: bereid een nieuw globaal plan voor (nieuwe diagnose aanbevolen)."
+    "lastYear": "Het globale plan zit in zijn 5e jaar: bereid een nieuw globaal plan voor (nieuwe diagnose aanbevolen).",
+    "awarenessLine": "Sensibilisering: ‘{titre}’ ({etat})",
+    "awarenessCol": "Sensibiliseringscampagnes"
   },
   "Sensibilisation": {
     "surtitre": "Sensibilisering",
@@ -1231,7 +1245,29 @@
     "archiveTitle": "Dit thema archiveren",
     "archiveHelp": "Een gearchiveerd thema wordt niet meer aan de organisaties voorgesteld.",
     "archive": "Archiveren",
-    "isArchived": "Dit thema is gearchiveerd."
+    "isArchived": "Dit thema is gearchiveerd.",
+    "fieldEvents": "Gebeurtenissen in de onderneming",
+    "fieldEventsHelp": "Het thema wordt voorgesteld wanneer de preventieadviseur een van deze gebeurtenissen meldt.",
+    "alertsLink": "Regelgevende waarschuwingen",
+    "alertsTitle": "Regelgevende waarschuwingen",
+    "alertsIntro": "Een waarschuwing meldt een wettelijke of reglementaire wijziging aan de ondernemingen van een land (en zo nodig van een sector). Ze stelt de gekozen thema's voor in hun kalender en verwittigt hun preventieadviseur per e-mail.",
+    "alertsEmpty": "Nog geen waarschuwingen.",
+    "allSectors": "alle sectoren",
+    "alertIsWithdrawn": "Waarschuwing ingetrokken.",
+    "alertWithdraw": "Waarschuwing intrekken",
+    "alertNew": "Nieuwe waarschuwing",
+    "alertNoTheme": "Valideer eerst minstens één thema: een waarschuwing stelt gevalideerde thema's voor.",
+    "alertCreate": "Waarschuwing publiceren",
+    "alertFieldTitle": "Titel",
+    "alertFieldMessage": "Bericht",
+    "alertFieldMessageHelp": "Wat verandert, voor wie en vanaf wanneer. Zonder e-mail of telefoon.",
+    "alertFieldSectors": "Sectoren",
+    "alertFieldSectorsHelp": "Geen vakje aangevinkt: alle sectoren.",
+    "alertFieldThemes": "Voorgestelde thema's",
+    "alertFieldThemesHelp": "Eén tot vijf gevalideerde thema's.",
+    "alertFieldYear": "Jaar",
+    "alertCreated": "{n, plural, =0 {Waarschuwing gepubliceerd. Nog geen onderneming betrokken.} one {Waarschuwing gepubliceerd voor # onderneming.} other {Waarschuwing gepubliceerd voor # ondernemingen.}}",
+    "alertWithdrawn": "Waarschuwing ingetrokken."
   },
   "Calendrier": {
     "title": "Sensibiliseringskalender",
@@ -1287,6 +1323,52 @@
     "ficheQuestions": "Vragen voor het gesprek",
     "ficheTips": "Tips voor de begeleider",
     "helpTitle": "Hulp nodig? U kunt contact opnemen met",
-    "noContacts": "Er zijn nog geen vertrouwenspersonen voor de organisatie ingevuld: IMA voegt ze toe in de diagnosecampagne."
+    "noContacts": "Er zijn nog geen vertrouwenspersonen voor de organisatie ingevuld: IMA voegt ze toe in de diagnosecampagne.",
+    "evenements": {
+      "reorganisation": "Reorganisatie of verhuizing",
+      "licenciements": "Ontslagen",
+      "fusion": "Fusie of overname",
+      "accident_grave": "Ernstig ongeval",
+      "agression": "Agressie",
+      "forte_charge": "Periode van hoge werkdruk",
+      "conflit_collectif": "Collectief conflict",
+      "cyberattaque": "Cyberaanval of grote storing",
+      "deces": "Overlijden van een collega"
+    },
+    "causes": {
+      "registre": "Risicoregister: ‘{risque}’ (klasse {classe}).",
+      "comportement": "Tijdens de diagnose werd ongewenst gedrag gemeld.",
+      "evenement": "Gemelde gebeurtenis: {evenement} ({date}).",
+      "alerte": "Regelgevende waarschuwing van IMA: ‘{titre}’."
+    },
+    "decesTitle": "Er werd een overlijden gemeld: eerst professionele begeleiding",
+    "decesText": "InnerOS stelt na een overlijden, zeker na een zelfdoding, geen communicatiecampagne voor. Doe eerst een beroep op een professional: psychologische hulp, externe dienst voor preventie of arbeidsgeneeskunde. Een sensibiliseringscampagne kan later worden overwogen, als die professional dat nuttig vindt.",
+    "alertsTitle": "Regelgevende waarschuwingen van IMA",
+    "alertMonth": "Aanbevolen maand: {mois}",
+    "suggestionsTitle": "{n, plural, =0 {Geen voorstellen in afwachting} one {# voorstel te bekijken} other {# voorstellen te bekijken}}",
+    "suggestionsHelp": "InnerOS stelt campagnes voor op basis van het risicoregister, gemeld gedrag, de gebeurtenissen die u meldt en de waarschuwingen van IMA. Niets wordt toegevoegd zonder uw akkoord: aanvaard door de maand te kiezen, of weiger met een reden.",
+    "priority": "Prioritair",
+    "alreadyPlanned": "Dit thema staat al in de kalender in {mois} ({statut}): aanvaarden vervroegt het naar de gekozen maand als die vroeger is.",
+    "suggestedFor": "Voorgestelde maand: {mois}",
+    "accept": "Aanvaarden",
+    "refuse": "Weigeren",
+    "refuseReason": "Reden van weigering",
+    "refuseReasonHelp": "Bijvoorbeeld: thema al op een andere manier behandeld. Zonder naam, e-mail of telefoon.",
+    "accepted": "Voorstel aanvaard: de campagne staat in de kalender.",
+    "refused": "Voorstel geweigerd.",
+    "causeLine": "Voorgesteld naar aanleiding van: {cause}",
+    "linkedAction": "Actie van het preventieplan: {action}",
+    "link": "Koppelen",
+    "linked": "Koppeling met het preventieplan opgeslagen.",
+    "planAction": "Actie van het preventieplan",
+    "noAction": "Geen gekoppelde actie",
+    "suggestedAction": "(voorgesteld)",
+    "eventsTitle": "Een gebeurtenis melden",
+    "eventsHelp": "Een gebeurtenis die de teams kan raken. Geef enkel het type en de datum, nooit namen of een verhaal. InnerOS stelt dan zes maanden lang passende thema's voor.",
+    "declare": "Melden",
+    "eventType": "Soort gebeurtenis",
+    "eventDate": "Datum",
+    "declared": "{n, plural, =0 {Gebeurtenis opgeslagen. Geen nieuw thema voor te stellen.} one {Gebeurtenis opgeslagen: # voorstel toegevoegd.} other {Gebeurtenis opgeslagen: # voorstellen toegevoegd.}}",
+    "declaredDeces": "Gebeurtenis opgeslagen. Er wordt geen campagne voorgesteld: bespreek eerst met een professional hoe de teams begeleid worden."
   }
 }

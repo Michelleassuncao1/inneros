@@ -23,7 +23,12 @@ export default async function SensibilisationPage({ params }: PageProps<"/[local
   return (
     <EspaceAdmin locale={locale} actif="sensibilisation">
       <TitrePage surtitre={t("surtitre")} titre={t("title")} />
-      <p className="mb-8 max-w-[70ch] text-ima-muted">{t("intro")}</p>
+      <p className="mb-4 max-w-[70ch] text-ima-muted">{t("intro")}</p>
+      <p className="mb-8">
+        <Link href="/admin/sensibilisation/alertes" className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream">
+          {t("alertsLink")}
+        </Link>
+      </p>
 
       {themes.length === 0 ? (
         <p className="mb-10">{t("empty")}</p>

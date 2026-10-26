@@ -2,12 +2,13 @@
 import { getTranslations } from "next-intl/server";
 import { CasesACocher, Champ, Selection } from "@/components/Formulaire";
 import { NIVEAUX_MINDSET } from "@/lib/rapport/contenu";
-import type { FicheTheme } from "@/lib/sensibilisation/contenu";
+import { EVENEMENTS_THEME, type FicheTheme } from "@/lib/sensibilisation/contenu";
 
 export async function ChampsFiche({ fiche, locale = "fr" }: { fiche?: FicheTheme | null; locale?: string }) {
   const t = await getTranslations("Sensibilisation");
   const tres = await getTranslations("Resultats");
   const l = await getTranslations("Libelles");
+  const tcal = await getTranslations("Calendrier");
   const mois = Array.from({ length: 12 }, (_, i) => ({
     valeur: String(i + 1),
     libelle: new Intl.DateTimeFormat(locale, { month: "long", timeZone: "UTC" }).format(new Date(Date.UTC(2026, i, 1))),
@@ -37,6 +38,13 @@ export async function ChampsFiche({ fiche, locale = "fr" }: { fiche?: FicheTheme
         options={(["BE", "FR", "BR", "PT"] as const).map((p) => ({ valeur: p, libelle: l(`country.${p}`) }))}
         cochees={fiche?.pays ?? []}
         aide={t("fieldCountriesHelp")}
+      />
+      <CasesACocher
+        legende={t("fieldEvents")}
+        name="evenements"
+        options={EVENEMENTS_THEME.map((e) => ({ valeur: e, libelle: tcal(`evenements.${e}`) }))}
+        cochees={fiche?.evenements ?? []}
+        aide={t("fieldEventsHelp")}
       />
     </>
   );

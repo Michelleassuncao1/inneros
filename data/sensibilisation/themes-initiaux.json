@@ -1,61 +1,268 @@
 [
   {
-    "fiche": { "code": "reprise-charge", "mois": 1, "journee": null, "niveau_mindset": "travail", "echelles": ["qd", "wp", "charge", "rythme"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "reprise-charge",
+      "mois": 1,
+      "journee": null,
+      "niveau_mindset": "travail",
+      "echelles": [
+        "qd",
+        "wp",
+        "charge",
+        "rythme"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": [
+        "forte_charge"
+      ]
+    },
     "titre": "Commencer l'année sans surcharge",
     "objectif": "Clarifier les priorités de l'équipe en début d'année et repérer ensemble ce qui alourdit la charge de travail."
   },
   {
-    "fiche": { "code": "sommeil-recuperation", "mois": 2, "journee": null, "niveau_mindset": "organisation", "echelles": ["wf", "concil", "epuise", "stress", "pb", "wb"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "sommeil-recuperation",
+      "mois": 2,
+      "journee": null,
+      "niveau_mindset": "organisation",
+      "echelles": [
+        "wf",
+        "concil",
+        "epuise",
+        "stress",
+        "pb",
+        "wb"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": [
+        "forte_charge"
+      ]
+    },
     "titre": "Récupérer entre deux journées de travail",
     "objectif": "Faire le lien entre organisation du travail, horaires et récupération, et identifier des leviers collectifs pour mieux récupérer."
   },
   {
-    "fiche": { "code": "reconnaissance", "mois": 3, "journee": null, "niveau_mindset": "management", "echelles": ["re", "reconnais", "js", "satisf"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "reconnaissance",
+      "mois": 3,
+      "journee": null,
+      "niveau_mindset": "management",
+      "echelles": [
+        "re",
+        "reconnais",
+        "js",
+        "satisf"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": []
+    },
     "titre": "La reconnaissance au quotidien",
     "objectif": "Montrer que la reconnaissance du travail accompli est un facteur de prévention et donner des pistes concrètes aux équipes et aux managers."
   },
   {
-    "fiche": { "code": "journee-sst", "mois": 4, "journee": "28 avril — Journée mondiale de la sécurité et de la santé au travail", "niveau_mindset": "organisation", "echelles": ["pr", "previsib", "cl", "clarte"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "journee-sst",
+      "mois": 4,
+      "journee": "28 avril — Journée mondiale de la sécurité et de la santé au travail",
+      "niveau_mindset": "organisation",
+      "echelles": [
+        "pr",
+        "previsib",
+        "cl",
+        "clarte"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": [
+        "accident_grave"
+      ]
+    },
     "titre": "Les risques psychosociaux, un risque comme les autres",
     "objectif": "À l'occasion de la journée mondiale, rappeler que la prévention des risques psychosociaux fait partie de la santé et de la sécurité au travail, et présenter la démarche de l'entreprise."
   },
   {
-    "fiche": { "code": "sante-mentale-parler", "mois": 5, "journee": null, "niveau_mindset": "interactions", "echelles": ["stress", "epuise", "gh", "santegen"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "sante-mentale-parler",
+      "mois": 5,
+      "journee": null,
+      "niveau_mindset": "interactions",
+      "echelles": [
+        "stress",
+        "epuise",
+        "gh",
+        "santegen"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": [
+        "accident_grave",
+        "agression",
+        "conflit_collectif"
+      ]
+    },
     "titre": "Santé mentale : en parler, c'est déjà agir",
     "objectif": "Réduire les tabous autour de la santé mentale au travail et faire connaître les personnes de soutien et les ressources disponibles."
   },
   {
-    "fiche": { "code": "deconnexion-conges", "mois": 6, "journee": null, "niveau_mindset": "organisation", "echelles": ["wf", "concil", "ct"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "deconnexion-conges",
+      "mois": 6,
+      "journee": null,
+      "niveau_mindset": "organisation",
+      "echelles": [
+        "wf",
+        "concil",
+        "ct"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": [
+        "forte_charge"
+      ]
+    },
     "titre": "Se déconnecter vraiment pendant les congés",
     "objectif": "Organiser collectivement les absences et la continuité du travail pour que chacun puisse se déconnecter pendant ses congés."
   },
   {
-    "fiche": { "code": "changements-incertitude", "mois": 7, "journee": null, "niveau_mindset": "organisation", "echelles": ["iw", "ji", "insecur", "pr", "previsib"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "changements-incertitude",
+      "mois": 7,
+      "journee": null,
+      "niveau_mindset": "organisation",
+      "echelles": [
+        "iw",
+        "ji",
+        "insecur",
+        "pr",
+        "previsib"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": [
+        "reorganisation",
+        "licenciements",
+        "fusion",
+        "cyberattaque"
+      ]
+    },
     "titre": "Traverser les changements ensemble",
     "objectif": "Mieux informer et associer les équipes lors des changements d'organisation pour réduire l'incertitude."
   },
   {
-    "fiche": { "code": "soutien-collegues", "mois": 8, "journee": null, "niveau_mindset": "interactions", "echelles": ["sc", "soutiencoll", "sw", "coopcoll", "te"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "soutien-collegues",
+      "mois": 8,
+      "journee": null,
+      "niveau_mindset": "interactions",
+      "echelles": [
+        "sc",
+        "soutiencoll",
+        "sw",
+        "coopcoll",
+        "te"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": [
+        "accident_grave",
+        "agression",
+        "licenciements",
+        "conflit_collectif"
+      ]
+    },
     "titre": "Le soutien entre collègues",
     "objectif": "Valoriser l'entraide et la coopération dans les équipes, et donner des repères pour demander et apporter de l'aide."
   },
   {
-    "fiche": { "code": "prevention-suicide", "mois": 9, "journee": "10 septembre — Journée mondiale de la prévention du suicide", "niveau_mindset": "interactions", "echelles": ["epuise", "stress", "gh", "santegen"], "sensible": true, "pays": null },
+    "fiche": {
+      "code": "prevention-suicide",
+      "mois": 9,
+      "journee": "10 septembre — Journée mondiale de la prévention du suicide",
+      "niveau_mindset": "interactions",
+      "echelles": [
+        "epuise",
+        "stress",
+        "gh",
+        "santegen"
+      ],
+      "sensible": true,
+      "pays": null,
+      "evenements": []
+    },
     "titre": "Prendre soin les uns des autres : repérer, écouter, orienter",
     "objectif": "Savoir repérer qu'un collègue ne va pas bien, oser en parler avec bienveillance et l'orienter vers l'aide, sans jouer un rôle de soignant."
   },
   {
-    "fiche": { "code": "sante-mentale-organisation", "mois": 10, "journee": "10 octobre — Journée mondiale de la santé mentale", "niveau_mindset": "management", "echelles": ["in", "marge", "ql", "leadership", "ss", "soutienhier"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "sante-mentale-organisation",
+      "mois": 10,
+      "journee": "10 octobre — Journée mondiale de la santé mentale",
+      "niveau_mindset": "management",
+      "echelles": [
+        "in",
+        "marge",
+        "ql",
+        "leadership",
+        "ss",
+        "soutienhier"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": [
+        "reorganisation",
+        "fusion"
+      ]
+    },
     "titre": "Santé mentale au travail : le rôle de l'organisation",
     "objectif": "Montrer comment l'autonomie, le soutien des managers et la qualité du management protègent la santé mentale de tous."
   },
   {
-    "fiche": { "code": "respect-harcelement", "mois": 11, "journee": null, "niveau_mindset": "interactions", "echelles": ["sh", "tv", "pv", "bu", "sexuel", "menaces", "violence", "harcelement"], "sensible": true, "pays": null },
+    "fiche": {
+      "code": "respect-harcelement",
+      "mois": 11,
+      "journee": null,
+      "niveau_mindset": "interactions",
+      "echelles": [
+        "sh",
+        "tv",
+        "pv",
+        "bu",
+        "sexuel",
+        "menaces",
+        "violence",
+        "harcelement"
+      ],
+      "sensible": true,
+      "pays": null,
+      "evenements": [
+        "agression",
+        "conflit_collectif"
+      ]
+    },
     "titre": "Le respect au travail : prévenir le harcèlement et la violence",
     "objectif": "Rappeler les comportements attendus, les procédures de signalement et les personnes de soutien, pour que chacun sache quoi faire face à une situation de harcèlement ou de violence."
   },
   {
-    "fiche": { "code": "fin-annee-priorites", "mois": 12, "journee": null, "niveau_mindset": "travail", "echelles": ["qd", "charge", "re", "reconnais"], "sensible": false, "pays": null },
+    "fiche": {
+      "code": "fin-annee-priorites",
+      "mois": 12,
+      "journee": null,
+      "niveau_mindset": "travail",
+      "echelles": [
+        "qd",
+        "charge",
+        "re",
+        "reconnais"
+      ],
+      "sensible": false,
+      "pays": null,
+      "evenements": [
+        "forte_charge"
+      ]
+    },
     "titre": "Fin d'année : priorités et reconnaissance",
     "objectif": "Aider les équipes à gérer le pic de fin d'année en priorisant, et prendre le temps de reconnaître le travail accompli."
   }

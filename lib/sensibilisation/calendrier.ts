@@ -8,7 +8,7 @@ import { and, desc, eq, isNull } from "drizzle-orm";
 import { z } from "zod";
 import { journaliser } from "../audit";
 import { lireSoutien } from "../admin/soutien";
-import { auditLog, awarenessCampaigns, campaigns, organizations, users } from "../db/schema";
+import { auditLog, awarenessCampaigns, awarenessSuggestions, campaigns, organizations, users } from "../db/schema";
 import type { Db } from "../db/types";
 import { envoyerEmail, type Email } from "../email/brevo";
 import { emailIMA } from "../email/modele";
@@ -199,7 +199,7 @@ export async function kitDeCampagne(db: Db, u: Utilisateur, campagneId: string, 
 const base = () => process.env.APP_URL ?? "http://localhost:3000";
 
 // Appelé chaque nuit : au plus un rappel par entreprise et par mois, aux conseillers en prévention,
-// s'il reste des campagnes « prévues » ce mois-ci
+// s'il reste des campagnes « prévues » ce mois-ci ou des propositions à examiner (module B3)
 export async function envoyerRappelsSensibilisation(db: Db, maintenant = new Date(), envoi: (e: Email) => Promise<void> = envoyerEmail) {
   const a = maintenant.getUTCFullYear();
   const m = maintenant.getUTCMonth() + 1;
@@ -209,15 +209,23 @@ export async function envoyerRappelsSensibilisation(db: Db, maintenant = new Dat
     .from(awarenessCampaigns)
     .innerJoin(organizations, eq(awarenessCampaigns.organizationId, organizations.id))
     .where(and(eq(awarenessCampaigns.year, a), eq(awarenessCampaigns.month, m), eq(awarenessCampaigns.status, "prevue")));
-  const parOrg = new Map<string, { locale: string; nombre: number }>();
-  for (const p of prevues) parOrg.set(p.organizationId, { locale: p.locale, nombre: (parOrg.get(p.organizationId)?.nombre ?? 0) + 1 });
+  const parOrg = new Map<string, { locale: string; nombre: number; propositions: number }>();
+  const ligne = (id: string, locale: string) => parOrg.get(id) ?? { locale, nombre: 0, propositions: 0 };
+  for (const p of prevues) parOrg.set(p.organizationId, { ...ligne(p.organizationId, p.locale), nombre: ligne(p.organizationId, p.locale).nombre + 1 });
+  const enAttente = await db
+    .select({ organizationId: awarenessSuggestions.organizationId, locale: organizations.locale })
+    .from(awarenessSuggestions)
+    .innerJoin(organizations, eq(awarenessSuggestions.organizationId, organizations.id))
+    .where(eq(awarenessSuggestions.status, "en_attente"));
+  for (const p of enAttente)
+    parOrg.set(p.organizationId, { ...ligne(p.organizationId, p.locale), propositions: ligne(p.organizationId, p.locale).propositions + 1 });
   const deja = new Set(
     (await db.select({ targetId: auditLog.targetId, details: auditLog.details }).from(auditLog).where(eq(auditLog.action, "awareness_reminder_sent")))
       .filter((l) => (l.details as { mois?: string } | null)?.mois === cle)
       .map((l) => l.targetId),
   );
   let envoyes = 0;
-  for (const [orgId, { locale, nombre }] of parOrg) {
+  for (const [orgId, { locale, nombre, propositions }] of parOrg) {
     if (deja.has(orgId)) continue;
     const conseillers = await db
       .select({ email: users.email, name: users.name })
@@ -230,7 +238,10 @@ export async function envoyerRappelsSensibilisation(db: Db, maintenant = new Dat
           emailIMA(locale, d, {
             sujet: t("rappelSensibSujet"),
             salutation: t("salutation", { name: d.name }),
-            paragraphes: [t("rappelSensibTexte", { nombre })],
+            paragraphes: [
+              ...(nombre ? [t("rappelSensibTexte", { nombre })] : []),
+              ...(propositions ? [t("rappelSensibPropositions", { nombre: propositions })] : []),
+            ],
             bouton: t("ouvrirEspace"),
             lien: `${base()}/${locale}/espace/sensibilisation`,
             mention: t("sansContenu"),
