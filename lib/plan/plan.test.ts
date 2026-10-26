@@ -90,7 +90,7 @@ function iaSimulee(recus: ChargePlan[] = []) {
 describe("Prompts versionnés", () => {
   it("lit la version du prompt du rapport et du plan", () => {
     expect(lirePrompt().version).toMatch(/^rapport-v\d+\.\d+$/);
-    expect(lirePrompt(FICHIER_PROMPT_PLAN).version).toBe("plan-v1.3");
+    expect(lirePrompt(FICHIER_PROMPT_PLAN).version).toBe("plan-v1.4");
   });
 });
 
