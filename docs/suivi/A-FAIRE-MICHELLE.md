@@ -4,7 +4,18 @@ Liste des actions qui ne dépendent pas du code. Claude la relit et la rappelle 
 
 ## Contrats et juridique
 
-- [ ] **Clause dans le contrat avec les entreprises : partage de résultats agrégés et anonymes avec des équipes de recherche** (ex. équipe COPSOQ belge de la prof. Els Clays, Université de Gand, intéressée le 12/10/2026). À faire rédiger par l'agent juridique IMA : accord préalable de l'entreprise, seulement des résultats collectifs (jamais de groupe sous 10 personnes, jamais le nom de l'entreprise), finalité de recherche, possibilité de refuser. **À intégrer au moment de la rédaction du contrat type avec les entreprises** (rappel de l'agent juridique, 26/10/2026). *Noté le 21/10/2026.*
+### À intégrer au contrat type, au DPA et à la page « Confidentialité »
+
+À reprendre **au moment de la rédaction du contrat type avec les entreprises**, puis à faire relire par un juriste. Liste tenue par l'agent juridique IMA.
+
+- [ ] **Contrat type — clause « recherche »** : partage de résultats agrégés et anonymes avec des équipes de recherche (ex. équipe COPSOQ belge de la prof. Els Clays, Université de Gand, intéressée le 12/10/2026). Accord préalable de l'entreprise, seulement des résultats collectifs (jamais de groupe sous 10 personnes, jamais le nom de l'entreprise), finalité de recherche, possibilité de refuser. Pour ce partage, IMA agit pour son propre compte : le prévoir comme une finalité distincte, acceptée par l'entreprise. *Noté le 21/10/2026, confirmé le 27/10/2026.*
+- [ ] **Contrat type — ateliers (module C)** : l'entreprise est responsable des inscriptions aux ateliers ; IMA est son sous-traitant (art. 28 RGPD ; « operador » au Brésil, LGPD). Un animateur IMA qui anime un atelier agit dans ce même cadre. Si IMA veut utiliser les avis des ateliers pour améliorer ses propres prestations, le prévoir explicitement (finalité propre d'IMA, résultats agrégés uniquement). *Agent juridique, 27/10/2026.*
+- [ ] **Contrat type — engagements de l'entreprise pour les ateliers** : participation volontaire ; présence et avis jamais utilisés pour évaluer ou sanctionner un travailleur ; information du CPPT (Belgique), du CSE (France), des représentants des travailleurs (Portugal) ou de la CIPA (Brésil) ; information des travailleurs (texte fourni par InnerOS sur la page d'inscription).
+- [ ] **DPA (contrat de sous-traitance)** : ajouter le traitement « inscriptions aux ateliers » (nom, e-mail professionnel, présence) ; finalités (organisation, confirmation, rappel, liste des présents) ; durée (suppression 30 jours après l'atelier ; l'entreprise peut exporter la liste des présents avant, par exemple comme preuve de formation des managers) ; sous-traitants ultérieurs (Brevo pour les e-mails, OVHcloud, Vercel) ; accès limité au conseiller en prévention et à l'animateur.
+- [ ] **Page « Confidentialité » d'InnerOS** : ajouter une partie « Ateliers » (qui est responsable, données collectées, durée, droits et à qui s'adresser) et expliquer que l'avis est séparé de l'inscription. Ne pas promettre que le texte libre est « anonyme » dans tous les cas : dans un petit groupe, on peut reconnaître quelqu'un à ce qu'il écrit. *Claude prépare le texte pendant le module C ; à faire relire par le juriste.*
+
+### Autres points
+
 - [x] Portugal : cadre légal du plan de prévention corrigé sur la version consolidée (prompt `plan-v1.4`, 26/10/2026) ; à inclure dans la relecture par le juriste.
 - [ ] Brevo : télécharger le DPA, décider la durée de conservation des e-mails, désactiver le suivi des ouvertures et des clics.
 - [ ] Anthropic : signer le DPA, demander la conservation nulle des données (ZDR), encadrer le transfert vers les États-Unis.
