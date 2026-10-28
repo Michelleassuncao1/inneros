@@ -26,6 +26,8 @@ Si une demande contredit l'une de ces règles, arrête-toi et explique le confli
 8. **AI Act.** Aucune inférence d'émotions, aucune analyse de voix, de visage ou de données physiologiques, aucune prédiction ou évaluation individuelle. Chaque rapport mentionne l'assistance de l'IA.
 9. **Instruments.** Questionnaires utilisés sans modification, source citée ; items COPSOQ d'engagement au travail (WE) exclus. Les textes des items ne sont jamais inventés : ils viennent des fichiers officiels fournis par IMA dans `instruments/`.
 10. **Langage.** Vocabulaire non clinique, descriptif et proportionné (règle de langage IMA, ETH-IMA-01). Jamais « dépression », « burn-out diagnostiqué », « harcèlement avéré ».
+Les règles 1 et 3 concernent les répondants des questionnaires. Les **ateliers** (module C, décision de Michelle du 27/10/2026, avis de l'agent juridique) suivent leurs propres règles : inscription avec nom et e-mail professionnel (table séparée, supprimée 30 jours après l'atelier, l'entreprise responsable du traitement et IMA sous-traitant) ; avis jamais relié à l'inscription, date du jour seulement, texte libre autorisé sans modération (filtre des e-mails et téléphones) ; résultats à partir de 5 avis pour l'atelier entier.
+
 11. **Secrets.** Les clés (Anthropic, Brevo, base OVH) vivent uniquement dans `.env.local` (développement) puis dans les variables d'environnement Vercel. `.env*` est dans `.gitignore`. Ne jamais afficher une clé dans le terminal ni dans un commit.
 
 ## 3. Pile technique

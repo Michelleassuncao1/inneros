@@ -44,6 +44,7 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
   const l = await getTranslations("Libelles");
   const tr = await getTranslations("Risques");
   const tcal = await getTranslations("Calendrier");
+  const ta = await getTranslations("Ateliers");
 
   return (
     <EspaceAdmin locale={locale} actif="entreprises">
@@ -65,6 +66,12 @@ export default async function EntreprisePage({ params }: PageProps<"/[locale]/ad
           className="ml-3 inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
         >
           {tcal("title")}
+        </Link>
+        <Link
+          href={`/admin/entreprises/${id}/ateliers`}
+          className="ml-3 inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+        >
+          {ta("title")}
         </Link>
       </p>
 

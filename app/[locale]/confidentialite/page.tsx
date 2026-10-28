@@ -2,6 +2,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WaveFooter } from "@/components/WaveFooter";
+import { dureesAteliers } from "@/lib/ateliers/ateliers";
 import { dureesConservation } from "@/lib/confidentialite/conservation";
 import { TEXTES_CONFIDENTIALITE } from "@/lib/confidentialite/textes";
 
@@ -10,11 +11,14 @@ export default async function ConfidentialitePage({ params }: PageProps<"/[local
   setRequestLocale(locale);
   const texte = TEXTES_CONFIDENTIALITE[locale as keyof typeof TEXTES_CONFIDENTIALITE] ?? TEXTES_CONFIDENTIALITE.fr;
   const d = dureesConservation();
+  const ateliers = dureesAteliers();
   const remplir = (s: string) =>
     s
       .replaceAll("{reponses}", String(d.reponsesApresAcceptation))
       .replaceAll("{secours}", String(d.reponsesApresCloture))
-      .replaceAll("{journal}", String(d.journal));
+      .replaceAll("{journal}", String(d.journal))
+      .replaceAll("{inscriptionsAteliers}", String(ateliers.inscriptionsJours))
+      .replaceAll("{avisAteliers}", String(ateliers.avisMois));
 
   return (
     <>

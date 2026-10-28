@@ -784,3 +784,105 @@ export const aiTrainingProgress = pgTable(
     check("ai_training_ordre", sql`${t.registeredAt} IS NULL OR (${t.passedAt} IS NOT NULL AND ${t.guideAckAt} IS NOT NULL AND ${t.certificateCode} IS NOT NULL)`),
   ],
 );
+
+// ─── Ateliers avec QR code (module C, décisions de Michelle du 27/10/2026) ─────
+// Le conseiller en prévention (ou IMA) crée l'atelier ; un lien et un QR code uniques servent avant l'atelier
+// à s'inscrire, puis à donner un avis anonyme. Inscriptions et avis sont dans deux tables sans aucun lien.
+
+export const typeAtelier = pgEnum("workshop_type", [
+  "atelier_participatif",
+  "quart_heure_bien_etre",
+  "formation_managers",
+  "groupe_expression",
+  "conference",
+  "yoga_guide",
+  "pleine_conscience",
+]);
+export const statutAppuiIma = pgEnum("workshop_support_status", ["demande", "accepte", "refuse"]);
+
+export const workshops = pgTable(
+  "workshops",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    organizationId: uuid("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    type: typeAtelier("type").notNull(),
+    title: text("title").notNull(), // titre neutre, visible sur la page d'inscription
+    description: text("description"),
+    startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
+    durationMinutes: integer("duration_minutes").notNull(),
+    place: text("place").notNull(), // salle, adresse ou visioconférence
+    capacity: integer("capacity").notNull(),
+    facilitator: text("facilitator"), // fonction de l'animateur (pas forcément un nom)
+    // Code de la page publique (lien et QR code) : aléatoire, impossible à deviner
+    publicCode: text("public_code").notNull().unique(),
+    awarenessCampaignId: uuid("awareness_campaign_id").references(() => awarenessCampaigns.id, { onDelete: "set null" }),
+    planId: uuid("plan_id").references(() => preventionPlans.id, { onDelete: "set null" }),
+    planActionId: text("plan_action_id"),
+    // Demande facultative d'appui ou d'un animateur IMA
+    supportStatus: statutAppuiIma("support_status"),
+    supportRequest: text("support_request"),
+    supportReply: text("support_reply"),
+    imaFacilitatorId: uuid("ima_facilitator_id").references(() => users.id, { onDelete: "set null" }),
+    cancelledAt: timestamp("cancelled_at", { withTimezone: true }),
+    reminderSentAt: timestamp("reminder_sent_at", { withTimezone: true }),
+    // Après suppression des inscriptions (30 jours après l'atelier) : seuls ces nombres restent
+    registrationsPurgedAt: timestamp("registrations_purged_at", { withTimezone: true }),
+    registeredCount: integer("registered_count"),
+    waitlistCount: integer("waitlist_count"),
+    attendedCount: integer("attended_count"),
+    feedbackPurgedAt: timestamp("feedback_purged_at", { withTimezone: true }),
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+    updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check("workshops_textes", sql`length(${t.title}) BETWEEN 3 AND 120 AND coalesce(length(${t.description}), 0) <= 1000 AND length(${t.place}) BETWEEN 2 AND 300 AND coalesce(length(${t.facilitator}), 0) <= 120`),
+    check("workshops_appui", sql`coalesce(length(${t.supportRequest}), 0) <= 500 AND coalesce(length(${t.supportReply}), 0) <= 500`),
+    check("workshops_nombres", sql`${t.capacity} BETWEEN 1 AND 500 AND ${t.durationMinutes} BETWEEN 5 AND 600`),
+    check("workshops_action", sql`${t.planActionId} IS NULL OR ${t.planId} IS NOT NULL`),
+  ],
+);
+
+export const statutInscription = pgEnum("workshop_registration_status", ["inscrit", "attente"]);
+
+// Inscriptions : nom et e-mail professionnel, supprimés 30 jours après l'atelier. Une désinscription supprime la ligne.
+export const workshopRegistrations = pgTable(
+  "workshop_registrations",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    workshopId: uuid("workshop_id")
+      .notNull()
+      .references(() => workshops.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    email: text("email").notNull(),
+    locale: langue("locale").notNull(),
+    status: statutInscription("status").notNull(),
+    attended: boolean("attended").notNull().default(false),
+    // Empreinte du lien de désinscription envoyé par e-mail
+    cancelTokenHash: text("cancel_token_hash").notNull().unique(),
+    reminderSentAt: timestamp("reminder_sent_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    unique("workshop_registrations_unique").on(t.workshopId, t.email),
+    check("workshop_registrations_textes", sql`length(${t.name}) BETWEEN 2 AND 120 AND length(${t.email}) <= 254 AND ${t.email} = lower(trim(${t.email}))`),
+  ],
+);
+
+// Avis anonymes : la date du jour seulement, aucune donnée de connexion, aucun lien avec une inscription
+export const workshopFeedback = pgTable(
+  "workshop_feedback",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    workshopId: uuid("workshop_id")
+      .notNull()
+      .references(() => workshops.id, { onDelete: "cascade" }),
+    submittedOn: date("submitted_on").notNull(),
+    answers: jsonb("answers").notNull(), // { utile: 1..5, clair: 1..5, … }
+    comment: text("comment"),
+  },
+  (t) => [check("workshop_feedback_commentaire", sql`coalesce(length(${t.comment}), 0) <= 1000`)],
+);

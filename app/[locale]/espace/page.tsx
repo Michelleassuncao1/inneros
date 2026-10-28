@@ -19,6 +19,7 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
   const tr = await getTranslations("Risques");
   const tp = await getTranslations("Plan");
   const tcal = await getTranslations("Calendrier");
+  const ta = await getTranslations("Ateliers");
   const plan = await planPourReferentSuivi(getDb(), referent);
   const liste = await campagnesDuReferent(getDb(), referent.id);
   const date = (d: string) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
@@ -42,6 +43,14 @@ export default async function EspaceReferentPage({ params }: PageProps<"/[locale
           >
             {tcal("title")}
           </Link>
+          {referent.preventionAdvisor && (
+            <Link
+              href="/espace/ateliers"
+              className="inline-block rounded-md border border-ima-navy px-4 py-2 font-semibold text-ima-navy hover:bg-ima-cream"
+            >
+              {ta("title")}
+            </Link>
+          )}
         </p>
         {(referent.preventionAdvisor || plan) && (
           <p className="mt-3 flex flex-wrap gap-3">

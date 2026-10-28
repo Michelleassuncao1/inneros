@@ -6,7 +6,15 @@ const echapper = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0
 export function emailIMA(
   locale: string,
   destinataire: { email: string; name: string },
-  contenu: { sujet: string; salutation: string; paragraphes: string[]; bouton: string; lien: string; mention?: string },
+  contenu: {
+    sujet: string;
+    salutation: string;
+    paragraphes: string[];
+    bouton: string;
+    lien: string;
+    mention?: string;
+    secondaire?: { libelle: string; lien: string }; // lien discret sous le bouton (ex. se désinscrire)
+  },
 ): Email {
   const html = `<!doctype html>
 <html lang="${locale}"><body style="margin:0;background:#FAF8F3;font-family:Arial,sans-serif;color:#1C1C1A">
@@ -20,12 +28,13 @@ export function emailIMA(
 <p style="margin:0 0 12px;line-height:1.5">${echapper(contenu.salutation)}</p>
 ${contenu.paragraphes.map((p) => `<p style="margin:0 0 12px;line-height:1.5">${echapper(p)}</p>`).join("\n")}
 <p style="margin:12px 0 24px"><a href="${contenu.lien}" style="display:inline-block;background:#08275A;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:8px">${echapper(contenu.bouton)}</a></p>
+${contenu.secondaire ? `<p style="margin:0 0 24px"><a href="${contenu.secondaire.lien}" style="color:#08275A">${echapper(contenu.secondaire.libelle)}</a></p>` : ""}
 ${contenu.mention ? `<p style="margin:0 0 24px;line-height:1.5;color:#5A5A5A;font-size:14px">${echapper(contenu.mention)}</p>` : ""}
 </td></tr>
 </table>
 </td></tr>
 </table>
 </body></html>`;
-  const text = [contenu.salutation, "", ...contenu.paragraphes, "", `${contenu.bouton} : ${contenu.lien}`, contenu.mention ? `\n${contenu.mention}` : ""].join("\n");
+  const text = [contenu.salutation, "", ...contenu.paragraphes, "", `${contenu.bouton} : ${contenu.lien}`, contenu.secondaire ? `${contenu.secondaire.libelle} : ${contenu.secondaire.lien}` : "", contenu.mention ? `\n${contenu.mention}` : ""].join("\n");
   return { to: destinataire, subject: contenu.sujet, html, text };
 }

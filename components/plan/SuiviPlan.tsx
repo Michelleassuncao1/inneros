@@ -10,6 +10,7 @@ import { preventionPlans, users } from "@/lib/db/schema";
 import { lireContenuPlan } from "@/lib/plan/contenu";
 import { lireAvancement, ORGANES, STATUTS_ACTION, tableauDeBord } from "@/lib/plan/suivi";
 import { campagnesDuPlan } from "@/lib/sensibilisation/declencheurs";
+import { ateliersDuPlan } from "@/lib/ateliers/ateliers";
 
 export async function SuiviPlan({
   plan,
@@ -29,6 +30,9 @@ export async function SuiviPlan({
   if (!contenu) return null;
   const statuts = await lireAvancement(db, plan.id);
   const campagnes = await campagnesDuPlan(db, plan.id, locale);
+  const ateliers = await ateliersDuPlan(db, plan.id);
+  const ta = await getTranslations("Ateliers");
+  const jour = (d: Date) => new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(d);
   const bord = tableauDeBord(contenu, plan.actionYear, statuts);
   const date = (d: string) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${d}T00:00:00Z`));
   const [adoptant] = plan.adoptedBy ? await db.select({ name: users.name }).from(users).where(eq(users.id, plan.adoptedBy)) : [];
@@ -133,6 +137,12 @@ export async function SuiviPlan({
                   <p key={i} className="mt-1 text-sm">
                     {t("awarenessLine", { titre: c.titre, etat: tcal(`statuts.${c.statut}`) })}
                     {c.diffuseeLe && ` · ${date(c.diffuseeLe)}`}
+                  </p>
+                ))}
+                {(ateliers.get(a.id) ?? []).map((x, i) => (
+                  <p key={`atelier-${i}`} className={`mt-1 text-sm ${x.annule ? "text-ima-muted line-through" : ""}`}>
+                    {ta("planLine", { titre: x.titre, date: jour(x.debut) })}
+                    {x.annule ? ` · ${ta("calendarCancelled")}` : x.avis ? ` · ${ta("planFeedback", { n: x.avis })}` : ""}
                   </p>
                 ))}
                 {peutSuivre && (

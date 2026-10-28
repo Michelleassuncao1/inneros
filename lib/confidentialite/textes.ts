@@ -1,6 +1,7 @@
 // Page de confidentialité (étape 9), dans les 4 langues. Version de travail : à valider par un juriste et
 // dans l'AIPD (rôle de responsable du traitement, hébergeurs, bases légales, durées).
-// Les durées viennent des réglages ({reponses}, {secours}, {journal}) pour rester toujours exactes.
+// Les durées viennent des réglages ({reponses}, {secours}, {journal}, {inscriptionsAteliers}, {avisAteliers})
+// pour rester toujours exactes.
 export type SectionConfidentialite = { titre: string; paragraphes?: string[]; puces?: string[] };
 export type TexteConfidentialite = { titre: string; aValider: string; intro: string; sections: SectionConfidentialite[] };
 
@@ -90,6 +91,19 @@ export const TEXTES_CONFIDENTIALITE: Record<"fr" | "nl" | "en" | "pt-BR", TexteC
           "Pour les personnes qui se connectent (référents des entreprises et praticiens IMA) : nom, adresse e-mail, rôle et journal des actions. Ces données sont conservées pendant le contrat, plus un an ; le journal pendant {journal} mois.",
         ],
       },
+      {
+        titre: "Ateliers (inscription et avis)",
+        paragraphes: [
+          "Quand votre employeur propose un atelier (par exemple un quart d'heure bien-être, du yoga guidé ou une formation des managers), un lien ou un QR code permet de s'inscrire puis de donner son avis. Pour ces inscriptions, votre employeur est responsable du traitement et l'Institut Mindset en Action® (InnerOS) est son sous-traitant.",
+        ],
+        puces: [
+          "Inscription : votre nom, votre adresse e-mail professionnelle et votre présence, pour organiser l'atelier, vous envoyer la confirmation et un rappel la veille. Seuls le conseiller en prévention de votre employeur et IMA les voient. Elles sont supprimées {inscriptionsAteliers} jours après l'atelier ; seuls les nombres d'inscrits et de présents restent.",
+          "La participation est volontaire. La présence et les avis ne servent jamais à évaluer une personne.",
+          "Avis après l'atelier : des réponses à choix et, si vous le souhaitez, un commentaire. L'avis n'est jamais relié à votre inscription ; seule la date du jour est enregistrée, sans heure ni donnée de connexion. Un cookie technique, qui ne contient que l'identifiant de l'atelier, évite de donner deux avis depuis le même appareil.",
+          "Les résultats ne sont affichés qu'à partir de 5 avis, pour l'atelier entier. Dans un petit groupe, on peut parfois reconnaître quelqu'un à ce qu'il écrit : ne citez personne et n'indiquez pas de coordonnées. Les avis sont supprimés après {avisAteliers} mois.",
+          "Pour vous désinscrire, utilisez le lien reçu par e-mail. Pour toute autre demande sur ces données, adressez-vous à votre employeur ou à IMA.",
+        ],
+      },
     ],
   },
   nl: {
@@ -173,6 +187,19 @@ export const TEXTES_CONFIDENTIALITE: Record<"fr" | "nl" | "en" | "pt-BR", TexteC
         titre: "Referentiepersonen en IMA-practitioners",
         paragraphes: [
           "Voor de personen die zich aanmelden (referentiepersonen van de ondernemingen en IMA-practitioners): naam, e-mailadres, rol en logboek van de acties. Deze gegevens worden bewaard tijdens het contract, plus één jaar; het logboek gedurende {journal} maanden.",
+        ],
+      },
+      {
+        titre: "Workshops (inschrijving en feedback)",
+        paragraphes: [
+          "Wanneer uw werkgever een workshop aanbiedt (bijvoorbeeld een welzijnskwartier, begeleide yoga of een opleiding voor leidinggevenden), kunt u zich via een link of QR-code inschrijven en daarna feedback geven. Voor deze inschrijvingen is uw werkgever verwerkingsverantwoordelijke en het Institut Mindset en Action® (InnerOS) zijn verwerker.",
+        ],
+        puces: [
+          "Inschrijving: uw naam, uw professioneel e-mailadres en uw aanwezigheid, om de workshop te organiseren en u de bevestiging en een herinnering de dag ervoor te sturen. Alleen de preventieadviseur van uw werkgever en IMA zien ze. Ze worden {inscriptionsAteliers} dagen na de workshop verwijderd; alleen het aantal ingeschrevenen en aanwezigen blijft.",
+          "Deelnemen is vrijwillig. Aanwezigheid en feedback worden nooit gebruikt om iemand te beoordelen.",
+          "Feedback na de workshop: antwoorden op meerkeuzevragen en, als u wilt, een opmerking. De feedback wordt nooit aan uw inschrijving gekoppeld; alleen de datum wordt geregistreerd, zonder uur of verbindingsgegevens. Een technische cookie, die alleen het nummer van de workshop bevat, voorkomt dat vanaf hetzelfde toestel twee keer feedback wordt gegeven.",
+          "De resultaten worden pas getoond vanaf 5 antwoorden, voor de hele workshop. In een kleine groep kan men iemand soms herkennen aan wat hij of zij schrijft: noem geen namen en geef geen contactgegevens. De feedback wordt na {avisAteliers} maanden verwijderd.",
+          "Om u uit te schrijven, gebruikt u de link uit de e-mail. Voor andere vragen over deze gegevens kunt u terecht bij uw werkgever of bij IMA.",
         ],
       },
     ],
@@ -260,6 +287,19 @@ export const TEXTES_CONFIDENTIALITE: Record<"fr" | "nl" | "en" | "pt-BR", TexteC
           "For people who sign in (company referents and IMA practitioners): name, email address, role and log of actions. This data is kept for the length of the contract, plus one year; the log for {journal} months.",
         ],
       },
+      {
+        titre: "Workshops (registration and feedback)",
+        paragraphes: [
+          "When your employer offers a workshop (for example a well-being quarter hour, guided yoga or manager training), a link or QR code lets you sign up and then give feedback. For these registrations, your employer is the controller and Institut Mindset en Action® (InnerOS) is its processor.",
+        ],
+        puces: [
+          "Registration: your name, your work email address and your attendance, to organise the workshop and send you the confirmation and a reminder the day before. Only your employer's prevention adviser and IMA can see them. They are deleted {inscriptionsAteliers} days after the workshop; only the numbers of registered and present people remain.",
+          "Taking part is voluntary. Attendance and feedback are never used to assess anyone.",
+          "Feedback after the workshop: multiple-choice answers and, if you wish, a comment. Feedback is never linked to your registration; only the date is recorded, with no time or connection data. A technical cookie, containing only the workshop identifier, prevents giving feedback twice from the same device.",
+          "Results are shown only from 5 responses, for the whole workshop. In a small group, people can sometimes be recognised by what they write: do not name anyone or give contact details. Feedback is deleted after {avisAteliers} months.",
+          "To cancel your registration, use the link in the email. For any other request about this data, contact your employer or IMA.",
+        ],
+      },
     ],
   },
   "pt-BR": {
@@ -343,6 +383,19 @@ export const TEXTES_CONFIDENTIALITE: Record<"fr" | "nl" | "en" | "pt-BR", TexteC
         titre: "Referentes e profissionais da IMA",
         paragraphes: [
           "Para as pessoas que acessam a plataforma (referentes das empresas e profissionais da IMA): nome, e-mail, função e registro das ações. Esses dados são conservados durante o contrato, mais um ano; o registro, durante {journal} meses.",
+        ],
+      },
+      {
+        titre: "Oficinas (inscrição e avaliação)",
+        paragraphes: [
+          "Quando seu empregador oferece uma oficina (por exemplo, quinze minutos de bem-estar, yoga guiado ou formação de gestores), um link ou QR code permite se inscrever e depois dar sua avaliação. Para essas inscrições, seu empregador é o controlador e o Institut Mindset en Action® (InnerOS) é seu operador.",
+        ],
+        puces: [
+          "Inscrição: seu nome, seu e-mail profissional e sua presença, para organizar a oficina e enviar a confirmação e um lembrete na véspera. Apenas o responsável pela prevenção do seu empregador e a IMA os veem. Eles são apagados {inscriptionsAteliers} dias após a oficina; ficam apenas os números de inscritos e de presentes.",
+          "A participação é voluntária. A presença e as avaliações nunca servem para avaliar uma pessoa.",
+          "Avaliação após a oficina: respostas de múltipla escolha e, se quiser, um comentário. A avaliação nunca é vinculada à sua inscrição; só a data é registrada, sem horário nem dado de conexão. Um cookie técnico, que contém apenas o identificador da oficina, evita dar duas avaliações no mesmo aparelho.",
+          "Os resultados só aparecem a partir de 5 avaliações, para a oficina inteira. Em um grupo pequeno, às vezes é possível reconhecer alguém pelo que escreve: não cite ninguém e não informe contatos. As avaliações são apagadas após {avisAteliers} meses.",
+          "Para cancelar sua inscrição, use o link recebido por e-mail. Para qualquer outro pedido sobre esses dados, fale com seu empregador ou com a IMA.",
         ],
       },
     ],

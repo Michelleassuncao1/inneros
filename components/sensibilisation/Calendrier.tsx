@@ -29,6 +29,9 @@ import {
   type Cause,
 } from "@/lib/sensibilisation/declencheurs";
 import type { Theme } from "@/lib/sensibilisation/themes";
+import { ateliersDeLAnnee, FUSEAUX } from "@/lib/ateliers/ateliers";
+import { organizations } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 
 const COULEURS: Record<string, string> = {
   prevue: "border-ima-line text-ima-navy",
@@ -64,6 +67,11 @@ export async function Calendrier({
   const evenements = await lireEvenements(db, utilisateur, organizationId);
   const deces = modifiable && (await decesRecent(db, organizationId));
   const lien = await actionsPourLien(db, utilisateur, organizationId);
+  const ta = await getTranslations("Ateliers");
+  const ateliers = await ateliersDeLAnnee(db, utilisateur, organizationId, annee);
+  const [org] = await db.select({ country: organizations.country }).from(organizations).where(eq(organizations.id, organizationId));
+  const quandAtelier = (d: Date) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeStyle: "short", timeZone: FUSEAUX[org?.country ?? "BE"] }).format(d);
+  const baseAteliers = utilisateur.role === "admin" ? `/admin/entreprises/${organizationId}/ateliers` : "/espace/ateliers";
 
   const nomMois = (m: number, a = annee) => new Intl.DateTimeFormat(locale, { month: "long", timeZone: "UTC" }).format(new Date(Date.UTC(a, m - 1, 1)));
   const moisOptions = (a = annee) => Array.from({ length: 12 }, (_, i) => ({ valeur: String(i + 1), libelle: nomMois(i + 1, a) }));
@@ -225,6 +233,26 @@ export async function Calendrier({
             );
           })}
         </ol>
+      )}
+
+      {/* Ateliers de l'année (module C) */}
+      {ateliers.length > 0 && (
+        <section aria-labelledby="ateliers" className="flex max-w-3xl flex-col gap-2">
+          <h2 id="ateliers" className="text-xl">{t("workshopsTitle")}</h2>
+          <ul className="flex flex-col gap-1">
+            {ateliers.map((a) => (
+              <li key={a.id} className={a.annule ? "text-ima-muted line-through" : ""}>
+                <span className="mr-2 text-sm">{quandAtelier(a.debut)}</span>
+                {modifiable ? (
+                  <Link href={`${baseAteliers}/${a.id}`} className="font-semibold text-ima-navy underline">{a.titre}</Link>
+                ) : (
+                  <span className="font-semibold text-ima-navy">{a.titre}</span>
+                )}
+                <span className="ml-2 text-sm text-ima-muted">{ta(`types.${a.type}`)}{a.annule ? ` · ${ta("calendarCancelled")}` : ""}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       {modifiable && disponibles.length > 0 && (

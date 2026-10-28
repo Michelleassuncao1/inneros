@@ -27,6 +27,7 @@ Liste des actions qui ne dépendent pas du code. Claude la relit et la rappelle 
 - [ ] Relire `docs/relecture/risques-relecture.html` : grille Kinney, exemples de gravité, règles de probabilité et de gravité proposées, côté défavorable des échelles.
 - [ ] Relire les choix de méthode du plan (prompt `prompts/plan-prevention.system.md`) : nouveau diagnostic au plus tard en année 3, évaluation à mi-parcours, 3 à 5 actions « importantes » par an.
 - [ ] Relire et valider les 12 thèmes de sensibilisation (espace IMA > Sensibilisation) : kits français rédigés par l'IA le 23/10/2026. Faire relire « Prendre soin les uns des autres » (prévention du suicide) et « Le respect au travail » (harcèlement, violence) par un professionnel ; puis faire rédiger les autres langues (bouton IA par langue).
+- [ ] Ateliers (module C) : regarder l'affiche PDF d'un atelier et la page d'inscription sur téléphone ; relire les 5 questions de l'avis (utile, clair, envie d'appliquer, animation, recommandation) et les textes des e-mails aux participants.
 - [ ] Après une première vraie campagne : vérifier le réglage des valeurs Kinney proposées (beaucoup de risques « élevés » sur les données de démonstration).
 
 ## En attente d'autres personnes
