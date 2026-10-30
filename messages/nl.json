@@ -85,7 +85,8 @@
     "journal": "Logboek",
     "awareness": "Sensibilisering",
     "training": "AI-opleiding",
-    "workshops": "Workshops"
+    "workshops": "Workshops",
+    "templates": "Modellen"
   },
   "Libelles": {
     "all": "Alle landen",
@@ -732,7 +733,8 @@
       "workshop_attendance_exported": "Lijst van ingeschrevenen geëxporteerd",
       "workshop_reminder_sent": "Herinnering voor een workshop verstuurd",
       "workshop_registrations_deleted": "Inschrijvingen van een workshop verwijderd (einde bewaring)",
-      "workshop_feedback_deleted": "Feedback van een workshop verwijderd (einde bewaring)"
+      "workshop_feedback_deleted": "Feedback van een workshop verwijderd (einde bewaring)",
+      "template_downloaded": "Model gedownload"
     }
   },
   "Rapport": {
@@ -1635,5 +1637,28 @@
     "rappelConseillerSujet": "Komende workshop: {titre}",
     "rappelConseillerTexte": "Uw workshop \"{titre}\" vindt plaats op {quand}: {inscrits, plural, =0 {geen inschrijvingen} one {# ingeschreven} other {# ingeschreven}}, {attente} op de wachtlijst. Denk eraan de QR-code op te hangen om op het einde feedback te verzamelen, en de aanwezigheden aan te duiden.",
     "ouvrirEspace": "InnerOS openen"
+  },
+  "Modeles": {
+    "title": "Modellen",
+    "backSpace": "← Terug naar mijn ruimte",
+    "intro": "Lege modellen om te downloaden, in de huisstijl van IMA. U vult ze in op uw computer en kunt het logo van uw onderneming toevoegen.",
+    "adminTitle": "Modellenbibliotheek",
+    "adminHelp": "Alle modellen, gevalideerd of nog te valideren. Preventieadviseurs zien alleen de gevalideerde modellen van hun land.",
+    "privacy": "Ingevulde documenten blijven bij u: InnerOS bewaart nooit een ingevuld model.",
+    "empty": "Nog geen modellen beschikbaar.",
+    "categories": {
+      "rapport_annuel": "Jaarverslagen",
+      "plan": "Preventieplannen",
+      "reunion": "Vergaderingen",
+      "sensibilisation": "Sensibilisering",
+      "atelier": "Workshops",
+      "psychosocial": "Psychosociale aspecten"
+    },
+    "validated": "Gevalideerd",
+    "toValidate": "Te valideren",
+    "format": "{format} · {langue}",
+    "source": "Bron: {source}",
+    "download": "Downloaden",
+    "logoHelp": "Om uw logo toe te voegen aan een beveiligd Word-formulier: Controleren › Bewerking beperken › Beveiliging stoppen, vervang het kader \"Logo de votre entreprise\" en zet de beveiliging daarna weer aan om de velden in te vullen."
   }
 }

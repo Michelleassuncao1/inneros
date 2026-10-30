@@ -85,7 +85,8 @@
     "journal": "Journal",
     "awareness": "Sensibilisation",
     "training": "Formation IA",
-    "workshops": "Ateliers"
+    "workshops": "Ateliers",
+    "templates": "Modèles"
   },
   "Libelles": {
     "all": "Tous les pays",
@@ -732,7 +733,8 @@
       "workshop_attendance_exported": "Liste des inscrits exportée",
       "workshop_reminder_sent": "Rappel d'atelier envoyé",
       "workshop_registrations_deleted": "Inscriptions d'un atelier supprimées (fin de conservation)",
-      "workshop_feedback_deleted": "Avis d'un atelier supprimés (fin de conservation)"
+      "workshop_feedback_deleted": "Avis d'un atelier supprimés (fin de conservation)",
+      "template_downloaded": "Modèle téléchargé"
     }
   },
   "Rapport": {
@@ -1635,5 +1637,28 @@
     "rappelConseillerSujet": "Atelier à venir : {titre}",
     "rappelConseillerTexte": "Votre atelier « {titre} » a lieu le {quand} : {inscrits, plural, =0 {aucun inscrit} one {# inscrit} other {# inscrits}}, {attente} en liste d'attente. Pensez à afficher le QR code pour recueillir les avis à la fin, et à cocher les présences.",
     "ouvrirEspace": "Ouvrir InnerOS"
+  },
+  "Modeles": {
+    "title": "Modèles",
+    "backSpace": "← Retour à mon espace",
+    "intro": "Modèles vierges à télécharger, aux couleurs d'IMA. Vous les remplissez sur votre ordinateur et pouvez y ajouter le logo de votre entreprise.",
+    "adminTitle": "Bibliothèque de modèles",
+    "adminHelp": "Tous les modèles, validés ou à valider. Les conseillers en prévention ne voient que les modèles validés de leur pays.",
+    "privacy": "Les documents remplis restent chez vous : InnerOS n'enregistre jamais un modèle complété.",
+    "empty": "Aucun modèle disponible pour l'instant.",
+    "categories": {
+      "rapport_annuel": "Rapports annuels",
+      "plan": "Plans de prévention",
+      "reunion": "Réunions",
+      "sensibilisation": "Sensibilisation",
+      "atelier": "Ateliers",
+      "psychosocial": "Aspects psychosociaux"
+    },
+    "validated": "Validé",
+    "toValidate": "À valider",
+    "format": "{format} · {langue}",
+    "source": "Source : {source}",
+    "download": "Télécharger",
+    "logoHelp": "Pour ajouter votre logo dans un formulaire Word protégé : Révision › Restreindre la modification › Désactiver la protection, remplacez le cadre « Logo de votre entreprise », puis réactivez la protection pour remplir les champs."
   }
 }

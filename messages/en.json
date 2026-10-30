@@ -85,7 +85,8 @@
     "journal": "Log",
     "awareness": "Awareness",
     "training": "AI training",
-    "workshops": "Workshops"
+    "workshops": "Workshops",
+    "templates": "Templates"
   },
   "Libelles": {
     "all": "All countries",
@@ -732,7 +733,8 @@
       "workshop_attendance_exported": "Registration list exported",
       "workshop_reminder_sent": "Workshop reminder sent",
       "workshop_registrations_deleted": "Workshop registrations deleted (end of retention)",
-      "workshop_feedback_deleted": "Workshop feedback deleted (end of retention)"
+      "workshop_feedback_deleted": "Workshop feedback deleted (end of retention)",
+      "template_downloaded": "Template downloaded"
     }
   },
   "Rapport": {
@@ -1635,5 +1637,28 @@
     "rappelConseillerSujet": "Upcoming workshop: {titre}",
     "rappelConseillerTexte": "Your workshop \"{titre}\" takes place on {quand}: {inscrits, plural, =0 {no one registered} one {# registered} other {# registered}}, {attente} on the waiting list. Remember to display the QR code to collect feedback at the end, and to record attendance.",
     "ouvrirEspace": "Open InnerOS"
+  },
+  "Modeles": {
+    "title": "Templates",
+    "backSpace": "← Back to my space",
+    "intro": "Blank templates to download, in IMA's style. You fill them in on your computer and can add your company's logo.",
+    "adminTitle": "Template library",
+    "adminHelp": "All templates, validated or awaiting validation. Prevention advisers only see validated templates for their country.",
+    "privacy": "Completed documents stay with you: InnerOS never stores a filled-in template.",
+    "empty": "No templates available yet.",
+    "categories": {
+      "rapport_annuel": "Annual reports",
+      "plan": "Prevention plans",
+      "reunion": "Meetings",
+      "sensibilisation": "Awareness",
+      "atelier": "Workshops",
+      "psychosocial": "Psychosocial aspects"
+    },
+    "validated": "Validated",
+    "toValidate": "To validate",
+    "format": "{format} · {langue}",
+    "source": "Source: {source}",
+    "download": "Download",
+    "logoHelp": "To add your logo to a protected Word form: Review › Restrict Editing › Stop Protection, replace the \"Logo de votre entreprise\" frame, then turn protection back on to fill in the fields."
   }
 }

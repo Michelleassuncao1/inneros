@@ -85,7 +85,8 @@
     "journal": "Registro",
     "awareness": "Sensibilização",
     "training": "Formação em IA",
-    "workshops": "Oficinas"
+    "workshops": "Oficinas",
+    "templates": "Modelos"
   },
   "Libelles": {
     "all": "Todos os países",
@@ -732,7 +733,8 @@
       "workshop_attendance_exported": "Lista de inscritos exportada",
       "workshop_reminder_sent": "Lembrete de oficina enviado",
       "workshop_registrations_deleted": "Inscrições de uma oficina apagadas (fim da conservação)",
-      "workshop_feedback_deleted": "Avaliações de uma oficina apagadas (fim da conservação)"
+      "workshop_feedback_deleted": "Avaliações de uma oficina apagadas (fim da conservação)",
+      "template_downloaded": "Modelo baixado"
     }
   },
   "Rapport": {
@@ -1635,5 +1637,28 @@
     "rappelConseillerSujet": "Próxima oficina: {titre}",
     "rappelConseillerTexte": "Sua oficina \"{titre}\" acontece em {quand}: {inscrits, plural, =0 {nenhum inscrito} one {# inscrito} other {# inscritos}}, {attente} na lista de espera. Lembre-se de afixar o QR code para coletar as avaliações no final e de registrar as presenças.",
     "ouvrirEspace": "Abrir o InnerOS"
+  },
+  "Modeles": {
+    "title": "Modelos",
+    "backSpace": "← Voltar ao meu espaço",
+    "intro": "Modelos em branco para baixar, com a identidade visual do IMA. Você os preenche no seu computador e pode adicionar o logotipo da sua empresa.",
+    "adminTitle": "Biblioteca de modelos",
+    "adminHelp": "Todos os modelos, validados ou a validar. Os responsáveis pela prevenção só veem os modelos validados do seu país.",
+    "privacy": "Os documentos preenchidos ficam com você: o InnerOS nunca armazena um modelo preenchido.",
+    "empty": "Nenhum modelo disponível por enquanto.",
+    "categories": {
+      "rapport_annuel": "Relatórios anuais",
+      "plan": "Planos de prevenção",
+      "reunion": "Reuniões",
+      "sensibilisation": "Sensibilização",
+      "atelier": "Oficinas",
+      "psychosocial": "Aspectos psicossociais"
+    },
+    "validated": "Validado",
+    "toValidate": "A validar",
+    "format": "{format} · {langue}",
+    "source": "Fonte: {source}",
+    "download": "Baixar",
+    "logoHelp": "Para adicionar seu logotipo a um formulário Word protegido: Revisão › Restringir Edição › Interromper Proteção, substitua o quadro \"Logo de votre entreprise\" e depois reative a proteção para preencher os campos."
   }
 }
