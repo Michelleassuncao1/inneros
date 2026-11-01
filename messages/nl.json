@@ -483,7 +483,12 @@
     "atelierLienInvalide": "Deze link is niet meer geldig. Gebruik de laatste e-mail die u kreeg.",
     "atelierAvisFerme": "Feedback voor deze workshop is niet open.",
     "atelierAvisComplet": "Het maximale aantal antwoorden voor deze workshop is bereikt.",
-    "atelierAvisDejaDonne": "U hebt vanaf dit toestel al feedback gegeven over deze workshop."
+    "atelierAvisDejaDonne": "U hebt vanaf dit toestel al feedback gegeven over deze workshop.",
+    "redactionDesactivee": "De schrijfhulp is niet geactiveerd.",
+    "redactionPaysNonDisponible": "De schrijfhulp is nog niet beschikbaar in uw land.",
+    "redactionEngagementRequis": "Vink het vakje aan dat bevestigt dat uw notities geen persoonsgegevens bevatten.",
+    "redactionDonneesPersonnelles": "Uw notities bevatten een e-mailadres, telefoonnummer of identificatienummer: verwijder het en probeer opnieuw.",
+    "redactionLimiteAtteinte": "U hebt de limiet van 10 ontwerpen voor vandaag bereikt."
   },
   "Passation": {
     "enterTitle": "Naar de vragenlijst",
@@ -734,7 +739,9 @@
       "workshop_reminder_sent": "Herinnering voor een workshop verstuurd",
       "workshop_registrations_deleted": "Inschrijvingen van een workshop verwijderd (einde bewaring)",
       "workshop_feedback_deleted": "Feedback van een workshop verwijderd (einde bewaring)",
-      "template_downloaded": "Model gedownload"
+      "template_downloaded": "Model gedownload",
+      "ai_writing_aid_used": "Ontwerp voorbereid met de schrijfhulp (zonder inhoud)",
+      "ai_writing_aid_exported": "Goedgekeurd ontwerp gedownload als Word (zonder inhoud)"
     }
   },
   "Rapport": {
@@ -1661,6 +1668,41 @@
     "download": "Downloaden",
     "logoHelp": "Om uw logo toe te voegen aan een beveiligd Word-formulier: Controleren › Bewerking beperken › Beveiliging stoppen, vervang het kader \"Logo de votre entreprise\" en zet de beveiliging daarna weer aan om de velden in te vullen.",
     "downloadWord": "Downloaden (Word)",
-    "downloadPdf": "Downloaden (pdf)"
+    "downloadPdf": "Downloaden (pdf)",
+    "writingAid": "Schrijfhulp (AI)"
+  },
+  "Redaction": {
+    "title": "Schrijfhulp",
+    "adminTitle": "Schrijfhulp (AI)",
+    "backTemplates": "← Terug naar de modellen",
+    "intro": "Plak uw ruwe notities (u kunt ze dicteren met uw telefoon of computer): de AI maakt er een ontwerp van dat u verbetert, goedkeurt en als Word-bestand downloadt. Uw notities en het ontwerp worden niet bewaard.",
+    "goodPractice": "Voor het versturen: vervang namen door functies (\"de verantwoordelijke logistiek\"), beschrijf geen individuele gevallen of iemands gezondheid, en vermeld geen e-mailadressen of telefoonnummers. De AI kan zich vergissen: u blijft verantwoordelijk voor het document dat u goedkeurt. Het individuele gesprek en het verzoek tot formele psychosociale interventie worden niet aangeboden.",
+    "type": "Soort document",
+    "types": {
+      "rapport_annuel": "Jaarverslag (geschreven delen)",
+      "pv_reunion": "Notulen van een vergadering",
+      "fiche_sensibilisation": "Sensibiliseringsfiche",
+      "deroule_atelier": "Verloop van een workshop",
+      "note_information": "Informatienota voor het personeel",
+      "plan_actions": "Voorstelling van preventieacties"
+    },
+    "notes": "Uw notities",
+    "notesHelp": "Minstens 30 tekens, hoogstens {max}.",
+    "commitment": "Ik bevestig dat deze notities geen persoonsgegevens bevatten: geen namen, geen contactgegevens, geen individuele gevallen en geen informatie over iemands gezondheid.",
+    "prepare": "Ontwerp voorbereiden",
+    "preparing": "Bezig…",
+    "remaining": "{n, plural, =0 {Vandaag geen ontwerp meer mogelijk} one {Vandaag nog # ontwerp mogelijk} other {Vandaag nog # ontwerpen mogelijk}}",
+    "draftNotice": "Ontwerp voorbereid door AI: lees het volledig na, verbeter het en vul de \"[aan te vullen]\" in.",
+    "toComplete": "Informatie die u zelf moet aanvullen",
+    "sectionTitle": "Titel van deel {n}",
+    "sectionText": "Tekst",
+    "approve": "Ik heb dit ontwerp nagelezen en verbeterd, en ik keur het goed. Het document vermeldt \"opgesteld met behulp van AI, nagelezen en goedgekeurd\" met mijn naam en de datum.",
+    "download": "Downloaden als Word",
+    "restart": "Opnieuw beginnen",
+    "nothingStored": "Er wordt niets bewaard: als u deze pagina verlaat, gaat het ontwerp verloren.",
+    "error": "Het ontwerp kon niet worden voorbereid. Probeer later opnieuw.",
+    "personalDataInDraft": "De tekst bevat een e-mailadres, telefoonnummer of identificatienummer: verwijder het voor het downloaden.",
+    "disabled": "De schrijfhulp is nog niet geactiveerd.",
+    "countryUnavailable": "De schrijfhulp is nog niet beschikbaar voor organisaties in Brazilië."
   }
 }

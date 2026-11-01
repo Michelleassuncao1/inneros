@@ -1,6 +1,7 @@
 // Bibliothèque de modèles vierges (module D1), commune à l'espace IMA et à l'espace du conseiller en prévention
 import { getTranslations } from "next-intl/server";
 import { MessageInfo } from "@/components/Formulaire";
+import { Link } from "@/i18n/navigation";
 import type { users } from "@/lib/db/schema";
 import { getDb } from "@/lib/db/client";
 import { CATEGORIES_MODELE, modelesVisibles } from "@/lib/modeles/modeles";
@@ -15,6 +16,11 @@ export async function ListeModeles({ utilisateur }: { utilisateur: typeof users.
 
   return (
     <div className="flex flex-col gap-8">
+      <p>
+        <Link href={ima ? "/admin/redaction" : "/espace/redaction"} className={bouton}>
+          {t("writingAid")}
+        </Link>
+      </p>
       <MessageInfo>{t("privacy")}</MessageInfo>
       {modeles.length === 0 && <p>{t("empty")}</p>}
       {CATEGORIES_MODELE.filter((c) => modeles.some((m) => m.categorie === c)).map((c) => (

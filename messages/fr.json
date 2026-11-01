@@ -483,7 +483,12 @@
     "atelierLienInvalide": "Ce lien n'est plus valable. Utilisez le dernier e-mail reçu.",
     "atelierAvisFerme": "Les avis sur cet atelier ne sont pas ouverts.",
     "atelierAvisComplet": "Le nombre maximal d'avis pour cet atelier est atteint.",
-    "atelierAvisDejaDonne": "Vous avez déjà donné votre avis sur cet atelier depuis cet appareil."
+    "atelierAvisDejaDonne": "Vous avez déjà donné votre avis sur cet atelier depuis cet appareil.",
+    "redactionDesactivee": "L'aide à la rédaction n'est pas activée.",
+    "redactionPaysNonDisponible": "L'aide à la rédaction n'est pas encore disponible dans votre pays.",
+    "redactionEngagementRequis": "Cochez la case confirmant que vos notes ne contiennent aucune donnée personnelle.",
+    "redactionDonneesPersonnelles": "Vos notes contiennent un e-mail, un numéro de téléphone ou un numéro d'identification : retirez-le puis réessayez.",
+    "redactionLimiteAtteinte": "Vous avez atteint la limite de 10 brouillons pour aujourd'hui."
   },
   "Passation": {
     "enterTitle": "Accéder au questionnaire",
@@ -734,7 +739,9 @@
       "workshop_reminder_sent": "Rappel d'atelier envoyé",
       "workshop_registrations_deleted": "Inscriptions d'un atelier supprimées (fin de conservation)",
       "workshop_feedback_deleted": "Avis d'un atelier supprimés (fin de conservation)",
-      "template_downloaded": "Modèle téléchargé"
+      "template_downloaded": "Modèle téléchargé",
+      "ai_writing_aid_used": "Brouillon préparé avec l'aide à la rédaction (sans contenu)",
+      "ai_writing_aid_exported": "Brouillon approuvé téléchargé en Word (sans contenu)"
     }
   },
   "Rapport": {
@@ -1661,6 +1668,41 @@
     "download": "Télécharger",
     "logoHelp": "Pour ajouter votre logo dans un formulaire Word protégé : Révision › Restreindre la modification › Désactiver la protection, remplacez le cadre « Logo de votre entreprise », puis réactivez la protection pour remplir les champs.",
     "downloadWord": "Télécharger (Word)",
-    "downloadPdf": "Télécharger (PDF)"
+    "downloadPdf": "Télécharger (PDF)",
+    "writingAid": "Aide à la rédaction (IA)"
+  },
+  "Redaction": {
+    "title": "Aide à la rédaction",
+    "adminTitle": "Aide à la rédaction (IA)",
+    "backTemplates": "← Retour aux modèles",
+    "intro": "Collez vos notes brutes (vous pouvez les dicter avec votre téléphone ou votre ordinateur) : l'IA en prépare un brouillon que vous corrigez, approuvez puis téléchargez en Word. Ni vos notes ni le brouillon ne sont conservés.",
+    "goodPractice": "Avant d'envoyer : remplacez les noms par des fonctions (« le responsable logistique »), ne décrivez aucun cas individuel ni la santé d'une personne, et ne mettez ni e-mail ni numéro de téléphone. L'IA peut se tromper : vous restez responsable du document que vous approuvez. L'entretien individuel et la demande d'intervention psychosociale ne sont pas proposés.",
+    "type": "Type de document",
+    "types": {
+      "rapport_annuel": "Rapport annuel (parties rédigées)",
+      "pv_reunion": "Procès-verbal ou compte rendu de réunion",
+      "fiche_sensibilisation": "Fiche de sensibilisation",
+      "deroule_atelier": "Déroulé d'atelier",
+      "note_information": "Note d'information au personnel",
+      "plan_actions": "Présentation d'actions de prévention"
+    },
+    "notes": "Vos notes",
+    "notesHelp": "Au moins 30 caractères, au plus {max}.",
+    "commitment": "Je confirme que ces notes ne contiennent aucune donnée personnelle : aucun nom, aucune coordonnée, aucun cas individuel ni information sur la santé d'une personne.",
+    "prepare": "Préparer le brouillon",
+    "preparing": "Préparation…",
+    "remaining": "{n, plural, =0 {Plus de brouillon possible aujourd'hui} one {Encore # brouillon possible aujourd'hui} other {Encore # brouillons possibles aujourd'hui}}",
+    "draftNotice": "Brouillon préparé par l'IA : relisez-le entièrement, corrigez-le et complétez les « [à compléter] ».",
+    "toComplete": "Informations à compléter vous-même",
+    "sectionTitle": "Titre de la partie {n}",
+    "sectionText": "Texte",
+    "approve": "J'ai relu et corrigé ce brouillon, et je l'approuve. Le document portera la mention « préparé avec l'aide de l'IA, relu et approuvé » avec mon nom et la date.",
+    "download": "Télécharger en Word",
+    "restart": "Recommencer",
+    "nothingStored": "Rien n'est enregistré : si vous quittez cette page, le brouillon est perdu.",
+    "error": "Le brouillon n'a pas pu être préparé. Réessayez plus tard.",
+    "personalDataInDraft": "Le texte contient un e-mail, un numéro de téléphone ou un numéro d'identification : retirez-le avant de télécharger.",
+    "disabled": "L'aide à la rédaction n'est pas encore activée.",
+    "countryUnavailable": "L'aide à la rédaction n'est pas encore disponible pour les organisations situées au Brésil."
   }
 }

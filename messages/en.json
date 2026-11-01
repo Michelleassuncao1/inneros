@@ -483,7 +483,12 @@
     "atelierLienInvalide": "This link is no longer valid. Use the latest e-mail you received.",
     "atelierAvisFerme": "Feedback for this workshop is not open.",
     "atelierAvisComplet": "The maximum number of responses for this workshop has been reached.",
-    "atelierAvisDejaDonne": "You have already given feedback on this workshop from this device."
+    "atelierAvisDejaDonne": "You have already given feedback on this workshop from this device.",
+    "redactionDesactivee": "The writing aid is not enabled.",
+    "redactionPaysNonDisponible": "The writing aid is not yet available in your country.",
+    "redactionEngagementRequis": "Tick the box confirming that your notes contain no personal data.",
+    "redactionDonneesPersonnelles": "Your notes contain an email address, phone number or identification number: remove it and try again.",
+    "redactionLimiteAtteinte": "You have reached the limit of 10 drafts for today."
   },
   "Passation": {
     "enterTitle": "Access the questionnaire",
@@ -734,7 +739,9 @@
       "workshop_reminder_sent": "Workshop reminder sent",
       "workshop_registrations_deleted": "Workshop registrations deleted (end of retention)",
       "workshop_feedback_deleted": "Workshop feedback deleted (end of retention)",
-      "template_downloaded": "Template downloaded"
+      "template_downloaded": "Template downloaded",
+      "ai_writing_aid_used": "Draft prepared with the writing aid (no content)",
+      "ai_writing_aid_exported": "Approved draft downloaded as Word (no content)"
     }
   },
   "Rapport": {
@@ -1661,6 +1668,41 @@
     "download": "Download",
     "logoHelp": "To add your logo to a protected Word form: Review › Restrict Editing › Stop Protection, replace the \"Logo de votre entreprise\" frame, then turn protection back on to fill in the fields.",
     "downloadWord": "Download (Word)",
-    "downloadPdf": "Download (PDF)"
+    "downloadPdf": "Download (PDF)",
+    "writingAid": "Writing aid (AI)"
+  },
+  "Redaction": {
+    "title": "Writing aid",
+    "adminTitle": "Writing aid (AI)",
+    "backTemplates": "← Back to templates",
+    "intro": "Paste your raw notes (you can dictate them on your phone or computer): the AI prepares a draft that you correct, approve and download as a Word file. Neither your notes nor the draft are stored.",
+    "goodPractice": "Before sending: replace names with roles (\"the logistics manager\"), do not describe any individual case or anyone's health, and do not include email addresses or phone numbers. The AI can make mistakes: you remain responsible for the document you approve. Individual interviews and formal psychosocial intervention requests are not offered.",
+    "type": "Document type",
+    "types": {
+      "rapport_annuel": "Annual report (written sections)",
+      "pv_reunion": "Meeting minutes",
+      "fiche_sensibilisation": "Awareness sheet",
+      "deroule_atelier": "Workshop outline",
+      "note_information": "Information note to staff",
+      "plan_actions": "Presentation of prevention actions"
+    },
+    "notes": "Your notes",
+    "notesHelp": "At least 30 characters, at most {max}.",
+    "commitment": "I confirm that these notes contain no personal data: no names, no contact details, no individual case and no information about anyone's health.",
+    "prepare": "Prepare the draft",
+    "preparing": "Preparing…",
+    "remaining": "{n, plural, =0 {No more drafts available today} one {# draft left today} other {# drafts left today}}",
+    "draftNotice": "Draft prepared by AI: read it in full, correct it and fill in the \"[to complete]\" items.",
+    "toComplete": "Information you need to add",
+    "sectionTitle": "Title of part {n}",
+    "sectionText": "Text",
+    "approve": "I have read and corrected this draft and I approve it. The document will state \"prepared with the help of AI, reviewed and approved\" with my name and the date.",
+    "download": "Download as Word",
+    "restart": "Start again",
+    "nothingStored": "Nothing is stored: if you leave this page, the draft is lost.",
+    "error": "The draft could not be prepared. Please try again later.",
+    "personalDataInDraft": "The text contains an email address, phone number or identification number: remove it before downloading.",
+    "disabled": "The writing aid is not yet enabled.",
+    "countryUnavailable": "The writing aid is not yet available for organisations based in Brazil."
   }
 }

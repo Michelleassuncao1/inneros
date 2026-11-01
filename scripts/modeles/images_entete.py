@@ -84,6 +84,7 @@ CADRE_SIMPLE = {
     "fr": ("Logo de votre entreprise", "Clic droit › Modifier l'image"),
     "nl": ("Logo van uw onderneming", "Rechtsklikken › Afbeelding wijzigen"),
     "pt-BR": ("Logotipo da sua empresa", "Clique com o botão direito › Alterar imagem"),
+    "en": ("Your company logo", "Right-click › Change Picture"),
 }
 
 

@@ -483,7 +483,12 @@
     "atelierLienInvalide": "Este link não é mais válido. Use o último e-mail recebido.",
     "atelierAvisFerme": "As avaliações desta oficina não estão abertas.",
     "atelierAvisComplet": "O número máximo de avaliações desta oficina foi atingido.",
-    "atelierAvisDejaDonne": "Você já deu sua avaliação sobre esta oficina neste aparelho."
+    "atelierAvisDejaDonne": "Você já deu sua avaliação sobre esta oficina neste aparelho.",
+    "redactionDesactivee": "O apoio à redação não está ativado.",
+    "redactionPaysNonDisponible": "O apoio à redação ainda não está disponível no seu país.",
+    "redactionEngagementRequis": "Marque a caixa confirmando que suas anotações não contêm dados pessoais.",
+    "redactionDonneesPersonnelles": "Suas anotações contêm um e-mail, telefone ou número de identificação: retire-o e tente novamente.",
+    "redactionLimiteAtteinte": "Você atingiu o limite de 10 rascunhos por hoje."
   },
   "Passation": {
     "enterTitle": "Acessar o questionário",
@@ -734,7 +739,9 @@
       "workshop_reminder_sent": "Lembrete de oficina enviado",
       "workshop_registrations_deleted": "Inscrições de uma oficina apagadas (fim da conservação)",
       "workshop_feedback_deleted": "Avaliações de uma oficina apagadas (fim da conservação)",
-      "template_downloaded": "Modelo baixado"
+      "template_downloaded": "Modelo baixado",
+      "ai_writing_aid_used": "Rascunho preparado com o apoio à redação (sem conteúdo)",
+      "ai_writing_aid_exported": "Rascunho aprovado baixado em Word (sem conteúdo)"
     }
   },
   "Rapport": {
@@ -1661,6 +1668,41 @@
     "download": "Baixar",
     "logoHelp": "Para adicionar seu logotipo a um formulário Word protegido: Revisão › Restringir Edição › Interromper Proteção, substitua o quadro \"Logo de votre entreprise\" e depois reative a proteção para preencher os campos.",
     "downloadWord": "Baixar (Word)",
-    "downloadPdf": "Baixar (PDF)"
+    "downloadPdf": "Baixar (PDF)",
+    "writingAid": "Apoio à redação (IA)"
+  },
+  "Redaction": {
+    "title": "Apoio à redação",
+    "adminTitle": "Apoio à redação (IA)",
+    "backTemplates": "← Voltar aos modelos",
+    "intro": "Cole suas anotações brutas (você pode ditá-las no celular ou no computador): a IA prepara um rascunho que você corrige, aprova e baixa em Word. Nem suas anotações nem o rascunho são armazenados.",
+    "goodPractice": "Antes de enviar: substitua nomes por funções (\"o responsável pela logística\"), não descreva casos individuais nem a saúde de alguém, e não inclua e-mails ou telefones. A IA pode errar: você continua responsável pelo documento que aprova.",
+    "type": "Tipo de documento",
+    "types": {
+      "rapport_annuel": "Relatório anual (partes redigidas)",
+      "pv_reunion": "Ata de reunião",
+      "fiche_sensibilisation": "Ficha de sensibilização",
+      "deroule_atelier": "Roteiro de oficina",
+      "note_information": "Comunicado aos trabalhadores",
+      "plan_actions": "Apresentação de ações de prevenção"
+    },
+    "notes": "Suas anotações",
+    "notesHelp": "No mínimo 30 caracteres, no máximo {max}.",
+    "commitment": "Confirmo que estas anotações não contêm dados pessoais: nenhum nome, nenhum contato, nenhum caso individual nem informação sobre a saúde de alguém.",
+    "prepare": "Preparar o rascunho",
+    "preparing": "Preparando…",
+    "remaining": "{n, plural, =0 {Nenhum rascunho disponível hoje} one {Ainda # rascunho disponível hoje} other {Ainda # rascunhos disponíveis hoje}}",
+    "draftNotice": "Rascunho preparado pela IA: leia-o por inteiro, corrija-o e preencha os \"[a completar]\".",
+    "toComplete": "Informações que você mesmo deve completar",
+    "sectionTitle": "Título da parte {n}",
+    "sectionText": "Texto",
+    "approve": "Li e corrigi este rascunho e o aprovo. O documento trará a menção \"preparado com o auxílio de IA, revisado e aprovado\" com meu nome e a data.",
+    "download": "Baixar em Word",
+    "restart": "Recomeçar",
+    "nothingStored": "Nada é armazenado: se você sair desta página, o rascunho será perdido.",
+    "error": "Não foi possível preparar o rascunho. Tente novamente mais tarde.",
+    "personalDataInDraft": "O texto contém um e-mail, telefone ou número de identificação: retire-o antes de baixar.",
+    "disabled": "O apoio à redação ainda não está ativado.",
+    "countryUnavailable": "O apoio à redação ainda não está disponível para organizações no Brasil."
   }
 }

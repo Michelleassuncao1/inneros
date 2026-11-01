@@ -38,7 +38,19 @@ const SERIF = "Georgia";
 const TEXTES = {
   fr: { modele: "Modèle", references: "Références", version: "version", adapter: "à adapter à votre organisation", page: "Page", deuxPoints: " :" },
   "pt-BR": { modele: "Modelo", references: "Referências", version: "versão", adapter: "a adaptar à sua organização", page: "Página", deuxPoints: ":" },
+  nl: { modele: "Model", references: "Referenties", version: "versie", adapter: "aan te passen aan uw organisatie", page: "Pagina", deuxPoints: ":" },
+  en: { modele: "Template", references: "References", version: "version", adapter: "to adapt to your organisation", page: "Page", deuxPoints: ":" },
 } as const;
+type Langue = keyof typeof TEXTES;
+
+// Mention des brouillons préparés avec l'aide de l'IA (AI Act, article 50) : visible dans le document
+// et inscrite dans ses propriétés (marquage lisible par une machine)
+const MENTION_IA: Record<Langue, (nom: string, date: string) => string> = {
+  fr: (nom, date) => `Document préparé avec l'aide de l'IA (Claude, Anthropic), relu et approuvé par ${nom} le ${date}.`,
+  nl: (nom, date) => `Document opgesteld met behulp van AI (Claude, Anthropic), nagelezen en goedgekeurd door ${nom} op ${date}.`,
+  en: (nom, date) => `Document prepared with the help of AI (Claude, Anthropic), reviewed and approved by ${nom} on ${date}.`,
+  "pt-BR": (nom, date) => `Documento preparado com o auxílio de IA (Claude, Anthropic), revisado e aprovado por ${nom} em ${date}.`,
+};
 
 const image = (nom: string) => readFileSync(path.join(process.cwd(), "data/modeles/images", nom));
 const logoIma = () => readFileSync(path.join(process.cwd(), "assets/logo-ima.png"));
@@ -49,7 +61,7 @@ const bordures = (couleur = LINE) => {
   return { top: b, bottom: b, left: b, right: b, insideHorizontal: b, insideVertical: b };
 };
 
-function entete(langue: ModeleIma["langue"]) {
+function entete(langue: Langue) {
   return new Header({
     children: [
       new Table({
@@ -218,4 +230,54 @@ export function documentModele(m: ModeleIma) {
 
 export async function docxModele(m: ModeleIma) {
   return Packer.toBuffer(documentModele(m));
+}
+
+// Brouillon de l'aide à la rédaction (module D2), relu et approuvé : aux couleurs d'IMA, avec la mention IA
+export async function docxBrouillon(b: { langue: Langue; titre: string; sections: { titre: string; texte: string }[] }, approbateur: string, date: Date) {
+  const jour = new Intl.DateTimeFormat(b.langue, { dateStyle: "long" }).format(date);
+  const mention = MENTION_IA[b.langue](approbateur, jour);
+  const doc = new Document({
+    creator: approbateur,
+    title: b.titre,
+    subject: "AI-assisted document",
+    keywords: "IA; AI; Claude; Anthropic; AI-generated content; human reviewed",
+    description: mention,
+    styles: { default: { document: { run: { font: POLICE, size: 20 } } } },
+    sections: [
+      {
+        properties: { page: { margin: { top: 1300, bottom: 1300, left: 1100, right: 1100, header: 500, footer: 500 } } },
+        headers: { default: entete(b.langue) },
+        footers: {
+          default: new Footer({
+            children: [
+              new Paragraph({
+                border: { top: { style: BorderStyle.SINGLE, size: 6, color: GOLD, space: 4 } },
+                alignment: AlignmentType.CENTER,
+                children: [new TextRun({ text: mention, font: POLICE, size: 14, color: MUTED })],
+              }),
+              new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ children: [`${TEXTES[b.langue].page} `, PageNumber.CURRENT], font: POLICE, size: 16, color: NAVY })] }),
+            ],
+          }),
+        },
+        children: [
+          new Paragraph({ children: [new TextRun({ text: b.titre, font: SERIF, size: 36, bold: true, color: NAVY })] }),
+          new Paragraph({ border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: GOLD, space: 1 } }, spacing: { after: 160 }, indent: { right: 8000 }, children: [] }),
+          new Paragraph({
+            shading: { type: ShadingType.CLEAR, fill: CREAM, color: "auto" },
+            border: { left: { style: BorderStyle.SINGLE, size: 18, color: GOLD, space: 6 } },
+            spacing: { after: 200 },
+            children: [new TextRun({ text: mention, font: POLICE, size: 18, color: NAVY })],
+          }),
+          ...b.sections.flatMap((s) => [
+            ...(s.titre ? [new Paragraph({ spacing: { before: 280, after: 100 }, children: [new TextRun({ text: s.titre, font: SERIF, size: 26, bold: true, color: NAVY })] })] : []),
+            ...s.texte
+              .split(/\n\s*\n/)
+              .filter((p) => p.trim())
+              .map((p) => new Paragraph({ spacing: { after: 120 }, children: [new TextRun({ text: p.trim(), font: POLICE, size: 21 })] })),
+          ]),
+        ],
+      },
+    ],
+  });
+  return Packer.toBuffer(doc);
 }
