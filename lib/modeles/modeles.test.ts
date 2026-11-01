@@ -21,6 +21,7 @@ describe("Catalogue", () => {
     for (const m of CATALOGUE) {
       expect(existsSync(path.join("data/modeles/fichiers", m.fichier)), m.fichier).toBe(true);
       expect(m.fichier.endsWith(`.${m.format}`)).toBe(true);
+      if (m.pdf) expect(existsSync(path.join("data/modeles/fichiers", m.pdf)), m.pdf).toBe(true);
     }
   });
 });
@@ -47,10 +48,10 @@ describe("Droits", () => {
     expect((await modelesVisibles(db, cp, catalogue)).map((m) => m.id)).toEqual(["be-valide"]);
     expect(await modelesVisibles(db, autre, catalogue)).toEqual([]);
 
-    expect(await telechargerModele(db, cp, "be-a-valider", catalogue)).toBeNull();
-    const t = (await telechargerModele(db, cp, "be-valide", catalogue))!;
+    expect(await telechargerModele(db, cp, "be-a-valider", false, catalogue)).toBeNull();
+    const t = (await telechargerModele(db, cp, "be-valide", false, catalogue))!;
     expect(t.contenu.subarray(0, 2).toString()).toBe("PK"); // fichier Word (archive zip)
     const [j] = await db.select().from(auditLog).where(eq(auditLog.action, "template_downloaded"));
-    expect([j.actorUserId, j.targetId, j.details]).toEqual([cp.id, org.valeur.id, { modele: "be-valide" }]);
+    expect([j.actorUserId, j.targetId, j.details]).toEqual([cp.id, org.valeur.id, { modele: "be-valide", format: "docx" }]);
   });
 });

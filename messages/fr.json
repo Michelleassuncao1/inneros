@@ -1659,6 +1659,8 @@
     "format": "{format} · {langue}",
     "source": "Source : {source}",
     "download": "Télécharger",
-    "logoHelp": "Pour ajouter votre logo dans un formulaire Word protégé : Révision › Restreindre la modification › Désactiver la protection, remplacez le cadre « Logo de votre entreprise », puis réactivez la protection pour remplir les champs."
+    "logoHelp": "Pour ajouter votre logo dans un formulaire Word protégé : Révision › Restreindre la modification › Désactiver la protection, remplacez le cadre « Logo de votre entreprise », puis réactivez la protection pour remplir les champs.",
+    "downloadWord": "Télécharger (Word)",
+    "downloadPdf": "Télécharger (PDF)"
   }
 }

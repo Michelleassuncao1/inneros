@@ -8,7 +8,7 @@ Le contenu officiel n'est pas modifié : seuls changent
 La protection « remplissage de formulaires » (sans mot de passe) est conservée.
 
 Usage (Python 3.12, depuis la racine du projet) :
-    python -I scripts/modeles/personnaliser_spf.py <formulaire SPF .docx> <fichier de sortie .docx> <source>
+    python -I scripts/modeles/personnaliser_spf.py <fr|nl> <formulaire SPF .docx> <fichier de sortie .docx> <source>
 Exemple de source : "SPF Emploi, Travail et Concertation sociale, rapport annuel SIPP, formulaire A, exercice 2025"
 """
 
@@ -22,15 +22,21 @@ RACINE = Path(__file__).resolve().parents[2]
 IMAGES = RACINE / "data/modeles/images"
 
 
-def ligne_source(source: str) -> str:
-    texte = escape(f"Formulaire officiel : {source}, contenu inchangé (source : emploi.belgique.be). Mise en page : Institut Mindset en Action®.")
+MENTIONS = {
+    "fr": "Formulaire officiel : {source}, contenu inchangé (source : emploi.belgique.be). Mise en page : Institut Mindset en Action®.",
+    "nl": "Officieel formulier: {source}, inhoud ongewijzigd (bron: werk.belgie.be). Opmaak: Institut Mindset en Action®.",
+}
+
+
+def ligne_source(langue: str, source: str) -> str:
+    texte = escape(MENTIONS[langue].format(source=source))
     return (
         '<w:p><w:pPr><w:spacing w:after="40"/><w:jc w:val="center"/></w:pPr>'
         f'<w:r><w:rPr><w:color w:val="5A5A5A"/><w:sz w:val="14"/><w:szCs w:val="14"/></w:rPr><w:t xml:space="preserve">{texte}</w:t></w:r></w:p>'
     )
 
 
-def personnaliser(entree: Path, sortie: Path, source: str):
+def personnaliser(langue: str, entree: Path, sortie: Path, source: str):
     with zipfile.ZipFile(entree) as z:
         fichiers = {n: z.read(n) for n in z.namelist()}
 
@@ -46,15 +52,15 @@ def personnaliser(entree: Path, sortie: Path, source: str):
     images = [cibles[r] for r in re.findall(r'(?:r:embed|<v:imagedata r:id)="([^"]+)"', document) if r in cibles][:2]
     if images != ["media/image1.png", "media/image2.png"]:
         raise SystemExit(f"Logos inattendus en tête du formulaire : {images}")
-    fichiers["word/media/image1.png"] = (IMAGES / "logo-entreprise.png").read_bytes()
-    fichiers["word/media/image2.png"] = (IMAGES / "signature-ima-spf.png").read_bytes()
+    fichiers["word/media/image1.png"] = (IMAGES / f"logo-entreprise-{langue}.png").read_bytes()
+    fichiers["word/media/image2.png"] = (IMAGES / f"signature-ima-spf-{langue}.png").read_bytes()
 
     # Une ligne « source » au début de chaque pied de page
     pieds = [n for n in fichiers if re.fullmatch(r"word/footer\d+\.xml", n)]
     for n in pieds:
         xml = fichiers[n].decode("utf-8")
         ouverture = re.search(r"<w:ftr[^>]*>", xml)
-        xml = xml[: ouverture.end()] + ligne_source(source) + xml[ouverture.end() :]
+        xml = xml[: ouverture.end()] + ligne_source(langue, source) + xml[ouverture.end() :]
         fichiers[n] = xml.encode("utf-8")
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
@@ -65,6 +71,6 @@ def personnaliser(entree: Path, sortie: Path, source: str):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 5 or sys.argv[1] not in MENTIONS:
         raise SystemExit(__doc__)
-    personnaliser(Path(sys.argv[1]), Path(sys.argv[2]), sys.argv[3])
+    personnaliser(sys.argv[1], Path(sys.argv[2]), Path(sys.argv[3]), sys.argv[4])

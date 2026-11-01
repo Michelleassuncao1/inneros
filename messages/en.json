@@ -1659,6 +1659,8 @@
     "format": "{format} · {langue}",
     "source": "Source: {source}",
     "download": "Download",
-    "logoHelp": "To add your logo to a protected Word form: Review › Restrict Editing › Stop Protection, replace the \"Logo de votre entreprise\" frame, then turn protection back on to fill in the fields."
+    "logoHelp": "To add your logo to a protected Word form: Review › Restrict Editing › Stop Protection, replace the \"Logo de votre entreprise\" frame, then turn protection back on to fill in the fields.",
+    "downloadWord": "Download (Word)",
+    "downloadPdf": "Download (PDF)"
   }
 }

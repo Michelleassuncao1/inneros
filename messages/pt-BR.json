@@ -1659,6 +1659,8 @@
     "format": "{format} · {langue}",
     "source": "Fonte: {source}",
     "download": "Baixar",
-    "logoHelp": "Para adicionar seu logotipo a um formulário Word protegido: Revisão › Restringir Edição › Interromper Proteção, substitua o quadro \"Logo de votre entreprise\" e depois reative a proteção para preencher os campos."
+    "logoHelp": "Para adicionar seu logotipo a um formulário Word protegido: Revisão › Restringir Edição › Interromper Proteção, substitua o quadro \"Logo de votre entreprise\" e depois reative a proteção para preencher os campos.",
+    "downloadWord": "Baixar (Word)",
+    "downloadPdf": "Baixar (PDF)"
   }
 }

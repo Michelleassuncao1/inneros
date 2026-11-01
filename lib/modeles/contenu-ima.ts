@@ -1,0 +1,303 @@
+// Contenu des modèles vierges rédigés par IMA (module D1). Chaque modèle est produit en Word aux couleurs d'IMA
+// par lib/modeles/docx-ima.ts (script : npm run modeles:ima), puis en PDF. Les références légales ont été vérifiées
+// le 01/11/2026 (agent juridique) ; tous les modèles restent « à valider » par Michelle, et les modèles
+// psychosociaux par un juriste.
+
+export type Bloc =
+  | { type: "titre"; texte: string }
+  | { type: "texte"; texte: string; discret?: boolean }
+  | { type: "champs"; libelles: string[] } // « Libellé : ______ »
+  | { type: "lignes"; nombre: number } // lignes vides pour écrire
+  | { type: "cases"; options: string[] } // cases à cocher
+  | { type: "tableau"; colonnes: string[]; lignes: number; largeurs?: number[] }
+  | { type: "signatures"; libelles: string[] };
+
+export type ModeleIma = {
+  id: string;
+  pays: "BE" | "BR";
+  langue: "fr" | "pt-BR";
+  categorie: "rapport_annuel" | "plan" | "reunion" | "sensibilisation" | "atelier" | "psychosocial";
+  titre: string;
+  description: string;
+  references?: string; // textes légaux sur lesquels repose la structure
+  confidentiel?: string; // mention en tête de document
+  paysage?: boolean;
+  blocs: Bloc[];
+  valide: boolean;
+};
+
+export const VERSION_MODELES_IMA = "1.0 (novembre 2026)";
+
+const ACTIONS_FR = ["Objectif", "Action", "Responsable", "Moyens", "Échéance", "Critère d'évaluation", "Statut"];
+
+export const MODELES_IMA: readonly ModeleIma[] = [
+  // ─── Belgique (français) ────────────────────────────────────────────────────────────────────
+  {
+    id: "be-fr-plan-global-prevention",
+    pays: "BE",
+    langue: "fr",
+    categorie: "plan",
+    titre: "Plan global de prévention",
+    description: "Plan sur cinq ans, établi par l'employeur en concertation avec la ligne hiérarchique et les services de prévention.",
+    references: "Code du bien-être au travail, livre I, titre 2 (article I.2-8). Avis préalable du comité pour la prévention et la protection au travail.",
+    blocs: [
+      { type: "champs", libelles: ["Employeur", "Période couverte (5 ans)", "Établi le", "Avis du CPPT (date)"] },
+      { type: "titre", texte: "1. Résultats de l'analyse des risques" },
+      { type: "texte", texte: "Description concrète des résultats de l'identification des dangers et de l'évaluation des risques, y compris les risques psychosociaux.", discret: true },
+      { type: "lignes", nombre: 6 },
+      { type: "titre", texte: "2. Objectifs prioritaires" },
+      { type: "lignes", nombre: 5 },
+      { type: "titre", texte: "3. Activités à mener et moyens à mettre en œuvre" },
+      { type: "tableau", colonnes: ["Objectif", "Activités", "Moyens (organisationnels, matériels, financiers)", "Année"], lignes: 8, largeurs: [22, 34, 30, 14] },
+      { type: "titre", texte: "4. Missions et obligations des personnes concernées" },
+      { type: "tableau", colonnes: ["Fonction", "Missions et obligations"], lignes: 6, largeurs: [30, 70] },
+      { type: "titre", texte: "5. Évaluation" },
+      { type: "texte", texte: "Critères d'évaluation de la politique de prévention et calendrier des évaluations. Le plan est réévalué régulièrement et remplacé au moins tous les cinq ans.", discret: true },
+      { type: "lignes", nombre: 4 },
+      { type: "signatures", libelles: ["L'employeur", "Le conseiller en prévention"] },
+    ],
+    valide: false,
+  },
+  {
+    id: "be-fr-plan-action-annuel",
+    pays: "BE",
+    langue: "fr",
+    categorie: "plan",
+    titre: "Plan d'action annuel",
+    description: "Mise en œuvre du plan global pour un exercice, à soumettre à l'avis du CPPT avant le début de l'exercice.",
+    references: "Code du bien-être au travail, livre I, titre 2 (article I.2-9).",
+    paysage: true,
+    blocs: [
+      { type: "champs", libelles: ["Employeur", "Exercice", "Plan global de prévention de référence", "Avis du CPPT (date)"] },
+      { type: "titre", texte: "1. Objectifs prioritaires de l'exercice et actions" },
+      { type: "tableau", colonnes: ACTIONS_FR, lignes: 10, largeurs: [15, 22, 13, 15, 10, 15, 10] },
+      { type: "titre", texte: "2. Adaptations du plan global de prévention" },
+      { type: "texte", texte: "À la suite d'un changement de circonstances, d'incidents ou d'accidents, du rapport annuel du service interne de l'année précédente et des avis du comité.", discret: true },
+      { type: "lignes", nombre: 5 },
+      { type: "signatures", libelles: ["L'employeur", "Le conseiller en prévention"] },
+    ],
+    valide: false,
+  },
+  {
+    id: "be-fr-pv-cppt",
+    pays: "BE",
+    langue: "fr",
+    categorie: "reunion",
+    titre: "Procès-verbal de réunion du CPPT",
+    description: "Comité pour la prévention et la protection au travail : présences, points traités, avis rendus et suites.",
+    references: "Loi du 4 août 1996 relative au bien-être des travailleurs et Code du bien-être au travail, livre II, titre 7 ; règlement d'ordre intérieur du comité.",
+    blocs: [
+      { type: "champs", libelles: ["Réunion n°", "Date et heure", "Lieu ou visioconférence", "Président(e)", "Secrétaire"] },
+      { type: "titre", texte: "Présences" },
+      { type: "tableau", colonnes: ["Délégation", "Présents", "Excusés"], lignes: 4, largeurs: [30, 40, 30] },
+      { type: "texte", texte: "Délégation de l'employeur, délégation des travailleurs, conseiller en prévention interne, conseiller en prévention-médecin du travail, autres conseillers invités.", discret: true },
+      { type: "titre", texte: "1. Approbation du procès-verbal de la réunion précédente" },
+      { type: "lignes", nombre: 2 },
+      { type: "titre", texte: "2. Rapport mensuel du service interne" },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "3. Accidents et incidents depuis la dernière réunion" },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "4. Points à l'ordre du jour et avis du comité" },
+      { type: "tableau", colonnes: ["Point", "Discussion", "Avis ou décision", "Suite (qui, quand)"], lignes: 6, largeurs: [18, 37, 25, 20] },
+      { type: "titre", texte: "5. Divers" },
+      { type: "lignes", nombre: 3 },
+      { type: "champs", libelles: ["Prochaine réunion"] },
+      { type: "signatures", libelles: ["Le (la) président(e)", "Le (la) secrétaire"] },
+    ],
+    valide: false,
+  },
+  {
+    id: "be-fr-fiche-sensibilisation",
+    pays: "BE",
+    langue: "fr",
+    categorie: "sensibilisation",
+    titre: "Fiche de sensibilisation",
+    description: "Préparer une campagne : objectif, messages clés, public, canaux, ressources d'aide et évaluation.",
+    blocs: [
+      { type: "champs", libelles: ["Thème", "Période ou journée mondiale", "Public visé", "Responsable"] },
+      { type: "titre", texte: "Objectif" },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "Messages clés" },
+      { type: "lignes", nombre: 4 },
+      { type: "titre", texte: "Canaux de diffusion" },
+      { type: "cases", options: ["Intranet", "Affiche", "E-mail aux équipes", "Réunion d'équipe", "Atelier", "Autre : ____________"] },
+      { type: "titre", texte: "Ressources d'aide à rappeler" },
+      { type: "texte", texte: "Personne de confiance, conseiller en prévention aspects psychosociaux, médecin du travail, numéros d'aide du pays.", discret: true },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "Évaluation" },
+      { type: "champs", libelles: ["Date de diffusion", "Personnes touchées (estimation)", "Retours reçus"] },
+      { type: "lignes", nombre: 2 },
+    ],
+    valide: false,
+  },
+  {
+    id: "be-fr-deroule-atelier",
+    pays: "BE",
+    langue: "fr",
+    categorie: "atelier",
+    titre: "Déroulé d'atelier",
+    description: "Préparer un atelier (bien-être, yoga guidé, pleine conscience, groupe d'expression…) : objectifs, séquences, matériel, cadre.",
+    blocs: [
+      { type: "champs", libelles: ["Titre de l'atelier", "Type", "Date et durée", "Lieu", "Animateur (fonction)", "Nombre de places"] },
+      { type: "titre", texte: "Objectifs" },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "Déroulé" },
+      { type: "tableau", colonnes: ["Durée", "Séquence", "Activité", "Matériel"], lignes: 7, largeurs: [12, 22, 44, 22] },
+      { type: "titre", texte: "Cadre de l'atelier" },
+      { type: "texte", texte: "Participation volontaire, confidentialité des échanges, bienveillance, droit de ne pas participer à un exercice. Rappeler les ressources d'aide en fin d'atelier.", discret: true },
+      { type: "lignes", nombre: 2 },
+      { type: "titre", texte: "Avis des participants" },
+      { type: "texte", texte: "Afficher le QR code InnerOS de l'atelier en fin de séance : avis anonyme, résultats à partir de 5 réponses.", discret: true },
+      { type: "titre", texte: "Suites prévues" },
+      { type: "lignes", nombre: 3 },
+    ],
+    valide: false,
+  },
+  {
+    id: "be-fr-demande-intervention-formelle",
+    pays: "BE",
+    langue: "fr",
+    categorie: "psychosocial",
+    titre: "Demande d'intervention psychosociale formelle",
+    description: "Document daté et signé par le travailleur, remis au conseiller en prévention aspects psychosociaux après l'entretien personnel obligatoire.",
+    references: "Code du bien-être au travail, livre I, titre 3 : articles I.3-14 (entretien personnel), I.3-15 (demande formelle) et I.3-35 (faits de violence ou de harcèlement).",
+    confidentiel: "Document confidentiel — à remettre en mains propres au conseiller en prévention aspects psychosociaux (ou à son service externe), qui en signe une copie valant accusé de réception.",
+    blocs: [
+      { type: "champs", libelles: ["Nom et prénom du travailleur", "Fonction et service", "Date de l'entretien personnel préalable"] },
+      { type: "titre", texte: "1. Nature de la demande" },
+      { type: "cases", options: ["Demande à caractère principalement collectif", "Demande à caractère principalement individuel", "Demande pour faits de violence ou de harcèlement moral ou sexuel au travail"] },
+      { type: "titre", texte: "2. Description de la situation de travail problématique" },
+      { type: "lignes", nombre: 6 },
+      { type: "titre", texte: "3. Pour des faits de violence ou de harcèlement uniquement (article I.3-35)" },
+      { type: "texte", texte: "La description précise des faits qui constituent, selon le travailleur, de la violence ou du harcèlement moral ou sexuel au travail, et, le cas échéant, le lien avec un critère de discrimination :", discret: true },
+      { type: "lignes", nombre: 5 },
+      { type: "tableau", colonnes: ["Fait", "Moment (date, heure)", "Endroit"], lignes: 5, largeurs: [50, 25, 25] },
+      { type: "champs", libelles: ["Identité de la personne mise en cause"] },
+      { type: "titre", texte: "4. Demande à l'employeur" },
+      { type: "texte", texte: "Je demande à l'employeur de prendre des mesures appropriées pour mettre fin à la situation (ou aux faits) décrite ci-dessus.", discret: false },
+      { type: "lignes", nombre: 3 },
+      { type: "signatures", libelles: ["Date et signature du travailleur", "Réception : date et signature du conseiller en prévention aspects psychosociaux"] },
+    ],
+    valide: false,
+  },
+  {
+    id: "be-fr-fiche-entretien",
+    pays: "BE",
+    langue: "fr",
+    categorie: "psychosocial",
+    titre: "Fiche d'entretien (intervention psychosociale)",
+    description: "Notes de la personne de confiance ou du conseiller en prévention aspects psychosociaux lors d'un entretien. À conserver dans le dossier individuel, jamais dans InnerOS.",
+    references: "Code du bien-être au travail, livre I, titre 3 (procédure interne) ; secret professionnel de la personne de confiance et du conseiller en prévention aspects psychosociaux.",
+    confidentiel: "Document confidentiel, couvert par le secret professionnel — à conserver dans le dossier individuel de demande d'intervention.",
+    blocs: [
+      { type: "champs", libelles: ["Date de l'entretien", "Intervenant(e)", "Travailleur (nom ou référence de dossier)"] },
+      { type: "titre", texte: "Type d'entretien" },
+      { type: "cases", options: ["Premier contact", "Entretien personnel préalable à une demande formelle", "Suivi"] },
+      { type: "titre", texte: "Demande exprimée par le travailleur" },
+      { type: "lignes", nombre: 5 },
+      { type: "titre", texte: "Informations données sur les possibilités d'intervention" },
+      { type: "cases", options: ["Voie informelle : accueil et conseil", "Voie informelle : intervention auprès d'une autre personne", "Voie informelle : conciliation", "Voie formelle : demande d'intervention psychosociale formelle"] },
+      { type: "titre", texte: "Choix du travailleur et suites convenues" },
+      { type: "lignes", nombre: 4 },
+      { type: "champs", libelles: ["Attestation d'entretien remise (date)"] },
+      { type: "signatures", libelles: ["Intervenant(e)"] },
+    ],
+    valide: false,
+  },
+
+  // ─── Brésil (portugais) ─────────────────────────────────────────────────────────────────────
+  {
+    id: "br-pt-plano-acao-pgr",
+    pays: "BR",
+    langue: "pt-BR",
+    categorie: "plan",
+    titre: "Plano de ação do PGR",
+    description: "Medidas de prevenção do Programa de Gerenciamento de Riscos, com cronograma, acompanhamento e aferição de resultados, incluindo os fatores de risco psicossociais.",
+    references: "NR-1 (Disposições gerais e gerenciamento de riscos ocupacionais), item 1.5 — Gerenciamento de riscos ocupacionais.",
+    paysage: true,
+    blocs: [
+      { type: "champs", libelles: ["Organização", "Estabelecimento", "Período", "Responsável pelo PGR"] },
+      { type: "titre", texte: "1. Medidas de prevenção" },
+      { type: "tableau", colonnes: ["Perigo / fator de risco", "Medida de prevenção", "Responsável", "Cronograma", "Forma de acompanhamento", "Aferição de resultados", "Situação"], lignes: 10, largeurs: [16, 20, 12, 12, 14, 16, 10] },
+      { type: "titre", texte: "2. Revisões do plano" },
+      { type: "texte", texte: "Após mudanças nos processos, acidentes ou doenças relacionadas ao trabalho, resultados do acompanhamento ou solicitações da CIPA.", discret: true },
+      { type: "lignes", nombre: 4 },
+      { type: "signatures", libelles: ["Responsável pela organização", "Responsável técnico"] },
+    ],
+    valide: false,
+  },
+  {
+    id: "br-pt-ata-cipa",
+    pays: "BR",
+    langue: "pt-BR",
+    categorie: "reunion",
+    titre: "Ata de reunião da CIPA",
+    description: "Comissão Interna de Prevenção de Acidentes e de Assédio: presenças, pauta, deliberações e encaminhamentos.",
+    references: "NR-5 (Comissão Interna de Prevenção de Acidentes e de Assédio — CIPA).",
+    blocs: [
+      { type: "champs", libelles: ["Reunião nº", "Data e horário", "Local", "Presidente", "Secretário(a)"] },
+      { type: "titre", texte: "Presenças" },
+      { type: "tableau", colonnes: ["Representação", "Presentes", "Ausentes (justificativa)"], lignes: 4, largeurs: [30, 40, 30] },
+      { type: "titre", texte: "1. Leitura e aprovação da ata anterior" },
+      { type: "lignes", nombre: 2 },
+      { type: "titre", texte: "2. Acidentes, incidentes e situações de risco desde a última reunião" },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "3. Pauta e deliberações" },
+      { type: "tableau", colonnes: ["Assunto", "Discussão", "Deliberação", "Encaminhamento (quem, quando)"], lignes: 6, largeurs: [18, 37, 25, 20] },
+      { type: "titre", texte: "4. Prevenção e combate ao assédio e à violência no trabalho" },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "5. Assuntos gerais" },
+      { type: "lignes", nombre: 3 },
+      { type: "champs", libelles: ["Próxima reunião"] },
+      { type: "signatures", libelles: ["Presidente", "Secretário(a)"] },
+    ],
+    valide: false,
+  },
+  {
+    id: "br-pt-ficha-sensibilizacao",
+    pays: "BR",
+    langue: "pt-BR",
+    categorie: "sensibilisation",
+    titre: "Ficha de sensibilização",
+    description: "Preparar uma campanha: objetivo, mensagens-chave, público, canais, recursos de apoio e avaliação.",
+    blocs: [
+      { type: "champs", libelles: ["Tema", "Período ou data comemorativa", "Público-alvo", "Responsável"] },
+      { type: "titre", texte: "Objetivo" },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "Mensagens-chave" },
+      { type: "lignes", nombre: 4 },
+      { type: "titre", texte: "Canais de divulgação" },
+      { type: "cases", options: ["Intranet", "Cartaz", "E-mail às equipes", "Reunião de equipe", "Oficina", "Outro: ____________"] },
+      { type: "titre", texte: "Recursos de apoio a lembrar" },
+      { type: "texte", texte: "SESMT, CIPA, canal de denúncia, CVV (188), serviços de saúde.", discret: true },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "Avaliação" },
+      { type: "champs", libelles: ["Data de divulgação", "Pessoas alcançadas (estimativa)", "Retornos recebidos"] },
+      { type: "lignes", nombre: 2 },
+    ],
+    valide: false,
+  },
+  {
+    id: "br-pt-roteiro-oficina",
+    pays: "BR",
+    langue: "pt-BR",
+    categorie: "atelier",
+    titre: "Roteiro de oficina",
+    description: "Preparar uma oficina (bem-estar, yoga guiado, atenção plena, roda de conversa…): objetivos, etapas, materiais, combinados.",
+    blocs: [
+      { type: "champs", libelles: ["Título da oficina", "Tipo", "Data e duração", "Local", "Facilitador (função)", "Número de vagas"] },
+      { type: "titre", texte: "Objetivos" },
+      { type: "lignes", nombre: 3 },
+      { type: "titre", texte: "Roteiro" },
+      { type: "tableau", colonnes: ["Duração", "Etapa", "Atividade", "Materiais"], lignes: 7, largeurs: [12, 22, 44, 22] },
+      { type: "titre", texte: "Combinados" },
+      { type: "texte", texte: "Participação voluntária, sigilo das conversas, acolhimento, direito de não participar de um exercício. Lembrar os recursos de apoio ao final.", discret: true },
+      { type: "lignes", nombre: 2 },
+      { type: "titre", texte: "Avaliação dos participantes" },
+      { type: "texte", texte: "Exibir o QR code InnerOS da oficina ao final: avaliação anônima, resultados a partir de 5 respostas.", discret: true },
+      { type: "titre", texte: "Próximos passos" },
+      { type: "lignes", nombre: 3 },
+    ],
+    valide: false,
+  },
+];

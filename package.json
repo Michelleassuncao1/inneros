@@ -17,7 +17,8 @@
     "instruments:charger": "tsx scripts/charger-instrument.ts",
     "demo:campagne": "tsx scripts/demo-campagne.ts",
     "donnees:purger": "tsx scripts/purger-donnees.ts",
-    "themes:initiaux": "tsx scripts/themes-initiaux.ts"
+    "themes:initiaux": "tsx scripts/themes-initiaux.ts",
+    "modeles:ima": "tsx scripts/generer-modeles-ima.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.133.0",
@@ -25,6 +26,7 @@
     "@fontsource/figtree": "^5.3.0",
     "@react-pdf/renderer": "^4.9.0",
     "country-flag-icons": "^1.6.20",
+    "docx": "9.11.0",
     "drizzle-orm": "^0.45.3",
     "exceljs": "^4.4.0",
     "next": "16.3.8",

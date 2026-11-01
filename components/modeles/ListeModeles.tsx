@@ -48,8 +48,13 @@ export async function ListeModeles({ utilisateur }: { utilisateur: typeof users.
                   </p>
                   <p className="mt-3">
                     <a href={`/api/modeles/${m.id}`} className={bouton}>
-                      {t("download")}
+                      {m.format === "docx" ? t("downloadWord") : t("download")}
                     </a>
+                    {m.pdf && (
+                      <a href={`/api/modeles/${m.id}?format=pdf`} className={`${bouton} ml-3`}>
+                        {t("downloadPdf")}
+                      </a>
+                    )}
                   </p>
                 </li>
               ))}

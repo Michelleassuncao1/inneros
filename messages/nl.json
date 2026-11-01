@@ -1659,6 +1659,8 @@
     "format": "{format} · {langue}",
     "source": "Bron: {source}",
     "download": "Downloaden",
-    "logoHelp": "Om uw logo toe te voegen aan een beveiligd Word-formulier: Controleren › Bewerking beperken › Beveiliging stoppen, vervang het kader \"Logo de votre entreprise\" en zet de beveiliging daarna weer aan om de velden in te vullen."
+    "logoHelp": "Om uw logo toe te voegen aan een beveiligd Word-formulier: Controleren › Bewerking beperken › Beveiliging stoppen, vervang het kader \"Logo de votre entreprise\" en zet de beveiliging daarna weer aan om de velden in te vullen.",
+    "downloadWord": "Downloaden (Word)",
+    "downloadPdf": "Downloaden (pdf)"
   }
 }

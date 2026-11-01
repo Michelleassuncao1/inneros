@@ -4,11 +4,11 @@ import { utilisateurConnecte } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 import { telechargerModele } from "@/lib/modeles/modeles";
 
-export async function GET(_requete: Request, { params }: RouteContext<"/api/modeles/[id]">) {
+export async function GET(requete: Request, { params }: RouteContext<"/api/modeles/[id]">) {
   const { id } = await params;
   const u = await utilisateurConnecte();
   if (!u) return new Response(null, { status: 401 });
-  const t = await telechargerModele(getDb(), u, id);
+  const t = await telechargerModele(getDb(), u, id, new URL(requete.url).searchParams.get("format") === "pdf");
   if (!t) return new Response(null, { status: 404 });
   return new Response(new Uint8Array(t.contenu), {
     headers: { "content-type": t.type, "content-disposition": `attachment; filename="${t.nom}"`, "cache-control": "no-store" },
