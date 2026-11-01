@@ -64,7 +64,7 @@ export const MODELES_IMA: readonly ModeleIma[] = [
     langue: "fr",
     categorie: "plan",
     titre: "Plan d'action annuel",
-    description: "Mise en œuvre du plan global pour un exercice, à soumettre à l'avis du CPPT avant le début de l'exercice.",
+    description: "Mise en œuvre du plan global pour un exercice, à soumettre à l'avis du CPPT au plus tard le premier jour du deuxième mois qui précède l'exercice (le 1er novembre pour une année civile).",
     references: "Code du bien-être au travail, livre I, titre 2 (article I.2-9).",
     paysage: true,
     blocs: [
@@ -161,7 +161,7 @@ export const MODELES_IMA: readonly ModeleIma[] = [
     titre: "Demande d'intervention psychosociale formelle",
     description: "Document daté et signé par le travailleur, remis au conseiller en prévention aspects psychosociaux après l'entretien personnel obligatoire.",
     references: "Code du bien-être au travail, livre I, titre 3 : articles I.3-14 (entretien personnel), I.3-15 (demande formelle) et I.3-35 (faits de violence ou de harcèlement).",
-    confidentiel: "Document confidentiel — à remettre en mains propres au conseiller en prévention aspects psychosociaux (ou à son service externe), qui en signe une copie valant accusé de réception.",
+    confidentiel: "Document confidentiel, rédigé, daté et signé par le travailleur — à remettre au conseiller en prévention aspects psychosociaux (ou à son service externe) selon les modalités du Code ; en cas de remise en mains propres, celui-ci signe une copie valant accusé de réception.",
     blocs: [
       { type: "champs", libelles: ["Nom et prénom du travailleur", "Fonction et service", "Date de l'entretien personnel préalable"] },
       { type: "titre", texte: "1. Nature de la demande" },
@@ -186,9 +186,9 @@ export const MODELES_IMA: readonly ModeleIma[] = [
     langue: "fr",
     categorie: "psychosocial",
     titre: "Fiche d'entretien (intervention psychosociale)",
-    description: "Notes de la personne de confiance ou du conseiller en prévention aspects psychosociaux lors d'un entretien. À conserver dans le dossier individuel, jamais dans InnerOS.",
-    references: "Code du bien-être au travail, livre I, titre 3 (procédure interne) ; secret professionnel de la personne de confiance et du conseiller en prévention aspects psychosociaux.",
-    confidentiel: "Document confidentiel, couvert par le secret professionnel — à conserver dans le dossier individuel de demande d'intervention.",
+    description: "Notes de travail de la personne de confiance ou du conseiller en prévention aspects psychosociaux lors d'un entretien. À conserver par l'intervenant, jamais dans InnerOS.",
+    references: "Code du bien-être au travail, livre I, titre 3 (procédure interne) ; secret professionnel (article 458 du Code pénal) de la personne de confiance et du conseiller en prévention aspects psychosociaux.",
+    confidentiel: "Document confidentiel, couvert par le secret professionnel. Notes personnelles de l'intervenant : elles ne font pas partie du dossier individuel de demande d'intervention et sont conservées par l'intervenant seul.",
     blocs: [
       { type: "champs", libelles: ["Date de l'entretien", "Intervenant(e)", "Travailleur (nom ou référence de dossier)"] },
       { type: "titre", texte: "Type d'entretien" },

@@ -17,9 +17,18 @@ Liste des actions qui ne dépendent pas du code. Claude la relit et la rappelle 
 ### Autres points
 
 - [x] Portugal : cadre légal du plan de prévention corrigé sur la version consolidée (prompt `plan-v1.4`, 26/10/2026) ; à inclure dans la relecture par le juriste.
-- [ ] Brevo : télécharger le DPA, décider la durée de conservation des e-mails, désactiver le suivi des ouvertures et des clics.
-- [ ] Anthropic : signer le DPA, demander la conservation nulle des données (ZDR), encadrer le transfert vers les États-Unis. **Avant d'activer l'aide à la rédaction (module D2) en production**, et pour le Brésil : vérifier que le DPA d'Anthropic contient les clauses-types de l'ANPD (obligatoires depuis le 23/08/2025, article 33 de la LGPD).
-- [ ] Faire relire par un juriste, avec les autres documents : le guide interne « Utiliser l'IA dans InnerOS » v1.0 (https://claude.ai/artifact/SpVKPZd85cfz9KwtwNap6D), la confirmation qu'InnerOS n'est pas un système à haut risque (AI Act, annexe III), et l'information du CSE (France) ou du CPPT (Belgique) chez les clients.
+
+### Relecture par un juriste
+
+Documents déjà relus et corrigés par l'agent juridique IMA (dernière relecture : 02/11/2026). Ils restent « à valider » : un vrai juriste doit les relire avant le lancement.
+
+- [ ] **Contrat type** : [clauses à intégrer, dont la clause « recherche »](https://github.com/Michelleassuncao1/inneros/blob/main/docs/juridique/clauses-contrat-type.md) et les points ci-dessus (ateliers, DPA, page Confidentialité).
+- [ ] **Guide interne « Utiliser l'IA dans InnerOS » v1.0** : https://claude.ai/artifact/SpVKPZd85cfz9KwtwNap6D, avec la confirmation qu'InnerOS n'est pas un système à haut risque (AI Act, annexe III) et l'information du CPPT (Belgique) ou du CSE (France) chez les clients.
+- [ ] **Page Confidentialité** (parties questionnaires et ateliers) : [textes dans les 4 langues](https://github.com/Michelleassuncao1/inneros/blob/main/lib/confidentialite/textes.ts).
+- [ ] **Modèles psychosociaux (Belgique)**, priorité : [demande d'intervention psychosociale formelle (PDF)](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BE/fr/be-fr-demande-intervention-formelle.pdf) et [fiche d'entretien (PDF)](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BE/fr/be-fr-fiche-entretien.pdf) (secret professionnel, articles I.3-14, I.3-15 et I.3-35).
+- [ ] **Autres modèles IMA (Belgique)** : [plan global de prévention](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BE/fr/be-fr-plan-global-prevention.pdf), [plan d'action annuel](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BE/fr/be-fr-plan-action-annuel.pdf), [PV du CPPT](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BE/fr/be-fr-pv-cppt.pdf), [fiche de sensibilisation](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BE/fr/be-fr-fiche-sensibilisation.pdf), [déroulé d'atelier](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BE/fr/be-fr-deroule-atelier.pdf).
+- [ ] **Modèles Brésil**, par un professionnel brésilien (NR-1, NR-5) : [plano de ação do PGR](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BR/pt-BR/br-pt-plano-acao-pgr.pdf), [ata da CIPA](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BR/pt-BR/br-pt-ata-cipa.pdf), [ficha de sensibilização](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BR/pt-BR/br-pt-ficha-sensibilizacao.pdf), [roteiro de oficina](https://github.com/Michelleassuncao1/inneros/blob/main/data/modeles/fichiers/BR/pt-BR/br-pt-roteiro-oficina.pdf).
+- [ ] **Prompts de l'IA** : [aide à la rédaction](https://github.com/Michelleassuncao1/inneros/blob/main/prompts/aide-redaction.system.md), [plan de prévention (cadres légaux par pays)](https://github.com/Michelleassuncao1/inneros/blob/main/prompts/plan-prevention.system.md), [rapport](https://github.com/Michelleassuncao1/inneros/blob/main/prompts/redaction-rapport.system.md).
 
 ## InnerOS
 
@@ -27,10 +36,18 @@ Liste des actions qui ne dépendent pas du code. Claude la relit et la rappelle 
 - [ ] Relire `docs/relecture/risques-relecture.html` : grille Kinney, exemples de gravité, règles de probabilité et de gravité proposées, côté défavorable des échelles.
 - [ ] Relire les choix de méthode du plan (prompt `prompts/plan-prevention.system.md`) : nouveau diagnostic au plus tard en année 3, évaluation à mi-parcours, 3 à 5 actions « importantes » par an.
 - [ ] Relire et valider les 12 thèmes de sensibilisation (espace IMA > Sensibilisation) : kits français rédigés par l'IA le 23/10/2026. Faire relire « Prendre soin les uns des autres » (prévention du suicide) et « Le respect au travail » (harcèlement, violence) par un professionnel ; puis faire rédiger les autres langues (bouton IA par langue).
-- [ ] Modèles (module D1) : espace IMA > Modèles. Vérifier puis me dire lesquels marquer « validés » (ils deviennent visibles pour les conseillers en prévention du pays) : (1) rapport annuel du SIPP 2025, formulaires A, B, C et notice, en français et en néerlandais (contenu officiel du SPF, mis aux couleurs d'IMA) ; (2) 11 modèles IMA en Word et PDF : Belgique (plan global de prévention, plan d'action annuel, PV du CPPT, fiche de sensibilisation, déroulé d'atelier, demande d'intervention psychosociale formelle, fiche d'entretien) et Brésil (plano de ação do PGR, ata da CIPA, ficha de sensibilização, roteiro de oficina). **Faire relire par le juriste** la demande d'intervention formelle et la fiche d'entretien (secret professionnel) ; pour le Brésil, la relecture par un professionnel brésilien (NR-1, NR-5). Chaque année, déposer les nouveaux formulaires du SPF.
-- [ ] Aide à la rédaction (module D2) : coupée par défaut. **Après la signature du DPA d'Anthropic**, l'activer en ajoutant `AI_WRITING_AID_ENABLED=true` dans .env.local (puis dans Vercel), et faire un premier essai réel (environ 0,02 à 0,10 $ par brouillon). Relire le prompt `prompts/aide-redaction.system.md`. Brésil : `AI_WRITING_AID_BRAZIL=true` seulement après vérification des clauses-types de l'ANPD.
+- [ ] **Valider les modèles** (module D1) : espace IMA › onglet « Modèles » (votre serveur : http://localhost:3000/fr/admin/modeles). Ils deviennent visibles pour les conseillers en prévention du pays une fois validés : formulaires officiels du SPF (rapport annuel du SIPP 2025, A, B, C et notice, en français et en néerlandais : contenu officiel, seule la mise en page IMA change) et les 11 modèles IMA, après la relecture par le juriste. Chaque année, déposer les nouveaux formulaires du SPF.
 - [ ] Ateliers (module C) : regarder l'affiche PDF d'un atelier et la page d'inscription sur téléphone ; relire les 5 questions de l'avis (utile, clair, envie d'appliquer, animation, recommandation) et les textes des e-mails aux participants.
 - [ ] Après une première vraie campagne : vérifier le réglage des valeurs Kinney proposées (beaucoup de risques « élevés » sur les données de démonstration).
+
+## Au lancement (décision du 02/11/2026)
+
+Tous les contrats seront signés quand l'application sera prête, juste avant les vrais tests puis le lancement.
+
+- [ ] **Signer les contrats de sous-traitance (DPA)** : Anthropic (avec la conservation nulle des données, ZDR, et l'encadrement du transfert vers les États-Unis), Brevo (durée de conservation des e-mails, suivi des ouvertures et des clics désactivé), OVHcloud (base de données, région UE) et Vercel (hébergement).
+- [ ] **Brésil** : l'aide à la rédaction reste bloquée tant que les clauses-types de l'ANPD ne sont pas vérifiées. Demander à Anthropic si son DPA contient ces clauses (Résolution CD/ANPD n° 19/2024, obligatoires depuis le 23/08/2025, article 33 de la LGPD) ; aucune source publique ne le confirme au 02/11/2026. Ensuite seulement : `AI_WRITING_AID_BRAZIL=true`. *Vérifié par l'agent juridique le 02/11/2026.*
+- [ ] **Activer l'aide à la rédaction** (module D2) après la signature du DPA d'Anthropic : `AI_WRITING_AID_ENABLED=true` dans les réglages de Vercel, puis un premier essai réel (environ 0,02 à 0,10 $ par brouillon).
+- [ ] **Vrais tests** avec une entreprise pilote (campagne, rapport, plan, calendrier, ateliers, modèles), puis lancement.
 
 ## En attente d'autres personnes
 
