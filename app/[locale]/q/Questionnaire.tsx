@@ -25,7 +25,7 @@ type Donnees = {
   aides: { numero: string; cle: string }[];
   soutien: { contacts: Contact[]; ima: SoutienIma | null };
 };
-type Raison = "invalide" | "utilise" | "expire" | "pasOuverte" | "indisponible" | "reseau" | "reponses" | "groupe";
+type Raison = "invalide" | "utilise" | "expire" | "pasOuverte" | "indisponible" | "reseau" | "reponses" | "groupe" | "tropDEssais";
 type Etape =
   | { nom: "saisie" }
   | { nom: "chargement" }

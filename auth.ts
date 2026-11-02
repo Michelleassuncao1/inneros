@@ -8,6 +8,7 @@ import { z } from "zod";
 import { verifierConnexionAdmin } from "@/lib/auth/connexion-admin";
 import { consommerLienMagique } from "@/lib/auth/lien-magique";
 import { getDb } from "@/lib/db/client";
+import { adresseClient, compter } from "@/lib/securite/limite-requetes";
 
 declare module "next-auth" {
   interface User {
@@ -47,7 +48,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Credentials({
       id: "admin",
       credentials: { email: {}, password: {}, code: {} },
-      async authorize(credentials) {
+      async authorize(credentials, requete) {
+        // Limite par appareil, en plus du blocage par adresse e-mail (lib/auth/limite.ts)
+        if (!(await compter(getDb(), "connexion", adresseClient(requete.headers)))) throw new CompteBloque();
         const saisie = saisieAdmin.safeParse(credentials);
         if (!saisie.success) return null;
         const resultat = await verifierConnexionAdmin(getDb(), saisie.data);

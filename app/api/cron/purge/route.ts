@@ -7,6 +7,7 @@ import { envoyerRappelsAteliers, purgerAteliers } from "@/lib/ateliers/ateliers"
 import { purgerDonnees } from "@/lib/confidentialite/conservation";
 import { getDb } from "@/lib/db/client";
 import { envoyerRappelsTrimestriels } from "@/lib/plan/suivi";
+import { purgerCompteurs } from "@/lib/securite/limite-requetes";
 import { envoyerRappelsSensibilisation } from "@/lib/sensibilisation/calendrier";
 import { actualiserToutesPropositions } from "@/lib/sensibilisation/declencheurs";
 
@@ -25,8 +26,9 @@ export async function GET(requete: Request) {
   if (!autorise(requete)) return new Response(null, { status: 401 });
   const r = await purgerDonnees(getDb());
   const ateliers = await purgerAteliers(getDb());
+  const compteurs = await purgerCompteurs(getDb()); // limitation des requêtes : compteurs de plus de 24 h
   await actualiserToutesPropositions(getDb()); // propositions de campagnes (module B3), avant le rappel mensuel
   const rappels = (await envoyerRappelsTrimestriels(getDb())) + (await envoyerRappelsSensibilisation(getDb())) + (await envoyerRappelsAteliers(getDb()));
   // Seulement des nombres : aucun identifiant ni donnée dans la réponse
-  return Response.json({ campagnes: r.campagnes.length, reponses: r.campagnes.reduce((s, c) => s + c.reponses, 0), journal: r.journal, ateliers, rappels });
+  return Response.json({ campagnes: r.campagnes.length, reponses: r.campagnes.reduce((s, c) => s + c.reponses, 0), journal: r.journal, ateliers, compteurs, rappels });
 }

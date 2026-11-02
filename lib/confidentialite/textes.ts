@@ -42,6 +42,7 @@ export const TEXTES_CONFIDENTIALITE: Record<"fr" | "nl" | "en" | "pt-BR", TexteC
           "votre nom, votre adresse e-mail, votre adresse IP, votre appareil ou votre navigateur ;",
           "l'heure de votre réponse ;",
           "un lien entre votre code et vos réponses : le code sert seulement à vérifier qu'il n'est utilisé qu'une fois, et il est supprimé à la fin de l'enquête.",
+          "Protection contre les robots : si un appareil essaie trop de codes faux, il est bloqué quelques minutes. Pour cela, une empreinte chiffrée de l'adresse réseau, qui change chaque jour, est gardée au plus 24 heures (jamais l'adresse elle-même) ; elle n'est jamais liée aux réponses.",
         ],
       },
       {
@@ -140,6 +141,7 @@ export const TEXTES_CONFIDENTIALITE: Record<"fr" | "nl" | "en" | "pt-BR", TexteC
           "uw naam, e-mailadres, IP-adres, toestel of browser;",
           "het tijdstip van uw antwoord;",
           "een verband tussen uw code en uw antwoorden: de code dient alleen om na te gaan dat hij maar één keer wordt gebruikt, en wordt aan het einde van de bevraging verwijderd.",
+          "Bescherming tegen robots: als een toestel te veel foute codes probeert, wordt het enkele minuten geblokkeerd. Daarvoor wordt een versleutelde vingerafdruk van het netwerkadres, die elke dag verandert, hoogstens 24 uur bewaard (nooit het adres zelf); die wordt nooit aan de antwoorden gekoppeld.",
         ],
       },
       {
@@ -238,6 +240,7 @@ export const TEXTES_CONFIDENTIALITE: Record<"fr" | "nl" | "en" | "pt-BR", TexteC
           "your name, email address, IP address, device or browser;",
           "the time of your answer;",
           "any link between your code and your answers: the code is only used to check that it is used once, and it is deleted at the end of the survey.",
+          "Protection against bots: if a device tries too many wrong codes, it is blocked for a few minutes. To do this, an encrypted fingerprint of the network address, which changes every day, is kept for at most 24 hours (never the address itself); it is never linked to the answers.",
         ],
       },
       {
@@ -336,6 +339,7 @@ export const TEXTES_CONFIDENTIALITE: Record<"fr" | "nl" | "en" | "pt-BR", TexteC
           "o seu nome, e-mail, endereço IP, aparelho ou navegador;",
           "o horário da sua resposta;",
           "qualquer vínculo entre o seu código e as suas respostas: o código serve apenas para verificar que é usado uma única vez e é excluído ao final da pesquisa.",
+          "Proteção contra robôs: se um aparelho tentar muitos códigos errados, ele é bloqueado por alguns minutos. Para isso, uma impressão digital criptografada do endereço de rede, que muda todos os dias, é guardada por no máximo 24 horas (nunca o endereço em si); ela nunca é vinculada às respostas.",
         ],
       },
       {

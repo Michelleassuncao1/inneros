@@ -1,11 +1,13 @@
 "use server";
 
+import { headers } from "next/headers";
 import { z } from "zod";
 import { langueValide } from "@/i18n/locale";
 import { demanderLienMagique } from "@/lib/auth/lien-magique";
 import { getDb } from "@/lib/db/client";
 import { envoyerEmail } from "@/lib/email/brevo";
 import { emailLienMagique } from "@/lib/email/lien-magique";
+import { adresseClient, compter } from "@/lib/securite/limite-requetes";
 
 export type EtatDemandeLien = { envoye?: boolean; erreur?: "email" };
 
@@ -19,6 +21,8 @@ export async function demanderLien(
   const email = adresse.safeParse(formData.get("email"));
   if (!email.success) return { erreur: "email" };
   const langue = langueValide(locale);
+  // Trop de demandes depuis cet appareil : même réponse, mais aucun e-mail n'est envoyé
+  if (!(await compter(getDb(), "lien", adresseClient(await headers())))) return { envoye: true };
 
   try {
     await demanderLienMagique(getDb(), email.data, async (destinataire, jeton) => {

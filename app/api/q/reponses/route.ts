@@ -2,6 +2,7 @@
 import { z } from "zod";
 import { getDb } from "@/lib/db/client";
 import { enregistrerReponses } from "@/lib/passation";
+import { adresseClient, compter, limiteAtteinte } from "@/lib/securite/limite-requetes";
 
 const corps = z.object({
   code: z.string().min(4).max(40),
@@ -12,6 +13,11 @@ const corps = z.object({
 export async function POST(requete: Request) {
   const saisie = corps.safeParse(await requete.json().catch(() => null));
   if (!saisie.success) return Response.json({ ok: false, raison: "reponses" }, { status: 400 });
+  const adresse = adresseClient(requete.headers);
+  if (await limiteAtteinte(getDb(), "code", adresse)) {
+    return Response.json({ ok: false, raison: "tropDEssais" }, { status: 429, headers: { "cache-control": "no-store" } });
+  }
   const r = await enregistrerReponses(getDb(), saisie.data);
+  if (!r.ok) await compter(getDb(), "code", adresse);
   return Response.json(r, { status: r.ok ? 200 : 409, headers: { "cache-control": "no-store" } });
 }

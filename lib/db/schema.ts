@@ -145,6 +145,14 @@ export const loginAttempts = pgTable("login_attempts", {
   lockedUntil: timestamp("locked_until", { withTimezone: true }),
 });
 
+// Limitation des requêtes par appareil (lib/securite/limite-requetes.ts). La clé est une empreinte chiffrée
+// (HMAC, change chaque jour) de la règle et de l'adresse réseau : jamais l'adresse elle-même. Lignes supprimées après 24 h.
+export const rateLimits = pgTable("rate_limits", {
+  key: text("key").primaryKey(),
+  hits: integer("hits").notNull().default(0),
+  windowStart: timestamp("window_start", { withTimezone: true }).notNull(),
+});
+
 // Questionnaires : une ligne par instrument et par version.
 // `definitions` contient le fichier JSON de chaque langue : { "fr": {...}, "pt-BR": {...} }.
 // Les identifiants d'items sont les mêmes dans toutes les langues.

@@ -30,6 +30,8 @@ Les règles 1 et 3 concernent les répondants des questionnaires. Les **ateliers
 
 La règle 5 concerne les rapports de campagne. L'**aide à la rédaction** (module D2, décision de Michelle et avis de l'agent juridique du 29/10/2026) envoie à l'API Claude les notes du conseiller en prévention, sans nom d'entreprise : filtre des e-mails, téléphones, numéros d'identification et IBAN, engagement « aucune donnée personnelle », types individuels exclus, 10 brouillons par jour, rien n'est conservé (journal sans contenu), document marqué « préparé avec l'aide de l'IA ». Coupée par défaut (`AI_WRITING_AID_ENABLED`) jusqu'à la signature du DPA d'Anthropic ; Brésil seulement avec `AI_WRITING_AID_BRAZIL` (clauses-types de l'ANPD).
 
+**Limitation des requêtes** (étape 10, 02/11/2026) : `lib/securite/limite-requetes.ts`, compteur en base (`rate_limits`). L'adresse réseau n'est jamais enregistrée : seule une empreinte HMAC (secret + jour + règle) est gardée au plus 24 h, sans lien avec les réponses. Pour les questionnaires, seuls les codes refusés sont comptés (réseau d'entreprise partagé). Toute nouvelle page publique ou action qui envoie un e-mail doit passer par `compter()`.
+
 11. **Secrets.** Les clés (Anthropic, Brevo, base OVH) vivent uniquement dans `.env.local` (développement) puis dans les variables d'environnement Vercel. `.env*` est dans `.gitignore`. Ne jamais afficher une clé dans le terminal ni dans un commit.
 
 ## 3. Pile technique
