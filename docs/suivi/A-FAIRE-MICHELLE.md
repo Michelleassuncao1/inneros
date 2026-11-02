@@ -42,11 +42,13 @@ Documents déjà relus et corrigés par l'agent juridique IMA (dernière relectu
 
 ## Au lancement (décision du 02/11/2026)
 
-Tous les contrats seront signés quand l'application sera prête, juste avant les vrais tests puis le lancement.
+Les contrats avec Anthropic, Brevo, OVHcloud et Vercel sont déjà signés pour le site IMA (même titulaire : Michelle Assunção) : pas de deuxième signature, mais une vérification de leur portée (02/11/2026). Les vrais tests puis le lancement auront lieu quand l'application sera prête.
 
-- [ ] **Signer les contrats de sous-traitance (DPA)** : Anthropic (avec la conservation nulle des données, ZDR, et l'encadrement du transfert vers les États-Unis), Brevo (durée de conservation des e-mails, suivi des ouvertures et des clics désactivé), OVHcloud (base de données, région UE) et Vercel (hébergement).
-- [ ] **Brésil** : l'aide à la rédaction reste bloquée tant que les clauses-types de l'ANPD ne sont pas vérifiées. Demander à Anthropic si son DPA contient ces clauses (Résolution CD/ANPD n° 19/2024, obligatoires depuis le 23/08/2025, article 33 de la LGPD) ; aucune source publique ne le confirme au 02/11/2026. Ensuite seulement : `AI_WRITING_AID_BRAZIL=true`. *Vérifié par l'agent juridique le 02/11/2026.*
+- [ ] **Vérifier les contrats existants** dans chaque compte : DPA bien accepté (Anthropic : Console › Settings ; Vercel : dans les conditions de l'offre Pro, obligatoire pour un usage commercial ; OVHcloud : espace client › Contrats ; Brevo : Paramètres › Sécurité / DPA). Anthropic : demander la conservation nulle des données (ZDR). Brevo : durée de conservation des e-mails, suivi des ouvertures et des clics désactivé, domaine d'envoi PluriPrev authentifié. Créer des clés séparées pour PluriPrev – RPS (jamais celles du site IMA).
+- [ ] **Brésil** : l'aide à la rédaction reste bloquée tant que les clauses-types de l'ANPD ne sont pas vérifiées (Résolution CD/ANPD n° 19/2024, obligatoires depuis le 23/08/2025, article 33 de la LGPD). **Envoyer l'e-mail préparé par Claude le 02/11/2026 à privacy@anthropic.com** (ou via le support de la Console). Après leur réponse écrite seulement : `AI_WRITING_AID_BRAZIL=true`. *Vérifié par l'agent juridique le 02/11/2026.*
 - [ ] **Activer l'aide à la rédaction** (module D2) après la signature du DPA d'Anthropic : `AI_WRITING_AID_ENABLED=true` dans les réglages de Vercel, puis un premier essai réel (environ 0,02 à 0,10 $ par brouillon).
+- [x] **Nom public** : « PluriPrev – RPS » (décision du 02/11/2026). Faire vérifier la marque (Benelux, UE, Brésil) avant le lancement.
+- [ ] **Nom de domaine** chez OVHcloud (même compte que le site IMA) : `pluriprev.com`, `pluriprev.be` et `pluriprev.eu`, libres au 02/11/2026 ; `pluriprev.com.br` demande un CPF ou un CNPJ brésilien. Application à l'adresse `app.pluriprev.com`.
 - [ ] **Vrais tests** avec une entreprise pilote (campagne, rapport, plan, calendrier, ateliers, modèles), puis lancement.
 
 ## En attente d'autres personnes
