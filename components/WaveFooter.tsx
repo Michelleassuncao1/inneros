@@ -35,6 +35,10 @@ export function WaveFooter() {
           <Link href="/confidentialite" className="underline hover:text-ima-gold">
             {t("privacy")}
           </Link>
+          {" · "}
+          <Link href="/mentions-legales" className="underline hover:text-ima-gold">
+            {t("legal")}
+          </Link>
         </p>
       </div>
     </footer>
