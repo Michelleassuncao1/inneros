@@ -3,6 +3,7 @@ import { mkdirSync } from "node:fs";
 import { PGlite } from "@electric-sql/pglite";
 import { drizzle as drizzleNodePg } from "drizzle-orm/node-postgres";
 import { drizzle as drizzlePglite } from "drizzle-orm/pglite";
+import { estUrlPostgres, poolPostgres } from "./postgres";
 import * as schema from "./schema";
 import type { Db } from "./types";
 
@@ -14,13 +15,12 @@ export const PGLITE_DIR = process.env.PGLITE_DIR || ".data/pglite";
 
 function creerClient(): Db {
   const url = process.env.DATABASE_URL;
-  if (url && /^postgres(ql)?:\/\//.test(url)) {
-    // Production : connexion chiffrée (TLS) obligatoire vers la base OVH
-    if (process.env.NODE_ENV === "production" && !/[?&]sslmode=(require|verify-ca|verify-full)\b/.test(url)) {
-      throw new Error("DATABASE_URL doit imposer une connexion chiffrée (sslmode=require ou verify-full).");
-    }
-    return drizzleNodePg(url, { schema });
+  if (estUrlPostgres(url)) {
+    // Production : connexion chiffrée (TLS) obligatoire vers la base OVH (lib/db/postgres.ts)
+    return drizzleNodePg({ client: poolPostgres(url), schema });
   }
+  // Sur Vercel, le disque est en lecture seule : sans base PostgreSQL, refuser de démarrer plutôt que d'écrire n'importe où
+  if (process.env.VERCEL) throw new Error("DATABASE_URL manquant : configurez la base PostgreSQL de cet environnement Vercel.");
   mkdirSync(".data", { recursive: true });
   return drizzlePglite(new PGlite(PGLITE_DIR), { schema });
 }

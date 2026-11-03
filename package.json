@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "node scripts/migrer-deploiement.mts && next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
@@ -18,7 +19,10 @@
     "demo:campagne": "tsx scripts/demo-campagne.ts",
     "donnees:purger": "tsx scripts/purger-donnees.ts",
     "themes:initiaux": "tsx scripts/themes-initiaux.ts",
-    "modeles:ima": "tsx scripts/generer-modeles-ima.ts"
+    "modeles:ima": "tsx scripts/generer-modeles-ima.ts",
+    "sauvegarde": "node scripts/sauvegarde.mts sauvegarder",
+    "sauvegarde:cle": "node scripts/sauvegarde.mts cle",
+    "sauvegarde:restaurer": "node scripts/sauvegarde.mts restaurer"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.133.0",

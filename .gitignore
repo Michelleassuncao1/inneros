@@ -43,3 +43,6 @@ next-env.d.ts
 
 # base PGlite locale (développement)
 /.data/
+
+# Sauvegardes chiffrées de la base (npm run sauvegarde)
+/.sauvegardes/

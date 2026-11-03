@@ -51,6 +51,7 @@ Les contrats avec Anthropic, Brevo, OVHcloud et Vercel sont déjà signés pour 
 - [ ] **Activer l'aide à la rédaction** (module D2) après la signature du DPA d'Anthropic : `AI_WRITING_AID_ENABLED=true` dans les réglages de Vercel, puis un premier essai réel (environ 0,02 à 0,10 $ par brouillon).
 - [x] **Nom public** : « PluriPrev – RPS » (décision du 02/11/2026). Faire vérifier la marque (Benelux, UE, Brésil) avant le lancement.
 - [ ] **Nom de domaine** chez OVHcloud (même compte que le site IMA) : `pluriprev.com`, `pluriprev.be` et `pluriprev.eu`, libres au 02/11/2026 ; `pluriprev.com.br` demande un CPF ou un CNPJ brésilien. Application à l'adresse `app.pluriprev.com`.
+- [ ] **Base de données de production** chez OVHcloud, avec Claude, en suivant le [guide pas à pas](https://github.com/Michelleassuncao1/inneros/blob/main/docs/lancement/BASE-DE-DONNEES.md) : PostgreSQL 17 ou plus récent, région GRA ou SBG, offre « Production » (sauvegardes 14 jours) ; « Discovery » possible pour l'entreprise pilote. Puis créer la clé des sauvegardes (`npm run sauvegarde:cle`), la ranger dans votre coffre-fort, et faire une copie chiffrée chaque mois (`npm run sauvegarde`) ; essai de restauration tous les 3 mois.
 - [ ] **Vrais tests** avec une entreprise pilote (campagne, rapport, plan, calendrier, ateliers, modèles), puis lancement.
 
 ## En attente d'autres personnes
