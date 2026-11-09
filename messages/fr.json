@@ -1707,5 +1707,21 @@
     "personalDataInDraft": "Le texte contient un e-mail, un numéro de téléphone ou un numéro d'identification : retirez-le avant de télécharger.",
     "disabled": "L'aide à la rédaction n'est pas encore activée.",
     "countryUnavailable": "L'aide à la rédaction n'est pas encore disponible pour les organisations situées au Brésil."
+  },
+  "TachesNuit": {
+    "lateNever": "Les tâches de nuit (suppressions des données et rappels) ne se sont encore jamais faites.",
+    "late": "Les tâches de nuit (suppressions des données et rappels) n'ont pas réussi depuis le {date}.",
+    "failed": "Lors du dernier passage des tâches de nuit ({date}), ces étapes ont échoué : {etapes}. Les autres étapes ont bien été faites.",
+    "help": "À vérifier chez Vercel : Settings › Cron Jobs, et la variable CRON_SECRET. Claude peut vous aider.",
+    "etapes": {
+      "suppressions": "suppression des données arrivées à échéance",
+      "ateliers": "suppression des inscriptions et des avis des ateliers",
+      "compteurs": "nettoyage des compteurs anti-robots",
+      "propositions": "propositions de campagnes de sensibilisation",
+      "rappelsPlan": "rappels du plan de prévention",
+      "rappelsSensibilisation": "rappels de sensibilisation",
+      "rappelsAteliers": "rappels des ateliers",
+      "carnet": "nettoyage du carnet de bord"
+    }
   }
 }

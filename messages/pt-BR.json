@@ -1707,5 +1707,21 @@
     "personalDataInDraft": "O texto contém um e-mail, telefone ou número de identificação: retire-o antes de baixar.",
     "disabled": "O apoio à redação ainda não está ativado.",
     "countryUnavailable": "O apoio à redação ainda não está disponível para organizações no Brasil."
+  },
+  "TachesNuit": {
+    "lateNever": "As tarefas noturnas (exclusão de dados e lembretes) ainda nunca foram executadas.",
+    "late": "As tarefas noturnas (exclusão de dados e lembretes) não foram concluídas com sucesso desde {date}.",
+    "failed": "Na última execução das tarefas noturnas ({date}), estas etapas falharam: {etapes}. As outras etapas foram concluídas.",
+    "help": "Verificar na Vercel: Settings › Cron Jobs e a variável CRON_SECRET.",
+    "etapes": {
+      "suppressions": "exclusão dos dados com prazo vencido",
+      "ateliers": "exclusão das inscrições e avaliações das oficinas",
+      "compteurs": "limpeza dos contadores antirrobôs",
+      "propositions": "sugestões de campanhas de conscientização",
+      "rappelsPlan": "lembretes do plano de prevenção",
+      "rappelsSensibilisation": "lembretes de conscientização",
+      "rappelsAteliers": "lembretes das oficinas",
+      "carnet": "limpeza do registro de execuções"
+    }
   }
 }

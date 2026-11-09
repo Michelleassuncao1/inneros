@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 import { campaigns, organizations, users } from "@/lib/db/schema";
+import { etatTachesNuit } from "@/lib/taches/nuit";
 import { MessageErreur, MessageInfo } from "@/components/Formulaire";
 
 export default async function AdminPage({ params }: PageProps<"/[locale]/admin">) {
@@ -23,6 +24,20 @@ export default async function AdminPage({ params }: PageProps<"/[locale]/admin">
     db.select({ n: count() }).from(campaigns),
   ]);
 
+  // Alerte des tâches de nuit : en production toujours ; ailleurs seulement si la tâche a déjà été lancée
+  const tn = await getTranslations("TachesNuit");
+  const nuit = await etatTachesNuit(db);
+  const surveiller = process.env.VERCEL_ENV === "production" || nuit.dernierPassage !== null;
+  const dateHeure = (d: Date) => new Intl.DateTimeFormat(locale, { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Brussels" }).format(d);
+  const alertesNuit = !surveiller
+    ? []
+    : [
+        nuit.enRetard ? (nuit.derniereReussite ? tn("late", { date: dateHeure(nuit.derniereReussite) }) : tn("lateNever")) : null,
+        nuit.dernierPassage && nuit.etapesEchouees.length > 0
+          ? tn("failed", { date: dateHeure(nuit.dernierPassage), etapes: nuit.etapesEchouees.map((e) => tn(`etapes.${e}`)).join(", ") })
+          : null,
+      ].filter((m): m is string => m !== null);
+
   const cartes = [
     { href: "/admin/entreprises", compte: t("organizationsCount", { count: orgs.n }), lien: t("manageOrganizations") },
     { href: "/admin/campagnes", compte: t("campaignsCount", { count: camps.n }), lien: t("manageCampaigns") },
@@ -31,6 +46,16 @@ export default async function AdminPage({ params }: PageProps<"/[locale]/admin">
   return (
     <EspaceAdmin locale={locale} actif="accueil">
       <TitrePage surtitre={t("title")} titre={t("welcome", { name: admin.name })} />
+      {alertesNuit.length > 0 && (
+        <div className="mb-6 max-w-[70ch]">
+          <MessageErreur>
+            {alertesNuit.map((m) => (
+              <span key={m} className="block">{m}</span>
+            ))}
+            <span className="mt-1 block text-sm">{tn("help")}</span>
+          </MessageErreur>
+        </div>
+      )}
       <p className="max-w-[70ch]">{t("placeholder")}</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {cartes.map((c) => (

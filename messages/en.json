@@ -1707,5 +1707,21 @@
     "personalDataInDraft": "The text contains an email address, phone number or identification number: remove it before downloading.",
     "disabled": "The writing aid is not yet enabled.",
     "countryUnavailable": "The writing aid is not yet available for organisations based in Brazil."
+  },
+  "TachesNuit": {
+    "lateNever": "The nightly tasks (data deletion and reminders) have never run yet.",
+    "late": "The nightly tasks (data deletion and reminders) have not succeeded since {date}.",
+    "failed": "During the last run of the nightly tasks ({date}), these steps failed: {etapes}. The other steps were completed.",
+    "help": "To check in Vercel: Settings › Cron Jobs, and the CRON_SECRET variable.",
+    "etapes": {
+      "suppressions": "deletion of expired data",
+      "ateliers": "deletion of workshop registrations and feedback",
+      "compteurs": "clean-up of anti-bot counters",
+      "propositions": "awareness campaign suggestions",
+      "rappelsPlan": "prevention plan reminders",
+      "rappelsSensibilisation": "awareness reminders",
+      "rappelsAteliers": "workshop reminders",
+      "carnet": "clean-up of the run log"
+    }
   }
 }

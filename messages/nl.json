@@ -1707,5 +1707,21 @@
     "personalDataInDraft": "De tekst bevat een e-mailadres, telefoonnummer of identificatienummer: verwijder het voor het downloaden.",
     "disabled": "De schrijfhulp is nog niet geactiveerd.",
     "countryUnavailable": "De schrijfhulp is nog niet beschikbaar voor organisaties in Brazilië."
+  },
+  "TachesNuit": {
+    "lateNever": "De nachtelijke taken (verwijdering van gegevens en herinneringen) zijn nog nooit uitgevoerd.",
+    "late": "De nachtelijke taken (verwijdering van gegevens en herinneringen) zijn sinds {date} niet meer gelukt.",
+    "failed": "Bij de laatste uitvoering van de nachtelijke taken ({date}) zijn deze stappen mislukt: {etapes}. De andere stappen zijn wel uitgevoerd.",
+    "help": "Na te kijken bij Vercel: Settings › Cron Jobs, en de variabele CRON_SECRET.",
+    "etapes": {
+      "suppressions": "verwijdering van vervallen gegevens",
+      "ateliers": "verwijdering van inschrijvingen en feedback van workshops",
+      "compteurs": "opschoning van de anti-robottellers",
+      "propositions": "voorstellen voor sensibiliseringscampagnes",
+      "rappelsPlan": "herinneringen van het preventieplan",
+      "rappelsSensibilisation": "sensibiliseringsherinneringen",
+      "rappelsAteliers": "herinneringen van de workshops",
+      "carnet": "opschoning van het logboek"
+    }
   }
 }

@@ -153,6 +153,15 @@ export const rateLimits = pgTable("rate_limits", {
   windowStart: timestamp("window_start", { withTimezone: true }).notNull(),
 });
 
+// Carnet de bord des tâches de nuit (lib/taches/nuit.ts) : un passage par nuit, résultat de chaque étape.
+// `steps` : [{ etape, ok, nombre }] ; seulement des noms d'étapes et des nombres, jamais de donnée personnelle.
+export const cronRuns = pgTable("cron_runs", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  startedAt: timestamp("started_at", { withTimezone: true }).notNull(),
+  finishedAt: timestamp("finished_at", { withTimezone: true }),
+  steps: jsonb("steps").notNull().default(sql`'[]'::jsonb`),
+});
+
 // Questionnaires : une ligne par instrument et par version.
 // `definitions` contient le fichier JSON de chaque langue : { "fr": {...}, "pt-BR": {...} }.
 // Les identifiants d'items sont les mêmes dans toutes les langues.
