@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -12,10 +13,6 @@ const figtree = Figtree({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
-
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({
   params,
@@ -34,6 +31,8 @@ export default async function LocaleLayout({
     notFound();
   }
   setRequestLocale(locale);
+  // Pages générées à chaque visite : chacune reçoit le code unique des règles de sécurité (proxy.ts, CSP)
+  await connection();
 
   return (
     <html lang={locale} className={`${figtree.variable} h-full antialiased`}>

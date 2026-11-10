@@ -94,14 +94,15 @@ Si la même entreprise mène deux campagnes successives avec les mêmes groupes,
 | Liens de connexion des référents | Usage unique, 15 minutes, empreinte seulement | `lib/auth/lien-magique.ts` |
 | Limitation des tentatives | 5 échecs en 15 minutes | `lib/auth/limite.ts` |
 | Sessions | 8 heures | `auth.ts` |
-| Devinette de codes | 31^10 ≈ 8 × 10^14 combinaisons ; pas de limitation de débit sur l'ouverture du questionnaire | Recommandé avant production : limitation de débit au niveau de l'hébergeur |
+| Devinette de codes | 31^10 ≈ 8 × 10^14 combinaisons ; 30 codes refusés au plus par appareil en 10 minutes (02/11/2026) | `lib/securite/limite-requetes.ts` |
 | Contrôle d'accès | Praticiens : agrégats et rapports ; référents : participation et rapport validé de leurs campagnes ; **aucun écran de réponses brutes** | Pages `app/[locale]/admin`, `app/[locale]/espace` |
 | Accès direct à la base | **À DÉCIDER** : liste nominative des personnes, accès personnels (pas de compte partagé), journalisation des accès côté OVH | — |
 | Journal d'audit applicatif | Actions des praticiens et référents (dont la consultation des résultats et les suppressions), 24 mois, sans donnée de répondant (**testé**) | `lib/audit.ts`, page « Journal » |
 | Suppression des données brutes | Automatique : 12 mois après l'acceptation du rapport, 18 mois après la clôture au plus tard ; journalisée ; simulation possible | `lib/confidentialite/conservation.ts`, tâche nocturne `app/api/cron/purge` |
-| Secrets | Uniquement dans `.env.local` (développement) et les variables de l'hébergeur (production), jamais dans le code ni dans Git | `.env.example` |
+| Secrets | Uniquement dans `.env.local` (développement) et les variables de l'hébergeur (production), jamais dans le code ni dans Git. Mise en ligne refusée si une clé manque ou est trop courte (10/11/2026). Historique Git entièrement vérifié le 10/11/2026 : aucune clé trouvée | `.env.example`, `lib/securite/variables.ts`, `npm run securite` |
 | Environnement de développement | Base locale sur le PC de développement, données fictives uniquement | **À FORMALISER** : interdiction de copier des données réelles en développement |
-| Politique de sécurité du contenu (CSP) | Non configurée | Recommandé avant production |
+| Politique de sécurité du contenu (CSP) | Configurée le 10/11/2026 : seuls les scripts portant le code unique de la visite s'exécutent, aucune ressource extérieure ; testé en mode production (code injecté dans une image bloqué) | `lib/securite/csp.ts`, `proxy.ts` |
+| Modules utilisés (dépendances) | Next.js 16.4.5 (3 failles corrigées, dont une critique), zod et uuid corrigés le 10/11/2026 ; aucune faille connue dans ce qui part en production. Failles moyennes restantes seulement dans les outils de développement (drizzle-kit, eslint), qui ne partent pas en production | `npm run securite` avant chaque mise en ligne |
 | Revue de sécurité externe | Non réalisée | Prévue avant la première campagne réelle (cahier, section 10) |
 
 ## 5. Vérifications automatisées

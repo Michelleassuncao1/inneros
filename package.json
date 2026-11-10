@@ -22,7 +22,8 @@
     "modeles:ima": "tsx scripts/generer-modeles-ima.ts",
     "sauvegarde": "node scripts/sauvegarde.mts sauvegarder",
     "sauvegarde:cle": "node scripts/sauvegarde.mts cle",
-    "sauvegarde:restaurer": "node scripts/sauvegarde.mts restaurer"
+    "sauvegarde:restaurer": "node scripts/sauvegarde.mts restaurer",
+    "securite": "node scripts/verifier-securite.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.133.0",
@@ -33,7 +34,7 @@
     "docx": "9.11.0",
     "drizzle-orm": "^0.45.3",
     "exceljs": "^4.4.0",
-    "next": "16.3.8",
+    "next": "^16.4.5",
     "next-auth": "^5.0.0-beta.32",
     "next-intl": "^4.14.9",
     "otplib": "^13.5.0",
@@ -41,7 +42,7 @@
     "qrcode": "^1.5.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "zod": "^4.6.5"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -52,10 +53,13 @@
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.11",
     "eslint": "^9",
-    "eslint-config-next": "16.3.8",
+    "eslint-config-next": "^16.4.5",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5",
     "vitest": "^5.0.3"
+  },
+  "overrides": {
+    "uuid": "11.1.1"
   }
 }
