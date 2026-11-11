@@ -16,6 +16,7 @@ export const REGLES = {
   code: { max: 30, fenetreMs: 10 * MINUTE }, // codes de questionnaire refusés (un même réseau d'entreprise est partagé)
   inscription: { max: 10, fenetreMs: 60 * MINUTE }, // inscriptions et désinscriptions aux ateliers
   avis: { max: 20, fenetreMs: 60 * MINUTE }, // avis sur les ateliers
+  erreurs: { max: 20, fenetreMs: 10 * MINUTE }, // erreurs signalées par le navigateur (suivi des erreurs)
 } as const;
 
 export type Regle = keyof typeof REGLES;

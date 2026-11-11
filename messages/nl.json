@@ -86,7 +86,8 @@
     "awareness": "Sensibilisering",
     "training": "AI-opleiding",
     "workshops": "Workshops",
-    "templates": "Modellen"
+    "templates": "Modellen",
+    "errors": "Fouten"
   },
   "Libelles": {
     "all": "Alle landen",
@@ -1721,7 +1722,35 @@
       "rappelsPlan": "herinneringen van het preventieplan",
       "rappelsSensibilisation": "sensibiliseringsherinneringen",
       "rappelsAteliers": "herinneringen van de workshops",
-      "carnet": "opschoning van het logboek"
-    }
+      "carnet": "opschoning van het logboek",
+      "erreurs": "opschoning van het foutenlogboek"
+    },
+    "errors": "{n, plural, one {# nieuwe of teruggekeerde fout} other {# nieuwe of teruggekeerde fouten}} in de applicatie.",
+    "errorsLink": "Fouten bekijken"
+  },
+  "PageErreur": {
+    "title": "Er is een probleem opgetreden",
+    "text": "Deze pagina kon niet worden weergegeven. Probeer het zo meteen opnieuw. Blijft het probleem bestaan, ga dan terug naar de startpagina: het IMA-team wordt automatisch verwittigd.",
+    "retry": "Opnieuw proberen",
+    "home": "Terug naar de startpagina",
+    "notFoundTitle": "Pagina niet gevonden",
+    "notFoundText": "Deze pagina bestaat niet of is niet meer beschikbaar. Controleer het adres of ga terug naar de startpagina."
+  },
+  "JournalErreurs": {
+    "title": "Fouten van de applicatie",
+    "help": "Fouten van de laatste {jours} dagen, gegroepeerd per pagina en type. Er worden geen persoonsgegevens bewaard: geen bericht, geen netwerkadres, geen identificatie in de pagina. De technische details staan in de logboeken van Vercel, via de referentie. Fouten worden {conservation} dagen na hun laatste optreden verwijderd.",
+    "empty": "Geen fouten. Alles in orde.",
+    "last": "Laatste keer",
+    "page": "Pagina",
+    "source": "Oorsprong",
+    "kind": "Type",
+    "count": "Aantal",
+    "status": "Opvolging",
+    "server": "Server",
+    "browser": "Browser",
+    "reference": "Referentie: {digest}",
+    "times": "{n, plural, one {# keer} other {# keer}} (sinds {depuis})",
+    "resolve": "Als behandeld markeren",
+    "resolved": "Behandeld op {date}"
   }
 }

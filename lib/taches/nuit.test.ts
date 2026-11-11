@@ -18,7 +18,7 @@ describe("tâches de nuit", () => {
   it("toutes les vraies étapes passent sur une base vide et sont notées au carnet", async () => {
     const r = await executerTachesNuit(db, T0);
     expect(r.map((e) => e.etape)).toEqual([
-      "suppressions", "ateliers", "compteurs", "propositions", "rappelsPlan", "rappelsSensibilisation", "rappelsAteliers", "carnet",
+      "suppressions", "ateliers", "compteurs", "propositions", "rappelsPlan", "rappelsSensibilisation", "rappelsAteliers", "erreurs", "carnet",
     ]);
     expect(r.every((e) => e.ok)).toBe(true);
     const [passage] = await db.select().from(cronRuns);

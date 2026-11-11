@@ -103,6 +103,7 @@ Si la même entreprise mène deux campagnes successives avec les mêmes groupes,
 | Environnement de développement | Base locale sur le PC de développement, données fictives uniquement | **À FORMALISER** : interdiction de copier des données réelles en développement |
 | Politique de sécurité du contenu (CSP) | Configurée le 10/11/2026 : seuls les scripts portant le code unique de la visite s'exécutent, aucune ressource extérieure ; testé en mode production (code injecté dans une image bloqué) | `lib/securite/csp.ts`, `proxy.ts` |
 | Modules utilisés (dépendances) | Next.js 16.4.5 (3 failles corrigées, dont une critique), zod et uuid corrigés le 10/11/2026 ; aucune faille connue dans ce qui part en production. Failles moyennes restantes seulement dans les outils de développement (drizzle-kit, eslint), qui ne partent pas en production | `npm run securite` avant chaque mise en ligne |
+| Suivi des erreurs | Depuis le 11/11/2026 : erreurs du serveur et du navigateur regroupées par page (modèle de route, sans identifiant ni code) et par type, avec un compteur. Jamais le message d'erreur, l'adresse réseau ou une donnée saisie. Onglet « Erreurs » de l'espace IMA, avis à l'accueil, effacement 90 jours après la dernière occurrence. Pages d'erreur et page introuvable dans les 4 langues, sans détail technique | `lib/erreurs/journal.ts`, `instrumentation.ts`, `app/api/erreurs` |
 | Revue de sécurité externe | Non réalisée | Prévue avant la première campagne réelle (cahier, section 10) |
 
 ## 5. Vérifications automatisées

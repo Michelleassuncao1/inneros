@@ -86,7 +86,8 @@
     "awareness": "Sensibilização",
     "training": "Formação em IA",
     "workshops": "Oficinas",
-    "templates": "Modelos"
+    "templates": "Modelos",
+    "errors": "Erros"
   },
   "Libelles": {
     "all": "Todos os países",
@@ -1721,7 +1722,35 @@
       "rappelsPlan": "lembretes do plano de prevenção",
       "rappelsSensibilisation": "lembretes de conscientização",
       "rappelsAteliers": "lembretes das oficinas",
-      "carnet": "limpeza do registro de execuções"
-    }
+      "carnet": "limpeza do registro de execuções",
+      "erreurs": "limpeza do registro de erros"
+    },
+    "errors": "{n, plural, one {# erro novo ou recorrente} other {# erros novos ou recorrentes}} no aplicativo.",
+    "errorsLink": "Ver os erros"
+  },
+  "PageErreur": {
+    "title": "Ocorreu um problema",
+    "text": "Não foi possível exibir esta página. Tente novamente em instantes. Se o problema continuar, volte à página inicial: a equipe do IMA é avisada automaticamente.",
+    "retry": "Tentar novamente",
+    "home": "Voltar à página inicial",
+    "notFoundTitle": "Página não encontrada",
+    "notFoundText": "Esta página não existe ou não está mais disponível. Verifique o endereço ou volte à página inicial."
+  },
+  "JournalErreurs": {
+    "title": "Erros do aplicativo",
+    "help": "Erros dos últimos {jours} dias, agrupados por página e tipo. Nenhum dado pessoal é registrado: nem mensagem, nem endereço de rede, nem identificador na página. Os detalhes técnicos estão nos registros da Vercel, por meio da referência. Os erros são apagados {conservation} dias após a última ocorrência.",
+    "empty": "Nenhum erro. Tudo certo.",
+    "last": "Última vez",
+    "page": "Página",
+    "source": "Origem",
+    "kind": "Tipo",
+    "count": "Quantidade",
+    "status": "Acompanhamento",
+    "server": "Servidor",
+    "browser": "Navegador",
+    "reference": "Referência: {digest}",
+    "times": "{n, plural, one {# vez} other {# vezes}} (desde {depuis})",
+    "resolve": "Marcar como tratado",
+    "resolved": "Tratado em {date}"
   }
 }

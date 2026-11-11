@@ -86,7 +86,8 @@
     "awareness": "Awareness",
     "training": "AI training",
     "workshops": "Workshops",
-    "templates": "Templates"
+    "templates": "Templates",
+    "errors": "Errors"
   },
   "Libelles": {
     "all": "All countries",
@@ -1721,7 +1722,35 @@
       "rappelsPlan": "prevention plan reminders",
       "rappelsSensibilisation": "awareness reminders",
       "rappelsAteliers": "workshop reminders",
-      "carnet": "clean-up of the run log"
-    }
+      "carnet": "clean-up of the run log",
+      "erreurs": "clean-up of the error log"
+    },
+    "errors": "{n, plural, one {# new or recurring error} other {# new or recurring errors}} in the application.",
+    "errorsLink": "View errors"
+  },
+  "PageErreur": {
+    "title": "Something went wrong",
+    "text": "This page could not be displayed. Please try again in a moment. If the problem persists, go back to the home page: the IMA team is notified automatically.",
+    "retry": "Try again",
+    "home": "Back to home",
+    "notFoundTitle": "Page not found",
+    "notFoundText": "This page does not exist or is no longer available. Check the address, or go back to the home page."
+  },
+  "JournalErreurs": {
+    "title": "Application errors",
+    "help": "Errors from the last {jours} days, grouped by page and type. No personal data is stored: no message, no network address, no identifier in the page. Technical details are in the Vercel logs, using the reference. Errors are deleted {conservation} days after they last occurred.",
+    "empty": "No errors. All good.",
+    "last": "Last time",
+    "page": "Page",
+    "source": "Origin",
+    "kind": "Type",
+    "count": "Count",
+    "status": "Follow-up",
+    "server": "Server",
+    "browser": "Browser",
+    "reference": "Reference: {digest}",
+    "times": "{n, plural, one {# time} other {# times}} (since {depuis})",
+    "resolve": "Mark as handled",
+    "resolved": "Handled on {date}"
   }
 }

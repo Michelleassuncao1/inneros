@@ -6,6 +6,7 @@ import { desc, eq, lt } from "drizzle-orm";
 import { envoyerRappelsAteliers, purgerAteliers } from "../ateliers/ateliers";
 import { purgerDonnees } from "../confidentialite/conservation";
 import { cronRuns } from "../db/schema";
+import { purgerErreurs } from "../erreurs/journal";
 import type { Db } from "../db/types";
 import { envoyerRappelsTrimestriels } from "../plan/suivi";
 import { purgerCompteurs } from "../securite/limite-requetes";
@@ -24,6 +25,7 @@ export type NomEtape =
   | "rappelsPlan"
   | "rappelsSensibilisation"
   | "rappelsAteliers"
+  | "erreurs"
   | "carnet";
 
 export type ResultatEtape = { etape: NomEtape; ok: boolean; nombre: number };
@@ -50,6 +52,7 @@ export const ETAPES: Etape[] = [
   { etape: "rappelsPlan", lancer: (db, maintenant) => envoyerRappelsTrimestriels(db, maintenant) },
   { etape: "rappelsSensibilisation", lancer: (db, maintenant) => envoyerRappelsSensibilisation(db, maintenant) },
   { etape: "rappelsAteliers", lancer: (db, maintenant) => envoyerRappelsAteliers(db, maintenant) },
+  { etape: "erreurs", lancer: (db, maintenant) => purgerErreurs(db, maintenant) },
   { etape: "carnet", lancer: (db, maintenant) => purgerCarnet(db, maintenant) },
 ];
 

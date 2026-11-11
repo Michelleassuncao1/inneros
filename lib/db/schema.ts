@@ -162,6 +162,22 @@ export const cronRuns = pgTable("cron_runs", {
   steps: jsonb("steps").notNull().default(sql`'[]'::jsonb`),
 });
 
+// Journal des erreurs (lib/erreurs/journal.ts) : une ligne par erreur distincte (source, page, type), avec un compteur.
+// Jamais de message d'erreur, d'adresse réseau ni de donnée saisie : la page est le modèle de route (« /[locale]/q »),
+// sans identifiant ni code. Lignes supprimées 90 jours après la dernière occurrence (tâche de nuit).
+export const errorEvents = pgTable("error_events", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  fingerprint: text("fingerprint").notNull().unique(),
+  source: text("source").notNull(), // serveur | navigateur
+  route: text("route").notNull(),
+  kind: text("kind").notNull(), // nom du type d'erreur (TypeError, …)
+  digest: text("digest"), // référence de Next.js, pour retrouver l'erreur dans les journaux de Vercel
+  occurrences: integer("occurrences").notNull().default(1),
+  firstAt: timestamp("first_at", { withTimezone: true }).notNull(),
+  lastAt: timestamp("last_at", { withTimezone: true }).notNull(),
+  resolvedAt: timestamp("resolved_at", { withTimezone: true }),
+});
+
 // Questionnaires : une ligne par instrument et par version.
 // `definitions` contient le fichier JSON de chaque langue : { "fr": {...}, "pt-BR": {...} }.
 // Les identifiants d'items sont les mêmes dans toutes les langues.

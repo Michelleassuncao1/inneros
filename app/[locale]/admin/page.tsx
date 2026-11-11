@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { exigerAdmin } from "@/lib/auth/acces";
 import { getDb } from "@/lib/db/client";
 import { campaigns, organizations, users } from "@/lib/db/schema";
+import { nombreErreursNonTraitees } from "@/lib/erreurs/journal";
 import { etatTachesNuit } from "@/lib/taches/nuit";
 import { MessageErreur, MessageInfo } from "@/components/Formulaire";
 
@@ -38,6 +39,8 @@ export default async function AdminPage({ params }: PageProps<"/[locale]/admin">
           : null,
       ].filter((m): m is string => m !== null);
 
+  const erreursNouvelles = await nombreErreursNonTraitees(db);
+
   const cartes = [
     { href: "/admin/entreprises", compte: t("organizationsCount", { count: orgs.n }), lien: t("manageOrganizations") },
     { href: "/admin/campagnes", compte: t("campaignsCount", { count: camps.n }), lien: t("manageCampaigns") },
@@ -54,6 +57,16 @@ export default async function AdminPage({ params }: PageProps<"/[locale]/admin">
             ))}
             <span className="mt-1 block text-sm">{tn("help")}</span>
           </MessageErreur>
+        </div>
+      )}
+      {erreursNouvelles > 0 && (
+        <div className="mb-6 max-w-[70ch]">
+          <MessageInfo>
+            {tn("errors", { n: erreursNouvelles })}{" "}
+            <Link href="/admin/erreurs" className="font-semibold underline">
+              {tn("errorsLink")}
+            </Link>
+          </MessageInfo>
         </div>
       )}
       <p className="max-w-[70ch]">{t("placeholder")}</p>

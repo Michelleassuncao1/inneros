@@ -162,6 +162,13 @@
       "when": 1794234150924,
       "tag": "0022_taches-nuit",
       "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1794403891905,
+      "tag": "0023_journal-erreurs",
+      "breakpoints": true
     }
   ]
 }

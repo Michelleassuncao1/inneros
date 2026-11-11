@@ -86,7 +86,8 @@
     "awareness": "Sensibilisation",
     "training": "Formation IA",
     "workshops": "Ateliers",
-    "templates": "Modèles"
+    "templates": "Modèles",
+    "errors": "Erreurs"
   },
   "Libelles": {
     "all": "Tous les pays",
@@ -1721,7 +1722,35 @@
       "rappelsPlan": "rappels du plan de prévention",
       "rappelsSensibilisation": "rappels de sensibilisation",
       "rappelsAteliers": "rappels des ateliers",
-      "carnet": "nettoyage du carnet de bord"
-    }
+      "carnet": "nettoyage du carnet de bord",
+      "erreurs": "nettoyage du journal des erreurs"
+    },
+    "errors": "{n, plural, one {# erreur nouvelle ou revenue} other {# erreurs nouvelles ou revenues}} dans l'application.",
+    "errorsLink": "Voir les erreurs"
+  },
+  "PageErreur": {
+    "title": "Un problème est survenu",
+    "text": "Cette page n'a pas pu s'afficher. Réessayez dans un instant. Si le problème continue, revenez à l'accueil : l'équipe IMA est prévenue automatiquement.",
+    "retry": "Réessayer",
+    "home": "Retour à l'accueil",
+    "notFoundTitle": "Page introuvable",
+    "notFoundText": "Cette page n'existe pas ou n'est plus disponible. Vérifiez l'adresse, ou revenez à l'accueil."
+  },
+  "JournalErreurs": {
+    "title": "Erreurs de l'application",
+    "help": "Erreurs des {jours} derniers jours, regroupées par page et par type. Aucune donnée personnelle n'est enregistrée : ni message, ni adresse réseau, ni identifiant dans la page. Le détail technique se trouve dans les journaux de Vercel, grâce à la référence. Les erreurs sont effacées {conservation} jours après leur dernière apparition.",
+    "empty": "Aucune erreur. Tout va bien.",
+    "last": "Dernière fois",
+    "page": "Page",
+    "source": "Origine",
+    "kind": "Type",
+    "count": "Nombre",
+    "status": "Suivi",
+    "server": "Serveur",
+    "browser": "Navigateur",
+    "reference": "Référence : {digest}",
+    "times": "{n, plural, one {# fois} other {# fois}} (depuis le {depuis})",
+    "resolve": "Marquer comme traitée",
+    "resolved": "Traitée le {date}"
   }
 }
